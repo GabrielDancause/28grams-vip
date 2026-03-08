@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meat Smoking Calculator — Time & Temp | Free Tool</title>
+<meta name="description" content="Calculate estimated smoking times, internal target temperatures, and rest times for brisket, pork shoulder, ribs, chicken, and more based on weight and smoker temp.">
+<meta property="og:title" content="Meat Smoking Calculator — Time & Temp">
+<meta property="og:description" content="Calculate estimated smoking times, internal target temperatures, and rest times based on weight and smoker temp. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Meat Smoking Calculator",
+  "url": "https://28grams.vip/smoking-calculator",
+  "description": "Calculate estimated smoking times, internal target temperatures, and rest times for various meats based on weight and smoker temp.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards */
+.calculator-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+.card-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.control-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+select.custom-select, input.custom-input {
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #e0d0d8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+select.custom-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+select.custom-select:focus, input.custom-input:focus { border-color: #C2185B; }
+input.custom-input.mono { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; }
+
+/* Grid for weight and temp */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Unit toggle inside input */
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-with-unit input {
+  padding-right: 60px;
+}
+.unit-toggle {
+  position: absolute;
+  right: 6px;
+  background: #2a1820;
+  border: none;
+  color: #888;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+.unit-toggle:hover { color: #ccc; background: #3a2030; }
+
+/* Result Box */
+.result-box {
+  background: #150d12;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 8px;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.result-item .label {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.result-item .value {
+  font-size: 1.3rem;
+  color: #C2185B;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+.result-item .value.primary {
+  font-size: 1.6rem;
+}
+
+.result-notes {
+  border-top: 1px solid #2a1820;
+  padding-top: 16px;
+  font-size: 0.85rem;
+  color: #a09098;
+  line-height: 1.6;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .result-item .value.primary { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Meat Smoking <span>Calculator</span> 🔥</h1>
+  <p>Calculate estimated smoking times, target internal temperatures, and rest times based on meat, weight, and smoker temp.</p>
+</div>
+
+<div class="main">
+  <div class="calculator-card">
+    <div class="card-header">
+      <h2>🥩 Smoke Plan</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Plan</button>
+    </div>
+    <div class="card-body">
+
+      <div class="input-group">
+        <span class="input-label">Meat Type</span>
+        <select id="meatType" class="custom-select">
+          <option value="brisket">Brisket (Packer)</option>
+          <option value="pork_shoulder">Pork Shoulder / Butt</option>
+          <option value="ribs_spare">Pork Ribs (Spare)</option>
+          <option value="ribs_baby_back">Pork Ribs (Baby Back)</option>
+          <option value="beef_ribs">Beef Short Ribs</option>
+          <option value="chicken_whole">Whole Chicken</option>
+          <option value="turkey_whole">Whole Turkey</option>
+          <option value="salmon">Salmon Filet</option>
+        </select>
+      </div>
+
+      <div class="grid-2">
+        <div class="input-group">
+          <span class="input-label">Weight</span>
+          <div class="input-with-unit">
+            <input type="number" id="meatWeight" class="custom-input mono" value="10" min="0.1" step="0.1">
+            <button class="unit-toggle" id="weightUnitBtn" onclick="toggleWeightUnit()">LBS</button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <span class="input-label">Smoker Temp</span>
+          <div class="input-with-unit">
+            <select id="smokerTemp" class="custom-select mono">
+              <option value="225">225°F</option>
+              <option value="250" selected>250°F</option>
+              <option value="275">275°F</option>
+              <option value="300">300°F</option>
+              <option value="325">325°F</option>
+            </select>
+            <button class="unit-toggle" id="tempUnitBtn" onclick="toggleTempUnit()">°F</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="result-grid">
+          <div class="result-item">
+            <span class="label">Est. Cook Time</span>
+            <span class="value primary" id="resCookTime">--</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Target Internal Temp</span>
+            <span class="value" id="resInternalTemp">--</span>
+          </div>
+          <div class="result-item">
+            <span class="label">Recommended Rest</span>
+            <span class="value" id="resRestTime">--</span>
+          </div>
+        </div>
+        <div class="result-notes" id="resNotes">
+          --
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>How to Calculate Smoking Time</h2>
+  <p>Smoking meat is an art that depends heavily on temperature control and time. A general rule of thumb for large cuts like brisket or pork shoulder is <strong>1 to 1.5 hours per pound at 225°F to 250°F</strong>. However, this is just an estimate. The actual time depends on the thickness of the meat, humidity, smoker airflow, and how often you open the lid.</p>
+
+  <h2>The "Stall"</h2>
+  <p>When smoking large cuts like brisket or pork butt, you will likely encounter "the stall" — a period where the internal temperature stops rising, usually around 150°F to 165°F (65°C to 74°C). This happens because of evaporative cooling as the meat sweats out moisture. You can wait it out, or you can wrap the meat tightly in butcher paper or foil (the "Texas Crutch") to push through the stall faster.</p>
+
+  <h2>Target Temperatures & Resting</h2>
+  <ul>
+    <li><strong>Brisket & Pork Butt:</strong> We aim for an internal temperature of about 200°F - 205°F (93°C - 96°C). The meat should be probe-tender (like pushing a probe into warm butter). Resting for at least 1-2 hours is critical for the juices to redistribute.</li>
+    <li><strong>Poultry (Chicken/Turkey):</strong> Needs to reach a safe internal temperature of 165°F (74°C) in the thickest part of the breast and thigh. Smoking poultry at higher temps (275°F - 325°F) helps render the fat and crisp the skin.</li>
+    <li><strong>Pork Ribs:</strong> Instead of checking internal temperature, rely on the "bend test". When you pick up the rack with tongs in the middle, it should bend and the bark should start to crack.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Data structure for meat smoking calculations
+const meatData = {
+  brisket: {
+    name: "Brisket",
+    ratePerLb225: 1.5, // hours per lb at 225F
+    ratePerLb250: 1.25,
+    ratePerLb275: 1.0,
+    ratePerLb300: 0.8,
+    ratePerLb325: 0.7,
+    internalTempF: "200°F - 205°F",
+    internalTempC: "93°C - 96°C",
+    restTime: "2 to 4 hours",
+    notes: "Plan for the stall around 160°F. Wrap in butcher paper or foil to speed up cooking. Test for tenderness with a probe—it should slide in like warm butter."
+  },
+  pork_shoulder: {
+    name: "Pork Shoulder",
+    ratePerLb225: 1.5,
+    ratePerLb250: 1.25,
+    ratePerLb275: 1.0,
+    ratePerLb300: 0.8,
+    ratePerLb325: 0.7,
+    internalTempF: "200°F - 205°F",
+    internalTempC: "93°C - 96°C",
+    restTime: "1 to 2 hours",
+    notes: "Ideal for pulled pork. Wrap at 160°F-165°F if desired. Must rest before pulling."
+  },
+  ribs_spare: {
+    name: "Pork Ribs (Spare)",
+    fixedTime: true,
+    time225: 6.0,
+    time250: 5.0,
+    time275: 4.5,
+    time300: 3.5,
+    time325: 3.0,
+    internalTempF: "195°F - 205°F",
+    internalTempC: "90°C - 96°C",
+    restTime: "15 to 30 mins",
+    notes: "Weight doesn't significantly change time. Many use the 3-2-1 method at 225F (3hrs smoke, 2hrs wrapped, 1hr unwrapped). Use the bend test for doneness."
+  },
+  ribs_baby_back: {
+    name: "Pork Ribs (Baby Back)",
+    fixedTime: true,
+    time225: 5.0,
+    time250: 4.0,
+    time275: 3.5,
+    time300: 3.0,
+    time325: 2.5,
+    internalTempF: "195°F - 205°F",
+    internalTempC: "90°C - 96°C",
+    restTime: "15 to 30 mins",
+    notes: "Faster than spare ribs. Try the 2-2-1 method. Use the bend test to check if they are done."
+  },
+  beef_ribs: {
+    name: "Beef Short Ribs",
+    fixedTime: true,
+    time225: 8.0,
+    time250: 7.0,
+    time275: 6.0,
+    time300: 5.0,
+    time325: 4.5,
+    internalTempF: "203°F - 205°F",
+    internalTempC: "95°C - 96°C",
+    restTime: "1 to 2 hours",
+    notes: "Smoke until probe tender between the bones. They have a lot of fat and connective tissue to render."
+  },
+  chicken_whole: {
+    name: "Whole Chicken",
+    ratePerLb225: 0.75,
+    ratePerLb250: 0.6,
+    ratePerLb275: 0.5,
+    ratePerLb300: 0.4,
+    ratePerLb325: 0.35,
+    internalTempF: "165°F",
+    internalTempC: "74°C",
+    restTime: "15 to 20 mins",
+    notes: "Measure temp in the thickest part of the thigh and breast. Higher temps (275°F+) help achieve crispy skin."
+  },
+  turkey_whole: {
+    name: "Whole Turkey",
+    ratePerLb225: 0.6,
+    ratePerLb250: 0.5,
+    ratePerLb275: 0.4,
+    ratePerLb300: 0.35,
+    ratePerLb325: 0.3,
+    internalTempF: "165°F",
+    internalTempC: "74°C",
+    restTime: "30 to 45 mins",
+    notes: "Ensure temp is checked in the breast and thigh without touching bone. Spatchcocking will reduce cook time."
+  },
+  salmon: {
+    name: "Salmon Filet",
+    fixedTime: true,
+    time225: 1.5,
+    time250: 1.2,
+    time275: 1.0,
+    time300: 0.8,
+    time325: 0.6,
+    internalTempF: "135°F - 145°F",
+    internalTempC: "57°C - 63°C",
+    restTime: "5 to 10 mins",
+    notes: "Skin side down. Use a meat thermometer to prevent drying out. Times vary based on filet thickness."
+  }
+};
+
+// State
+let weightUnit = 'lbs'; // 'lbs' or 'kg'
+let tempUnit = 'f'; // 'f' or 'c'
+
+// DOM Elements
+const meatSelect = document.getElementById('meatType');
+const weightInput = document.getElementById('meatWeight');
+const weightUnitBtn = document.getElementById('weightUnitBtn');
+const smokerTempSelect = document.getElementById('smokerTemp');
+const tempUnitBtn = document.getElementById('tempUnitBtn');
+
+const resCookTime = document.getElementById('resCookTime');
+const resInternalTemp = document.getElementById('resInternalTemp');
+const resRestTime = document.getElementById('resRestTime');
+const resNotes = document.getElementById('resNotes');
+
+function formatTime(hours) {
+  if (hours <= 0) return "--";
+  const h = Math.floor(hours);
+  const m = Math.round((hours - h) * 60);
+
+  if (h === 0) return `${m} mins`;
+  if (m === 0) return `${h} hr${h > 1 ? 's' : ''}`;
+  return `${h} hr${h > 1 ? 's' : ''} ${m} min`;
+}
+
+function convertTemp(f, toC) {
+  if (toC) return Math.round((f - 32) * 5 / 9);
+  return f;
+}
+
+function updateTempOptions() {
+  const currentVal = smokerTempSelect.value;
+  smokerTempSelect.innerHTML = '';
+
+  const tempsF = [225, 250, 275, 300, 325];
+
+  tempsF.forEach(f => {
+    const opt = document.createElement('option');
+    opt.value = f; // value always stored as F for calculation simplicity
+    if (tempUnit === 'c') {
+      opt.textContent = `${convertTemp(f, true)}°C`;
+    } else {
+      opt.textContent = `${f}°F`;
+    }
+    if (f == currentVal) opt.selected = true;
+    smokerTempSelect.appendChild(opt);
+  });
+}
+
+function toggleWeightUnit() {
+  const val = parseFloat(weightInput.value);
+  if (weightUnit === 'lbs') {
+    weightUnit = 'kg';
+    weightUnitBtn.textContent = 'KG';
+    if (!isNaN(val)) weightInput.value = (val / 2.20462).toFixed(1);
+  } else {
+    weightUnit = 'lbs';
+    weightUnitBtn.textContent = 'LBS';
+    if (!isNaN(val)) weightInput.value = (val * 2.20462).toFixed(1);
+  }
+  calculate();
+}
+
+function toggleTempUnit() {
+  tempUnit = tempUnit === 'f' ? 'c' : 'f';
+  tempUnitBtn.textContent = tempUnit === 'f' ? '°F' : '°C';
+  updateTempOptions();
+  calculate();
+}
+
+function calculate() {
+  const meat = meatData[meatSelect.value];
+  const smokerTempF = parseInt(smokerTempSelect.value);
+
+  let weightLbs = parseFloat(weightInput.value);
+  if (isNaN(weightLbs) || weightLbs <= 0) {
+    weightLbs = 0;
+  } else if (weightUnit === 'kg') {
+    weightLbs = weightLbs * 2.20462;
+  }
+
+  // Calculate Time
+  let timeHours = 0;
+
+  if (meat.fixedTime) {
+    // For fixed time meats, we assume a standard size per piece, but we can do a minor scale if they put in a very large weight, but generally we ignore weight for ribs
+    const timeKey = `time${smokerTempF}`;
+    timeHours = meat[timeKey];
+    if (weightLbs > 0 && (meatSelect.value === 'salmon' || meatSelect.value === 'beef_ribs')) {
+       // slightly adjust for weight on salmon/beef ribs but not as drastically
+       // let's just stick to standard fixed time for simplicity if it's fixedTime=true to match instructions
+    }
+  } else {
+    const rateKey = `ratePerLb${smokerTempF}`;
+    const rate = meat[rateKey];
+    timeHours = weightLbs * rate;
+  }
+
+  // Handle display
+  if (timeHours > 0) {
+    // Range: +/- 15% for estimation
+    const minTime = timeHours * 0.85;
+    const maxTime = timeHours * 1.15;
+    resCookTime.textContent = `${formatTime(minTime)} - ${formatTime(maxTime)}`;
+  } else {
+    resCookTime.textContent = "--";
+  }
+
+  resInternalTemp.textContent = tempUnit === 'f' ? meat.internalTempF : meat.internalTempC;
+  resRestTime.textContent = meat.restTime;
+  resNotes.textContent = meat.notes;
+}
+
+function copyResult() {
+  const meatName = meatSelect.options[meatSelect.selectedIndex].text;
+  const weight = weightInput.value + ' ' + weightUnit.toUpperCase();
+  const tempStr = tempUnit === 'f' ? `${smokerTempSelect.value}°F` : `${convertTemp(smokerTempSelect.value, true)}°C`;
+
+  const text = `🔥 Smoke Plan: ${meatName}
+Weight: ${weight}
+Smoker Temp: ${tempStr}
+
+Est. Cook Time: ${resCookTime.textContent}
+Target Internal Temp: ${resInternalTemp.textContent}
+Recommended Rest: ${resRestTime.textContent}
+
+Notes: ${resNotes.textContent}`;
+
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy Plan'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Event Listeners
+meatSelect.addEventListener('change', () => {
+  // If ribs are selected, disable weight input as it doesn't affect time much
+  const isFixed = meatData[meatSelect.value].fixedTime;
+  weightInput.disabled = isFixed;
+  if (isFixed) {
+    weightInput.parentElement.style.opacity = '0.5';
+  } else {
+    weightInput.parentElement.style.opacity = '1';
+  }
+  calculate();
+});
+weightInput.addEventListener('input', calculate);
+smokerTempSelect.addEventListener('change', calculate);
+
+// Init
+calculate();
+
+</script>
+</body>
+</html>
