@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sous Vide Time & Temp Calculator | Free Tool</title>
+<meta name="description" content="Calculate the perfect sous vide time and temperature for beef, pork, chicken, fish, and eggs. Precise, interactive, and free.">
+<meta property="og:title" content="Sous Vide Time & Temperature Calculator">
+<meta property="og:description" content="Calculate the perfect sous vide time and temperature for beef, pork, chicken, fish, and eggs. Precise, interactive, and free.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sous Vide Calculator",
+  "url": "https://28grams.vip/sous-vide",
+  "description": "Calculate the perfect sous vide time and temperature for beef, pork, chicken, fish, and eggs.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards */
+.calculator-card, .result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header, .result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2, .result-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; }
+.card-body, .result-body { padding: 24px 20px; }
+
+.input-group { margin-bottom: 20px; }
+.input-group:last-child { margin-bottom: 0; }
+.input-label { display: block; font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+
+.custom-select {
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 14px;
+  color: #e0d0d8;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  transition: border-color 0.2s;
+}
+.custom-select:focus { border-color: #C2185B; }
+.custom-select option { color: #e0d0d8; background: #120c10; }
+
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.result-box {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.result-label { display: block; font-size: 0.8rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.result-value { font-family: 'JetBrains Mono', monospace; font-size: 1.6rem; font-weight: 700; color: #C2185B; display: flex; align-items: baseline; justify-content: center; gap: 6px; }
+.result-value .sub-val { font-size: 1rem; color: #888; font-weight: 500; }
+
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .result-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Sous Vide <span>Calculator</span> 🌡️</h1>
+  <p>Find the perfect time and temperature for any protein. Set it, forget it, and get flawless results.</p>
+</div>
+
+<div class="main">
+
+  <div class="calculator-card">
+    <div class="card-header">
+      <h2>⚙️ Sous Vide Settings</h2>
+    </div>
+    <div class="card-body">
+
+      <div class="input-group">
+        <label class="input-label">Protein</label>
+        <select id="proteinSelect" class="custom-select"></select>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Cut / Type</label>
+        <select id="cutSelect" class="custom-select"></select>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">Doneness / Result</label>
+        <select id="donenessSelect" class="custom-select"></select>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <h2>🎯 Recommended Time & Temp</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+
+      <div class="result-grid">
+        <div class="result-box">
+          <span class="result-label">Temperature</span>
+          <div class="result-value" id="tempResult"><span id="tempF">--</span>°F <span class="sub-val">/ <span id="tempC">--</span>°C</span></div>
+        </div>
+        <div class="result-box">
+          <span class="result-label">Cooking Time</span>
+          <div class="result-value" id="timeResult">-- to --</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>How Sous Vide Works</h2>
+  <p>Sous vide (French for "under vacuum") involves vacuum-sealing food in a bag and cooking it in a precisely regulated water bath. This low-temperature, long-time cooking method produces results that are impossible to achieve through any other culinary technique.</p>
+  <p>Because the water bath never exceeds the target temperature of the food, it is mathematically impossible to overcook your protein. A steak cooked at 130°F will be perfectly medium-rare from edge to edge, with no gray band.</p>
+
+  <h2>Why Is There a Time Range?</h2>
+  <p>In traditional cooking, time is used to control temperature. In sous vide, temperature is controlled directly by the water bath, and time is used to control <strong>texture</strong>.</p>
+  <ul>
+    <li><strong>Minimum Time:</strong> The time required for the core of the food to reach the target temperature of the water bath. This depends heavily on the thickness of the cut.</li>
+    <li><strong>Maximum Time:</strong> The longest you should leave the food in the bath before the prolonged heat breaks down the muscle fibers too much, resulting in a mushy texture.</li>
+  </ul>
+  <p>As long as you pull your food out anywhere between the minimum and maximum time, it will be perfectly cooked.</p>
+
+  <h2>Food Safety & Searing</h2>
+  <p>For temperatures below 130°F (54°C), such as rare steak or soft fish, you should not cook for longer than 2-2.5 hours to prevent bacterial growth. For long cooks (like 24-hour roasts), always ensure the water bath is set to at least 130°F.</p>
+  <p>Since sous vide cooking does not brown the outside of the meat, you will want to finish your protein with a hard sear. Pat the food completely dry with paper towels, then sear in a ripping hot cast-iron skillet for 60 seconds per side, or use a culinary torch.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+const svData = {"beef": {"name": "Beef", "cuts": {"steak": {"name": "Steak (Tender cuts, 1-2\")", "doneness": [{"name": "Rare", "tempF": 120, "tempC": 49, "timeMin": "1h", "timeMax": "2h"}, {"name": "Medium Rare", "tempF": 130, "tempC": 54, "timeMin": "1h", "timeMax": "4h"}, {"name": "Medium", "tempF": 140, "tempC": 60, "timeMin": "1h", "timeMax": "4h"}, {"name": "Medium Well", "tempF": 150, "tempC": 65, "timeMin": "1h", "timeMax": "4h"}]}, "roast": {"name": "Tough Roasts (Chuck, Brisket)", "doneness": [{"name": "Steak-like (Medium Rare)", "tempF": 135, "tempC": 57, "timeMin": "24h", "timeMax": "48h"}, {"name": "Fall-apart Tender", "tempF": 165, "tempC": 74, "timeMin": "16h", "timeMax": "24h"}]}}}, "pork": {"name": "Pork", "cuts": {"chops": {"name": "Chops & Tenderloin", "doneness": [{"name": "Medium Rare (Pink)", "tempF": 135, "tempC": 57, "timeMin": "1h", "timeMax": "4h"}, {"name": "Medium (Hint of pink)", "tempF": 140, "tempC": 60, "timeMin": "1h", "timeMax": "4h"}, {"name": "Well Done", "tempF": 150, "tempC": 65, "timeMin": "1h", "timeMax": "4h"}]}, "shoulder": {"name": "Shoulder / Butt", "doneness": [{"name": "Sliceable", "tempF": 145, "tempC": 63, "timeMin": "24h", "timeMax": "36h"}, {"name": "Pulled Pork", "tempF": 165, "tempC": 74, "timeMin": "16h", "timeMax": "24h"}]}}}, "chicken": {"name": "Chicken / Poultry", "cuts": {"breast": {"name": "Breast (Boneless)", "doneness": [{"name": "Very Juicy & Soft", "tempF": 140, "tempC": 60, "timeMin": "1.5h", "timeMax": "4h"}, {"name": "Juicy & Tender", "tempF": 150, "tempC": 65, "timeMin": "1h", "timeMax": "4h"}, {"name": "Traditional (Firm)", "tempF": 160, "tempC": 71, "timeMin": "1h", "timeMax": "4h"}]}, "dark": {"name": "Thighs & Legs", "doneness": [{"name": "Very Juicy", "tempF": 165, "tempC": 74, "timeMin": "1h", "timeMax": "4h"}, {"name": "Fall Off the Bone", "tempF": 165, "tempC": 74, "timeMin": "4h", "timeMax": "8h"}]}}}, "fish": {"name": "Fish & Seafood", "cuts": {"salmon": {"name": "Salmon / Halibut", "doneness": [{"name": "Very Soft (Sashimi-like)", "tempF": 110, "tempC": 43, "timeMin": "30m", "timeMax": "45m"}, {"name": "Tender & Flaky", "tempF": 120, "tempC": 49, "timeMin": "30m", "timeMax": "45m"}, {"name": "Firm & Flaky", "tempF": 130, "tempC": 54, "timeMin": "30m", "timeMax": "45m"}]}, "shrimp": {"name": "Shrimp / Scallops", "doneness": [{"name": "Tender & Plump", "tempF": 130, "tempC": 54, "timeMin": "15m", "timeMax": "30m"}, {"name": "Firm", "tempF": 140, "tempC": 60, "timeMin": "15m", "timeMax": "30m"}]}}}, "eggs": {"name": "Eggs", "cuts": {"shell": {"name": "In Shell", "doneness": [{"name": "Runny Yolk (Soft)", "tempF": 145, "tempC": 63, "timeMin": "45m", "timeMax": "1h"}, {"name": "Jammy Yolk", "tempF": 153, "tempC": 67, "timeMin": "45m", "timeMax": "1h"}, {"name": "Firm (Hard Boiled)", "tempF": 165, "tempC": 74, "timeMin": "45m", "timeMax": "1h"}]}}}};
+
+const proteinSelect = document.getElementById('proteinSelect');
+const cutSelect = document.getElementById('cutSelect');
+const donenessSelect = document.getElementById('donenessSelect');
+const tempFEl = document.getElementById('tempF');
+const tempCEl = document.getElementById('tempC');
+const timeResult = document.getElementById('timeResult');
+
+function init() {
+  // Populate Proteins
+  for (const pKey in svData) {
+    const opt = document.createElement('option');
+    opt.value = pKey;
+    opt.textContent = svData[pKey].name;
+    proteinSelect.appendChild(opt);
+  }
+
+  proteinSelect.addEventListener('change', updateCuts);
+  cutSelect.addEventListener('change', updateDoneness);
+  donenessSelect.addEventListener('change', updateResult);
+
+  // Trigger initial
+  updateCuts();
+}
+
+function updateCuts() {
+  const pKey = proteinSelect.value;
+  const cuts = svData[pKey].cuts;
+
+  cutSelect.innerHTML = '';
+  for (const cKey in cuts) {
+    const opt = document.createElement('option');
+    opt.value = cKey;
+    opt.textContent = cuts[cKey].name;
+    cutSelect.appendChild(opt);
+  }
+
+  updateDoneness();
+}
+
+function updateDoneness() {
+  const pKey = proteinSelect.value;
+  const cKey = cutSelect.value;
+  const donenessArr = svData[pKey].cuts[cKey].doneness;
+
+  donenessSelect.innerHTML = '';
+  donenessArr.forEach((d, idx) => {
+    const opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = d.name;
+    donenessSelect.appendChild(opt);
+  });
+
+  updateResult();
+}
+
+function updateResult() {
+  const pKey = proteinSelect.value;
+  const cKey = cutSelect.value;
+  const dIdx = donenessSelect.value;
+
+  const result = svData[pKey].cuts[cKey].doneness[dIdx];
+
+  tempFEl.textContent = result.tempF;
+  tempCEl.textContent = result.tempC;
+  timeResult.textContent = result.timeMin + ' - ' + result.timeMax;
+}
+
+function copyResult() {
+  const pName = svData[proteinSelect.value].name;
+  const cName = svData[proteinSelect.value].cuts[cutSelect.value].name;
+  const dName = svData[proteinSelect.value].cuts[cutSelect.value].doneness[donenessSelect.value].name;
+  const tempF = tempFEl.textContent;
+  const tempC = tempCEl.textContent;
+  const time = timeResult.textContent;
+
+  const textToCopy = `Sous Vide ${pName} (${cName}) - ${dName}: ${tempF}°F / ${tempC}°C for ${time}`;
+
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
