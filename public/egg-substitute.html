@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egg Substitute Calculator — Baking Conversions | Free Tool</title>
+<meta name="description" content="Calculate perfect egg substitutes for baking. Find exact measurements for flax, chia, applesauce, banana, and aquafaba. Simple, accurate, and completely free.">
+<meta property="og:title" content="Egg Substitute Calculator — Baking Conversions">
+<meta property="og:description" content="Calculate perfect egg substitutes for baking. Find exact measurements for flax, chia, applesauce, banana, and aquafaba.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Egg Substitute Calculator",
+  "url": "https://28grams.vip/egg-substitute",
+  "description": "Calculate perfect egg substitutes for baking. Enter the number of eggs to find out exactly how much flax, chia, applesauce, banana, or aquafaba you need.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 20px 14px 40px; }
+
+/* Methods control */
+.methods-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.method-btn {
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  color: #888;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease;
+}
+.method-btn:hover {
+  background: #2a1820;
+  color: #ccc;
+}
+.method-btn.active {
+  background: #2a1020;
+  border-color: #C2185B;
+  color: #fff;
+}
+
+/* Calculator Grid */
+.calc-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.calc-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+
+.calc-body {
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.calc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.calc-label {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.calc-input {
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 14px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.calc-input:focus { border-color: #C2185B; }
+
+.ratio-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.ratio-label {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.ratio-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #C2185B;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ratio-value span { font-size: 1.5rem; }
+
+/* Readonly display for substitute amount */
+.calc-result-box {
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 14px 14px;
+  color: #C2185B;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60px;
+}
+.calc-result-box .sub-val {
+  margin-bottom: 2px;
+}
+.calc-result-box .sub-note {
+  font-size: 0.75rem;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (min-width: 600px) {
+  .hero h1 { font-size: 2.4rem; }
+  .main { padding: 32px 20px 40px; }
+  .calc-body {
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 20px;
+  }
+  .ratio-display {
+    flex-direction: column;
+    gap: 0;
+  }
+  .ratio-label { margin-bottom: 4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Egg <span>Substitute</span> 🥚</h1>
+  <p>Perfect baking conversions. Enter the number of eggs to instantly calculate exactly how much substitute you need.</p>
+</div>
+
+<div class="main">
+
+  <div class="methods-bar" id="methodsBar">
+    <button class="method-btn active" data-method="flax" data-name="Flaxseed">Flax Egg</button>
+    <button class="method-btn" data-method="chia" data-name="Chia">Chia Egg</button>
+    <button class="method-btn" data-method="applesauce" data-name="Applesauce">Applesauce</button>
+    <button class="method-btn" data-method="banana" data-name="Mashed Banana">Banana</button>
+    <button class="method-btn" data-method="aquafaba" data-name="Aquafaba">Aquafaba</button>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-header">
+      <h2 id="methodTitle">Flax Egg</h2>
+    </div>
+
+    <div class="calc-body">
+      <div class="calc-group">
+        <span class="calc-label">Eggs to Replace</span>
+        <div class="input-with-unit">
+          <input type="number" class="calc-input" id="eggsInput" value="1" min="0" step="any">
+        </div>
+      </div>
+
+      <div class="ratio-display">
+        <span class="ratio-label">Equals</span>
+        <div class="ratio-value">
+          <span>=</span>
+        </div>
+      </div>
+
+      <div class="calc-group">
+        <span class="calc-label" id="substituteLabel">Substitute Needed</span>
+        <div class="calc-result-box" id="substituteOutput">
+          <div class="sub-val" id="subVal">1 tbsp ground flaxseed</div>
+          <div class="sub-note" id="subNote">+ 3 tbsp water</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-header">
+      <h2>📋 Replacement Recipe</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+      <pre id="resultText"></pre>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Choosing the Right Egg Substitute</h2>
+  <p>Eggs play multiple roles in baking: they bind ingredients, add moisture, and help goods rise. Choosing the best substitute depends on what the egg is primarily doing in your recipe.</p>
+  <ul>
+    <li><strong>Flax or Chia Eggs:</strong> Excellent binders with a slightly nutty flavor. Best for heavy, dense baked goods like muffins, quick breads, and cookies. Let the mixture sit for 5-10 minutes to thicken before using.</li>
+    <li><strong>Applesauce & Mashed Banana:</strong> Add great moisture and dense texture, but don't bind as well. Perfect for cakes, brownies, and moist breads. Keep in mind they will add a slight fruit flavor (especially banana).</li>
+    <li><strong>Aquafaba (Chickpea Water):</strong> The best overall substitute for egg whites. It can even be whipped into stiff peaks for meringues and macarons. 3 tablespoons equals one whole egg, while 2 tablespoons equals one egg white.</li>
+  </ul>
+
+  <h2>When Not to Substitute</h2>
+  <p>While substitutes work brilliantly in many recipes, they have limitations. As a general rule, if a recipe calls for more than 3 or 4 eggs, it relies too heavily on eggs for structure, and a substitute may result in a dense or crumbly bake. Substitutes also won't work for egg-centric dishes like omelets or quiches.</p>
+
+  <h2>Baking Tips for Vegan Substitutes</h2>
+  <p>When using fruit purées like applesauce or banana, you might want to add an extra ½ teaspoon of baking powder to help the recipe rise, as fruit purées tend to make baked goods heavier. Always use unsweetened applesauce, or reduce the sugar in your recipe to compensate.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Elements
+var eggsInput = document.getElementById('eggsInput');
+var methodTitle = document.getElementById('methodTitle');
+var substituteLabel = document.getElementById('substituteLabel');
+var subVal = document.getElementById('subVal');
+var subNote = document.getElementById('subNote');
+var resultText = document.getElementById('resultText');
+var methodBtns = document.querySelectorAll('.method-btn');
+
+var currentMethod = "flax";
+var currentMethodName = "Flax Egg";
+
+var substitutions = {
+  flax: {
+    name: "Flax Egg",
+    primaryUnit: "tbsp ground flaxseed",
+    primaryMultiplier: 1,
+    secondaryUnit: "tbsp water",
+    secondaryMultiplier: 3,
+    note: "Mix and let rest for 5-10 mins to thicken."
+  },
+  chia: {
+    name: "Chia Egg",
+    primaryUnit: "tbsp chia seeds",
+    primaryMultiplier: 1,
+    secondaryUnit: "tbsp water",
+    secondaryMultiplier: 3,
+    note: "Mix and let rest for 10-15 mins to thicken."
+  },
+  applesauce: {
+    name: "Applesauce",
+    primaryUnit: "cup unsweetened applesauce",
+    primaryMultiplier: 0.25,
+    secondaryUnit: "",
+    secondaryMultiplier: 0,
+    note: "May make baked goods denser; add 1/2 tsp baking powder if needed."
+  },
+  banana: {
+    name: "Mashed Banana",
+    primaryUnit: "cup mashed banana",
+    primaryMultiplier: 0.25,
+    secondaryUnit: "",
+    secondaryMultiplier: 0,
+    note: "(About 1/2 medium banana). Will add banana flavor."
+  },
+  aquafaba: {
+    name: "Aquafaba",
+    primaryUnit: "tbsp aquafaba (chickpea liquid)",
+    primaryMultiplier: 3,
+    secondaryUnit: "",
+    secondaryMultiplier: 0,
+    note: "Whisk slightly until foamy before adding to recipe."
+  }
+};
+
+function formatAmount(val) {
+  if (val === 0) return "0";
+
+  // Try to use fractions for common baking amounts
+  var tolerance = 0.01;
+  var whole = Math.floor(val);
+  var remainder = val - whole;
+  var fractionStr = "";
+
+  if (Math.abs(remainder - 0) < tolerance) {
+    fractionStr = "";
+  } else if (Math.abs(remainder - 0.125) < tolerance) {
+    fractionStr = "1/8";
+  } else if (Math.abs(remainder - 0.25) < tolerance) {
+    fractionStr = "1/4";
+  } else if (Math.abs(remainder - 0.333) < tolerance || Math.abs(remainder - 0.33) < tolerance) {
+    fractionStr = "1/3";
+  } else if (Math.abs(remainder - 0.375) < tolerance) {
+    fractionStr = "3/8";
+  } else if (Math.abs(remainder - 0.5) < tolerance) {
+    fractionStr = "1/2";
+  } else if (Math.abs(remainder - 0.625) < tolerance) {
+    fractionStr = "5/8";
+  } else if (Math.abs(remainder - 0.666) < tolerance || Math.abs(remainder - 0.67) < tolerance) {
+    fractionStr = "2/3";
+  } else if (Math.abs(remainder - 0.75) < tolerance) {
+    fractionStr = "3/4";
+  } else if (Math.abs(remainder - 0.875) < tolerance) {
+    fractionStr = "7/8";
+  } else {
+    // If not a common fraction, just round to 2 decimals
+    return (Math.round(val * 100) / 100).toString();
+  }
+
+  if (whole > 0 && fractionStr) {
+    return whole + " " + fractionStr;
+  } else if (whole > 0) {
+    return whole.toString();
+  } else {
+    return fractionStr;
+  }
+}
+
+function updateCalculation() {
+  var eggs = parseFloat(eggsInput.value) || 0;
+  var subInfo = substitutions[currentMethod];
+
+  var primaryAmount = eggs * subInfo.primaryMultiplier;
+  var formattedPrimary = formatAmount(primaryAmount);
+
+  var valStr = formattedPrimary + " " + subInfo.primaryUnit;
+  subVal.textContent = valStr;
+
+  var noteStr = "";
+  if (subInfo.secondaryMultiplier > 0) {
+    var secondaryAmount = eggs * subInfo.secondaryMultiplier;
+    var formattedSecondary = formatAmount(secondaryAmount);
+    noteStr = "+ " + formattedSecondary + " " + subInfo.secondaryUnit;
+  }
+
+  subNote.textContent = noteStr;
+
+  updateSummary(eggs, subInfo, formattedPrimary, subInfo.secondaryMultiplier > 0 ? formatAmount(eggs * subInfo.secondaryMultiplier) : null);
+}
+
+function updateSummary(eggs, subInfo, primaryStr, secondaryStr) {
+  var lines = [];
+  lines.push("Replacing: " + eggs + (eggs === 1 ? " egg" : " eggs"));
+  lines.push("Method:    " + subInfo.name);
+  lines.push("------------------------");
+
+  if (subInfo.secondaryMultiplier > 0) {
+    lines.push("Ingredients:");
+    lines.push("• " + primaryStr + " " + subInfo.primaryUnit);
+    lines.push("• " + secondaryStr + " " + subInfo.secondaryUnit);
+    lines.push("");
+    lines.push("Instructions: " + subInfo.note);
+  } else {
+    lines.push("Amount: " + primaryStr + " " + subInfo.primaryUnit);
+    lines.push("");
+    lines.push("Note: " + subInfo.note);
+  }
+
+  resultText.textContent = lines.join('\n');
+}
+
+// Event Listeners
+eggsInput.addEventListener('input', updateCalculation);
+
+methodBtns.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    methodBtns.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+
+    currentMethod = btn.getAttribute('data-method');
+    currentMethodName = btn.getAttribute('data-name');
+
+    methodTitle.textContent = currentMethodName;
+    substituteLabel.textContent = currentMethodName + " Needed";
+
+    updateCalculation();
+  });
+});
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(resultText.textContent).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Init
+updateCalculation();
+</script>
+</body>
+</html>
