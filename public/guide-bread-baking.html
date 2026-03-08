@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bread Baking for Beginners — Reference Guide & Cheat Sheet | Free Tool</title>
+<meta name="description" content="Start baking bread at home. Comprehensive reference guide on equipment, flour types, kneading, proofing, baking, and a first recipe.">
+<meta property="og:title" content="Bread Baking for Beginners — Reference Guide & Cheat Sheet">
+<meta property="og:description" content="Comprehensive reference guide on equipment, flour types, kneading, proofing, baking, and a first recipe.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Bread Baking for Beginners",
+  "name": "Bread Baking for Beginners — Reference Guide & Cheat Sheet",
+  "url": "https://28grams.vip/guide-bread-baking",
+  "description": "Start baking bread at home. Comprehensive reference guide on equipment, flour types, kneading, proofing, baking, and a first recipe.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Search / Filter Bar */
+.search-container {
+  margin-bottom: 24px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 14px 20px 14px 44px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.2s;
+}
+.search-input:focus {
+  border-color: #C2185B;
+}
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* Cards shared */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.card.hidden {
+  display: none;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+  cursor: pointer;
+  user-select: none;
+}
+.card-header h2 { font-size: 1rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; }
+.toggle-icon {
+  color: #C2185B;
+  font-size: 1.2rem;
+  transition: transform 0.3s;
+}
+.card.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+.card-body {
+  padding: 24px 20px;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out, opacity 0.3s;
+  overflow: hidden;
+}
+.card.collapsed .card-body {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  border-top: none;
+}
+
+/* Content blocks */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.grid-item {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px;
+}
+.grid-item h3 {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.grid-item p {
+  font-size: 0.85rem;
+  color: #888;
+  line-height: 1.5;
+}
+
+/* Tables */
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+.ref-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: #181015;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #2a1820;
+}
+.ref-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #1a1015;
+  color: #e0d0d8;
+  line-height: 1.4;
+}
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table td.mono { color: #c8b8c0; }
+
+/* Copy Block */
+.copy-block {
+  background: #150d12;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  position: relative;
+  margin-top: 16px;
+}
+.copy-block pre {
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #c8b8c0;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .ref-table th, .ref-table td { padding: 10px; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Bread Baking <span>Guide</span> 🥖</h1>
+  <p>Your cheat sheet for getting started with baking bread at home. Equipment, flour, techniques, and your first recipe.</p>
+</div>
+
+<div class="main">
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search guide (e.g. 'flour', 'kneading', 'recipe')...">
+  </div>
+
+  <div class="card" data-tags="equipment tools scale thermometer scraper">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🛠️ Essential Equipment</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="grid-2">
+        <div class="grid-item">
+          <h3>Digital Scale</h3>
+          <p>The most important tool. Measure in grams for precision and consistency. Volumes (cups) vary wildly for flour.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Bench Scraper</h3>
+          <p>Indispensable for moving, dividing, and shaping dough without sticking to your hands. Also great for cleaning counters.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Instant-Read Thermometer</h3>
+          <p>Water temp controls fermentation time. Bread is fully baked when the internal temp hits 190°F-205°F (88°C-96°C).</p>
+        </div>
+        <div class="grid-item">
+          <h3>Dutch Oven</h3>
+          <p>Creates a sealed, steamy environment in home ovens. Essential for achieving a thick, crispy artisan crust.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-tags="flour wheat hydration protein all-purpose bread">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🌾 Common Flour Types</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Flour Type</th>
+            <th>Protein %</th>
+            <th>Best Used For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>All-Purpose (AP)</strong></td>
+            <td class="mono">10 - 12%</td>
+            <td>Soft rolls, flatbreads, everyday simple loaves. Lower water absorption.</td>
+          </tr>
+          <tr>
+            <td><strong>Bread Flour</strong></td>
+            <td class="mono">12 - 14%</td>
+            <td>Chewy artisan breads, bagels, sourdough. High gluten forms strong structure.</td>
+          </tr>
+          <tr>
+            <td><strong>Whole Wheat</strong></td>
+            <td class="mono">13 - 15%</td>
+            <td>Hearty breads. Absorbs a lot of water. Sharp bran edges can cut gluten strands.</td>
+          </tr>
+          <tr>
+            <td><strong>Rye Flour</strong></td>
+            <td class="mono">Varies</td>
+            <td>Dense, flavorful breads. Very low in gluten-forming proteins. Sticky to handle.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" data-tags="technique kneading folding autolyse tension">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>👐 Handling Techniques</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <div class="grid-2">
+        <div class="grid-item">
+          <h3>Autolyse</h3>
+          <p>Mixing just flour and water and letting it sit (20 mins to 2 hours) before adding salt/yeast. Fully hydrates flour and kickstarts gluten development automatically.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Kneading</h3>
+          <p>Mechanically developing gluten by repeatedly folding and pushing the dough. Good for stiff, low-hydration doughs (like bagels or sandwich bread).</p>
+        </div>
+        <div class="grid-item">
+          <h3>Stretch & Fold</h3>
+          <p>Used for wet (high hydration) doughs. Grab one side of the dough, stretch it up, and fold it over itself. Repeat on all 4 sides. Usually done 3-4 times every 30 mins.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Shaping</h3>
+          <p>Creating surface tension on the outside of the dough before baking. This tension gives the bread vertical "oven spring" instead of spreading flat into a pancake.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-tags="fermentation proofing yeast time temperature bulk">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>⏱️ The Fermentation Stages</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Description</th>
+            <th>What to look for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bulk Fermentation</strong><br>(First Rise)</td>
+            <td>The entire mass of dough ferments together after mixing. Flavor develops here.</td>
+            <td>Dough should increase in volume (50-100%), feel airy, and have a smooth, domed top.</td>
+          </tr>
+          <tr>
+            <td><strong>Dividing & Preshape</strong></td>
+            <td>Cutting the dough into individual loaf sizes and gently rounding them.</td>
+            <td>Let sit for 10-20 mins (bench rest) to relax the gluten before final shaping.</td>
+          </tr>
+          <tr>
+            <td><strong>Final Proof</strong><br>(Second Rise)</td>
+            <td>Dough is shaped and placed in a basket (banneton) or pan for its final rise.</td>
+            <td><strong>The Poke Test:</strong> Poke the dough. If it springs back slowly and leaves a slight indent, it's ready to bake.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" data-tags="recipe first easy simple beginner yeast standard">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>📝 Your First Recipe: The Saturday Loaf</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="font-size: 0.9rem; color: #888; margin-bottom: 12px; line-height: 1.5;">
+        A very forgiving, straight-dough recipe using instant yeast. Takes about 4-5 hours from start to finish. Yields one standard loaf. (72% hydration).
+      </p>
+
+      <div class="copy-block">
+        <button class="copy-btn" onclick="copyRecipe(this)">Copy Recipe</button>
+<pre id="recipeContent">INGREDIENTS:
+- 500g Bread Flour (or All-Purpose)
+- 360g Warm Water (approx. 90°F / 32°C)
+- 10g Fine Sea Salt
+- 3g Instant Yeast (approx. 1 scant tsp)
+
+INSTRUCTIONS:
+1. Mix all ingredients in a large bowl until a shaggy dough forms.
+2. Cover and let rest for 20 minutes.
+3. Perform 3 sets of "Stretch and Folds", waiting 30 mins between each.
+4. Let the dough rise covered until doubled in size (about 1.5 to 2 hours depending on room temp).
+5. Gently turn dough out onto a lightly floured surface. Shape into a round ball, building tension on the top.
+6. Place upside down into a floured proofing basket (or a bowl lined with a floured towel).
+7. Final proof for 45-60 mins. Preheat oven (with Dutch oven inside) to 475°F (245°C).
+8. Flip dough onto parchment paper. Score the top with a razor or sharp knife.
+9. Carefully transfer to hot Dutch oven. Bake with lid on for 30 mins.
+10. Remove lid, reduce heat to 450°F (230°C), bake 10-15 more mins until deep golden brown.
+11. Cool completely (at least 2 hours) on a wire rack before slicing!</pre>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>Why Bake Your Own Bread?</h2>
+  <p>Baking bread at home transforms simple, inexpensive ingredients—flour, water, salt, and yeast—into something extraordinary. Beyond the incredible smell that fills your house, homemade bread is free of the commercial preservatives, dough conditioners, and excessive sugars found in supermarket loaves. You have total control over what goes into your body.</p>
+
+  <h2>The Role of Time and Temperature</h2>
+  <p>In bread baking, temperature is an ingredient. Yeast (whether commercial or wild sourdough) acts faster in warm environments and slower in cold ones. Professional bakers manipulate temperature to control <em>time</em>.</p>
+  <ul>
+    <li><strong>Warm ferments:</strong> Fast rising times, milder flavor. Good for quick yeast breads.</li>
+    <li><strong>Cold ferments (The fridge):</strong> Slow rising times, complex flavor development, and better crust blistering. Often called "retarding" the dough.</li>
+  </ul>
+  <p>If your dough is rising too fast, you can put it in the fridge to slow it down. If it's too slow, find a warmer spot in your kitchen.</p>
+
+  <h2>Mastering Baker's Math</h2>
+  <p>As you progress, you'll start seeing recipes written in percentages rather than grams or cups. This is called Baker's Percentage. In this system, the total flour weight is <em>always</em> 100%. Every other ingredient is a percentage of that flour weight. This makes scaling recipes up or down incredibly easy. Be sure to check out our <a href="/bakers-percentage">Baker's Percentage Calculator</a> when you are ready to start writing your own formulas.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Toggle card collapse
+function toggleCard(headerEl) {
+  const card = headerEl.parentElement;
+  card.classList.toggle('collapsed');
+}
+
+// Search functionality
+const searchInput = document.getElementById('searchInput');
+const cards = document.querySelectorAll('.card');
+
+searchInput.addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase().trim();
+
+  cards.forEach(card => {
+    // Search in tags, headers, and body text
+    const tags = card.getAttribute('data-tags') || '';
+    const textContent = card.innerText.toLowerCase();
+
+    if (tags.includes(query) || textContent.includes(query)) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+});
+
+// Copy recipe
+function copyRecipe(btn) {
+  const recipeText = document.getElementById('recipeContent').innerText;
+
+  navigator.clipboard.writeText(recipeText).then(() => {
+    const originalText = btn.innerText;
+    btn.innerText = '✓ Copied';
+    btn.classList.add('copied');
+
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+</script>
+</body>
+</html>
