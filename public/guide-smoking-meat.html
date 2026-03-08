@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smoking Meat for Beginners — Ultimate Guide & Cheat Sheet</title>
+<meta name="description" content="Complete guide to smoking meat. Wood types, smoker types, temperatures, times, and first smoke recipes. Everything you need to know in one reference sheet.">
+<meta property="og:title" content="Smoking Meat for Beginners — Ultimate Guide & Cheat Sheet">
+<meta property="og:description" content="Complete guide to smoking meat. Wood types, smoker types, temperatures, times, and first smoke recipes. Everything you need to know in one reference sheet.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Smoking Meat for Beginners — Ultimate Guide",
+  "description": "Complete reference guide to smoking meat, including wood types, temperatures, times, and beginner recipes.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+
+.main { max-width: 900px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 32px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px 20px 16px 48px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* Cards */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 1.1rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; }
+
+/* Data Tables */
+.table-wrapper { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 14px 20px; border-bottom: 1px solid #2a1820; }
+th { background: #1a1015; color: #888; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; white-space: nowrap; }
+tr:last-child td { border-bottom: none; }
+td { font-size: 0.95rem; color: #e0d0d8; }
+.td-primary { font-weight: 600; color: #fff; }
+.td-mono { font-family: 'JetBrains Mono', monospace; color: #C2185B; font-weight: 600; font-size: 0.9rem; }
+.td-desc { font-size: 0.85rem; color: #888; line-height: 1.4; }
+
+/* Wood Grid */
+.wood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1px;
+  background: #2a1820;
+}
+.wood-item {
+  background: #120c10;
+  padding: 20px;
+}
+.wood-name { font-weight: 700; color: #fff; margin-bottom: 4px; font-size: 1.05rem; }
+.wood-strength { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+.str-mild { background: #1a2a1a; color: #4ade80; }
+.str-medium { background: #3a2a10; color: #fbbf24; }
+.str-strong { background: #3a1a1a; color: #f87171; }
+.wood-pairs { font-size: 0.8rem; color: #888; margin-bottom: 8px; font-weight: 600; }
+.wood-desc { font-size: 0.85rem; color: #a09098; line-height: 1.5; }
+
+/* Smoker Types */
+.smoker-list { display: flex; flex-direction: column; }
+.smoker-item { padding: 20px; border-bottom: 1px solid #2a1820; }
+.smoker-item:last-child { border-bottom: none; }
+.smoker-title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.smoker-pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
+.pros h4 { color: #4ade80; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 4px; }
+.cons h4 { color: #f87171; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 4px; }
+.pros ul, .cons ul { list-style: none; padding: 0; }
+.pros li, .cons li { font-size: 0.85rem; color: #a09098; margin-bottom: 4px; padding-left: 12px; position: relative; }
+.pros li::before { content: '+'; position: absolute; left: 0; color: #4ade80; font-weight: bold; }
+.cons li::before { content: '-'; position: absolute; left: 0; color: #f87171; font-weight: bold; }
+
+/* Recipes / Expandables */
+details {
+  background: #1a1015;
+  border-bottom: 1px solid #2a1820;
+}
+details:last-child { border-bottom: none; }
+summary {
+  padding: 16px 20px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '+';
+  color: #C2185B;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+details[open] summary::after { content: '−'; }
+.recipe-content {
+  padding: 0 20px 20px;
+  color: #a09098;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.recipe-content h4 { color: #e0d0d8; margin: 12px 0 6px; font-size: 0.95rem; }
+.recipe-content ul, .recipe-content ol { padding-left: 20px; margin-bottom: 12px; }
+.recipe-content li { margin-bottom: 4px; }
+
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  float: right;
+  margin-top: -30px;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+.hidden { display: none !important; }
+.no-results { text-align: center; padding: 40px; color: #888; font-size: 1.1rem; display: none; }
+
+/* SEO content */
+.content { max-width: 800px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .smoker-pros-cons { grid-template-columns: 1fr; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Smoking Meat <span>Guide</span> 🔥</h1>
+  <p>The ultimate cheat sheet for temperatures, times, wood pairings, and classic recipes. Perfect for beginners.</p>
+</div>
+
+<div class="main">
+
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search meats, woods, smokers, recipes...">
+  </div>
+
+  <div id="noResults" class="no-results">No matches found. Try a different search term.</div>
+
+  <!-- Temp & Time Table -->
+  <div class="card searchable-section" data-tags="temperature time chart meat brisket pork shoulder ribs chicken turkey salmon beef">
+    <div class="card-header">
+      <h2>🌡️ Temperatures & Times</h2>
+    </div>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Meat Cut</th>
+            <th>Smoker Temp</th>
+            <th>Target Internal</th>
+            <th>Est. Time</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="searchable-item" data-text="brisket beef">
+            <td class="td-primary">Brisket (Packer)</td>
+            <td class="td-mono">225-250°F</td>
+            <td class="td-mono">200-205°F</td>
+            <td class="td-mono">1-1.5 hrs/lb</td>
+            <td class="td-desc">Wrap at the stall (160°F). Rest 2-4 hrs in a cooler.</td>
+          </tr>
+          <tr class="searchable-item" data-text="pork shoulder butt pulled pork">
+            <td class="td-primary">Pork Shoulder / Butt</td>
+            <td class="td-mono">225-250°F</td>
+            <td class="td-mono">200-205°F</td>
+            <td class="td-mono">1-1.5 hrs/lb</td>
+            <td class="td-desc">Wrap at 165°F for faster cook. Rest 1 hr before pulling.</td>
+          </tr>
+          <tr class="searchable-item" data-text="pork ribs spare baby back 3-2-1">
+            <td class="td-primary">Pork Ribs (Spare)</td>
+            <td class="td-mono">225-250°F</td>
+            <td class="td-mono">195-205°F</td>
+            <td class="td-mono">5-6 hrs total</td>
+            <td class="td-desc">Use bend test. 3-2-1 method is popular. (Baby Backs: 2-2-1).</td>
+          </tr>
+          <tr class="searchable-item" data-text="beef short ribs dino">
+            <td class="td-primary">Beef Short Ribs</td>
+            <td class="td-mono">250-275°F</td>
+            <td class="td-mono">203-205°F</td>
+            <td class="td-mono">6-8 hrs total</td>
+            <td class="td-desc">"Brisket on a stick." Do not wrap unless necessary.</td>
+          </tr>
+          <tr class="searchable-item" data-text="whole chicken poultry birds">
+            <td class="td-primary">Whole Chicken</td>
+            <td class="td-mono">275-325°F</td>
+            <td class="td-mono">165°F (Breast)</td>
+            <td class="td-mono">30-45 mins/lb</td>
+            <td class="td-desc">Higher temp needed for crispy skin. Spatchcock for even cooking.</td>
+          </tr>
+          <tr class="searchable-item" data-text="salmon fish seafood">
+            <td class="td-primary">Salmon Filet</td>
+            <td class="td-mono">225°F</td>
+            <td class="td-mono">135-145°F</td>
+            <td class="td-mono">1-1.5 hrs</td>
+            <td class="td-desc">Smoke skin-side down. Brine beforehand for best results.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Wood Types -->
+  <div class="card searchable-section" data-tags="wood smoking flavor pairings chunks chips pellets logs">
+    <div class="card-header">
+      <h2>🪵 Wood Pairing Guide</h2>
+    </div>
+    <div class="wood-grid">
+      <div class="wood-item searchable-item" data-text="hickory strong pork beef">
+        <div class="wood-name">Hickory</div>
+        <span class="wood-strength str-strong">Strong</span>
+        <div class="wood-pairs">Pairs: Pork, Beef, Ribs</div>
+        <div class="wood-desc">The classic BBQ wood. Pungent, smoky, bacon-like flavor. Can be bitter if overused.</div>
+      </div>
+      <div class="wood-item searchable-item" data-text="mesquite strong beef brisket texas">
+        <div class="wood-name">Mesquite</div>
+        <span class="wood-strength str-strong">Very Strong</span>
+        <div class="wood-pairs">Pairs: Beef, Brisket</div>
+        <div class="wood-desc">Intense, earthy flavor. Burns hot and fast. Best mixed with milder woods to avoid overpowering meat.</div>
+      </div>
+      <div class="wood-item searchable-item" data-text="oak medium beef pork universal">
+        <div class="wood-name">Oak / Post Oak</div>
+        <span class="wood-strength str-medium">Medium</span>
+        <div class="wood-pairs">Pairs: Universal (Beef, Pork, Poultry)</div>
+        <div class="wood-desc">The staple of Texas BBQ. Clean, even burn with a moderate smoke profile that works on everything.</div>
+      </div>
+      <div class="wood-item searchable-item" data-text="apple mild pork chicken sweet">
+        <div class="wood-name">Apple</div>
+        <span class="wood-strength str-mild">Mild</span>
+        <div class="wood-pairs">Pairs: Pork, Poultry, Fish</div>
+        <div class="wood-desc">Subtle, sweet, and fruity flavor. Takes longer to penetrate meat. Great for ribs and chicken.</div>
+      </div>
+      <div class="wood-item searchable-item" data-text="cherry mild pork beef color red">
+        <div class="wood-name">Cherry</div>
+        <span class="wood-strength str-mild">Mild</span>
+        <div class="wood-pairs">Pairs: Pork, Beef, Poultry</div>
+        <div class="wood-desc">Sweet and fruity. Highly valued because it imparts a beautiful dark mahogany red color to bark.</div>
+      </div>
+      <div class="wood-item searchable-item" data-text="pecan medium pork chicken nuts">
+        <div class="wood-name">Pecan</div>
+        <span class="wood-strength str-medium">Medium</span>
+        <div class="wood-pairs">Pairs: Pork, Poultry, Brisket</div>
+        <div class="wood-desc">Similar to hickory but sweeter and milder. Nutty flavor. Burns cooler than most hard woods.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smoker Types -->
+  <div class="card searchable-section" data-tags="smoker types offset pellet kamado electric kettle weber traeger">
+    <div class="card-header">
+      <h2>🔥 Smoker Types Compared</h2>
+    </div>
+    <div class="smoker-list">
+      <div class="smoker-item searchable-item" data-text="offset stick burner traditional wood">
+        <div class="smoker-title">Offset Smoker (Stick Burner)</div>
+        <div class="td-desc">The traditional BBQ pit. Firebox on the side, smoking chamber in the middle. Burns real wood logs.</div>
+        <div class="smoker-pros-cons">
+          <div class="pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Best, most authentic smoke flavor</li>
+              <li>Exceptional bark formation</li>
+              <li>Large cooking capacity</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Steep learning curve</li>
+              <li>Requires constant fire management (every 45m)</li>
+              <li>Good ones are very expensive/heavy</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="smoker-item searchable-item" data-text="pellet traeger easy set and forget electricity">
+        <div class="smoker-title">Pellet Smoker</div>
+        <div class="td-desc">Uses compressed sawdust pellets fed by an automated auger. Temperature is controlled digitally.</div>
+        <div class="smoker-pros-cons">
+          <div class="pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>"Set it and forget it" convenience</li>
+              <li>Precise temperature control</li>
+              <li>Very easy for beginners</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Lighter smoke profile than wood/charcoal</li>
+              <li>Requires electricity to run</li>
+              <li>Moving parts (auger/fan) can break</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="smoker-item searchable-item" data-text="kamado egg green ceramic charcoal efficient">
+        <div class="smoker-title">Kamado (Ceramic)</div>
+        <div class="td-desc">Thick ceramic egg-shaped grills that use lump charcoal. Highly insulated.</div>
+        <div class="smoker-pros-cons">
+          <div class="pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Incredible heat retention and efficiency</li>
+              <li>Versatile (can smoke low or sear at 700°F+)</li>
+              <li>Holds temp steady for hours in cold weather</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Very heavy and fragile</li>
+              <li>Hard to lower temp if you overshoot</li>
+              <li>Smaller cooking area relative to price</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="smoker-item searchable-item" data-text="kettle weber charcoal snake method snake">
+        <div class="smoker-title">Kettle Grill (Weber)</div>
+        <div class="td-desc">Standard charcoal grill. Can be used as a smoker by banking coals or using the "snake method".</div>
+        <div class="smoker-pros-cons">
+          <div class="pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Very affordable and accessible</li>
+              <li>Highly versatile</li>
+              <li>Produces excellent flavor with charcoal/wood chunks</li>
+            </ul>
+          </div>
+          <div class="cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Requires manual vent adjustment for temp control</li>
+              <li>Small capacity for smoking</li>
+              <li>Hard to add fuel during long cooks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- First Smoke Recipes -->
+  <div class="card searchable-section" data-tags="recipes first smoke beginners pulled pork ribs 3-2-1">
+    <div class="card-header">
+      <h2>🍖 First Smoke Recipes</h2>
+    </div>
+
+    <details class="searchable-item" data-text="pulled pork butt shoulder beginner recipe">
+      <summary>Beginner's Pulled Pork (Pork Butt)</summary>
+      <div class="recipe-content">
+        <button class="copy-btn" onclick="copyRecipe(this, 'pulledPorkRecipe')">Copy Recipe</button>
+        <p>The most forgiving cut of meat. It has enough fat and connective tissue that it's very hard to ruin, making it the perfect first smoke.</p>
+        <div id="pulledPorkRecipe">
+          <h4>Ingredients</h4>
+          <ul>
+            <li>1 Pork Shoulder (Boston Butt) - 8 to 10 lbs</li>
+            <li>Yellow mustard or olive oil (as binder)</li>
+            <li>BBQ Rub (Salt, pepper, paprika, garlic powder, brown sugar)</li>
+            <li>Apple juice/cider vinegar (for spritzing)</li>
+          </ul>
+          <h4>Instructions</h4>
+          <ol>
+            <li><strong>Prep:</strong> Trim thick fat cap to 1/4 inch. Apply binder, then coat generously with rub. Let sit 30 mins.</li>
+            <li><strong>Smoke:</strong> Set smoker to 225°F - 250°F. Use Hickory or Apple wood.</li>
+            <li><strong>Cook:</strong> Place meat in smoker. Spritz with apple juice every hour after the first 2 hours.</li>
+            <li><strong>The Stall:</strong> Around 160°F internal, the temp will stall. Wrap tightly in aluminum foil or butcher paper.</li>
+            <li><strong>Finish:</strong> Continue cooking until internal temp is 200°F-205°F and a probe slides in like warm butter. (Total time ~8-12 hours).</li>
+            <li><strong>Rest:</strong> Rest wrapped in a dry cooler for 1-2 hours before shredding.</li>
+          </ol>
+        </div>
+      </div>
+    </details>
+
+    <details class="searchable-item" data-text="3-2-1 ribs spare baby back recipe">
+      <summary>3-2-1 Pork Ribs</summary>
+      <div class="recipe-content">
+        <button class="copy-btn" onclick="copyRecipe(this, 'ribsRecipe')">Copy Recipe</button>
+        <p>A foolproof method for tender, fall-off-the-bone ribs. (Note: For a bit more bite, try 3-1.5-1. For Baby Backs, use 2-2-1).</p>
+        <div id="ribsRecipe">
+          <h4>Ingredients</h4>
+          <ul>
+            <li>1 rack Pork Spare Ribs (St. Louis cut)</li>
+            <li>BBQ Rub (Sweet & savory profile)</li>
+            <li>Butter, brown sugar, honey (for wrapping)</li>
+            <li>BBQ Sauce</li>
+          </ul>
+          <h4>Instructions</h4>
+          <ol>
+            <li><strong>Prep:</strong> Remove the membrane from the back of the ribs. Apply rub on both sides.</li>
+            <li><strong>Phase 1 (3 Hours Smoke):</strong> Smoke at 225°F meat-side up for 3 hours. Spritz occasionally if looking dry.</li>
+            <li><strong>Phase 2 (2 Hours Wrap):</strong> Lay down foil. Add a row of butter, brown sugar, and honey. Place ribs meat-side down on mixture. Wrap tightly. Return to smoker for 2 hours.</li>
+            <li><strong>Phase 3 (1 Hour Set):</strong> Unwrap ribs. Place back on smoker meat-side up. Brush with BBQ sauce. Smoke for 45-60 mins until sauce is tacky.</li>
+            <li><strong>Rest:</strong> Rest 15 mins before slicing.</li>
+          </ol>
+        </div>
+      </div>
+    </details>
+
+  </div>
+
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>The Science of Smoke</h2>
+  <p>Smoking meat is low and slow cooking, typically between 225°F and 275°F. Unlike grilling, which cooks meat quickly over direct radiant heat, smoking uses indirect convection heat and wood smoke. This slow process allows time for tough connective tissues (collagen) in cuts like brisket and pork shoulder to slowly melt into gelatin. This is why a tough, cheap cut of meat becomes incredibly tender and juicy after 12 hours in a smoker.</p>
+
+  <h2>Bark Formation</h2>
+  <p>The "bark" is the delicious, dark crust that forms on the outside of smoked meat. It is a result of the Maillard reaction and the polymerization of fats, spices from your rub, and smoke. To get good bark, you need a balanced rub (salt and pepper are crucial), proper airflow, and time unwrapped in the smoke. Wrapping meat too early will ruin the bark, making it soft and mushy.</p>
+
+  <h2>The Stall Explained</h2>
+  <p>The "stall" is a phenomenon that frustrates many beginners. When smoking large cuts, the internal temperature will rise steadily to about 150°F to 165°F and then suddenly stop, sometimes for hours. This is caused by evaporative cooling—the meat is sweating out moisture faster than the heat can raise the temperature. To beat the stall, you can either patiently wait it out, or use the "Texas Crutch": wrapping the meat tightly in foil or butcher paper to trap the moisture and force the temperature up.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Search Functionality
+const searchInput = document.getElementById('searchInput');
+const sections = document.querySelectorAll('.searchable-section');
+const noResults = document.getElementById('noResults');
+
+searchInput.addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase().trim();
+  let hasVisibleSections = false;
+
+  if (term === '') {
+    // Reset all
+    sections.forEach(sec => {
+      sec.classList.remove('hidden');
+      const items = sec.querySelectorAll('.searchable-item');
+      items.forEach(item => item.classList.remove('hidden'));
+    });
+    noResults.style.display = 'none';
+    return;
+  }
+
+  sections.forEach(sec => {
+    let sectionHasMatch = false;
+    const items = sec.querySelectorAll('.searchable-item');
+
+    // Check if section title/tags match
+    const sectionTags = sec.getAttribute('data-tags') || '';
+    const sectionTitleMatch = sec.querySelector('h2').textContent.toLowerCase().includes(term);
+    const sectionTagMatch = sectionTags.includes(term);
+
+    items.forEach(item => {
+      const itemText = item.getAttribute('data-text') || '';
+      const itemContent = item.textContent.toLowerCase();
+
+      if (itemText.includes(term) || itemContent.includes(term) || sectionTitleMatch || sectionTagMatch) {
+        item.classList.remove('hidden');
+        sectionHasMatch = true;
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+
+    if (sectionHasMatch) {
+      sec.classList.remove('hidden');
+      hasVisibleSections = true;
+      // If a recipe is matched, open the details tag
+      if(sec.querySelector('details') && !sectionTitleMatch) {
+         sec.querySelectorAll('details.searchable-item:not(.hidden)').forEach(d => d.setAttribute('open', ''));
+      }
+    } else {
+      sec.classList.add('hidden');
+    }
+  });
+
+  if (!hasVisibleSections) {
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+  }
+});
+
+// Copy Recipe Functionality
+function copyRecipe(btn, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+
+  // Extract text roughly formatted
+  let text = '';
+  const elements = container.children;
+  for(let el of elements) {
+    if(el.tagName === 'H4') {
+      text += `\n${el.textContent}\n`;
+      text += '-'.repeat(el.textContent.length) + '\n';
+    } else if (el.tagName === 'UL') {
+      for(let li of el.children) {
+        text += `• ${li.textContent}\n`;
+      }
+    } else if (el.tagName === 'OL') {
+      let i = 1;
+      for(let li of el.children) {
+        text += `${i}. ${li.textContent}\n`;
+        i++;
+      }
+    }
+  }
+
+  navigator.clipboard.writeText(text.trim()).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+</script>
+</body>
+</html>
