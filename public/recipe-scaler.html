@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe Scaler — Multiply or Divide Any Recipe Instantly | Free Tool</title>
+<meta name="description" content="Scale any recipe up or down instantly. Enter ingredients with amounts, set your target servings, and get every measurement recalculated. Supports fractions, metric, and imperial. Free, no signup.">
+<meta property="og:title" content="Recipe Scaler — Multiply or Divide Any Recipe">
+<meta property="og:description" content="Enter your recipe, pick your target servings, and watch every ingredient update in real time. Fractions, metric, imperial — all supported.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Recipe Scaler",
+  "url": "https://28grams.vip/recipe-scaler",
+  "description": "Scale any recipe up or down. Enter ingredients, set target servings, get recalculated amounts instantly.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Servings control */
+.servings-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.serving-group { display: flex; align-items: center; gap: 10px; }
+.serving-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.serving-input {
+  width: 70px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.serving-input:focus { border-color: #C2185B; }
+.arrow { font-size: 1.5rem; color: #C2185B; }
+.multiplier {
+  background: #2a1020;
+  color: #C2185B;
+  padding: 6px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Quick multipliers */
+.quick-btns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.quick-btn {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  color: #888;
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.quick-btn:hover { border-color: #C2185B; color: #C2185B; }
+.quick-btn.active { background: #2a1020; border-color: #C2185B; color: #C2185B; }
+
+/* Ingredients */
+.ingredients-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.ing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.ing-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.add-btn {
+  background: #2a1020;
+  border: 1px solid #3a2030;
+  color: #C2185B;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.add-btn:hover { background: #3a1530; }
+.ing-list { padding: 8px 0; }
+.ing-row {
+  display: grid;
+  grid-template-columns: 80px 70px 1fr 36px;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 20px;
+  border-bottom: 1px solid #1a1015;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-row input {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #e0d0d8;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+.ing-row input:focus { border-color: #C2185B; }
+.ing-row input.amount {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-align: right;
+}
+.ing-row input.unit { }
+.ing-row input.name { }
+.ing-row .scaled {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: #C2185B;
+  font-size: 0.9rem;
+  text-align: right;
+  display: none;
+}
+.del-btn {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+.del-btn:hover { color: #f87171; background: #1a0a0a; }
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  display: none;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* Paste mode */
+.paste-area {
+  margin-bottom: 20px;
+}
+.paste-area textarea {
+  width: 100%;
+  min-height: 120px;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 20px;
+  color: #e0d0d8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  outline: none;
+  resize: vertical;
+  line-height: 1.7;
+}
+.paste-area textarea:focus { border-color: #C2185B; }
+.paste-area textarea::placeholder { color: #444; }
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.mode-btn {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  color: #888;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.mode-btn.active { background: #2a1020; border-color: #C2185B; color: #C2185B; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .servings-bar { flex-direction: column; gap: 14px; }
+  .ing-row { grid-template-columns: 70px 60px 1fr 30px; gap: 6px; padding: 8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Recipe <span>Scaler</span> ⚖️</h1>
+  <p>Enter your recipe. Pick your servings. Every ingredient updates instantly.</p>
+</div>
+
+<div class="main">
+
+  <div class="servings-bar">
+    <div class="serving-group">
+      <span class="serving-label">Original</span>
+      <input type="number" class="serving-input" id="origServing" value="4" min="1" max="999">
+    </div>
+    <span class="arrow">→</span>
+    <div class="serving-group">
+      <span class="serving-label">Target</span>
+      <input type="number" class="serving-input" id="targetServing" value="4" min="1" max="999">
+    </div>
+    <span class="multiplier" id="multiplierBadge">×1</span>
+  </div>
+
+  <div class="quick-btns">
+    <button class="quick-btn" onclick="setMultiplier(0.5)">½×</button>
+    <button class="quick-btn active" onclick="setMultiplier(1)">1×</button>
+    <button class="quick-btn" onclick="setMultiplier(1.5)">1.5×</button>
+    <button class="quick-btn" onclick="setMultiplier(2)">2×</button>
+    <button class="quick-btn" onclick="setMultiplier(3)">3×</button>
+    <button class="quick-btn" onclick="setMultiplier(4)">4×</button>
+  </div>
+
+  <div class="mode-toggle">
+    <button class="mode-btn active" id="modeManual" onclick="setMode('manual')">Add Ingredients</button>
+    <button class="mode-btn" id="modePaste" onclick="setMode('paste')">Paste Recipe</button>
+  </div>
+
+  <!-- Paste mode -->
+  <div class="paste-area" id="pasteArea" style="display:none;">
+    <textarea id="pasteInput" placeholder="Paste your recipe here, one ingredient per line:&#10;&#10;2 cups flour&#10;1/2 cup sugar&#10;3 eggs&#10;1 tsp vanilla extract&#10;250g butter"></textarea>
+    <div style="text-align:center; margin-top:10px;">
+      <button class="add-btn" onclick="parseRecipe()" style="padding:10px 24px; font-size:0.85rem;">Parse Recipe</button>
+    </div>
+  </div>
+
+  <!-- Manual mode -->
+  <div class="ingredients-card" id="ingredientsCard">
+    <div class="ing-header">
+      <h2>🧾 Ingredients</h2>
+      <button class="add-btn" onclick="addRow()">+ Add</button>
+    </div>
+    <div class="ing-list" id="ingList">
+    </div>
+  </div>
+
+  <!-- Scaled result -->
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <h2>📋 Scaled Recipe</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+      <pre id="resultText"></pre>
+    </div>
+  </div>
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>How to Scale a Recipe</h2>
+  <p>Scaling a recipe means adjusting all ingredient quantities proportionally to make more or fewer servings. Whether you're cooking for a crowd or cutting a recipe in half for date night, the math is simple: <strong>divide the target servings by the original servings</strong> to get your multiplier, then multiply every ingredient by that number.</p>
+  <p>Our recipe scaler does this instantly — enter your ingredients, set your original and target servings, and watch every measurement update in real time. It handles whole numbers, decimals, and fractions.</p>
+
+  <h2>Tips for Scaling Recipes</h2>
+  <ul>
+    <li><strong>Spices and seasonings:</strong> Don't scale linearly above 2×. Start at 1.5× the spice amount for a doubled recipe and adjust to taste.</li>
+    <li><strong>Baking recipes:</strong> Scale carefully — chemical leaveners (baking soda, baking powder) don't always scale linearly. For 2× batches, use 1.75× the leavener.</li>
+    <li><strong>Eggs:</strong> If scaling gives you a fraction of an egg, beat a whole egg and measure out the fraction by weight (one large egg ≈ 50g).</li>
+    <li><strong>Pan sizes:</strong> When doubling, you may need a larger pan or to bake in batches. A doubled recipe in the same pan will change cooking time.</li>
+    <li><strong>Cooking time:</strong> Larger volumes take longer. Add 25% more time when doubling and check for doneness.</li>
+  </ul>
+
+  <h2>Common Recipe Conversions</h2>
+  <ul>
+    <li><strong>1 cup</strong> = 240ml = 16 tablespoons</li>
+    <li><strong>1 tablespoon</strong> = 15ml = 3 teaspoons</li>
+    <li><strong>1 stick butter</strong> = ½ cup = 113g = 4 oz</li>
+    <li><strong>1 cup flour</strong> ≈ 125g (spooned and leveled)</li>
+    <li><strong>1 cup sugar</strong> ≈ 200g</li>
+    <li><strong>1 large egg</strong> ≈ 50g (without shell)</li>
+  </ul>
+
+  <h2>Why "28 Grams"?</h2>
+  <p>Because precision matters in the kitchen — and 28 grams is exactly one ounce. We build free culinary tools for home cooks and professional chefs who want to get it right every time.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+var ingredients = [];
+var origEl = document.getElementById('origServing');
+var targetEl = document.getElementById('targetServing');
+var mulBadge = document.getElementById('multiplierBadge');
+var ingList = document.getElementById('ingList');
+var resultCard = document.getElementById('resultCard');
+var resultText = document.getElementById('resultText');
+
+// Default starter ingredients
+var starters = [
+  { amount: 2, unit: 'cups', name: 'all-purpose flour' },
+  { amount: 1, unit: 'cup', name: 'sugar' },
+  { amount: 0.5, unit: 'cup', name: 'butter, melted' },
+  { amount: 3, unit: '', name: 'eggs' },
+  { amount: 1, unit: 'tsp', name: 'vanilla extract' },
+  { amount: 0.25, unit: 'tsp', name: 'salt' },
+];
+
+starters.forEach(function(s) { ingredients.push(s); });
+renderIngredients();
+update();
+
+origEl.addEventListener('input', update);
+targetEl.addEventListener('input', update);
+
+function getMultiplier() {
+  var o = parseFloat(origEl.value) || 1;
+  var t = parseFloat(targetEl.value) || 1;
+  return t / o;
+}
+
+function update() {
+  var mul = getMultiplier();
+  var display = mul === Math.floor(mul) ? '×' + mul : '×' + mul.toFixed(2).replace(/\.?0+$/, '');
+  mulBadge.textContent = display;
+
+  // Update quick button states
+  var btns = document.querySelectorAll('.quick-btn');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+
+  // Build result
+  if (ingredients.length === 0) { resultCard.style.display = 'none'; return; }
+  resultCard.style.display = 'block';
+  var lines = [];
+  ingredients.forEach(function(ing) {
+    if (!ing.name && !ing.amount) return;
+    var scaled = ing.amount * mul;
+    var formatted = formatAmount(scaled);
+    var line = formatted + (ing.unit ? ' ' + ing.unit : '') + (ing.name ? ' ' + ing.name : '');
+    lines.push(line.trim());
+  });
+  resultText.textContent = lines.join('\n');
+}
+
+function formatAmount(n) {
+  if (n === 0) return '0';
+  if (n >= 10) return Math.round(n * 10) / 10 + '';
+
+  // Try common fractions
+  var fracs = [
+    [0.125, '⅛'], [0.25, '¼'], [0.333, '⅓'], [0.375, '⅜'],
+    [0.5, '½'], [0.625, '⅝'], [0.667, '⅔'], [0.75, '¾'], [0.875, '⅞']
+  ];
+  var whole = Math.floor(n);
+  var frac = n - whole;
+
+  if (frac < 0.05) return whole + '';
+
+  for (var i = 0; i < fracs.length; i++) {
+    if (Math.abs(frac - fracs[i][0]) < 0.05) {
+      return (whole > 0 ? whole + ' ' : '') + fracs[i][1];
+    }
+  }
+  return (Math.round(n * 100) / 100) + '';
+}
+
+function setMultiplier(mul) {
+  var orig = parseFloat(origEl.value) || 4;
+  targetEl.value = Math.round(orig * mul);
+  update();
+}
+
+function addRow(amount, unit, name) {
+  ingredients.push({ amount: amount || 0, unit: unit || '', name: name || '' });
+  renderIngredients();
+  update();
+  // Focus the last amount input
+  var inputs = ingList.querySelectorAll('input.amount');
+  if (inputs.length > 0) inputs[inputs.length - 1].focus();
+}
+
+function removeRow(idx) {
+  ingredients.splice(idx, 1);
+  renderIngredients();
+  update();
+}
+
+function renderIngredients() {
+  ingList.innerHTML = '';
+  ingredients.forEach(function(ing, i) {
+    var row = document.createElement('div');
+    row.className = 'ing-row';
+    row.innerHTML =
+      '<input class="amount" type="text" value="' + formatEditAmount(ing.amount) + '" placeholder="Qty" data-idx="' + i + '" data-field="amount">' +
+      '<input class="unit" type="text" value="' + esc(ing.unit) + '" placeholder="unit" data-idx="' + i + '" data-field="unit">' +
+      '<input class="name" type="text" value="' + esc(ing.name) + '" placeholder="ingredient name" data-idx="' + i + '" data-field="name">' +
+      '<button class="del-btn" onclick="removeRow(' + i + ')">✕</button>';
+    ingList.appendChild(row);
+  });
+
+  // Attach listeners
+  ingList.querySelectorAll('input').forEach(function(inp) {
+    inp.addEventListener('input', function() {
+      var idx = parseInt(this.getAttribute('data-idx'));
+      var field = this.getAttribute('data-field');
+      if (field === 'amount') {
+        ingredients[idx].amount = parseFraction(this.value);
+      } else {
+        ingredients[idx][field] = this.value;
+      }
+      update();
+    });
+  });
+}
+
+function formatEditAmount(n) {
+  if (n === 0) return '';
+  if (n === Math.floor(n)) return n + '';
+  // Show as fraction if close
+  var fracs = [[0.125,'1/8'],[0.25,'1/4'],[0.333,'1/3'],[0.375,'3/8'],[0.5,'1/2'],[0.625,'5/8'],[0.667,'2/3'],[0.75,'3/4'],[0.875,'7/8']];
+  var whole = Math.floor(n);
+  var frac = n - whole;
+  for (var i = 0; i < fracs.length; i++) {
+    if (Math.abs(frac - fracs[i][0]) < 0.02) {
+      return (whole > 0 ? whole + ' ' : '') + fracs[i][1];
+    }
+  }
+  return (Math.round(n * 100) / 100) + '';
+}
+
+function parseFraction(str) {
+  str = str.trim();
+  if (!str) return 0;
+
+  // Handle unicode fractions
+  var uniMap = {'½':0.5,'⅓':0.333,'⅔':0.667,'¼':0.25,'¾':0.75,'⅛':0.125,'⅜':0.375,'⅝':0.625,'⅞':0.875};
+  for (var u in uniMap) {
+    if (str.indexOf(u) !== -1) {
+      var before = str.replace(u, '').trim();
+      return (before ? parseFloat(before) : 0) + uniMap[u];
+    }
+  }
+
+  // Handle "1 1/2" or "1/2"
+  var parts = str.split(/\s+/);
+  var total = 0;
+  parts.forEach(function(p) {
+    if (p.indexOf('/') !== -1) {
+      var fParts = p.split('/');
+      total += parseFloat(fParts[0]) / parseFloat(fParts[1]);
+    } else {
+      total += parseFloat(p) || 0;
+    }
+  });
+  return total;
+}
+
+function parseRecipe() {
+  var text = document.getElementById('pasteInput').value.trim();
+  if (!text) return;
+  var lines = text.split('\n').filter(function(l) { return l.trim(); });
+  ingredients = [];
+  lines.forEach(function(line) {
+    line = line.trim().replace(/^[-•*]\s*/, ''); // remove bullet points
+    var parsed = parseIngredientLine(line);
+    ingredients.push(parsed);
+  });
+  setMode('manual');
+  renderIngredients();
+  update();
+}
+
+function parseIngredientLine(line) {
+  // Try to parse: "2 cups flour" or "1/2 tsp salt" or "3 eggs"
+  var units = ['cups?','tablespoons?','tbsp','teaspoons?','tsp','ounces?','oz','pounds?','lbs?','grams?','g','kg','ml','liters?','l','pinch','dash','cloves?','cans?','packages?','sticks?','slices?','pieces?','bunch','head','stalks?'];
+  var unitPattern = new RegExp('^(' + units.join('|') + ')\\.?\\s+', 'i');
+
+  // Extract leading number (including fractions)
+  var numMatch = line.match(/^([\d\s./½⅓⅔¼¾⅛⅜⅝⅞]+)/);
+  var amount = 0;
+  var rest = line;
+  if (numMatch) {
+    amount = parseFraction(numMatch[1]);
+    rest = line.slice(numMatch[0].length).trim();
+  }
+
+  // Extract unit
+  var unit = '';
+  var unitMatch = rest.match(unitPattern);
+  if (unitMatch) {
+    unit = unitMatch[1];
+    rest = rest.slice(unitMatch[0].length).trim();
+  }
+
+  // Handle "of" prefix
+  rest = rest.replace(/^of\s+/i, '');
+
+  return { amount: amount, unit: unit, name: rest };
+}
+
+function setMode(mode) {
+  document.getElementById('modeManual').classList.toggle('active', mode === 'manual');
+  document.getElementById('modePaste').classList.toggle('active', mode === 'paste');
+  document.getElementById('pasteArea').style.display = mode === 'paste' ? 'block' : 'none';
+  document.getElementById('ingredientsCard').style.display = mode === 'manual' ? 'block' : 'none';
+  if (mode === 'manual') resultCard.style.display = ingredients.length > 0 ? 'block' : 'none';
+}
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(resultText.textContent).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>
