@@ -1,0 +1,60 @@
+---
+import BaseHead from '../layouts/BaseHead.astro';
+
+const tools = [
+  { emoji: "⚖️", name: "Recipe Yield Scaler", desc: "Scale any recipe up or down. Enter the original yield, your target, and get every ingredient recalculated.", soon: true },
+  { emoji: "🍞", name: "Baker's Percentage Calculator", desc: "Convert any bread recipe to baker's percentages — or go the other way. The pro baker's best friend.", soon: true },
+  { emoji: "🌡️", name: "Metric ↔ Imperial Converter", desc: "Cups to grams, Fahrenheit to Celsius, ounces to milliliters. Every kitchen conversion in one place.", soon: true },
+  { emoji: "🧈", name: "Butter & Sugar Substitution", desc: "Out of butter? Need less sugar? Find the right substitute and the exact amount to use.", soon: true },
+  { emoji: "⏱️", name: "Cooking Time Adjuster", desc: "Changing pan size or altitude? Recalculate baking time and temperature automatically.", soon: true },
+  { emoji: "🥘", name: "Serving Cost Calculator", desc: "How much does each plate really cost? Add ingredients, quantities, and prices — get cost per serving.", soon: true },
+];
+---
+<html lang="en">
+<head>
+  <BaseHead
+    title="28 Grams — Recipe Scaling, Baker's Percentages & Culinary Conversion Tools"
+    description="Free culinary calculators: recipe yield scaler, baker's percentage calculator, metric to imperial converter, substitution guides, and serving cost calculator. No signup."
+    ogTitle="28 Grams — Precision Cooking Starts Here"
+    ogDescription="Recipe scaling, baker's percentages, unit conversions, and culinary calculators. Free, fast, no signup."
+  />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; }
+    .hero { text-align: center; padding: 100px 24px 80px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); position: relative; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(122,27,61,0.1) 0%, transparent 60%); }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h1 { font-size: 3rem; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; background: linear-gradient(135deg, #fff 0%, #C2185B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { color: #666; font-size: 1.05rem; max-width: 480px; margin: 0 auto; }
+    .grid { max-width: 900px; margin: 0 auto; padding: 0 24px 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: #120c10; border: 2px solid #2a1820; border-radius: 16px; padding: 28px 24px; position: relative; }
+    .card .emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .card h2 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .card p { font-size: 0.85rem; color: #888; line-height: 1.6; }
+    .badge { position: absolute; top: 14px; right: 14px; background: #2a1820; color: #C2185B; font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+    .footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #1a0e15; }
+    .footer a { color: #C2185B; text-decoration: none; }
+    @media (max-width: 600px) { .hero h1 { font-size: 2.2rem; } .hero { padding: 70px 20px 50px; } .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="hero">
+  <div class="hero-content">
+    <h1>28 Grams 🍳</h1>
+    <p>Precision cooking tools. Scale recipes, nail baker's percentages, convert anything.</p>
+  </div>
+</div>
+<div class="grid">
+  {tools.map(t => (
+    <div class="card">
+      {t.soon && <span class="badge">COMING SOON</span>}
+      <span class="emoji">{t.emoji}</span>
+      <h2>{t.name}</h2>
+      <p>{t.desc}</p>
+    </div>
+  ))}
+</div>
+<div class="footer">© 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property</div>
+</body>
+</html>
