@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Dough Calculator — Neapolitan, NY, & Detroit Styles | Free Tool</title>
+<meta name="description" content="Calculate the perfect pizza dough recipe by style, size, and quantity. Free interactive tool using baker's percentages for Neapolitan, New York, and Detroit pizzas.">
+<meta property="og:title" content="Pizza Dough Calculator — Neapolitan, NY, & Detroit Styles">
+<meta property="og:description" content="Calculate the perfect pizza dough recipe by style, size, and quantity. Free interactive tool using baker's percentages for Neapolitan, New York, and Detroit pizzas.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Pizza Dough Calculator",
+  "url": "https://28grams.vip/pizza-dough",
+  "description": "Calculate the perfect pizza dough recipe by style, size, and quantity. Free interactive tool using baker's percentages for Neapolitan, New York, and Detroit pizzas.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Setup control */
+.setup-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.setup-group { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+.setup-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.setup-input-wrap { display: flex; align-items: center; gap: 6px; }
+.setup-input {
+  width: 90px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.setup-input:focus { border-color: #C2185B; }
+.setup-select {
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.setup-select:focus { border-color: #C2185B; }
+.setup-unit { font-size: 1.2rem; color: #888; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.arrow { font-size: 1.5rem; color: #C2185B; display: flex; align-items: center; }
+
+/* Info bar */
+.info-bar {
+  background: #150d12;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.info-item { text-align: center; }
+.info-val { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; }
+.info-lbl { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+/* Ingredients */
+.ingredients-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.ing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.ing-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.reset-btn {
+  background: #2a1020;
+  border: 1px solid #3a2030;
+  color: #C2185B;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.reset-btn:hover { background: #3a1530; }
+.ing-col-headers {
+  display: grid;
+  grid-template-columns: 1fr 90px 90px;
+  gap: 10px;
+  padding: 8px 20px;
+  border-bottom: 1px solid #2a1820;
+  background: #181015;
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ing-col-headers span:nth-child(2),
+.ing-col-headers span:nth-child(3) {
+  text-align: right;
+  padding-right: 10px;
+}
+.ing-list { padding: 8px 0; }
+.ing-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 20px;
+  border-bottom: 1px solid #1a1015;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-name {
+  font-size: 0.9rem;
+  color: #e0d0d8;
+  font-weight: 500;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input { width: 100%; }
+.input-wrap::after {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+.input-wrap.grams::after { content: 'g'; }
+.input-wrap.percent::after { content: '%'; }
+
+.ing-row input {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 8px 20px 8px 10px;
+  color: #e0d0d8;
+  outline: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-align: right;
+  font-size: 0.9rem;
+}
+.ing-row input:focus { border-color: #C2185B; }
+.ing-row input.percent { color: #C2185B; }
+.ing-row input:disabled { background: transparent; border-color: transparent; color: #888; -webkit-text-fill-color: #888; padding-right: 20px; opacity: 1; }
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .setup-bar { flex-direction: column; gap: 16px; }
+  .arrow { display: none; }
+  .ing-col-headers, .ing-row { grid-template-columns: 1fr 75px 75px; gap: 8px; padding: 8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Pizza Dough <span>Calculator</span> 🍕</h1>
+  <p>Scale the perfect pizza dough recipe by style, size, and quantity. Uses baker's percentages for precision baking.</p>
+</div>
+
+<div class="main">
+
+  <div class="setup-bar">
+    <div class="setup-group">
+      <span class="setup-label">Pizzas</span>
+      <div class="setup-input-wrap">
+        <input type="number" class="setup-input" id="pizzasInput" value="4" min="1" step="1">
+      </div>
+    </div>
+    <span class="arrow">×</span>
+    <div class="setup-group">
+      <span class="setup-label">Ball Weight</span>
+      <div class="setup-input-wrap">
+        <input type="number" class="setup-input" id="ballWeightInput" value="250" min="50" step="1">
+        <span class="setup-unit">g</span>
+      </div>
+    </div>
+    <span class="arrow">=</span>
+    <div class="setup-group">
+      <span class="setup-label">Style</span>
+      <select class="setup-select" id="styleSelect">
+        <option value="neapolitan">Neapolitan</option>
+        <option value="new_york">New York</option>
+        <option value="detroit">Detroit</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <div class="info-item">
+      <div class="info-val" id="totalDoughVal">1000g</div>
+      <div class="info-lbl">Total Dough</div>
+    </div>
+    <div class="info-item">
+      <div class="info-val" id="hydrationVal">65%</div>
+      <div class="info-lbl">Hydration</div>
+    </div>
+  </div>
+
+  <div class="ingredients-card">
+    <div class="ing-header">
+      <h2>⚖️ Recipe Adjuster</h2>
+      <button class="reset-btn" id="resetBtn" onclick="resetToStyle()">Reset to Style</button>
+    </div>
+    <div class="ing-col-headers">
+      <span>Ingredient</span>
+      <span>Weight</span>
+      <span>Percent</span>
+    </div>
+    <div class="ing-list" id="ingredientList">
+      <!-- Ingredients injected via JS -->
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-header">
+      <h2>📋 Recipe Summary</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+      <pre id="resultText"></pre>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>Pizza Dough Styles Explained</h2>
+  <p>Different pizza styles require entirely different dough compositions. The percentages below represent standard <strong>Baker's Percentages</strong>, where flour is always exactly 100%, and everything else is relative to the flour weight.</p>
+  <ul>
+    <li><strong>Neapolitan:</strong> The classic. A very simple dough requiring extreme heat (800°F+). Usually made with fine '00' flour, around 60-65% hydration, and absolutely no oil or sugar.</li>
+    <li><strong>New York:</strong> Designed for slightly lower temperatures (500°F - 600°F) in standard deck ovens. Often uses Bread Flour, 60-65% hydration, and incorporates a bit of sugar (for browning) and oil (for tenderness).</li>
+    <li><strong>Detroit:</strong> A high-hydration (70-75%) pan pizza. The dough is very wet and airy, baked in a steel pan generously coated with oil or shortening to fry the bottom crust.</li>
+  </ul>
+
+  <h2>Understanding Hydration</h2>
+  <p>Hydration is the ratio of water to flour. A higher hydration dough (like Detroit style) will be much stickier to handle but will result in a more open, airy crumb. A lower hydration dough (like NY style) is firmer, easier to toss, and produces a denser, chewier crust that can support heavy toppings.</p>
+  <p>If you're using standard all-purpose flour instead of bread flour or '00' flour, you may want to lower your hydration by 2-3%, as all-purpose flour absorbs less water.</p>
+
+  <h2>How to Use the Calculator</h2>
+  <p>Select your desired style, how many pizzas you want to make, and how large you want each dough ball to be. The calculator will automatically determine the exact gram amounts needed. You can manually tweak the percentages of any ingredient to create your own custom dough formulation.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Data
+const STYLES = {
+  neapolitan: { flour: 100, water: 65, salt: 2.5, yeast: 0.2, sugar: 0, oil: 0 },
+  new_york: { flour: 100, water: 62, salt: 2.0, yeast: 0.4, sugar: 1.5, oil: 2.0 },
+  detroit: { flour: 100, water: 70, salt: 2.0, yeast: 0.5, sugar: 0, oil: 2.0 }
+};
+
+const INGREDIENT_NAMES = {
+  flour: "Flour (100%)",
+  water: "Water",
+  salt: "Salt",
+  yeast: "Yeast",
+  sugar: "Sugar",
+  oil: "Olive Oil"
+};
+
+// State
+let currentPercentages = { ...STYLES.neapolitan };
+
+// Elements
+const pizzasInput = document.getElementById('pizzasInput');
+const ballWeightInput = document.getElementById('ballWeightInput');
+const styleSelect = document.getElementById('styleSelect');
+const totalDoughVal = document.getElementById('totalDoughVal');
+const hydrationVal = document.getElementById('hydrationVal');
+const ingredientList = document.getElementById('ingredientList');
+const resultText = document.getElementById('resultText');
+
+// Logic
+function getTotalDough() {
+  return (parseFloat(pizzasInput.value) || 0) * (parseFloat(ballWeightInput.value) || 0);
+}
+
+function getTotalPercent() {
+  let sum = 0;
+  for (let key in currentPercentages) {
+    sum += currentPercentages[key] || 0;
+  }
+  return sum;
+}
+
+function calculateWeights() {
+  const totalDough = getTotalDough();
+  const totalPercent = getTotalPercent();
+
+  if (totalPercent === 0) return {};
+
+  const flourWeight = totalDough / (totalPercent / 100);
+
+  let weights = {};
+  for (let key in currentPercentages) {
+    weights[key] = flourWeight * ((currentPercentages[key] || 0) / 100);
+  }
+  return weights;
+}
+
+function round(val, isSmall = false) {
+  if (isSmall) {
+    return Math.round(val * 100) / 100;
+  }
+  return Math.round(val * 10) / 10;
+}
+
+function roundPercent(val) {
+  return Math.round(val * 100) / 100;
+}
+
+function renderIngredients() {
+  const weights = calculateWeights();
+  ingredientList.innerHTML = '';
+
+  const keys = ['flour', 'water', 'salt', 'yeast', 'sugar', 'oil'];
+
+  keys.forEach(key => {
+    const isFlour = key === 'flour';
+    const row = document.createElement('div');
+    row.className = 'ing-row';
+
+    // Disable inputs for flour percent (always 100) and flour weight (calculated)
+    const pDisabled = isFlour ? 'disabled' : '';
+    const wDisabled = 'disabled'; // Weights are derived
+
+    // For small amounts like yeast, round to 2 decimals
+    const isSmall = key === 'yeast' || key === 'salt';
+
+    row.innerHTML = `
+      <div class="ing-name">${INGREDIENT_NAMES[key]}</div>
+      <div class="input-wrap grams"><input type="text" class="weight" value="${round(weights[key], isSmall)}" ${wDisabled}></div>
+      <div class="input-wrap percent"><input type="number" class="percent" data-key="${key}" value="${roundPercent(currentPercentages[key])}" min="0" step="any" ${pDisabled}></div>
+    `;
+
+    ingredientList.appendChild(row);
+  });
+
+  // Attach listeners
+  ingredientList.querySelectorAll('input.percent:not([disabled])').forEach(inp => {
+    inp.addEventListener('input', handlePercentInput);
+  });
+}
+
+function handlePercentInput(e) {
+  const el = e.target;
+  const key = el.getAttribute('data-key');
+  const val = parseFloat(el.value) || 0;
+
+  currentPercentages[key] = val;
+  styleSelect.value = 'custom';
+
+  updateAll();
+}
+
+function updateAll() {
+  const totalDough = getTotalDough();
+  totalDoughVal.textContent = round(totalDough) + 'g';
+  hydrationVal.textContent = roundPercent(currentPercentages.water || 0) + '%';
+
+  // Update weights in inputs
+  const weights = calculateWeights();
+  ingredientList.querySelectorAll('.ing-row').forEach(row => {
+    const pInput = row.querySelector('input.percent');
+    if (!pInput) return;
+    const key = pInput.getAttribute('data-key');
+    if (!key) return; // For flour it might not trigger loop nicely, wait, flour has data-key="flour"
+
+    const wInput = row.querySelector('input.weight');
+    const isSmall = key === 'yeast' || key === 'salt';
+    if (wInput) wInput.value = round(weights[key], isSmall);
+  });
+
+  updateSummary();
+}
+
+function updateSummary() {
+  const weights = calculateWeights();
+  const pizzas = parseInt(pizzasInput.value) || 0;
+  const ballWeight = parseFloat(ballWeightInput.value) || 0;
+
+  let lines = [];
+
+  lines.push("--- Pizza Dough Recipe ---");
+  lines.push(`${pizzas} pizzas @ ${ballWeight}g per ball`);
+  lines.push(`Total Dough: ${round(getTotalDough())}g`);
+  lines.push(`Hydration: ${roundPercent(currentPercentages.water || 0)}%`);
+  lines.push("");
+
+  const keys = ['flour', 'water', 'salt', 'yeast', 'sugar', 'oil'];
+
+  keys.forEach(key => {
+    const w = weights[key];
+    const p = currentPercentages[key];
+    if (p === 0 && w === 0) return; // Skip 0% ingredients
+
+    const isSmall = key === 'yeast' || key === 'salt';
+    const namePad = INGREDIENT_NAMES[key].split(' (')[0].padEnd(16, ' ');
+    const wPad = (round(w, isSmall) + 'g').padStart(8, ' ');
+    const pPad = (roundPercent(p) + '%').padStart(8, ' ');
+    lines.push(namePad + wPad + pPad);
+  });
+
+  resultText.textContent = lines.join('\n');
+}
+
+function resetToStyle() {
+  const style = styleSelect.value;
+  if (STYLES[style]) {
+    currentPercentages = { ...STYLES[style] };
+    renderIngredients();
+    updateAll();
+  } else {
+    // If custom, maybe reset to Neapolitan? Or do nothing.
+    styleSelect.value = 'neapolitan';
+    currentPercentages = { ...STYLES.neapolitan };
+    renderIngredients();
+    updateAll();
+  }
+}
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(resultText.textContent).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Handlers for Setup Inputs
+pizzasInput.addEventListener('input', updateAll);
+ballWeightInput.addEventListener('input', updateAll);
+
+styleSelect.addEventListener('change', function() {
+  const style = styleSelect.value;
+  if (STYLES[style]) {
+    currentPercentages = { ...STYLES[style] };
+    renderIngredients();
+    updateAll();
+  }
+});
+
+// Init
+renderIngredients();
+updateAll();
+</script>
+</body>
+</html>
