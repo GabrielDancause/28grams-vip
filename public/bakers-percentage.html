@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baker's Percentage Calculator — Convert Any Bread Recipe | Free Tool</title>
+<meta name="description" content="Convert any bread recipe to baker's percentages or vice versa. Enter flour weight and percentages — get exact gram amounts. Supports multiple flour types.">
+<meta property="og:title" content="Baker's Percentage Calculator — Convert Any Bread Recipe">
+<meta property="og:description" content="Enter flour weight and percentages — get exact gram amounts. Supports multiple flour types. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Baker's Percentage Calculator",
+  "url": "https://28grams.vip/bakers-percentage",
+  "description": "Convert any bread recipe to baker's percentages or vice versa. Enter flour weight and percentages — get exact gram amounts.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Totals control */
+.totals-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.total-group { display: flex; align-items: center; gap: 10px; }
+.total-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.total-input {
+  width: 90px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.total-input:focus { border-color: #C2185B; }
+.total-unit { font-size: 1.2rem; color: #888; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.arrow { font-size: 1.5rem; color: #C2185B; }
+
+/* Ingredients */
+.ingredients-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.ing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.ing-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.add-btn {
+  background: #2a1020;
+  border: 1px solid #3a2030;
+  color: #C2185B;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.add-btn:hover { background: #3a1530; }
+.ing-list { padding: 8px 0; }
+.ing-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 36px;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 20px;
+  border-bottom: 1px solid #1a1015;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-row input {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #e0d0d8;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+}
+.ing-row input:focus { border-color: #C2185B; }
+.ing-row input.amount, .ing-row input.percent {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Specific styling for percent to differentiate */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input { width: 100%; }
+.input-wrap::after {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+.input-wrap.grams::after { content: 'g'; }
+.input-wrap.percent::after { content: '%'; }
+.ing-row input.amount { padding-right: 20px; }
+.ing-row input.percent { padding-right: 20px; color: #C2185B; }
+
+
+.del-btn {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+}
+.del-btn:hover { color: #f87171; background: #1a0a0a; }
+.del-btn:disabled { opacity: 0; pointer-events: none; } /* keep spacing */
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .totals-bar { flex-direction: column; gap: 14px; }
+  .ing-row { grid-template-columns: 1fr 70px 70px 30px; gap: 6px; padding: 8px 14px; }
+}
+
+/* Header rows inside cards */
+.ing-col-headers {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px 36px;
+  gap: 10px;
+  padding: 8px 20px;
+  border-bottom: 1px solid #2a1820;
+  background: #181015;
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ing-col-headers span:nth-child(2),
+.ing-col-headers span:nth-child(3) {
+  text-align: right;
+  padding-right: 10px;
+}
+@media (max-width: 600px) {
+  .ing-col-headers { grid-template-columns: 1fr 70px 70px 30px; gap: 6px; padding: 8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Baker's <span>Percentage</span> 🥖</h1>
+  <p>Convert any bread recipe to baker's percentages or vice versa. Enter flour weight and percentages — get exact gram amounts.</p>
+</div>
+
+<div class="main">
+
+  <div class="totals-bar">
+    <div class="total-group">
+      <span class="total-label">Total Flour</span>
+      <input type="number" class="total-input" id="totalFlourInput" value="1000" min="0" step="any">
+      <span class="total-unit">g</span>
+    </div>
+    <span class="arrow">↔</span>
+    <div class="total-group">
+      <span class="total-label">Total Dough</span>
+      <input type="number" class="total-input" id="totalDoughInput" value="1720" min="0" step="any">
+      <span class="total-unit">g</span>
+    </div>
+  </div>
+
+  <div class="ingredients-card" id="floursCard">
+    <div class="ing-header">
+      <h2>🌾 Flours</h2>
+      <button class="add-btn" onclick="addFlour()">+ Add</button>
+    </div>
+    <div class="ing-col-headers">
+      <span>Ingredient</span>
+      <span>Weight</span>
+      <span>Percent</span>
+      <span></span>
+    </div>
+    <div class="ing-list" id="flourList">
+    </div>
+  </div>
+
+  <div class="ingredients-card" id="othersCard">
+    <div class="ing-header">
+      <h2>💧 Hydration & Others</h2>
+      <button class="add-btn" onclick="addOther()">+ Add</button>
+    </div>
+    <div class="ing-col-headers">
+      <span>Ingredient</span>
+      <span>Weight</span>
+      <span>Percent</span>
+      <span></span>
+    </div>
+    <div class="ing-list" id="otherList">
+    </div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <h2>📋 Recipe Summary</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+      <pre id="resultText"></pre>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>What is Baker's Percentage?</h2>
+  <p>Baker's percentage is a mathematical method widely used in baking to calculate the amounts of ingredients. Instead of expressing recipes in cups or absolute weights, every ingredient is expressed as a percentage of the total flour weight.</p>
+  <p>This means <strong>Total Flour is always exactly 100%</strong>. If a recipe has multiple flours (e.g., 80% bread flour, 20% whole wheat), their percentages add up to 100%.</p>
+
+  <h2>Why Use It?</h2>
+  <ul>
+    <li><strong>Scalability:</strong> You can easily scale a recipe up or down by simply changing the total flour weight. All other ingredients scale proportionally.</li>
+    <li><strong>Consistency:</strong> It helps visualize the structure of the dough. For example, knowing a dough is 75% hydration (water) gives you an immediate idea of how sticky or workable it will be.</li>
+    <li><strong>Troubleshooting:</strong> Comparing recipes is much easier when they are normalized into percentages.</li>
+  </ul>
+
+  <h2>How to Use This Tool</h2>
+  <p>This calculator is fully reactive. You can:</p>
+  <ul>
+    <li><strong>Scale a recipe:</strong> Change the "Total Flour" or "Total Dough" weight at the top. Everything else will update.</li>
+    <li><strong>Develop a recipe:</strong> Enter your ingredients and tweak their percentages. The gram amounts will calculate automatically based on the total flour.</li>
+    <li><strong>Convert a recipe:</strong> If you have a recipe in grams, type the gram amounts into the weight columns. The percentages will be calculated for you.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// State
+var flours = [
+  { name: "Bread Flour", weight: 800, percent: 80 },
+  { name: "Whole Wheat Flour", weight: 200, percent: 20 }
+];
+
+var others = [
+  { name: "Water", weight: 700, percent: 70 },
+  { name: "Salt", weight: 20, percent: 2 }
+];
+
+// Elements
+var totalFlourInput = document.getElementById('totalFlourInput');
+var totalDoughInput = document.getElementById('totalDoughInput');
+var flourList = document.getElementById('flourList');
+var otherList = document.getElementById('otherList');
+var resultText = document.getElementById('resultText');
+var resultCard = document.getElementById('resultCard');
+
+function getTotalFlourWeight() {
+  return flours.reduce(function(sum, f) { return sum + (f.weight || 0); }, 0);
+}
+
+function getTotalDoughWeight() {
+  var fw = getTotalFlourWeight();
+  var ow = others.reduce(function(sum, o) { return sum + (o.weight || 0); }, 0);
+  return fw + ow;
+}
+
+function updateTotals() {
+  var fw = getTotalFlourWeight();
+  var dw = getTotalDoughWeight();
+  totalFlourInput.value = round(fw);
+  totalDoughInput.value = round(dw);
+}
+
+function recalculateWeights() {
+  var totalFlourWeight = parseFloat(totalFlourInput.value) || 0;
+
+  // Recalculate flour weights based on percentages to maintain 100% total
+  // Wait, standard baker's percentage: weights are derived from percentages * totalFlourWeight / 100
+  flours.forEach(function(f) {
+    f.weight = (f.percent / 100) * totalFlourWeight;
+  });
+
+  others.forEach(function(o) {
+    o.weight = (o.percent / 100) * totalFlourWeight;
+  });
+}
+
+function recalculatePercentages() {
+  var totalFlourWeight = getTotalFlourWeight();
+  if (totalFlourWeight === 0) {
+    flours.forEach(function(f) { f.percent = 0; });
+    others.forEach(function(o) { o.percent = 0; });
+    return;
+  }
+
+  flours.forEach(function(f) {
+    f.percent = (f.weight / totalFlourWeight) * 100;
+  });
+
+  others.forEach(function(o) {
+    o.percent = (o.weight / totalFlourWeight) * 100;
+  });
+}
+
+// Handlers for Total Inputs
+totalFlourInput.addEventListener('input', function() {
+  var newTotalFlour = parseFloat(totalFlourInput.value) || 0;
+  recalculateWeights(); // weights based on new total flour and existing percentages
+  updateTotals(); // updates total dough
+  renderLists();
+  updateSummary();
+});
+
+totalDoughInput.addEventListener('input', function() {
+  var newTotalDough = parseFloat(totalDoughInput.value) || 0;
+  // We need to scale totalFlourWeight so that newTotalDough is achieved.
+  // totalDough = totalFlour + totalOthers
+  // totalDough = totalFlour + (totalOthersPercent / 100 * totalFlour)
+  // totalDough = totalFlour * (1 + totalOthersPercent / 100)
+
+  var totalOthersPercent = others.reduce(function(sum, o) { return sum + (o.percent || 0); }, 0);
+  var totalFlourPercent = flours.reduce(function(sum, f) { return sum + (f.percent || 0); }, 0);
+
+  // Actually, total dough percent is totalFlourPercent (should be 100) + totalOthersPercent
+  var totalDoughPercent = totalFlourPercent + totalOthersPercent;
+
+  if (totalDoughPercent === 0) return;
+
+  var newTotalFlour = (newTotalDough / totalDoughPercent) * 100;
+  totalFlourInput.value = round(newTotalFlour);
+
+  recalculateWeights();
+  updateTotals(); // ensures dough input doesn't lose decimal precision abruptly
+  renderLists();
+  updateSummary();
+});
+
+function round(val) {
+  return Math.round(val * 10) / 10;
+}
+
+function roundPercent(val) {
+  return Math.round(val * 100) / 100;
+}
+
+// Generic render for rows
+function renderList(listEl, items, type) {
+  listEl.innerHTML = '';
+  items.forEach(function(item, i) {
+    var row = document.createElement('div');
+    row.className = 'ing-row';
+
+    // Only allow delete if more than 1 flour remains (to prevent 0 flour error states easily)
+    var canDelete = type === 'flour' ? items.length > 1 : true;
+    var delDisabled = canDelete ? '' : 'disabled';
+
+    row.innerHTML =
+      '<input type="text" class="name" value="' + esc(item.name) + '" placeholder="Ingredient" data-idx="' + i + '" data-type="' + type + '" data-field="name">' +
+      '<div class="input-wrap grams"><input type="number" class="amount" value="' + round(item.weight) + '" min="0" step="any" data-idx="' + i + '" data-type="' + type + '" data-field="weight"></div>' +
+      '<div class="input-wrap percent"><input type="number" class="percent" value="' + roundPercent(item.percent) + '" min="0" step="any" data-idx="' + i + '" data-type="' + type + '" data-field="percent"></div>' +
+      '<button class="del-btn" onclick="removeRow(\'' + type + '\', ' + i + ')" ' + delDisabled + '>✕</button>';
+
+    listEl.appendChild(row);
+  });
+
+  // Attach listeners
+  listEl.querySelectorAll('input').forEach(function(inp) {
+    inp.addEventListener('input', handleCellInput);
+  });
+}
+
+function handleCellInput(e) {
+  var el = e.target;
+  var idx = parseInt(el.getAttribute('data-idx'));
+  var type = el.getAttribute('data-type');
+  var field = el.getAttribute('data-field');
+  var val = el.value;
+
+  var arr = type === 'flour' ? flours : others;
+
+  if (field === 'name') {
+    arr[idx].name = val;
+  } else if (field === 'weight') {
+    arr[idx].weight = parseFloat(val) || 0;
+    // When weight changes, recalculate percentages based on new total flour
+    recalculatePercentages();
+    // Re-normalize flour percentages if they changed?
+    // Actually, if flour weight changes, total flour changes. So all percentages must recalculate.
+    updateTotals();
+    // Do not re-render lists to avoid losing focus, just update summary
+  } else if (field === 'percent') {
+    arr[idx].percent = parseFloat(val) || 0;
+    // When percent changes, totalFlour is anchored. Recalculate weights.
+    recalculateWeights();
+    updateTotals();
+  }
+
+  // Sync the inputs of other rows if needed, but without losing focus.
+  // The simplest way to keep focus is to only update values of inputs that are NOT the event target.
+  syncInputs(el);
+  updateSummary();
+}
+
+function syncInputs(activeEl) {
+  // Sync flours
+  flourList.querySelectorAll('.ing-row').forEach(function(row, i) {
+    var item = flours[i];
+    var wInput = row.querySelector('input[data-field="weight"]');
+    var pInput = row.querySelector('input[data-field="percent"]');
+    if (wInput !== activeEl) wInput.value = round(item.weight);
+    if (pInput !== activeEl) pInput.value = roundPercent(item.percent);
+  });
+
+  // Sync others
+  otherList.querySelectorAll('.ing-row').forEach(function(row, i) {
+    var item = others[i];
+    var wInput = row.querySelector('input[data-field="weight"]');
+    var pInput = row.querySelector('input[data-field="percent"]');
+    if (wInput !== activeEl) wInput.value = round(item.weight);
+    if (pInput !== activeEl) pInput.value = roundPercent(item.percent);
+  });
+}
+
+function addFlour() {
+  flours.push({ name: '', weight: 0, percent: 0 });
+  renderLists();
+  focusLast(flourList, 'name');
+}
+
+function addOther() {
+  others.push({ name: '', weight: 0, percent: 0 });
+  renderLists();
+  focusLast(otherList, 'name');
+}
+
+function removeRow(type, idx) {
+  if (type === 'flour') {
+    if (flours.length <= 1) return;
+    flours.splice(idx, 1);
+  } else {
+    others.splice(idx, 1);
+  }
+  recalculatePercentages();
+  updateTotals();
+  renderLists();
+  updateSummary();
+}
+
+function focusLast(listEl, field) {
+  var inputs = listEl.querySelectorAll('input[data-field="' + field + '"]');
+  if (inputs.length > 0) inputs[inputs.length - 1].focus();
+}
+
+function renderLists() {
+  renderList(flourList, flours, 'flour');
+  renderList(otherList, others, 'other');
+}
+
+function updateSummary() {
+  var lines = [];
+
+  var addItems = function(items) {
+    items.forEach(function(item) {
+      if (!item.name && item.weight === 0) return;
+      var w = round(item.weight);
+      var p = roundPercent(item.percent);
+      // Format nicely padded
+      var namePad = (item.name || 'Ingredient').padEnd(20, ' ');
+      var wPad = (w + 'g').padStart(8, ' ');
+      var pPad = (p + '%').padStart(8, ' ');
+      lines.push(namePad + wPad + pPad);
+    });
+  };
+
+  lines.push("--- Flours ---");
+  addItems(flours);
+  lines.push("");
+  lines.push("--- Hydration & Others ---");
+  addItems(others);
+  lines.push("");
+  lines.push("--- Totals ---");
+  lines.push("Total Flour         " + (round(getTotalFlourWeight()) + 'g').padStart(8, ' ') + "    100%");
+
+  var totalOthersPercent = others.reduce(function(sum, o) { return sum + (o.percent || 0); }, 0);
+  var totalDoughPercent = 100 + totalOthersPercent;
+  lines.push("Total Dough         " + (round(getTotalDoughWeight()) + 'g').padStart(8, ' ') + (roundPercent(totalDoughPercent) + '%').padStart(8, ' '));
+
+  resultText.textContent = lines.join('\n');
+}
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(resultText.textContent).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Init
+recalculatePercentages();
+updateTotals();
+renderLists();
+updateSummary();
+</script>
+</body>
+</html>
