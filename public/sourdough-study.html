@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>We Analyzed Sourdough Recipes — Here's What We Found | 28grams.vip</title>
+  <title>Sourdough Bread Data: Average Hydration, Temperature &amp; Flour Types (85 Recipes Analyzed) | 28grams.vip</title>
   <link rel="canonical" href="https://28grams.vip/sourdough-study">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -251,8 +251,8 @@
 <body>
   <div class="container">
     <div class="tag">ORIGINAL RESEARCH</div>
-    <h1 id="mainTitle">We Analyzed Sourdough Recipes — Here's What We Found</h1>
-    <p class="subtitle">A data-driven look at hydration, flours, and baking temperatures across the internet's most popular sourdough recipes.</p>
+    <h1 id="mainTitle">Sourdough Bread Data: Average Hydration, Temperature &amp; Flour Types</h1>
+    <p class="subtitle">We analyzed 85 real sourdough recipes from top baking sites. Here's the data on hydration percentages, flour types, oven temperatures, and baking methods.</p>
 
     <div class="stats-grid">
       <div class="stat-card">
@@ -327,8 +327,33 @@
     </section>
 
     <section>
+      <h2>Frequently Asked Questions</h2>
+      <div class="methodology">
+        <h3 style="color:var(--text);margin-bottom:0.75rem;font-size:1.1rem">What is the average hydration for sourdough bread?</h3>
+        <p style="margin-bottom:1.5rem">Based on our analysis of 85 sourdough recipes from top baking sites, the average sourdough hydration is <strong style="color:var(--accent)">77.8%</strong>, with a median of 77.0%. Most recipes (75%) fall in the 70–85% range. Hydration below 65% produces a stiff dough suited for bagels, while hydration above 85% creates an open, ciabatta-like crumb.</p>
+
+        <h3 style="color:var(--text);margin-bottom:0.75rem;font-size:1.1rem">What is the best flour for sourdough bread?</h3>
+        <p style="margin-bottom:1.5rem"><strong style="color:var(--accent)">Bread flour</strong> is the most commonly used flour across the recipes we analyzed, appearing in 38% of recipes. All-purpose flour is the second most popular at 25%. Whole wheat blends account for 14%, offering more complex flavor but requiring hydration adjustments.</p>
+
+        <h3 style="color:var(--text);margin-bottom:0.75rem;font-size:1.1rem">What temperature should I bake sourdough bread?</h3>
+        <p style="margin-bottom:1.5rem">The most common baking temperature across all analyzed recipes is <strong style="color:var(--accent)">450°F (232°C)</strong>, used by 53% of recipes. The average baking temperature is 431°F. Most recipes start high (450–500°F) for oven spring, then reduce to 400–425°F for the remainder of the bake.</p>
+
+        <h3 style="color:var(--text);margin-bottom:0.75rem;font-size:1.1rem">Should I use a Dutch oven for sourdough?</h3>
+        <p style="margin-bottom:1.5rem">A significant portion of the recipes in our dataset call for a Dutch oven. Baking in a Dutch oven traps steam during the first 20–30 minutes, which promotes better oven spring, a crispier crust, and more consistent results — especially for home ovens that can't inject steam.</p>
+
+        <h3 style="color:var(--text);margin-bottom:0.75rem;font-size:1.1rem">How long should sourdough bulk ferment?</h3>
+        <p>Bulk fermentation times in our dataset range from 2 to 12 hours, depending on temperature and starter activity. The most common range is <strong style="color:var(--accent)">3–5 hours</strong> at room temperature (72–78°F). Cold retard (overnight in the fridge) extends this to 12–18 hours and develops more complex sour flavor.</p>
+      </div>
+    </section>
+
+    <section>
       <h2>Methodology</h2>
-      <div class="methodology" id="methodologyText"></div>
+      <div class="methodology" id="methodologyText">
+        <p><strong>Data collection:</strong> We scraped sourdough recipe pages from four of the internet's most respected baking resources: King Arthur Baking (kingarthurbaking.com), The Perfect Loaf (theperfectloaf.com), Breadtopia (breadtopia.com), and Alexandra Cooks (alexandracooks.com). These sites were selected because they consistently provide weight-based measurements (grams), detailed instructions, and are widely cited in the baking community.</p>
+        <p style="margin-top:0.75rem"><strong>Hydration calculation:</strong> For each recipe, hydration was calculated as (total water weight ÷ total flour weight) × 100. Sourdough starter weight was excluded from the calculation since its composition varies. Recipes where hydration could not be determined (cup-only measurements, missing water/flour weights) were marked as null. Values outside the 55–100% range were flagged as outliers.</p>
+        <p style="margin-top:0.75rem"><strong>Limitations:</strong> This dataset reflects recipes published on English-language baking sites, which skews toward North American and European baking traditions. Recipes using volume measurements (cups) rather than weight (grams) may have less accurate hydration calculations. Some non-sourdough recipes from the same sites may have been included in the dataset. Data was collected on March 8, 2026.</p>
+        <p style="margin-top:0.75rem"><strong>Reproducibility:</strong> The scraping script and raw data are available in our GitHub repository. The analysis can be independently verified.</p>
+      </div>
     </section>
 
     <footer>
@@ -337,6 +362,18 @@
     </footer>
   </div>
 
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is the average hydration for sourdough bread?","acceptedAnswer":{"@type":"Answer","text":"Based on analysis of 85 sourdough recipes, the average hydration is 77.8%, with a median of 77.0%. Most recipes fall in the 70-85% range."}},
+{"@type":"Question","name":"What is the best flour for sourdough bread?","acceptedAnswer":{"@type":"Answer","text":"Bread flour is the most commonly used, appearing in 38% of recipes. All-purpose flour is second at 25%, followed by whole wheat blends at 14%."}},
+{"@type":"Question","name":"What temperature should I bake sourdough bread?","acceptedAnswer":{"@type":"Answer","text":"The most common baking temperature is 450°F (232°C), used by 53% of recipes. The average across all recipes is 431°F."}},
+{"@type":"Question","name":"Should I use a Dutch oven for sourdough?","acceptedAnswer":{"@type":"Answer","text":"A significant portion of sourdough recipes call for a Dutch oven. It traps steam for better oven spring, crispier crust, and more consistent results."}},
+{"@type":"Question","name":"How long should sourdough bulk ferment?","acceptedAnswer":{"@type":"Answer","text":"Bulk fermentation typically ranges from 3-5 hours at room temperature (72-78°F). Cold retard extends this to 12-18 hours for more complex flavor."}}
+]}
+</script>
+  <script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Sourdough Bread Data: Average Hydration, Temperature & Flour Types (85 Recipes Analyzed)","description":"Original research analyzing 85 sourdough recipes for hydration, flour types, oven temperatures, and baking methods","author":{"@type":"Organization","name":"28grams.vip"},"publisher":{"@type":"Organization","name":"GAB Ventures","url":"https://gab.ae"},"datePublished":"2026-03-08","dateModified":"2026-03-08"}
+</script>
   <script type="application/ld+json" id="schemaObj"></script>
 
   <script>
