@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yeast Converter — Instant, Active Dry, Fresh & Sourdough | Free Tool</title>
+<meta name="description" content="Convert between active dry, instant, fresh yeast, and sourdough starter. Includes temperature adjustment for your kitchen. Free, no signup.">
+<meta property="og:title" content="Yeast Converter — Instant, Active Dry, Fresh & Sourdough">
+<meta property="og:description" content="Easily convert baking yeast types and adjust for kitchen temperature. Free interactive tool.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Yeast Converter",
+  "url": "https://28grams.vip/yeast-converter",
+  "description": "Convert between active dry, instant, fresh yeast, and sourdough starter with temperature adjustment.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.card-body { padding: 20px; }
+
+/* Input Group */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.input-group:last-child { margin-bottom: 0; }
+.input-label { font-size: 0.85rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+.input-row input {
+  flex: 1;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  outline: none;
+  min-width: 0;
+}
+.input-row input:focus { border-color: #C2185B; }
+.input-row select {
+  flex: 2;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+}
+.input-row select:focus { border-color: #C2185B; }
+
+/* Temperature Slider */
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.slider-value {
+  font-family: 'JetBrains Mono', monospace;
+  color: #C2185B;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #C2185B;
+  cursor: pointer;
+  margin-top: -8px;
+  box-shadow: 0 0 10px rgba(194, 24, 91, 0.5);
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+  background: #2a1820;
+  border-radius: 2px;
+}
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Results */
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1a1015;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #2a1820;
+}
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.result-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e0d0d8;
+}
+.result-note {
+  font-size: 0.75rem;
+  color: #888;
+}
+.result-value-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .input-row { flex-direction: column; }
+  .result-item { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .result-value-group { width: 100%; justify-content: space-between; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Yeast <span>Converter</span> 🦠</h1>
+  <p>Convert seamlessly between active dry, instant, fresh yeast, and sourdough starter. Adjust for your kitchen's temperature to keep proofing times consistent.</p>
+</div>
+
+<div class="main">
+
+  <!-- Input Section -->
+  <div class="card">
+    <div class="card-header">
+      <h2>1. Recipe Requirement</h2>
+    </div>
+    <div class="card-body">
+      <div class="input-group">
+        <span class="input-label">Amount & Yeast Type</span>
+        <div class="input-row">
+          <input type="number" id="baseAmount" value="7" min="0" step="any" placeholder="Amount">
+          <select id="baseType">
+            <option value="instant">Instant Yeast (IDY)</option>
+            <option value="active" selected>Active Dry Yeast (ADY)</option>
+            <option value="fresh">Fresh Yeast (CY)</option>
+            <option value="sourdough">Sourdough Starter (100% Hydration)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Temperature Section -->
+  <div class="card">
+    <div class="card-header">
+      <h2>2. Kitchen Temperature (Optional)</h2>
+    </div>
+    <div class="card-body">
+      <div class="slider-container">
+        <div class="slider-header">
+          <span class="input-label">Target Temperature</span>
+          <span class="slider-value" id="tempValueDisplay">20°C (68°F)</span>
+        </div>
+        <input type="range" id="tempSlider" min="10" max="35" value="20" step="1">
+        <div class="slider-labels">
+          <span>10°C (Cool)</span>
+          <span>20°C (Standard)</span>
+          <span>35°C (Warm)</span>
+        </div>
+        <p style="font-size: 0.8rem; color: #666; margin-top: 8px;">
+          Most recipes assume a 20°C (68°F) environment. If your kitchen is warmer, you need less yeast. If cooler, you need more. <span id="tempMultiplierNote" style="color: #C2185B;">Multiplier: 1.00x</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="card">
+    <div class="card-header">
+      <h2>3. Equivalent Amounts</h2>
+    </div>
+    <div class="card-body">
+      <div class="result-grid">
+
+        <div class="result-item">
+          <div class="result-info">
+            <span class="result-name">Instant Yeast</span>
+            <span class="result-note">Mix directly into dry ingredients</span>
+          </div>
+          <div class="result-value-group">
+            <span class="result-value" id="outInstant">0.0g</span>
+            <button class="copy-btn" onclick="copyVal('outInstant', this)">Copy</button>
+          </div>
+        </div>
+
+        <div class="result-item">
+          <div class="result-info">
+            <span class="result-name">Active Dry Yeast</span>
+            <span class="result-note">Dissolve in warm liquid first</span>
+          </div>
+          <div class="result-value-group">
+            <span class="result-value" id="outActive">0.0g</span>
+            <button class="copy-btn" onclick="copyVal('outActive', this)">Copy</button>
+          </div>
+        </div>
+
+        <div class="result-item">
+          <div class="result-info">
+            <span class="result-name">Fresh Yeast (Cake)</span>
+            <span class="result-note">Crumble into dry or dissolve in liquid</span>
+          </div>
+          <div class="result-value-group">
+            <span class="result-value" id="outFresh">0.0g</span>
+            <button class="copy-btn" onclick="copyVal('outFresh', this)">Copy</button>
+          </div>
+        </div>
+
+        <div class="result-item" style="border-color: #3a2830;">
+          <div class="result-info">
+            <span class="result-name">Sourdough Starter</span>
+            <span class="result-note" id="sourdoughNote">Reduce recipe flour & water by 0g each</span>
+          </div>
+          <div class="result-value-group">
+            <span class="result-value" id="outSourdough">0.0g</span>
+            <button class="copy-btn" onclick="copyVal('outSourdough', this)">Copy</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>Understanding Yeast Types</h2>
+  <p>Different types of yeast have varying moisture contents and granule sizes, which means they cannot be substituted 1:1 by weight.</p>
+  <ul>
+    <li><strong>Instant Yeast (IDY):</strong> The most concentrated form. It absorbs moisture rapidly and can be mixed directly into dry ingredients.</li>
+    <li><strong>Active Dry Yeast (ADY):</strong> Has a protective shell of dead yeast cells. It requires dissolving in warm liquid (blooming) before use and is slightly less concentrated than instant.</li>
+    <li><strong>Fresh Yeast (Cake Yeast):</strong> Has a very high moisture content (around 70%). It must be refrigerated and has a short shelf life, but provides excellent flavor.</li>
+  </ul>
+
+  <h2>Sourdough Starter Conversion Caveats</h2>
+  <p>Converting a commercial yeast recipe to sourdough is complex. Sourdough relies on a symbiotic culture of wild yeast and lactic acid bacteria, which works much slower than commercial yeast.</p>
+  <p>Our tool uses a standard rule of thumb: <strong>~14 grams of starter (100% hydration) for every 1 gram of instant yeast</strong>. However, you must also account for the flour and water present in the starter. For example, if the tool suggests 100g of starter, you should reduce your recipe's water by 50g and flour by 50g.</p>
+  <p><em>Note: Sourdough proofing times will still be significantly longer than commercial yeast, regardless of the amount used.</em></p>
+
+  <h2>How Temperature Affects Yeast</h2>
+  <p>Yeast activity is highly sensitive to temperature. The general rule in baking is that yeast activity doubles (or halves) for roughly every 10°C (18°F) change in dough temperature.</p>
+  <p>If your kitchen is significantly warmer than standard room temperature (20°C / 68°F), you can reduce the amount of yeast to maintain the original recipe's proofing timeline. Conversely, in a cold kitchen, increasing the yeast slightly can prevent excessively long rises.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Conversion rates (relative to 1 unit of Instant Yeast)
+const RATIOS = {
+  instant: 1.0,
+  active: 1.33,
+  fresh: 3.0,
+  sourdough: 14.0 // 1g instant ~ 14g starter
+};
+
+// Elements
+const amountInput = document.getElementById('baseAmount');
+const typeSelect = document.getElementById('baseType');
+const tempSlider = document.getElementById('tempSlider');
+const tempValueDisplay = document.getElementById('tempValueDisplay');
+const tempMultiplierNote = document.getElementById('tempMultiplierNote');
+
+const outInstant = document.getElementById('outInstant');
+const outActive = document.getElementById('outActive');
+const outFresh = document.getElementById('outFresh');
+const outSourdough = document.getElementById('outSourdough');
+const sourdoughNote = document.getElementById('sourdoughNote');
+
+function updateCalculations() {
+  const amount = parseFloat(amountInput.value) || 0;
+  const baseType = typeSelect.value;
+  const tempC = parseInt(tempSlider.value);
+
+  // 1. Convert input to Instant equivalent (Base 1.0)
+  const instantEquivalent = amount / RATIOS[baseType];
+
+  // 2. Calculate Temperature Multiplier
+  // Formula: Multiplier = 1.1 ^ (20 - tempC)
+  // This gives: 20C = 1x, 10C = ~2.6x, 30C = ~0.38x
+  const tempMultiplier = Math.pow(1.1, (20 - tempC));
+
+  // Update Temp UI
+  const tempF = Math.round((tempC * 9/5) + 32);
+  tempValueDisplay.textContent = `${tempC}°C (${tempF}°F)`;
+  tempMultiplierNote.textContent = `Multiplier: ${tempMultiplier.toFixed(2)}x`;
+
+  // 3. Apply Multiplier
+  const adjustedInstant = instantEquivalent * tempMultiplier;
+
+  // 4. Calculate Final Outputs
+  const finalInstant = adjustedInstant * RATIOS.instant;
+  const finalActive = adjustedInstant * RATIOS.active;
+  const finalFresh = adjustedInstant * RATIOS.fresh;
+  const finalSourdough = adjustedInstant * RATIOS.sourdough;
+
+  // Render Outputs
+  outInstant.textContent = formatNum(finalInstant) + 'g';
+  outActive.textContent = formatNum(finalActive) + 'g';
+  outFresh.textContent = formatNum(finalFresh) + 'g';
+  outSourdough.textContent = formatNum(finalSourdough) + 'g';
+
+  // Sourdough Note
+  const subtractAmount = Math.round(finalSourdough / 2);
+  sourdoughNote.textContent = `Reduce recipe flour & water by ${subtractAmount}g each`;
+}
+
+function formatNum(num) {
+  if (num === 0) return '0.0';
+  if (num < 10) return num.toFixed(2);
+  return num.toFixed(1);
+}
+
+function copyVal(id, btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+// Event Listeners
+amountInput.addEventListener('input', updateCalculations);
+typeSelect.addEventListener('change', updateCalculations);
+tempSlider.addEventListener('input', updateCalculations);
+
+// Init
+updateCalculations();
+</script>
+</body>
+</html>
