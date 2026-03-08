@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yeast Converter — Convert Active Dry, Instant, Fresh & Sourdough | Free Tool</title>
+<meta name="description" content="Convert between active dry, instant, fresh yeast, and sourdough starter. Accurately scale your baking recipes and adjust for temperature differences.">
+<meta property="og:title" content="Yeast Converter — Convert Active Dry, Instant, Fresh & Sourdough">
+<meta property="og:description" content="Convert between active dry, instant, fresh yeast, and sourdough starter. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Yeast Converter",
+  "url": "https://28grams.vip/yeast-converter",
+  "description": "Convert between active dry, instant, fresh yeast, and sourdough starter. Accurately scale your baking recipes and adjust for temperature differences.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Totals control */
+.totals-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.total-group { display: flex; align-items: center; gap: 10px; }
+.total-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.total-input {
+  width: 90px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.total-input:focus { border-color: #C2185B; }
+.total-unit { font-size: 1.2rem; color: #888; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.arrow { font-size: 1.5rem; color: #C2185B; }
+
+/* Select element styling */
+select.total-input {
+  width: auto;
+  min-width: 140px;
+  appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C2185B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+/* Ingredients */
+.ingredients-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.ing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.ing-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+
+.ing-list { padding: 8px 0; }
+.ing-row {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid #1a1015;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-row .name {
+  color: #e0d0d8;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.ing-row .desc {
+  color: #888;
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+.ing-row .value {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #C2185B;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: right;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input { width: 100%; }
+.input-wrap::after {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+.input-wrap.grams::after { content: 'g'; }
+.input-wrap.hours::after { content: 'h'; }
+.input-wrap.celsius::after { content: '°C'; }
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .totals-bar { flex-direction: column; gap: 14px; }
+  .ing-row { grid-template-columns: 1fr 80px; gap: 6px; padding: 10px 14px; }
+  .ing-row .value { font-size: 1rem; }
+}
+
+/* Note styling */
+.note-box {
+  background: #1a1015;
+  border-left: 3px solid #C2185B;
+  padding: 12px 16px;
+  margin: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+  color: #c8b8c0;
+  line-height: 1.5;
+}
+.note-box strong { color: #e0d0d8; }
+
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Yeast <span>Converter</span> 🦠</h1>
+  <p>Convert your recipes between active dry, instant, fresh yeast, and sourdough starter. Adjust baking times based on your kitchen temperature.</p>
+</div>
+
+<div class="main">
+
+  <!-- Yeast Input -->
+  <div class="totals-bar">
+    <div class="total-group">
+      <span class="total-label">Recipe Calls For</span>
+      <input type="number" class="total-input" id="sourceAmount" value="7" min="0" step="any">
+      <span class="total-unit">g</span>
+    </div>
+    <span class="arrow">of</span>
+    <div class="total-group">
+      <select class="total-input" id="sourceType">
+        <option value="instant" selected>Instant Yeast</option>
+        <option value="active">Active Dry Yeast</option>
+        <option value="fresh">Fresh Yeast (Cake)</option>
+        <option value="sourdough">Sourdough Starter (100%)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Conversions -->
+  <div class="ingredients-card" id="conversionsCard">
+    <div class="ing-header">
+      <h2>⚖️ Equivalent Amounts</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="ing-list" id="conversionList">
+      <!-- Generated via JS -->
+    </div>
+    <div class="note-box" id="sourdoughNote" style="display: none;">
+      <strong>Note:</strong> When using sourdough starter, subtract <span id="sdFlour" class="mono"></span>g of flour and <span id="sdWater" class="mono"></span>g of water from your recipe's total liquids to maintain the correct hydration.
+    </div>
+  </div>
+
+  <!-- Temperature Adjustment -->
+  <div class="ingredients-card" id="tempCard">
+    <div class="ing-header">
+      <h2>🌡️ Temperature & Time Adjuster</h2>
+    </div>
+    <div class="ing-list">
+      <div class="ing-row">
+        <div>
+          <div class="name">Recipe Fermentation Time</div>
+          <div class="desc">Original bulk proof time</div>
+        </div>
+        <div class="input-wrap hours">
+          <input type="number" class="total-input" style="width:100%; text-align:right; font-size:1.1rem;" id="recipeTime" value="4" min="0.1" step="0.5">
+        </div>
+      </div>
+      <div class="ing-row">
+        <div>
+          <div class="name">Recipe Temperature</div>
+          <div class="desc">Specified ambient temp</div>
+        </div>
+        <div class="input-wrap celsius">
+          <input type="number" class="total-input" style="width:100%; text-align:right; font-size:1.1rem;" id="recipeTemp" value="24" min="0" step="1">
+        </div>
+      </div>
+      <div class="ing-row">
+        <div>
+          <div class="name">Your Kitchen Temperature</div>
+          <div class="desc">Current ambient temp</div>
+        </div>
+        <div class="input-wrap celsius">
+          <input type="number" class="total-input" style="width:100%; text-align:right; font-size:1.1rem;" id="actualTemp" value="20" min="0" step="1">
+        </div>
+      </div>
+      <div class="ing-row" style="background: #181015;">
+        <div>
+          <div class="name" style="color: #C2185B;">Estimated New Time</div>
+          <div class="desc">Adjusted for your kitchen</div>
+        </div>
+        <div class="value" id="newTimeValue">-- h</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>The Main Types of Yeast</h2>
+  <p>Yeast is a living microorganism that feeds on sugars in flour, releasing carbon dioxide gas that makes dough rise. Knowing the difference between the main types is essential for substituting them effectively.</p>
+  <ul>
+    <li><strong>Instant Yeast:</strong> The most robust and concentrated form of commercial yeast. It can be mixed directly into dry ingredients without blooming. Also known as "Rapid Rise" or "Bread Machine Yeast."</li>
+    <li><strong>Active Dry Yeast:</strong> Contains larger granules and dormant yeast cells that usually require dissolving (blooming) in warm water before use to ensure they are active. It is about 25% less potent by weight than instant yeast.</li>
+    <li><strong>Fresh Yeast:</strong> Also known as cake yeast or compressed yeast. It is highly perishable, sold in solid blocks, and contains mostly water. It is very active but requires using about 3x the weight of instant yeast.</li>
+    <li><strong>Sourdough Starter:</strong> A wild yeast culture maintained in a mixture of flour and water. It ferments much slower than commercial yeast and adds a distinct tangy flavor to baked goods.</li>
+  </ul>
+
+  <h2>How to Convert Yeast Types</h2>
+  <p>To substitute one yeast for another, you can generally follow these weight ratios. Our calculator uses these exact standardized baking industry conversions:</p>
+  <ul>
+    <li><strong>100% Instant Yeast</strong> = Base multiplier (1.0x)</li>
+    <li><strong>125% Active Dry Yeast</strong> = 1.25x Instant Yeast</li>
+    <li><strong>300% Fresh Yeast</strong> = 3.00x Instant Yeast</li>
+    <li><strong>~1400% Sourdough Starter (100% hydration)</strong> = Generally, you can substitute 7g of instant yeast with roughly 100g of active sourdough starter. However, since starter is 50% flour and 50% water, you <em>must</em> subtract 50g of flour and 50g of water from your original recipe.</li>
+  </ul>
+
+  <h2>Temperature and Fermentation Time</h2>
+  <p>Yeast activity is highly dependent on temperature. The "Rule of 17" in baking states that for every 1°C increase in dough temperature, the fermentation time decreases by approximately 10%. Alternatively, a general rule of thumb is that fermentation time halves for every 8°C (15°F) increase in ambient temperature.</p>
+  <p>Our temperature adjuster uses a standard exponential decay model based on these principles to help you estimate how long your dough will take to rise if your kitchen is warmer or cooler than the recipe specifies.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Yeast Conversions (multiplier relative to Instant Yeast)
+const YEAST_TYPES = {
+  instant: { name: "Instant Yeast", desc: "No blooming required", multiplier: 1.0 },
+  active: { name: "Active Dry Yeast", desc: "Bloom in water first", multiplier: 1.25 },
+  fresh: { name: "Fresh Yeast", desc: "Cake / compressed", multiplier: 3.0 },
+  sourdough: { name: "Sourdough Starter", desc: "100% hydration (active)", multiplier: 14.28 } // Roughly 100g starter for 7g instant (100/7 ≈ 14.28)
+};
+
+// Elements
+const sourceAmountEl = document.getElementById('sourceAmount');
+const sourceTypeEl = document.getElementById('sourceType');
+const conversionListEl = document.getElementById('conversionList');
+const sourdoughNoteEl = document.getElementById('sourdoughNote');
+const sdFlourEl = document.getElementById('sdFlour');
+const sdWaterEl = document.getElementById('sdWater');
+
+const recipeTimeEl = document.getElementById('recipeTime');
+const recipeTempEl = document.getElementById('recipeTemp');
+const actualTempEl = document.getElementById('actualTemp');
+const newTimeValueEl = document.getElementById('newTimeValue');
+
+// Format number helper
+function formatNumber(num) {
+  if (num < 10) return (Math.round(num * 10) / 10).toString();
+  return Math.round(num).toString();
+}
+
+function updateConversions() {
+  const amount = parseFloat(sourceAmountEl.value) || 0;
+  const sourceType = sourceTypeEl.value;
+
+  // Convert input to base unit (Instant Yeast equivalent)
+  const baseMultiplier = YEAST_TYPES[sourceType].multiplier;
+  const instantEquivalent = amount / baseMultiplier;
+
+  let listHTML = '';
+  let showSourdoughNote = false;
+  let sourdoughAmount = 0;
+
+  // Generate output for all types except the source
+  for (const [key, data] of Object.entries(YEAST_TYPES)) {
+    if (key === sourceType) continue;
+
+    const convertedAmount = instantEquivalent * data.multiplier;
+    listHTML += `
+      <div class="ing-row">
+        <div>
+          <div class="name">${data.name}</div>
+          <div class="desc">${data.desc}</div>
+        </div>
+        <div class="value">${formatNumber(convertedAmount)}g</div>
+      </div>
+    `;
+
+    if (key === 'sourdough' || sourceType === 'sourdough') {
+      showSourdoughNote = true;
+      sourdoughAmount = key === 'sourdough' ? convertedAmount : amount;
+    }
+  }
+
+  conversionListEl.innerHTML = listHTML;
+
+  // Handle sourdough hydration note
+  if (showSourdoughNote && sourdoughAmount > 0) {
+    const half = Math.round(sourdoughAmount / 2);
+    sdFlourEl.textContent = half;
+    sdWaterEl.textContent = half;
+    sourdoughNoteEl.style.display = 'block';
+  } else {
+    sourdoughNoteEl.style.display = 'none';
+  }
+}
+
+function updateTemperatureTime() {
+  const time = parseFloat(recipeTimeEl.value) || 0;
+  const rTemp = parseFloat(recipeTempEl.value) || 0;
+  const aTemp = parseFloat(actualTempEl.value) || 0;
+
+  if (time <= 0) {
+    newTimeValueEl.textContent = '-- h';
+    return;
+  }
+
+  // Rule of thumb: Fermentation time changes by factor of 2 for every 8C difference
+  // New Time = Old Time * 2 ^ ((Old Temp - New Temp) / 8)
+  const tempDiff = rTemp - aTemp;
+  const multiplier = Math.pow(2, tempDiff / 8);
+  const newTime = time * multiplier;
+
+  // Format to neat hours (e.g., 2.5h)
+  newTimeValueEl.textContent = formatNumber(newTime) + ' h';
+}
+
+function copyResult() {
+  const amount = parseFloat(sourceAmountEl.value) || 0;
+  const sourceType = sourceTypeEl.options[sourceTypeEl.selectedIndex].text;
+  let text = `Recipe Calls For: ${amount}g of ${sourceType}\n\nEquivalent Amounts:\n`;
+
+  const rows = conversionListEl.querySelectorAll('.ing-row');
+  rows.forEach(row => {
+    const name = row.querySelector('.name').textContent;
+    const val = row.querySelector('.value').textContent;
+    text += `- ${name}: ${val}\n`;
+  });
+
+  if (sourdoughNoteEl.style.display === 'block') {
+    text += `\nNote: Subtract ${sdFlourEl.textContent}g flour and ${sdWaterEl.textContent}g water to maintain hydration.`;
+  }
+
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Event Listeners
+sourceAmountEl.addEventListener('input', updateConversions);
+sourceTypeEl.addEventListener('change', updateConversions);
+
+recipeTimeEl.addEventListener('input', updateTemperatureTime);
+recipeTempEl.addEventListener('input', updateTemperatureTime);
+actualTempEl.addEventListener('input', updateTemperatureTime);
+
+// Initial calculation
+updateConversions();
+updateTemperatureTime();
+</script>
+
+</body>
+</html>
