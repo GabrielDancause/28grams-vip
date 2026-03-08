@@ -283,6 +283,7 @@ code, .mono { font-family: 'JetBrains Mono', monospace; }
             <option value="yogurt">🥛 Yogurt</option>
             <option value="kombucha">🍄 Kombucha (F1)</option>
             <option value="kimchi">🌶️ Kimchi</option>
+            <option value="sauerkraut">🥬 Sauerkraut</option>
           </select>
         </div>
         <div class="info-text">Select your target culture.</div>
@@ -306,22 +307,17 @@ code, .mono { font-family: 'JetBrains Mono', monospace; }
         <div class="info-text">Starter amount. Standard is 20%.</div>
       </div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <h2>⏱️ Expected Timeline</h2>
-      <button class="copy-btn" id="copySchedBtn" onclick="copySchedule()">Copy Timeline</button>
-    </div>
-    <div class="schedule-controls">
+    <div class="schedule-controls" style="border-top: 1px solid #2a1820; border-bottom: none;">
       <label>Start Time:</label>
       <input type="time" id="startTime" value="09:00">
       <label style="margin-left: 8px;">Date:</label>
       <input type="date" id="startDate">
+      <button class="copy-btn" id="addBatchBtn" onclick="addBatch()" style="margin-left: auto; background: #C2185B; color: #fff; border-color: #C2185B; font-size: 0.8rem; padding: 6px 16px;">+ Add Batch</button>
     </div>
-    <div class="timeline" id="timelineList">
-      <!-- Injected by JS -->
-    </div>
+  </div>
+
+  <div id="batchesContainer">
+    <!-- Batch cards injected by JS -->
   </div>
 
 </div>
@@ -363,12 +359,12 @@ var inocInputEl = document.getElementById('inocInput');
 
 var startTimeEl = document.getElementById('startTime');
 var startDateEl = document.getElementById('startDate');
-var timelineList = document.getElementById('timelineList');
+var batchesContainer = document.getElementById('batchesContainer');
 var clipboardData = document.getElementById('clipboardData');
 
 // State
 var isCelsius = true;
-var scheduleData = [];
+var batchCounter = 0;
 
 // Base Profiles for Fermentation
 // tempBase: baseline temp in Celsius for the durBase
@@ -429,6 +425,19 @@ var profiles = {
       { title: "Cold Storage", desc: "Move to fridge for slow aging.", relDur: 0 }
     ],
     inocBase: 0
+  },
+  sauerkraut: {
+    tempBase: 20,
+    durBase: 10080, // 7 days (7 * 24 * 60)
+    q10: 2.2,
+    steps: [
+      { title: "Shred & Salt Cabbage", desc: "Shred cabbage, massage with salt.", relDur: 0 },
+      { title: "Rest & Sweat", desc: "Let sit to draw out brine.", relDur: 120 },
+      { title: "Pack Jars", desc: "Pack tightly, ensure submerged in brine.", relDur: 30 },
+      { title: "Room Temp Ferment", desc: "Burp jars daily, wait for sourness.", isMain: true },
+      { title: "Cold Storage", desc: "Move to fridge for slow aging.", relDur: 0 }
+    ],
+    inocBase: 0
   }
 };
 
@@ -455,7 +464,6 @@ function toggleTempUnit() {
     tempWrap.classList.remove('f-temp');
     tempWrap.classList.add('temp');
   }
-  generateSchedule();
 }
 
 function roundTemp(val) {
@@ -484,8 +492,6 @@ function handleTypeChange() {
   } else {
     inocInputEl.disabled = false;
   }
-
-  generateSchedule();
 }
 
 function calculateMainDuration(profile, tempC, inoc) {
@@ -523,7 +529,7 @@ function formatDateLabel(dateObj, baseDateObj) {
   return " (+" + diffDays + " Days)";
 }
 
-function generateSchedule() {
+function addBatch() {
   var t = fermentTypeEl.value;
   var profile = profiles[t];
   var tempC = getTempCelsius();
@@ -540,7 +546,7 @@ function generateSchedule() {
 
   var mainDur = calculateMainDuration(profile, tempC, inoc);
 
-  scheduleData = [];
+  var scheduleData = [];
   var currentTime = startDate.getTime();
 
   profile.steps.forEach(function(step) {
@@ -567,11 +573,52 @@ function generateSchedule() {
     });
   });
 
-  renderSchedule();
+  renderBatchCard(t, tempInputEl.value, scheduleData);
 }
 
-function renderSchedule() {
-  timelineList.innerHTML = '';
+function renderBatchCard(typeKey, tempValue, scheduleData) {
+  batchCounter++;
+  var batchId = 'batch-' + batchCounter;
+  var titleText = fermentTypeEl.options[fermentTypeEl.selectedIndex].text;
+  var tempUnit = isCelsius ? '°C' : '°F';
+
+  var card = document.createElement('div');
+  card.className = 'card';
+  card.id = batchId;
+  card.setAttribute('data-title', titleText);
+  card.setAttribute('data-temp', tempValue + tempUnit);
+
+  var header = document.createElement('div');
+  header.className = 'card-header';
+
+  var h2 = document.createElement('h2');
+  h2.innerHTML = '⏱️ ' + titleText + ' <span style="font-size: 0.8rem; color: #888; font-weight: normal; margin-left: 8px;">(' + tempValue + tempUnit + ')</span>';
+
+  var btnsDiv = document.createElement('div');
+  btnsDiv.style.display = 'flex';
+  btnsDiv.style.gap = '8px';
+
+  var copyBtn = document.createElement('button');
+  copyBtn.className = 'copy-btn';
+  copyBtn.textContent = 'Copy';
+  copyBtn.onclick = function() { copySchedule(batchId, copyBtn); };
+
+  var removeBtn = document.createElement('button');
+  removeBtn.className = 'copy-btn';
+  removeBtn.textContent = '×';
+  removeBtn.style.color = '#C2185B';
+  removeBtn.onclick = function() { removeBatch(batchId); };
+
+  btnsDiv.appendChild(copyBtn);
+  btnsDiv.appendChild(removeBtn);
+
+  header.appendChild(h2);
+  header.appendChild(btnsDiv);
+  card.appendChild(header);
+
+  var timeline = document.createElement('div');
+  timeline.className = 'timeline';
+
   scheduleData.forEach(function(s) {
     var row = document.createElement('div');
     row.className = 'time-row';
@@ -582,39 +629,58 @@ function renderSchedule() {
         '<div class="t-desc">' + s.desc + '</div>' +
       '</div>' +
       (s.dur ? '<div class="t-dur">' + s.dur + '</div>' : '<div></div>');
-    timelineList.appendChild(row);
+    timeline.appendChild(row);
   });
+
+  card.appendChild(timeline);
+
+  // Prepend so newest is on top
+  batchesContainer.insertBefore(card, batchesContainer.firstChild);
 }
 
-function copySchedule() {
-  var t = fermentTypeEl.options[fermentTypeEl.selectedIndex].text;
-  var temp = tempInputEl.value + (isCelsius ? '°C' : '°F');
-  var txt = t + " Schedule (" + temp + "):\n----------------------------\n";
+function removeBatch(id) {
+  var card = document.getElementById(id);
+  if (card) {
+    card.remove();
+  }
+}
 
-  scheduleData.forEach(function(s) {
-    txt += s.time.padEnd(20, ' ') + " | " + s.title + "\n";
+function copySchedule(batchId, btnEl) {
+  var card = document.getElementById(batchId);
+  if (!card) return;
+
+  if (btnEl.classList.contains('copied')) return;
+
+  var title = card.getAttribute('data-title');
+  var temp = card.getAttribute('data-temp');
+  var txt = title + " Schedule (" + temp + "):\n----------------------------\n";
+
+  var rows = card.querySelectorAll('.time-row');
+  rows.forEach(function(row) {
+    var timeText = row.querySelector('.t-time').textContent;
+    // t-step actually has a child t-step (which should be t-title maybe) and t-desc. Let's handle it properly by getting the first div's text
+    var stepText = row.children[1].children[0].textContent;
+    txt += timeText.padEnd(20, ' ') + " | " + stepText + "\n";
   });
 
   clipboardData.value = txt;
   clipboardData.select();
   document.execCommand('copy');
 
-  var btn = document.getElementById('copySchedBtn');
-  btn.textContent = '✓ Copied';
-  btn.classList.add('copied');
-  setTimeout(function() { btn.textContent = 'Copy Timeline'; btn.classList.remove('copied'); }, 1500);
+  var origText = btnEl.textContent;
+  btnEl.textContent = '✓ Copied';
+  btnEl.classList.add('copied');
+  setTimeout(function() { btnEl.textContent = origText; btnEl.classList.remove('copied'); }, 1500);
 }
 
 // Listeners
 fermentTypeEl.addEventListener('change', handleTypeChange);
-tempInputEl.addEventListener('input', generateSchedule);
-inocInputEl.addEventListener('input', generateSchedule);
-startTimeEl.addEventListener('input', generateSchedule);
-startDateEl.addEventListener('input', generateSchedule);
+// Removing auto-generate on input since we now use the "Add Batch" button
+// toggleTempUnit still calls handleTypeChange which was originally missing it, but it handles form updates.
+
 
 // Init
 initDate();
-generateSchedule();
 </script>
 </body>
 </html>
