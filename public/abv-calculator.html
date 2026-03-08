@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABV Calculator — Calculate Alcohol By Volume | Free Tool</title>
+<meta name="description" content="Calculate Alcohol By Volume (ABV) from Original Gravity (OG) and Final Gravity (FG) readings. Supports standard and alternate equations. Get calories per serving.">
+<meta property="og:title" content="ABV Calculator — Calculate Alcohol By Volume">
+<meta property="og:description" content="Enter OG and FG — get exact ABV percentage and calories. Works for beer, wine, and spirits. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "ABV Calculator",
+  "url": "https://28grams.vip/abv-calculator",
+  "description": "Calculate Alcohol By Volume (ABV) from Original Gravity (OG) and Final Gravity (FG) readings. Calculates calories per serving.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Hero */
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Control Cards */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.card-body {
+  padding: 24px 20px;
+}
+
+/* Grid Layouts */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 600px) {
+  .input-grid { grid-template-columns: 1fr; }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-label {
+  font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.input-group input {
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-group input:focus { border-color: #C2185B; }
+
+/* Radio Buttons */
+.radio-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #c8b8c0;
+}
+.radio-label input {
+  accent-color: #C2185B;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Results styling */
+.result-big {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #C2185B;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 24px;
+}
+.result-big span { font-size: 1.5rem; color: #888; }
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  background: #0a060a;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px;
+}
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+.stat-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #e0d0d8;
+}
+@media (max-width: 600px) {
+  .result-grid { grid-template-columns: 1fr; }
+  .stat-box { align-items: flex-start; text-align: left; padding: 8px 0; border-bottom: 1px solid #1a1015; }
+  .stat-box:last-child { border-bottom: none; }
+  .stat-box { flex-direction: row; justify-content: space-between; width: 100%; }
+}
+
+/* Copy Button */
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>ABV <span>Calculator</span> 🍺</h1>
+  <p>Calculate Alcohol By Volume (ABV) from gravity readings. Calibrate your beer, wine, or spirits with standard and alternate equations.</p>
+</div>
+
+<div class="main">
+
+  <div class="card">
+    <div class="card-header">
+      <h2>📏 Gravity Readings</h2>
+    </div>
+    <div class="card-body">
+      <div class="input-grid">
+        <div class="input-group">
+          <label class="input-label" for="ogInput">Original Gravity (OG)</label>
+          <input type="number" id="ogInput" value="1.050" step="0.001" min="1.000" max="1.200">
+        </div>
+        <div class="input-group">
+          <label class="input-label" for="fgInput">Final Gravity (FG)</label>
+          <input type="number" id="fgInput" value="1.010" step="0.001" min="0.990" max="1.200">
+        </div>
+      </div>
+
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="equation" value="standard" checked>
+          Standard Equation
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="equation" value="alternate">
+          Alternate (High ABV)
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="resultCard">
+    <div class="card-header">
+      <h2>📊 Results</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Data</button>
+    </div>
+    <div class="card-body">
+      <div class="result-big" id="abvResult">5.25<span>%</span></div>
+
+      <div class="result-grid">
+        <div class="stat-box">
+          <span class="stat-label">Apparent Attenuation</span>
+          <span class="stat-value" id="attenuationResult">80.0%</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Calories (12oz/355ml)</span>
+          <span class="stat-value" id="caloriesResult">165 kcal</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Alcohol By Weight (ABW)</span>
+          <span class="stat-value" id="abwResult">4.16%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>What is Alcohol By Volume (ABV)?</h2>
+  <p>Alcohol By Volume (ABV) is the standard measurement used worldwide to quantify the amount of alcohol (ethanol) contained within an alcoholic beverage. It represents the percentage of the total volume of the liquid that is pure alcohol.</p>
+
+  <h2>How to Measure Gravity</h2>
+  <p>To use this calculator, you need two measurements taken with a hydrometer or refractometer:</p>
+  <ul>
+    <li><strong>Original Gravity (OG):</strong> The specific gravity of the unfermented liquid (wort or must) before yeast is pitched.</li>
+    <li><strong>Final Gravity (FG):</strong> The specific gravity of the fermented liquid after fermentation has completely finished.</li>
+  </ul>
+  <p>The difference between these two numbers indicates how much sugar was consumed by the yeast and converted into alcohol and CO2.</p>
+
+  <h2>Standard vs. Alternate Equation</h2>
+  <p>This tool offers two equations to calculate ABV:</p>
+  <ul>
+    <li><strong>Standard Equation:</strong> <code>ABV = (OG - FG) * 131.25</code><br>This is the most common formula used by homebrewers. It is simple and highly accurate for most beers under 6% ABV.</li>
+    <li><strong>Alternate Equation:</strong> <code>ABV = (76.08 * (OG - FG) / (1.775 - OG)) * (FG / 0.794)</code><br>This more complex formula accounts for the changing density of the liquid as alcohol is produced. It is recommended for high-gravity beers, meads, and wines (generally anything above 6-7% ABV) where the standard equation begins to lose accuracy.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Elements
+var ogInput = document.getElementById('ogInput');
+var fgInput = document.getElementById('fgInput');
+var radios = document.getElementsByName('equation');
+var abvResult = document.getElementById('abvResult');
+var attenuationResult = document.getElementById('attenuationResult');
+var caloriesResult = document.getElementById('caloriesResult');
+var abwResult = document.getElementById('abwResult');
+
+// State
+var currentResults = {
+  abv: '0.00',
+  attenuation: '0.0',
+  calories: '0',
+  abw: '0.00'
+};
+
+function round(val, decimals) {
+  var multiplier = Math.pow(10, decimals);
+  return (Math.round(val * multiplier) / multiplier).toFixed(decimals);
+}
+
+function calculate() {
+  var og = parseFloat(ogInput.value);
+  var fg = parseFloat(fgInput.value);
+
+  if (isNaN(og) || isNaN(fg) || og <= 0 || fg <= 0) {
+    abvResult.innerHTML = '0.00<span>%</span>';
+    attenuationResult.textContent = '0.0%';
+    caloriesResult.textContent = '0 kcal';
+    abwResult.textContent = '0.00%';
+    return;
+  }
+
+  // Get selected equation
+  var equation = 'standard';
+  for (var i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      equation = radios[i].value;
+      break;
+    }
+  }
+
+  var abv = 0;
+  var abw = 0;
+
+  // Calculate ABV
+  if (equation === 'alternate') {
+    abv = (76.08 * (og - fg) / (1.775 - og)) * (fg / 0.794);
+  } else {
+    abv = (og - fg) * 131.25;
+  }
+
+  // Prevent negative ABV if FG > OG
+  if (abv < 0) abv = 0;
+
+  // Calculate ABW
+  // ABW = ABV * 0.79336 / FG
+  abw = abv * 0.79336 / fg;
+
+  // Calculate Apparent Attenuation
+  var attenuation = ((og - fg) / (og - 1)) * 100;
+  if (attenuation < 0) attenuation = 0;
+  if (og === 1) attenuation = 0; // Avoid divide by zero
+
+  // Calculate Calories (12oz / 355ml serving)
+  // Caloric content estimation
+  // Calories from alcohol: 1881.22 * FG * (OG - FG) / (1.775 - OG)
+  // Calories from carbs: 3550 * FG * ((0.1808 * OG) + (0.8192 * FG) - 1.0004)
+  // Simple formula for 12oz:
+  // Cal = 3550 * FG * (((0.1808 * OG) + (0.8192 * FG)) - 1.0004) + 1881.22 * FG * (OG - FG)/(1.775 - OG)
+  // Let's use a standard approximation for 12oz serving
+
+  var calFromAlcohol = 1881.22 * fg * (og - fg) / (1.775 - og);
+  var calFromCarbs = 3550.0 * fg * ((0.1808 * og) + (0.8192 * fg) - 1.0004);
+  var calories = calFromAlcohol + calFromCarbs;
+  if (calories < 0) calories = 0;
+
+  // Format and update state
+  currentResults.abv = round(abv, 2);
+  currentResults.attenuation = round(attenuation, 1);
+  currentResults.calories = Math.round(calories);
+  currentResults.abw = round(abw, 2);
+
+  // Update DOM
+  abvResult.innerHTML = currentResults.abv + '<span>%</span>';
+  attenuationResult.textContent = currentResults.attenuation + '%';
+  caloriesResult.textContent = currentResults.calories + ' kcal';
+  abwResult.textContent = currentResults.abw + '%';
+}
+
+function copyResult() {
+  var text = "ABV Calculator Results\n" +
+             "OG: " + ogInput.value + "\n" +
+             "FG: " + fgInput.value + "\n" +
+             "ABV: " + currentResults.abv + "%\n" +
+             "ABW: " + currentResults.abw + "%\n" +
+             "Apparent Attenuation: " + currentResults.attenuation + "%\n" +
+             "Calories (12oz): " + currentResults.calories + " kcal";
+
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy Data'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Event Listeners
+ogInput.addEventListener('input', calculate);
+fgInput.addEventListener('input', calculate);
+for (var i = 0; i < radios.length; i++) {
+  radios[i].addEventListener('change', calculate);
+}
+
+// Ensure correct values when clicking out/blur
+ogInput.addEventListener('blur', function() {
+  if (this.value) {
+    this.value = parseFloat(this.value).toFixed(3);
+    calculate();
+  }
+});
+fgInput.addEventListener('blur', function() {
+  if (this.value) {
+    this.value = parseFloat(this.value).toFixed(3);
+    calculate();
+  }
+});
+
+// Initial calculate
+calculate();
+</script>
+</body>
+</html>
