@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Fermentation Guide — Sauerkraut, Kombucha & More | Free Reference</title>
+<meta name="description" content="A comprehensive cheat sheet for home fermentation. Learn how to make sauerkraut, kimchi, kombucha, and yogurt. Includes equipment lists, safety tips, and troubleshooting.">
+<meta property="og:title" content="Home Fermentation Guide — Cheat Sheet & Reference">
+<meta property="og:description" content="Master home fermentation with this interactive guide. Ratios, times, and troubleshooting for sauerkraut, kombucha, kimchi, and yogurt.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Home Fermentation Guide & Cheat Sheet",
+  "name": "Home Fermentation Guide",
+  "url": "https://28grams.vip/guide-fermentation",
+  "description": "A comprehensive reference guide for home fermentation including sauerkraut, kimchi, kombucha, and yogurt.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; line-height: 1.6; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 900px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 32px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px 20px 16px 48px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* Cards shared */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  transition: display 0.3s ease;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+  cursor: pointer;
+}
+.card-header:hover { background: #1a1015; }
+.card-header h2 { font-size: 1.1rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; margin: 0;}
+.card-header .toggle-icon { color: #C2185B; font-weight: 900; font-size: 1.2rem; transition: transform 0.2s; }
+.card.collapsed .toggle-icon { transform: rotate(-90deg); }
+.card-body { padding: 24px; display: block; }
+.card.collapsed .card-body { display: none; }
+
+/* Tables */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+.info-table th, .info-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #2a1820;
+}
+.info-table th {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #150d12;
+}
+.info-table td { font-size: 0.9rem; color: #e0d0d8; }
+.info-table tr:last-child td { border-bottom: none; }
+.info-table .highlight { color: #C2185B; font-family: 'JetBrains Mono', monospace; font-weight: 600;}
+
+/* Tag lists */
+.tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;}
+.tag {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #c8b8c0;
+  font-weight: 500;
+}
+.tag.danger { border-color: #7f1d1d; color: #fca5a5; background: #450a0a; }
+.tag.success { border-color: #14532d; color: #86efac; background: #052e16; }
+
+/* Grid blocks */
+.grid-blocks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.block-item {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px;
+}
+.block-title { font-size: 0.85rem; font-weight: 700; color: #ccc; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.block-content { font-size: 0.9rem; color: #888; }
+
+/* Code / Copy areas */
+.code-box {
+  background: #0a060a;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 12px 16px;
+  position: relative;
+  margin-bottom: 16px;
+}
+.code-box pre { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #c8b8c0; white-space: pre-wrap; margin: 0; }
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+/* No Results Message */
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 1rem;
+  background: #120c10;
+  border: 2px dashed #2a1820;
+  border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .grid-blocks { grid-template-columns: 1fr; }
+  .info-table th, .info-table td { padding: 10px 12px; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Fermentation <span>Guide</span> 🦠</h1>
+  <p>A quick-reference cheat sheet for mastering sauerkraut, kimchi, kombucha, and yogurt at home.</p>
+</div>
+
+<div class="main">
+
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search for 'salt ratio', 'kombucha', 'troubleshooting'...">
+  </div>
+
+  <div id="noResults" class="no-results">
+    No fermentation guides match your search.
+  </div>
+
+  <div class="card" data-tags="sauerkraut cabbage lacto salt ratio vegetable">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🥬 Sauerkraut & Lacto-Fermentation</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 16px; color: #888; font-size: 0.9rem;">The simplest introduction to fermentation. Lactic acid bacteria (LAB) consume natural sugars in vegetables to create lactic acid, preserving the food.</p>
+
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Value / Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Salt Ratio</td>
+            <td><span class="highlight">2% - 2.5%</span> of total vegetable weight</td>
+          </tr>
+          <tr>
+            <td>Salt Type</td>
+            <td>Sea salt, Kosher salt (No iodine or anti-caking agents)</td>
+          </tr>
+          <tr>
+            <td>Temperature</td>
+            <td><span class="highlight">65°F - 72°F (18°C - 22°C)</span></td>
+          </tr>
+          <tr>
+            <td>Time</td>
+            <td>1 - 4 weeks (taste after 1 week)</td>
+          </tr>
+          <tr>
+            <td>Submersion</td>
+            <td>Vegetables MUST stay completely submerged in brine</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="block-title" style="margin-top: 24px;">Quick Recipe Formula</div>
+      <div class="code-box">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>1. Weigh cabbage (e.g., 1000g)
+2. Calculate salt: 1000g * 0.02 = 20g salt
+3. Shred cabbage, massage with salt until juicy (5-10 mins)
+4. Pack tightly into jar, pressing down to release brine
+5. Weigh down (glass weight or ziplock bag of water)
+6. Cover loosely or use airlock. Wait 1-4 weeks.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-tags="kimchi cabbage spice korean vegetable">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🌶️ Kimchi</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 16px; color: #888; font-size: 0.9rem;">A complex, spicy, and savory lacto-ferment. Requires a preliminary salting phase before applying the flavor paste.</p>
+
+      <div class="grid-blocks">
+        <div class="block-item">
+          <div class="block-title">Phase 1: Salting (Brining)</div>
+          <div class="block-content">Soak Napa cabbage in a 5-10% brine for 4-8 hours until pliable. Rinse thoroughly and squeeze out excess water before mixing with paste.</div>
+        </div>
+        <div class="block-item">
+          <div class="block-title">Phase 2: The Paste</div>
+          <div class="block-content">Gochugaru (Korean chili flakes), garlic, ginger, fish sauce (or soy sauce for vegan), daikon radish, green onions, and sometimes a rice flour porridge binder.</div>
+        </div>
+        <div class="block-item">
+          <div class="block-title">Fermentation Timeline</div>
+          <div class="block-content">Leave at room temp (68°F) for 1-3 days until bubbly and slightly sour, then move to fridge. It continues to slowly ferment for months.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-tags="kombucha tea scoby sugar f1 f2 carbonation">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🍄 Kombucha</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 16px; color: #888; font-size: 0.9rem;">A fermented, slightly alcoholic, lightly effervescent, sweetened black or green tea drink powered by a SCOBY (Symbiotic Culture Of Bacteria and Yeast).</p>
+
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Ingredient</th>
+            <th>Ratio per 1 Gallon (3.8L) Water</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tea</td>
+            <td><span class="highlight">6-8 bags</span> (or 2 tbsp loose leaf black/green)</td>
+          </tr>
+          <tr>
+            <td>Sugar</td>
+            <td><span class="highlight">1 cup (200g)</span> plain white cane sugar</td>
+          </tr>
+          <tr>
+            <td>Starter Liquid</td>
+            <td><span class="highlight">2 cups (470ml)</span> strong, unflavored kombucha</td>
+          </tr>
+          <tr>
+            <td>SCOBY</td>
+            <td>1 pellicle (optional, starter liquid is more important)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="block-title" style="margin-top: 24px;">The Two-Step Process</div>
+      <div class="code-box">
+        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        <pre>F1 (First Fermentation):
+- Brew sweet tea, cool to room temp (< 85°F).
+- Add starter liquid + SCOBY.
+- Cover with breathable cloth. Ferment 7-14 days.
+
+F2 (Second Fermentation - Carbonation):
+- Bottle liquid (leaving SCOBY behind).
+- Add fruit/sugar (approx 1 tbsp per 16oz).
+- Seal in pressure-safe flip-top bottles.
+- Wait 2-4 days at room temp, then refrigerate.</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" data-tags="yogurt milk dairy culture temperature">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🥛 Yogurt</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 16px; color: #888; font-size: 0.9rem;">A thermophilic (heat-loving) fermentation. Requires holding milk at a specific warm temperature to allow the yogurt cultures to multiply and set the proteins.</p>
+
+      <table class="info-table">
+        <thead>
+          <tr>
+            <th>Step</th>
+            <th>Target Temperature</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. Scald Milk</td>
+            <td><span class="highlight">180°F (82°C)</span></td>
+            <td>Denatures whey proteins for thicker yogurt, kills bad bacteria.</td>
+          </tr>
+          <tr>
+            <td>2. Cool</td>
+            <td><span class="highlight">110°F - 115°F (43°C - 46°C)</span></td>
+            <td>Safe temp to add culture; too hot will kill the bacteria.</td>
+          </tr>
+          <tr>
+            <td>3. Inoculate</td>
+            <td>110°F</td>
+            <td>Whisk in 2 tbsp plain yogurt (with active cultures) per quart of milk.</td>
+          </tr>
+          <tr>
+            <td>4. Incubate</td>
+            <td><span class="highlight">100°F - 110°F (38°C - 43°C)</span></td>
+            <td>Hold for 6-12 hours in oven, Instant Pot, or cooler.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" data-tags="safety equipment troubleshooting kahm yeast mold botulism">
+    <div class="card-header" onclick="toggleCard(this)">
+      <h2>🚨 Troubleshooting & Safety</h2>
+      <span class="toggle-icon">▼</span>
+    </div>
+    <div class="card-body">
+      <p style="margin-bottom: 16px; color: #888; font-size: 0.9rem;">Fermentation is inherently safe when basic rules are followed. The acidic environment prevents dangerous pathogens (like botulism) from surviving.</p>
+
+      <div class="tag-list">
+        <span class="tag success">Safe: Cloudy Brine</span>
+        <span class="tag success">Safe: Kahm Yeast (White, filmy)</span>
+        <span class="tag success">Safe: Bubbling/Hissing</span>
+        <span class="tag danger">Unsafe: Fuzzy Mold (Green/Black/Pink)</span>
+        <span class="tag danger">Unsafe: Putrid smell</span>
+      </div>
+
+      <div class="grid-blocks">
+        <div class="block-item">
+          <div class="block-title">Kahm Yeast vs Mold</div>
+          <div class="block-content">Kahm yeast is a white, wrinkly, powdery film on the surface. It's safe but can affect taste; skim it off. Mold is fuzzy, raised, and often colored (green, blue, pink, black). If it's fuzzy, throw the whole batch away.</div>
+        </div>
+        <div class="block-item">
+          <div class="block-title">Vegetables floating?</div>
+          <div class="block-content">Anything exposed to air will mold. Use glass fermentation weights, a smaller jar inserted into the neck, or a food-safe bag filled with brine to keep everything submerged.</div>
+        </div>
+        <div class="block-item">
+          <div class="block-title">Exploding Bottles (Kombucha)</div>
+          <div class="block-content">During F2, use only heavy-duty, pressure-rated flip-top bottles (like Grolsch bottles). Square decorative bottles will explode. "Burp" bottles daily to release excess pressure if unsure.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>The Golden Rule of Fermentation</h2>
+  <p><strong>"Under the brine, everything is fine."</strong></p>
+  <p>For vegetable ferments, the most crucial step is ensuring your ingredients are completely deprived of oxygen. Lactic acid bacteria are anaerobic, meaning they thrive without oxygen. Molds and bad bacteria require oxygen to survive. By keeping your vegetables submerged in a salty brine, you create a selective environment where only the good bacteria can grow.</p>
+
+  <h2>Essential Equipment</h2>
+  <ul>
+    <li><strong>Digital Kitchen Scale:</strong> Essential for calculating precise salt percentages. Volumetric measurements (teaspoons/tablespoons) for salt are dangerously inaccurate because grain sizes vary wildly.</li>
+    <li><strong>Glass Jars:</strong> Mason jars (wide-mouth) are the standard. Avoid metal containers (except stainless steel) as acid will react with them.</li>
+    <li><strong>Fermentation Weights:</strong> Heavy glass discs designed to hold vegetables below the brine. A cheap alternative is a ziplock bag filled with brine (use brine in the bag so if it leaks, it doesn't dilute your ferment).</li>
+    <li><strong>Airlocks (Optional but recommended):</strong> Silicone nipple lids or water airlocks allow CO2 to escape without letting oxygen or fruit flies in.</li>
+  </ul>
+
+  <h2>Why Ferment at Home?</h2>
+  <p>Store-bought pickles and sauerkraut are often pasteurized and canned using vinegar. This process kills all the beneficial probiotic bacteria. Home fermentation relies on natural bacterial processes, resulting in food rich in living probiotics, complex flavors, and enhanced nutrient bioavailability.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Toggle card collapse
+function toggleCard(header) {
+  const card = header.parentElement;
+  card.classList.toggle('collapsed');
+}
+
+// Copy Code
+function copyCode(btn) {
+  const pre = btn.nextElementSibling;
+  const text = pre.innerText;
+
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Search / Filter functionality
+const searchInput = document.getElementById('searchInput');
+const cards = document.querySelectorAll('.card');
+const noResults = document.getElementById('noResults');
+
+searchInput.addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase();
+  let visibleCount = 0;
+
+  cards.forEach(card => {
+    const tags = card.getAttribute('data-tags').toLowerCase();
+    const title = card.querySelector('h2').innerText.toLowerCase();
+
+    if (tags.includes(term) || title.includes(term)) {
+      card.style.display = 'block';
+      visibleCount++;
+      // Auto-expand if searching, collapse if empty
+      if(term !== "") {
+          card.classList.remove('collapsed');
+      }
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  if (visibleCount === 0 && term !== '') {
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+  }
+});
+
+// Init: Expand first card, collapse others
+document.addEventListener('DOMContentLoaded', () => {
+    cards.forEach((card, index) => {
+        if(index !== 0) {
+            card.classList.add('collapsed');
+        }
+    });
+});
+</script>
+</body>
+</html>
