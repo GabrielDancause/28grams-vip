@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fermentation Timer — Temp-Adjusted Schedules | Free Tool</title>
+<meta name="description" content="Calculate perfect fermentation schedules for bread, yogurt, kombucha, and kimchi. Temperature-adjusted timelines for bulk fermentation. Free, no signup.">
+<meta property="og:title" content="Fermentation Timer — Temp-Adjusted Schedules">
+<meta property="og:description" content="Calculate exact timelines for sourdough, yogurt, kombucha, and kimchi based on your room temperature. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Fermentation Timer",
+  "url": "https://28grams.vip/fermentation-timer",
+  "description": "Calculate perfect fermentation schedules for bread, yogurt, kombucha, and kimchi. Temperature-adjusted timelines.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards shared */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; }
+
+/* Formula Inputs */
+.formula-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 24px 20px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap select, .input-wrap input {
+  width: 100%;
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e0d0d8;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  outline: none;
+  appearance: none;
+}
+.input-wrap input {
+  font-family: 'JetBrains Mono', monospace;
+  text-align: right;
+  padding-right: 36px;
+}
+.input-wrap select { cursor: pointer; }
+.input-wrap input:focus, .input-wrap select:focus { border-color: #C2185B; }
+.input-wrap.temp::after {
+  position: absolute;
+  right: 12px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  content: '°C';
+}
+.input-wrap.f-temp::after { content: '°F'; }
+.info-text {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Toggle for C/F */
+.toggle-temp {
+  background: none;
+  border: none;
+  color: #C2185B;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-left: auto;
+}
+.toggle-temp:hover { text-decoration: underline; }
+
+/* Results Grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 24px 20px;
+}
+.res-box {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.res-label {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: block;
+}
+.res-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+.res-val span {
+  font-size: 0.9rem;
+  color: #888;
+  font-weight: 500;
+}
+
+/* Schedule */
+.schedule-controls {
+  padding: 16px 20px;
+  border-bottom: 1px solid #2a1820;
+  background: #181015;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.schedule-controls label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+}
+.schedule-controls input[type="time"], .schedule-controls input[type="date"] {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #e0d0d8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  outline: none;
+}
+.schedule-controls input[type="time"]:focus, .schedule-controls input[type="date"]:focus { border-color: #C2185B; }
+
+.timeline { padding: 20px; }
+.time-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #1a1015;
+  align-items: center;
+}
+.time-row:last-child { border-bottom: none; }
+.t-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: #C2185B;
+  font-weight: 600;
+}
+.t-step {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e0d0d8;
+}
+.t-desc {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 2px;
+}
+.t-dur {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #666;
+  background: #1a1015;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .formula-grid { grid-template-columns: 1fr; gap: 16px; }
+  .results-grid { grid-template-columns: repeat(2, 1fr); }
+  .time-row { grid-template-columns: 70px 1fr; }
+  .t-dur { display: none; }
+  .schedule-controls { flex-wrap: wrap; }
+}
+
+/* Hidden copy text area */
+#clipboardData { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Fermentation <span>Timer</span> ⏱️</h1>
+  <p>Calculate temperature-adjusted schedules for bread, yogurt, kombucha, and kimchi. Watch the clock less, ferment better.</p>
+</div>
+
+<div class="main">
+
+  <div class="card">
+    <div class="card-header">
+      <h2>🌡️ Environment Setup</h2>
+    </div>
+    <div class="formula-grid">
+      <div class="input-group">
+        <label>Ferment Type</label>
+        <div class="input-wrap">
+          <select id="fermentType">
+            <option value="bread">🍞 Sourdough Bulk</option>
+            <option value="yogurt">🥛 Yogurt</option>
+            <option value="kombucha">🍄 Kombucha (F1)</option>
+            <option value="kimchi">🌶️ Kimchi</option>
+          </select>
+        </div>
+        <div class="info-text">Select your target culture.</div>
+      </div>
+      <div class="input-group">
+        <div style="display: flex; justify-content: space-between;">
+          <label>Temperature</label>
+          <button class="toggle-temp" id="toggleTempBtn" onclick="toggleTempUnit()">Use °F</button>
+        </div>
+        <div class="input-wrap temp" id="tempWrap">
+          <input type="number" id="tempInput" value="22" step="0.5">
+        </div>
+        <div class="info-text" id="tempInfo">Ambient room temp affects speed.</div>
+      </div>
+      <div class="input-group">
+        <label>Inoculation %</label>
+        <div class="input-wrap percent">
+          <input type="number" id="inocInput" value="20" min="1" max="50" step="1" style="padding-right: 24px;">
+          <span style="position: absolute; right: 10px; color: #888; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; pointer-events: none;">%</span>
+        </div>
+        <div class="info-text">Starter amount. Standard is 20%.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>⏱️ Expected Timeline</h2>
+      <button class="copy-btn" id="copySchedBtn" onclick="copySchedule()">Copy Timeline</button>
+    </div>
+    <div class="schedule-controls">
+      <label>Start Time:</label>
+      <input type="time" id="startTime" value="09:00">
+      <label style="margin-left: 8px;">Date:</label>
+      <input type="date" id="startDate">
+    </div>
+    <div class="timeline" id="timelineList">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>The Science of Fermentation & Temperature</h2>
+  <p>Fermentation is a biological process driven by microorganisms like yeast and bacteria. Because these are living cultures, their activity rate is highly dependent on their environment—most notably, the ambient temperature.</p>
+  <ul>
+    <li><strong>The Q10 Temperature Coefficient:</strong> In biology, the Q10 value represents the factor by which the rate of a reaction increases for every 10°C rise in temperature. Most sourdough and yeast ferments have a Q10 around 2.0. This means if your kitchen is 10°C (18°F) warmer, your bread will proof <em>twice as fast</em>.</li>
+    <li><strong>Sourdough Bulk Fermentation:</strong> A standard sourdough recipe assumes a room temperature of 21-22°C (70-72°F). If your kitchen is hot (e.g., 28°C / 82°F) in the summer, a bulk fermentation that usually takes 5 hours could be done in less than 3 hours.</li>
+    <li><strong>Yogurt & Thermophilic Cultures:</strong> Yogurt bacteria thrive at much higher temperatures (~42°C / 108°F). Fermenting at lower temperatures will result in a much slower set and often a thinner, sweeter yogurt.</li>
+  </ul>
+
+  <h2>How to Use This Tool</h2>
+  <p>This timer uses biological models to approximate how long your ferment will take based on the temperature of the room or fermentation chamber you are using.</p>
+  <ul>
+    <li><strong>Step 1:</strong> Select your target ferment from the dropdown list.</li>
+    <li><strong>Step 2:</strong> Enter the ambient temperature where the vessel will be sitting. Use the toggle to switch between Celsius and Fahrenheit.</li>
+    <li><strong>Step 3:</strong> (Optional) Adjust your inoculation percentage if you are using more or less starter than a standard recipe calls for. <em>Note: This has the biggest impact on sourdough.</em></li>
+    <li><strong>Step 4:</strong> Input the time you plan to start, and copy the resulting timeline to your notes or calendar!</li>
+  </ul>
+  <p><em>Note: Sourdough and other ferments are living things. Always watch the dough/culture, not the clock. This calculator provides a highly accurate estimate, but visual cues are always the final test.</em></p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<textarea id="clipboardData" aria-hidden="true"></textarea>
+
+<script>
+// Elements
+var fermentTypeEl = document.getElementById('fermentType');
+var tempInputEl = document.getElementById('tempInput');
+var toggleTempBtn = document.getElementById('toggleTempBtn');
+var tempWrap = document.getElementById('tempWrap');
+var tempInfo = document.getElementById('tempInfo');
+var inocInputEl = document.getElementById('inocInput');
+
+var startTimeEl = document.getElementById('startTime');
+var startDateEl = document.getElementById('startDate');
+var timelineList = document.getElementById('timelineList');
+var clipboardData = document.getElementById('clipboardData');
+
+// State
+var isCelsius = true;
+var scheduleData = [];
+
+// Base Profiles for Fermentation
+// tempBase: baseline temp in Celsius for the durBase
+// durBase: duration in minutes at tempBase
+// q10: The Q10 temperature coefficient (rate of change for 10C difference).
+var profiles = {
+  bread: {
+    tempBase: 22,
+    durBase: 300, // 5 hours bulk
+    q10: 2.0,
+    steps: [
+      { title: "Mix Autolyse", desc: "Mix flour & water. Rest.", relDur: 0 },
+      { title: "Add Starter/Salt", desc: "Dimple in starter/salt. Mix.", relDur: 60 },
+      { title: "Stretch & Fold 1", desc: "Gentle folding.", relDur: 30 },
+      { title: "Stretch & Fold 2", desc: "Build structure.", relDur: 30 },
+      { title: "Stretch & Fold 3", desc: "Final fold. Leave to rest.", relDur: 30 },
+      { title: "End Bulk Fermentation", desc: "Dough should be airy, jiggly.", isMain: true },
+      { title: "Shape & Cold Retard", desc: "Shape and place in fridge.", relDur: 30 }
+    ],
+    inocBase: 20
+  },
+  yogurt: {
+    tempBase: 42,
+    durBase: 480, // 8 hours
+    q10: 2.5,
+    steps: [
+      { title: "Heat Milk", desc: "Heat milk to 82°C (180°F).", relDur: 0 },
+      { title: "Cool Milk", desc: "Cool to target temp.", relDur: 30 },
+      { title: "Inoculate", desc: "Stir in starter culture/yogurt.", relDur: 10 },
+      { title: "Ferment", desc: "Maintain target temp.", isMain: true },
+      { title: "Chill", desc: "Move to fridge to set.", relDur: 0 }
+    ],
+    inocBase: 5
+  },
+  kombucha: {
+    tempBase: 24,
+    durBase: 10080, // 7 days (7 * 24 * 60)
+    q10: 2.0,
+    steps: [
+      { title: "Brew Sweet Tea", desc: "Brew tea and dissolve sugar.", relDur: 0 },
+      { title: "Cool Tea", desc: "Cool to room temperature.", relDur: 180 },
+      { title: "Add SCOBY & Starter", desc: "Add culture and cover with cloth.", relDur: 10 },
+      { title: "F1 Complete", desc: "Taste test. Should be sweet & tart.", isMain: true },
+      { title: "Bottle (F2)", desc: "Bottle with flavoring for carbonation.", relDur: 60 }
+    ],
+    inocBase: 10
+  },
+  kimchi: {
+    tempBase: 20,
+    durBase: 4320, // 3 days (3 * 24 * 60)
+    q10: 2.2,
+    steps: [
+      { title: "Salt Cabbage", desc: "Salt cabbage and let wilt.", relDur: 0 },
+      { title: "Rinse & Drain", desc: "Rinse thoroughly and drain well.", relDur: 120 },
+      { title: "Mix Paste", desc: "Mix gochugaru, garlic, ginger, etc.", relDur: 30 },
+      { title: "Pack Jars", desc: "Coat cabbage and pack tightly.", relDur: 30 },
+      { title: "Room Temp Ferment", desc: "Look for bubbles and sour smell.", isMain: true },
+      { title: "Cold Storage", desc: "Move to fridge for slow aging.", relDur: 0 }
+    ],
+    inocBase: 0
+  }
+};
+
+function initDate() {
+  var now = new Date();
+  var yyyy = now.getFullYear();
+  var mm = String(now.getMonth() + 1).padStart(2, '0');
+  var dd = String(now.getDate()).padStart(2, '0');
+  startDateEl.value = yyyy + '-' + mm + '-' + dd;
+}
+
+function toggleTempUnit() {
+  var val = parseFloat(tempInputEl.value) || 0;
+  if (isCelsius) {
+    isCelsius = false;
+    tempInputEl.value = roundTemp((val * 9/5) + 32);
+    toggleTempBtn.textContent = 'Use °C';
+    tempWrap.classList.remove('temp');
+    tempWrap.classList.add('f-temp');
+  } else {
+    isCelsius = true;
+    tempInputEl.value = roundTemp((val - 32) * 5/9);
+    toggleTempBtn.textContent = 'Use °F';
+    tempWrap.classList.remove('f-temp');
+    tempWrap.classList.add('temp');
+  }
+  generateSchedule();
+}
+
+function roundTemp(val) {
+  return Math.round(val * 10) / 10;
+}
+
+function getTempCelsius() {
+  var val = parseFloat(tempInputEl.value) || 0;
+  return isCelsius ? val : (val - 32) * 5/9;
+}
+
+function handleTypeChange() {
+  var t = fermentTypeEl.value;
+  var p = profiles[t];
+
+  if (isCelsius) {
+    tempInputEl.value = p.tempBase;
+  } else {
+    tempInputEl.value = roundTemp((p.tempBase * 9/5) + 32);
+  }
+
+  inocInputEl.value = p.inocBase;
+  if (p.inocBase === 0) {
+    inocInputEl.disabled = true;
+    inocInputEl.value = '';
+  } else {
+    inocInputEl.disabled = false;
+  }
+
+  generateSchedule();
+}
+
+function calculateMainDuration(profile, tempC, inoc) {
+  var dur = profile.durBase;
+
+  var tempDiff = tempC - profile.tempBase;
+  var tempFactor = Math.pow(profile.q10, tempDiff / 10);
+
+  dur = dur / tempFactor;
+
+  if (profile.inocBase > 0 && inoc > 0) {
+    var inocFactor = Math.pow(profile.inocBase / inoc, 0.5);
+    dur = dur * inocFactor;
+  }
+
+  return dur;
+}
+
+function formatDuration(mins) {
+  if (mins <= 0) return "";
+  if (mins < 60) return "+ " + Math.round(mins) + "m";
+  if (mins < 1440) return "+ " + Math.round(mins / 60 * 10)/10 + "h";
+  return "+ " + Math.round(mins / 1440 * 10)/10 + "d";
+}
+
+function formatDateLabel(dateObj, baseDateObj) {
+  var diffTime = dateObj.getTime() - baseDateObj.getTime();
+  var diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) {
+      if (dateObj.getDate() !== baseDateObj.getDate()) return " (Next Day)";
+      return "";
+  }
+  if (diffDays === 1) return " (Next Day)";
+  return " (+" + diffDays + " Days)";
+}
+
+function generateSchedule() {
+  var t = fermentTypeEl.value;
+  var profile = profiles[t];
+  var tempC = getTempCelsius();
+  var inoc = parseFloat(inocInputEl.value) || 0;
+
+  var timeStr = startTimeEl.value;
+  var dateStr = startDateEl.value;
+  if (!timeStr || !dateStr) return;
+
+  var parts = timeStr.split(':');
+  var dParts = dateStr.split('-');
+  var startDate = new Date(dParts[0], dParts[1]-1, dParts[2], parseInt(parts[0]), parseInt(parts[1]), 0, 0);
+  var baseDate = new Date(startDate.getTime());
+
+  var mainDur = calculateMainDuration(profile, tempC, inoc);
+
+  scheduleData = [];
+  var currentTime = startDate.getTime();
+
+  profile.steps.forEach(function(step) {
+    var stepDur = step.isMain ? mainDur : (step.relDur || 0);
+    currentTime += stepDur * 60000;
+    var d = new Date(currentTime);
+
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12;
+    var mm = m < 10 ? '0' + m : m;
+    var fTime = h + ':' + mm + ' ' + ampm;
+
+    var dayLabel = formatDateLabel(d, baseDate);
+    var durStr = formatDuration(stepDur);
+
+    scheduleData.push({
+      time: fTime + dayLabel,
+      title: step.title,
+      desc: step.desc,
+      dur: durStr
+    });
+  });
+
+  renderSchedule();
+}
+
+function renderSchedule() {
+  timelineList.innerHTML = '';
+  scheduleData.forEach(function(s) {
+    var row = document.createElement('div');
+    row.className = 'time-row';
+    row.innerHTML =
+      '<div class="t-time">' + s.time + '</div>' +
+      '<div>' +
+        '<div class="t-step">' + s.title + '</div>' +
+        '<div class="t-desc">' + s.desc + '</div>' +
+      '</div>' +
+      (s.dur ? '<div class="t-dur">' + s.dur + '</div>' : '<div></div>');
+    timelineList.appendChild(row);
+  });
+}
+
+function copySchedule() {
+  var t = fermentTypeEl.options[fermentTypeEl.selectedIndex].text;
+  var temp = tempInputEl.value + (isCelsius ? '°C' : '°F');
+  var txt = t + " Schedule (" + temp + "):\n----------------------------\n";
+
+  scheduleData.forEach(function(s) {
+    txt += s.time.padEnd(20, ' ') + " | " + s.title + "\n";
+  });
+
+  clipboardData.value = txt;
+  clipboardData.select();
+  document.execCommand('copy');
+
+  var btn = document.getElementById('copySchedBtn');
+  btn.textContent = '✓ Copied';
+  btn.classList.add('copied');
+  setTimeout(function() { btn.textContent = 'Copy Timeline'; btn.classList.remove('copied'); }, 1500);
+}
+
+// Listeners
+fermentTypeEl.addEventListener('change', handleTypeChange);
+tempInputEl.addEventListener('input', generateSchedule);
+inocInputEl.addEventListener('input', generateSchedule);
+startTimeEl.addEventListener('input', generateSchedule);
+startDateEl.addEventListener('input', generateSchedule);
+
+// Init
+initDate();
+generateSchedule();
+</script>
+</body>
+</html>
