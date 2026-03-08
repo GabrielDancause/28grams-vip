@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitchen Knife Skills 101 — Essential Cuts & Types | Reference Guide</title>
+<meta name="description" content="A comprehensive reference guide for essential knife cuts (julienne, brunoise, chiffonade), knife types, maintenance, and kitchen safety. Free developer-style cheat sheet.">
+<meta property="og:title" content="Kitchen Knife Skills 101 — Essential Cuts & Types">
+<meta property="og:description" content="Quick reference for julienne, brunoise, batonnet, and more. Includes exact dimensions and knife care tips.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Kitchen Knife Skills 101",
+  "name": "Kitchen Knife Skills 101",
+  "url": "https://28grams.vip/guide-knife-skills",
+  "description": "A comprehensive reference guide for essential knife cuts, knife types, maintenance, and kitchen safety.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; line-height: 1.6; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 900px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 32px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-input::placeholder { color: #666; }
+
+/* Section Headers */
+.section-header {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #2a1820;
+  padding-bottom: 10px;
+}
+.section-header:first-of-type { margin-top: 0; }
+
+/* Grid Layout for Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Cards */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h3 { font-size: 1.1rem; font-weight: 700; color: #ccc; }
+.card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; gap: 12px;}
+.card-desc { font-size: 0.88rem; color: #888; }
+.card-dims {
+  background: #1a1015;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #2a1820;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+.card-dims code { color: #C2185B; font-weight: 600; font-size: 0.9rem; }
+
+/* Buttons */
+.copy-btn {
+  background: #2a1020;
+  border: 1px solid #3a2030;
+  color: #C2185B;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: #3a1530; color: #ff6b9d; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* Knife Types Table/List */
+.knife-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.knife-item {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 20px;
+}
+.knife-item h3 { font-size: 1.2rem; font-weight: 700; color: #ccc; margin-bottom: 8px; }
+.knife-item p { font-size: 0.9rem; color: #888; margin-bottom: 12px; }
+.knife-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  color: #C2185B;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Details/Summary for Maintenance */
+details {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+summary {
+  padding: 16px 20px;
+  font-weight: 600;
+  color: #ccc;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #150d12;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '+';
+  color: #C2185B;
+  font-size: 1.2rem;
+  font-weight: 800;
+  transition: transform 0.2s;
+}
+details[open] summary::after { content: '−'; }
+details[open] summary { border-bottom: 1px solid #2a1820; }
+.details-content {
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #888;
+}
+.details-content ul { padding-left: 20px; margin-top: 10px; }
+.details-content li { margin-bottom: 6px; }
+.details-content strong { color: #e0d0d8; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 60px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+.hidden { display: none !important; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Kitchen Knife <span>Skills 101</span> 🔪</h1>
+  <p>Your go-to cheat sheet for essential cuts, dimensions, and knife maintenance.</p>
+</div>
+
+<div class="main">
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search cuts, knives, or maintenance tips..." aria-label="Search content">
+  </div>
+
+  <div id="contentContainer">
+    <!-- Essential Cuts -->
+    <h2 class="section-header searchable-section" data-title="Essential Cuts">Essential Cuts</h2>
+    <div class="grid searchable-group">
+
+      <div class="card searchable-item" data-text="julienne matchstick thin long">
+        <div class="card-header">
+          <h3>Julienne</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Also known as the matchstick cut. Essential for stir-fries, garnishes, and making brunoise.</p>
+          <div class="card-dims">
+            <code>1/8" × 1/8" × 2"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/8&quot; × 1/8&quot; × 2&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="fine julienne very thin matchstick">
+        <div class="card-header">
+          <h3>Fine Julienne</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">A thinner version of the standard julienne. Often used for elegant garnishes or raw vegetables.</p>
+          <div class="card-dims">
+            <code>1/16" × 1/16" × 2"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/16&quot; × 1/16&quot; × 2&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="brunoise small dice fine cube">
+        <div class="card-header">
+          <h3>Brunoise</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">The finest dice, produced by first cutting a julienne, then dicing it into tiny, uniform cubes. Great for soups and sauces.</p>
+          <div class="card-dims">
+            <code>1/8" × 1/8" × 1/8"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/8&quot; × 1/8&quot; × 1/8&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="fine brunoise very small dice tiny cube">
+        <div class="card-header">
+          <h3>Fine Brunoise</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Produced by dicing a fine julienne. Used for delicate consommé garnishes.</p>
+          <div class="card-dims">
+            <code>1/16" × 1/16" × 1/16"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/16&quot; × 1/16&quot; × 1/16&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="batonnet stick thick french fry">
+        <div class="card-header">
+          <h3>Batonnet</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">A thicker stick cut, resembling a thick French fry. This is the starting point for a small dice.</p>
+          <div class="card-dims">
+            <code>1/4" × 1/4" × 2"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/4&quot; × 1/4&quot; × 2&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="small dice cube macedoine">
+        <div class="card-header">
+          <h3>Small Dice</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Created by dicing a batonnet. Also known as Macédoine. Perfect for mirepoix in hearty soups.</p>
+          <div class="card-dims">
+            <code>1/4" × 1/4" × 1/4"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/4&quot; × 1/4&quot; × 1/4&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="medium dice cube parmentier">
+        <div class="card-header">
+          <h3>Medium Dice</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Also known as Parmentier. A larger cube suitable for stews and roasting vegetables.</p>
+          <div class="card-dims">
+            <code>1/2" × 1/2" × 1/2"</code>
+            <button class="copy-btn" onclick="copyDim(this, '1/2&quot; × 1/2&quot; × 1/2&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="large dice cube carre">
+        <div class="card-header">
+          <h3>Large Dice</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Also known as Carré. Used for long-cooking root vegetables or making stocks where the veg will be strained out.</p>
+          <div class="card-dims">
+            <code>3/4" × 3/4" × 3/4"</code>
+            <button class="copy-btn" onclick="copyDim(this, '3/4&quot; × 3/4&quot; × 3/4&quot;')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="chiffonade herbs leafy greens ribbon ribbons">
+        <div class="card-header">
+          <h3>Chiffonade</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">Used for leafy herbs and greens (like basil or spinach). Stack the leaves, roll them into a tight cigar, and slice thinly into ribbons.</p>
+          <div class="card-dims">
+            <code>Thin Ribbons</code>
+            <button class="copy-btn" onclick="copyDim(this, 'Thin Ribbons')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card searchable-item" data-text="mince garlic very fine rough chop">
+        <div class="card-header">
+          <h3>Mince</h3>
+        </div>
+        <div class="card-body">
+          <p class="card-desc">A very fine, somewhat irregular cut. Smaller than a brunoise. Most commonly used for garlic, ginger, and shallots to quickly release flavor.</p>
+          <div class="card-dims">
+            <code>< 1/8" Irregular</code>
+            <button class="copy-btn" onclick="copyDim(this, '< 1/8&quot; Irregular')">Copy</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Knife Types -->
+    <h2 class="section-header searchable-section" data-title="Knife Types">Common Knife Types</h2>
+    <div class="knife-list searchable-group">
+
+      <div class="knife-item searchable-item" data-text="chef's knife versatile primary 8 inch">
+        <h3>Chef's Knife</h3>
+        <p>The workhorse of the kitchen. Usually 8-10 inches long with a curved blade that allows for a rocking motion while chopping. Used for 90% of kitchen tasks.</p>
+        <div class="knife-tags">
+          <span class="tag">Chopping</span>
+          <span class="tag">Slicing</span>
+          <span class="tag">Dicing</span>
+        </div>
+      </div>
+
+      <div class="knife-item searchable-item" data-text="santoku japanese sheep's foot granton edge">
+        <h3>Santoku</h3>
+        <p>A Japanese-style general-purpose knife. Features a straighter edge than a Western chef's knife and often has a Granton edge (dimples) to prevent food from sticking.</p>
+        <div class="knife-tags">
+          <span class="tag">Push-cutting</span>
+          <span class="tag">Precision</span>
+        </div>
+      </div>
+
+      <div class="knife-item searchable-item" data-text="paring small delicate peeling coring">
+        <h3>Paring Knife</h3>
+        <p>A small knife with a 3-4 inch blade. Designed for intricate work, peeling, coring, and delicate trimming where a chef's knife is too unwieldy.</p>
+        <div class="knife-tags">
+          <span class="tag">Peeling</span>
+          <span class="tag">Trimming</span>
+        </div>
+      </div>
+
+      <div class="knife-item searchable-item" data-text="serrated bread tomatoes scalloped edge">
+        <h3>Serrated / Bread Knife</h3>
+        <p>Features a scalloped edge that acts like a saw. Essential for cutting through foods with hard exteriors and soft interiors without crushing them.</p>
+        <div class="knife-tags">
+          <span class="tag">Bread</span>
+          <span class="tag">Tomatoes</span>
+          <span class="tag">Citrus</span>
+        </div>
+      </div>
+
+      <div class="knife-item searchable-item" data-text="cleaver heavy bone meat chopping">
+        <h3>Cleaver (Meat Cleaver)</h3>
+        <p>A heavy, thick rectangular blade designed to hack through meat, bone, and cartilage. Unlike other knives, it relies on momentum and weight.</p>
+        <div class="knife-tags">
+          <span class="tag">Bones</span>
+          <span class="tag">Heavy Duty</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Maintenance & Safety -->
+    <h2 class="section-header searchable-section" data-title="Maintenance & Safety">Maintenance & Safety</h2>
+    <div class="searchable-group">
+
+      <details class="searchable-item" data-text="honing sharpening steel whetstone angle">
+        <summary>Honing vs. Sharpening</summary>
+        <div class="details-content">
+          <p>These are two different processes that serve distinct purposes:</p>
+          <ul>
+            <li><strong>Honing (Honing Steel):</strong> Realigns the microscopic edge of the blade that gets bent during normal use. It does not remove metal. Should be done frequently (before or after every use). Use a 15-20 degree angle.</li>
+            <li><strong>Sharpening (Whetstone):</strong> Removes metal to create a brand new edge when the knife is actually dull. Only needs to be done a few times a year for a home cook.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="searchable-item" data-text="pinch grip hold knife handle control">
+        <summary>The Pinch Grip</summary>
+        <div class="details-content">
+          <p>The safest and most controlled way to hold a chef's knife:</p>
+          <ul>
+            <li>Grip the handle with your bottom three fingers.</li>
+            <li>Pinch the base of the blade (the bolster) between your thumb and the side of your index finger.</li>
+            <li>This provides superior balance, control, and prevents the knife from twisting in your hand.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="searchable-item" data-text="claw hand guide finger knuckles">
+        <summary>The Guide Hand (The Claw)</summary>
+        <div class="details-content">
+          <p>How to hold the food you are cutting to prevent injury:</p>
+          <ul>
+            <li>Curl your fingers inward like a bear claw.</li>
+            <li>Rest your fingertips on the food, tucking them back.</li>
+            <li>Rest the flat side of the knife blade against your middle knuckle.</li>
+            <li>Slide your hand back as you cut, using the knuckle to guide the blade.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="searchable-item" data-text="cutting board slipping damp paper towel">
+        <summary>Stabilizing the Cutting Board</summary>
+        <div class="details-content">
+          <p>A sliding cutting board is incredibly dangerous. To secure it:</p>
+          <ul>
+            <li>Place a damp paper towel or a thin, damp kitchen towel flat underneath the board.</li>
+            <li>Alternatively, use a dedicated non-slip silicone mat under the board.</li>
+            <li>Ensure the board sits completely flat and does not wobble.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="searchable-item" data-text="washing cleaning dishwasher rust carbon steel">
+        <summary>Cleaning and Storage</summary>
+        <div class="details-content">
+          <ul>
+            <li><strong>Never put good knives in the dishwasher.</strong> High heat, harsh detergents, and rattling against other items will ruin the edge and the handle.</li>
+            <li>Hand wash with warm soapy water immediately after use and dry completely with a towel to prevent rust (especially important for carbon steel).</li>
+            <li>Store on a magnetic wall strip, in a dedicated block, or in a drawer using an edge guard/saya. Never toss them loosely into a utensil drawer.</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+
+  </div> <!-- End contentContainer -->
+</div> <!-- End main -->
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>Why Master Knife Skills?</h2>
+  <p>Knife skills are the foundation of all culinary arts. Mastering them isn't just about looking like a professional; it fundamentally changes how your food cooks and tastes. Uniform cuts—whether a meticulous brunoise or a simple medium dice—ensure that ingredients cook evenly. If you have wildly different sized pieces of potato in a stew, some will turn to mush while others remain crunchy.</p>
+  <p>Furthermore, good knife skills drastically reduce your prep time and make cooking more enjoyable. Once muscle memory takes over, what used to be a tedious chore becomes a swift, satisfying rhythm.</p>
+
+  <h2>Choosing the Right Knife</h2>
+  <p>You don't need a massive block of 15 knives. A well-equipped kitchen really only requires three essential blades: an 8-inch chef's knife, a serrated bread knife, and a paring knife.</p>
+  <ul>
+    <li><strong>Weight and Balance:</strong> A good chef's knife should feel balanced right at the bolster (where the blade meets the handle). The weight is a personal preference; German knives tend to be heavier and more robust, while Japanese knives are lighter, harder, and thinner.</li>
+    <li><strong>Material:</strong> High-carbon stainless steel is the most popular choice as it holds a good edge and resists rust. Pure carbon steel takes a sharper edge but requires immediate cleaning and drying to prevent oxidation.</li>
+  </ul>
+
+  <h2>How to Practice Safely</h2>
+  <p>The irony of kitchen knives is that a sharp knife is much safer than a dull one. A dull knife requires excessive force to cut, increasing the likelihood that it will slip off the food and cut you instead. Keep your knives honed.</p>
+  <p>When practicing, start incredibly slow. Focus entirely on your form: the pinch grip on your cutting hand, and the claw grip on your guiding hand. Speed comes naturally with repetition. A great way to practice is on inexpensive, uniform vegetables like potatoes or carrots. Square off the sides to create a stable base, slice into planks, then sticks (batonnet), and finally dice.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+  // Copy Dimension Function
+  function copyDim(btn, text) {
+    // Decode html entities back to characters if needed, or just use raw string
+    const decodedText = text.replace(/&quot;/g, '"');
+    navigator.clipboard.writeText(decodedText).then(() => {
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 1500);
+    });
+  }
+
+  // Search Functionality
+  const searchInput = document.getElementById('searchInput');
+  const sections = document.querySelectorAll('.searchable-section');
+  const groups = document.querySelectorAll('.searchable-group');
+
+  searchInput.addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase().trim();
+
+    groups.forEach((group, index) => {
+      const items = group.querySelectorAll('.searchable-item');
+      let hasVisibleItem = false;
+
+      items.forEach(item => {
+        const searchableText = item.getAttribute('data-text') + " " + item.textContent.toLowerCase();
+
+        if (term === '' || searchableText.includes(term)) {
+          item.classList.remove('hidden');
+          hasVisibleItem = true;
+          // If searching, auto-open details
+          if (item.tagName.toLowerCase() === 'details' && term !== '') {
+            item.setAttribute('open', '');
+          }
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // Hide section header if no items match
+      if (hasVisibleItem) {
+        sections[index].classList.remove('hidden');
+        group.classList.remove('hidden');
+      } else {
+        sections[index].classList.add('hidden');
+        group.classList.add('hidden');
+      }
+    });
+  });
+</script>
+</body>
+</html>
