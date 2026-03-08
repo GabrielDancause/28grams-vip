@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Coffee Grinders — Curated List & Comparison Guide</title>
+<meta name="description" content="A curated list of the best manual and electric coffee grinders. Compare burr types, grind consistency, and price from budget to premium options.">
+<meta property="og:title" content="Best Coffee Grinders — Curated List & Comparison Guide">
+<meta property="og:description" content="A curated list of the best manual and electric coffee grinders. Compare burr types, grind consistency, and price from budget to premium options.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Coffee Grinder Comparison Tool",
+      "url": "https://28grams.vip/list-coffee-grinders",
+      "description": "Filter and sort the best coffee grinders by type, price, and rating.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+    },
+    {
+      "@type": "Article",
+      "headline": "Best Coffee Grinders — Curated List & Comparison Guide",
+      "description": "A curated list of the best manual and electric coffee grinders. Compare burr types, grind consistency, and price from budget to premium options.",
+      "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+
+.main { max-width: 900px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Filter & Sort Bar */
+.controls-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.control-label {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-btn, .sort-select {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  color: #888;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.sort-select {
+  appearance: none;
+  padding-right: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.filter-btn:hover, .sort-select:hover {
+  border-color: #C2185B;
+  color: #e0d0d8;
+}
+
+.filter-btn.active {
+  background: #2a1020;
+  border-color: #C2185B;
+  color: #C2185B;
+}
+
+/* Grinder Grid */
+.grinder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.grinder-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s;
+}
+
+.grinder-card:hover {
+  border-color: #3a2830;
+}
+
+.card-header {
+  padding: 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+  position: relative;
+}
+
+.card-tags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.tag.type-electric { background: #1a2a3a; color: #60a5fa; }
+.tag.type-manual { background: #3a2a1a; color: #fbbf24; }
+.tag.price { background: #1a3a1a; color: #4ade80; font-family: 'JetBrains Mono', monospace; }
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.card-rating {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #2a1020;
+  color: #C2185B;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #1a1015;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2a1820;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.spec-value {
+  font-size: 0.9rem;
+  color: #e0d0d8;
+  font-weight: 500;
+}
+
+.mono-value {
+  font-family: 'JetBrains Mono', monospace;
+  color: #ccc;
+}
+
+.pros-cons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pc-list li {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 6px;
+  padding-left: 20px;
+  position: relative;
+  color: #bbb;
+}
+
+.pc-list li:last-child {
+  margin-bottom: 0;
+}
+
+.pc-list.pros li::before {
+  content: '+';
+  position: absolute;
+  left: 0;
+  color: #4ade80;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.pc-list.cons li::before {
+  content: '-';
+  position: absolute;
+  left: 0;
+  color: #f87171;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #888;
+  font-size: 1rem;
+  background: #120c10;
+  border: 2px dashed #2a1820;
+  border-radius: 16px;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 768px) {
+  .controls-bar { flex-direction: column; align-items: stretch; }
+  .control-group { justify-content: space-between; }
+  .filter-btn { flex: 1; text-align: center; }
+  .sort-select { width: 100%; }
+  .grinder-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Best Coffee <span>Grinders</span></h1>
+  <p>Compare burr types, grind consistency, and value. From manual hand grinders to premium electric models.</p>
+</div>
+
+<div class="main">
+  <div class="controls-bar">
+    <div class="control-group">
+      <span class="control-label">Type:</span>
+      <button class="filter-btn active" data-filter="type" data-value="all">All</button>
+      <button class="filter-btn" data-filter="type" data-value="electric">Electric</button>
+      <button class="filter-btn" data-filter="type" data-value="manual">Manual</button>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label">Price:</span>
+      <button class="filter-btn active" data-filter="price" data-value="all">All</button>
+      <button class="filter-btn" data-filter="price" data-value="budget">Under $100</button>
+      <button class="filter-btn" data-filter="price" data-value="mid">$100 - $300</button>
+      <button class="filter-btn" data-filter="price" data-value="premium">$300+</button>
+    </div>
+
+    <div class="control-group">
+      <span class="control-label">Sort:</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="rating-desc">Rating: High to Low</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+        <option value="name-asc">Name: A to Z</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grinder-grid" id="grinderGrid">
+    <!-- Cards will be populated here via JS -->
+  </div>
+</div>
+
+<div class="content">
+  <h2>The Importance of the Grind</h2>
+  <p>If you have to choose between upgrading your coffee machine or your grinder, <strong>always choose the grinder</strong>. The best espresso machine in the world cannot fix a poor grind. Inconsistent particle sizes lead to channeling, bitter over-extraction, and sour under-extraction simultaneously.</p>
+  <p>A good burr grinder ensures uniform particle size, which is the foundation of a balanced, repeatable cup of coffee—whether you're brewing pour-over, French press, or espresso.</p>
+
+  <h2>Flat vs. Conical Burrs: What's the Difference?</h2>
+  <p>Burr geometry plays a significant role in the flavor profile of your coffee:</p>
+  <ul>
+    <li><strong>Conical Burrs:</strong> Generally produce a "bimodal" grind distribution (two distinct particle sizes). This results in a thicker body, complex texture, and traditionally sweet, chocolatey espresso profiles. They are often quieter and retain less coffee.</li>
+    <li><strong>Flat Burrs:</strong> Produce a highly "unimodal" grind (very uniform particle size). This emphasizes clarity, flavor separation, and high acidity. Flat burrs are highly prized for light-roast filter coffee and modern, high-extraction espresso.</li>
+  </ul>
+
+  <h2>Manual vs. Electric</h2>
+  <p>Should you buy a hand grinder or an electric one?</p>
+  <ul>
+    <li><strong>Manual Grinders:</strong> Offer unmatched value. A $150 hand grinder can rival the grind quality of a $500 electric grinder because you aren't paying for a motor or electronics. They are portable, quiet, and retain nearly zero coffee. The downside is the physical effort—grinding for espresso manually can take 45-60 seconds of vigorous cranking.</li>
+    <li><strong>Electric Grinders:</strong> Provide convenience and speed. If you make multiple coffees back-to-back or primarily drink espresso, an electric grinder is usually worth the investment. However, cheap electric burr grinders often suffer from alignment issues and high retention.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+const grinders = [
+  {
+    id: "timemore-c3",
+    name: "Timemore Chestnut C3",
+    type: "manual",
+    price: 65,
+    burrType: "38mm Conical (Steel)",
+    bestFor: "Filter & Aeropress",
+    rating: 8.5,
+    pros: ["Incredible value for money", "Fast grinding for filter", "Premium metal build"],
+    cons: ["Not capable of fine espresso adjustments", "Small 20g capacity"]
+  },
+  {
+    id: "baratza-encore",
+    name: "Baratza Encore",
+    type: "electric",
+    price: 149,
+    burrType: "40mm Conical (Steel)",
+    bestFor: "Drip & French Press",
+    rating: 8.0,
+    pros: ["The industry standard entry-level grinder", "Highly repairable, great customer service", "Consistent for medium-coarse grinds"],
+    cons: ["Loud and slow", "High retention", "Cannot do espresso"]
+  },
+  {
+    id: "fellow-ode-gen2",
+    name: "Fellow Ode Gen 2",
+    type: "electric",
+    price: 345,
+    burrType: "64mm Flat (Steel)",
+    bestFor: "Filter Coffee Only",
+    rating: 9.2,
+    pros: ["Exceptional clarity for pour-over", "Quiet operation and anti-static tech", "Beautiful design"],
+    cons: ["Strictly no espresso", "Still has minor retention in the chute"]
+  },
+  {
+    id: "1zpresso-jmax",
+    name: "1Zpresso J-Max",
+    type: "manual",
+    price: 199,
+    burrType: "48mm Conical (Titanium Coated)",
+    bestFor: "Espresso",
+    rating: 9.5,
+    pros: ["Incredibly fine 8.8-micron adjustment steps", "Fast grinding for espresso", "Magnetic catch cup"],
+    cons: ["Heavy", "Overkill for filter coffee"]
+  },
+  {
+    id: "niche-zero",
+    name: "Niche Zero",
+    type: "electric",
+    price: 650,
+    burrType: "63mm Conical (Mazzer)",
+    bestFor: "Espresso & Medium Roast",
+    rating: 9.6,
+    pros: ["True zero retention workflow", "Beautiful classic texture and body", "Incredibly quiet"],
+    cons: ["Expensive and hard to acquire", "Lacks clarity for light roast filter coffee"]
+  },
+  {
+    id: "eureka-mignon",
+    name: "Eureka Mignon Specialita",
+    type: "electric",
+    price: 499,
+    burrType: "55mm Flat (Steel)",
+    bestFor: "Espresso",
+    rating: 9.0,
+    pros: ["Built like a tank in Italy", "Very quiet", "Excellent timed dosing feature"],
+    cons: ["Dial adjustment is tiny and hard to replicate", "Not great for single dosing without mods"]
+  },
+  {
+    id: "comandante-c40",
+    name: "Comandante C40 MK4",
+    type: "manual",
+    price: 325,
+    burrType: "39mm Conical (Nitro Blade)",
+    bestFor: "Filter & Clarity",
+    rating: 9.4,
+    pros: ["Legendary grind uniformity for a conical", "Built to last a lifetime", "Huge aftermarket support"],
+    cons: ["Very expensive for a hand grinder", "Needs Red Clix mod for serious espresso"]
+  },
+  {
+    id: "df64-gen2",
+    name: "Turin DF64 Gen 2",
+    type: "electric",
+    price: 399,
+    burrType: "64mm Flat (DLC)",
+    bestFor: "All-Rounder & Modding",
+    rating: 8.9,
+    pros: ["Unbeatable price for a 64mm flat burr", "Plasma generator reduces static", "Can swap burrs (SSP compatible)"],
+    cons: ["Build quality can be inconsistent", "Aesthetics are polarizing"]
+  }
+];
+
+let currentFilters = {
+  type: 'all',
+  price: 'all'
+};
+
+let currentSort = 'rating-desc';
+
+const grid = document.getElementById('grinderGrid');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const sortSelect = document.getElementById('sortSelect');
+
+function formatPrice(price) {
+  return '$' + price;
+}
+
+function getPriceCategory(price) {
+  if (price < 100) return 'budget';
+  if (price < 300) return 'mid';
+  return 'premium';
+}
+
+function renderCards() {
+  // Filter
+  let filtered = grinders.filter(g => {
+    const typeMatch = currentFilters.type === 'all' || g.type === currentFilters.type;
+    const priceCat = getPriceCategory(g.price);
+
+    let priceMatch = true;
+    if (currentFilters.price === 'budget') priceMatch = g.price < 100;
+    else if (currentFilters.price === 'mid') priceMatch = g.price >= 100 && g.price < 300;
+    else if (currentFilters.price === 'premium') priceMatch = g.price >= 300;
+
+    if (currentFilters.price === 'budget') priceMatch = g.price < 100;
+    else if (currentFilters.price === 'mid') priceMatch = g.price >= 100 && g.price < 300;
+    else if (currentFilters.price === 'premium') priceMatch = g.price >= 300;
+
+    return typeMatch && priceMatch;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    const [field, order] = currentSort.split('-');
+    const multiplier = order === 'asc' ? 1 : -1;
+
+    if (field === 'price') return (a.price - b.price) * multiplier;
+    if (field === 'rating') return (a.rating - b.rating) * multiplier;
+    if (field === 'name') return a.name.localeCompare(b.name) * multiplier;
+    return 0;
+  });
+
+  // Render
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">No grinders match your selected filters.</div>';
+    return;
+  }
+
+  filtered.forEach(g => {
+    const card = document.createElement('div');
+    card.className = 'grinder-card';
+
+    const prosHtml = g.pros.map(p => '<li>' + p + '</li>').join('');
+    const consHtml = g.cons.map(c => '<li>' + c + '</li>').join('');
+
+    card.innerHTML =
+      '<div class="card-header">' +
+        '<div class="card-tags">' +
+          '<span class="tag type-' + g.type + '">' + g.type + '</span>' +
+          '<span class="tag price">' + formatPrice(g.price) + '</span>' +
+        '</div>' +
+        '<h3 class="card-title">' + g.name + '</h3>' +
+        '<div class="card-rating">★ ' + g.rating.toFixed(1) + '</div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<div class="specs-grid">' +
+          '<div class="spec-item">' +
+            '<span class="spec-label">Burr Type</span>' +
+            '<span class="spec-value mono-value" style="font-size: 0.8rem">' + g.burrType + '</span>' +
+          '</div>' +
+          '<div class="spec-item">' +
+            '<span class="spec-label">Best For</span>' +
+            '<span class="spec-value">' + g.bestFor + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="pros-cons">' +
+          '<ul class="pc-list pros">' + prosHtml + '</ul>' +
+          '<ul class="pc-list cons">' + consHtml + '</ul>' +
+        '</div>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+}
+
+// Event Listeners
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const filterType = e.target.getAttribute('data-filter');
+    const filterValue = e.target.getAttribute('data-value');
+
+    // Update state
+    currentFilters[filterType] = filterValue;
+
+    // Update UI active classes
+    document.querySelectorAll('.filter-btn[data-filter="' + filterType + '"]').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+
+    renderCards();
+  });
+});
+
+sortSelect.addEventListener('change', (e) => {
+  currentSort = e.target.value;
+  renderCards();
+});
+
+// Initial render
+renderCards();
+
+</script>
+</body>
+</html>
