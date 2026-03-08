@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice Substitution Guide — Ratios, Alternatives & Replacements | Free Tool</title>
+<meta name="description" content="Find the best substitutes for over 100 spices. Instantly get exact substitution ratios and alternatives for missing ingredients. Free, fast, and no signup required.">
+<meta property="og:title" content="Spice Substitution Guide — Find the Best Alternatives">
+<meta property="og:description" content="Missing a spice? Find the perfect replacement with exact ratio adjustments in seconds.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Spice Substitution Guide",
+  "url": "https://28grams.vip/spice-substitution",
+  "description": "Find exact substitutes and ratios for over 100 spices.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+.search-container {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #C2185B;
+}
+
+.search-input::placeholder {
+  color: #555;
+}
+
+.spice-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Custom scrollbar for spice list */
+.spice-list::-webkit-scrollbar { width: 6px; }
+.spice-list::-webkit-scrollbar-track { background: #0a060a; }
+.spice-list::-webkit-scrollbar-thumb { background: #2a1820; border-radius: 10px; }
+.spice-list::-webkit-scrollbar-thumb:hover { background: #3a2830; }
+
+.spice-btn {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  color: #ccc;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.spice-btn:hover {
+  background: #2a1820;
+  color: #fff;
+}
+
+.spice-btn.active {
+  background: #C2185B;
+  border-color: #C2185B;
+  color: #fff;
+  font-weight: 600;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Results section */
+.results-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.results-header {
+  padding: 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+
+.results-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.results-header p {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 4px;
+}
+
+.results-body {
+  padding: 0;
+}
+
+.substitute-item {
+  padding: 20px;
+  border-bottom: 1px solid #1a0e15;
+}
+
+.substitute-item:last-child {
+  border-bottom: none;
+}
+
+.substitute-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.substitute-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e0d0d8;
+}
+
+.substitute-ratio {
+  display: inline-block;
+  background: #2a1820;
+  color: #C2185B;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.substitute-note {
+  font-size: 0.9rem;
+  color: #888;
+  line-height: 1.6;
+}
+
+.copy-btn {
+  background: #1a1015;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.copy-btn:hover {
+  background: #2a1820;
+  color: #ccc;
+}
+
+.copy-btn.copied {
+  background: #1a3a1a;
+  color: #4ade80;
+  border-color: #2d5a2d;
+}
+
+.empty-state {
+  padding: 40px 20px;
+  text-align: center;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .spice-list { max-height: 160px; }
+  .substitute-header { flex-direction: column; gap: 12px; }
+  .copy-btn { margin-left: 0; align-self: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Spice <span>Substitution</span> Guide</h1>
+  <p>Missing an ingredient? Find the best alternative and the exact substitution ratio instantly.</p>
+</div>
+
+<div class="main">
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search for a spice (e.g., Cumin, Cardamom)..." autocomplete="off">
+  </div>
+
+  <div class="spice-list" id="spiceList">
+    <!-- Spice buttons will be generated here -->
+  </div>
+
+  <div class="results-card" id="resultsCard" style="display: none;">
+    <div class="results-header">
+      <h2 id="selectedSpiceName">Selected Spice</h2>
+      <p>Best substitutes and ratios</p>
+    </div>
+    <div class="results-body" id="resultsBody">
+      <!-- Substitutes will be rendered here -->
+    </div>
+  </div>
+
+  <div id="emptyState" class="empty-state">
+    Select a spice from the list or search to find substitutes.
+  </div>
+</div>
+
+<div class="content">
+  <h2>The Science of Spice Substitution</h2>
+  <p>Substituting spices isn't just about matching flavor profiles; it's about understanding the function of a spice in a recipe. Spices bring heat, color, sweetness, or earthiness. When replacing an ingredient, consider what role it plays.</p>
+  <p>For example, if a recipe calls for <strong>Saffron</strong>, substituting with <strong>Turmeric</strong> will give you the same vibrant yellow color, but a completely different flavor profile. If the flavor is key, you might be better off omitting it or finding a closer match.</p>
+
+  <h2>Fresh vs. Dried Herbs: The Golden Rule</h2>
+  <p>One of the most common substitutions is swapping fresh herbs for dried, or vice versa. Because dried herbs are much more concentrated than fresh ones, you cannot swap them in a 1:1 ratio.</p>
+  <ul>
+    <li><strong>The 3-to-1 Rule:</strong> Use 1 tablespoon of fresh herbs for every 1 teaspoon of dried herbs.</li>
+    <li><strong>Timing Matters:</strong> Dried herbs need time to rehydrate and release their essential oils, so add them early in the cooking process. Fresh herbs lose their bright flavor quickly when cooked, so they are best added at the very end.</li>
+  </ul>
+
+  <h2>Creating Complex Flavor Blends</h2>
+  <p>Many common spices are actually blends of several single-ingredient spices. If you run out of a blend like <strong>Apple Pie Spice</strong> or <strong>Curry Powder</strong>, you can often recreate it using ingredients already in your pantry.</p>
+  <p>Always start by mixing your custom blend in a separate bowl before adding it to your dish. This allows you to adjust the ratios to your personal taste. Remember that spices lose their potency over time, so you may need to use slightly more of an older spice to achieve the desired flavor.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Will be populated with data
+const spiceData = {
+  "Allspice": [
+    {
+      "name": "Cinnamon + Cloves + Nutmeg",
+      "ratio": "Equal parts",
+      "note": "Mix 1/2 tsp cinnamon, 1/4 tsp nutmeg, 1/4 tsp cloves to replace 1 tsp allspice."
+    },
+    {
+      "name": "Cinnamon",
+      "ratio": "1:1",
+      "note": "Lacks complexity but works in a pinch."
+    }
+  ],
+  "Anise (Seed)": [
+    {
+      "name": "Fennel Seed",
+      "ratio": "1:1",
+      "note": "Fennel is milder but has a similar licorice flavor."
+    },
+    {
+      "name": "Star Anise",
+      "ratio": "1/2:1",
+      "note": "Star anise is stronger, use half as much."
+    }
+  ],
+  "Apple Pie Spice": [
+    {
+      "name": "Cinnamon + Nutmeg + Allspice",
+      "ratio": "Equal parts",
+      "note": "Mix 1/2 tsp cinnamon, 1/4 tsp nutmeg, 1/8 tsp allspice, 1/8 tsp cardamom."
+    }
+  ],
+  "Asafoetida (Hing)": [
+    {
+      "name": "Garlic Powder + Onion Powder",
+      "ratio": "1:1",
+      "note": "Mix equal parts garlic and onion powder."
+    }
+  ],
+  "Basil (Dried)": [
+    {
+      "name": "Oregano (Dried)",
+      "ratio": "1:1",
+      "note": "Different flavor profile but works well in Italian dishes."
+    },
+    {
+      "name": "Thyme (Dried)",
+      "ratio": "1:1",
+      "note": "Good for savory dishes."
+    }
+  ],
+  "Basil (Fresh)": [
+    {
+      "name": "Basil (Dried)",
+      "ratio": "1/3:1",
+      "note": "Use 1 tsp dried basil for every 1 tbsp fresh."
+    }
+  ],
+  "Bay Leaf": [
+    {
+      "name": "Thyme (Dried)",
+      "ratio": "1/4 tsp:1 leaf",
+      "note": "Substitute 1/4 tsp dried thyme for 1 bay leaf."
+    },
+    {
+      "name": "Oregano (Dried)",
+      "ratio": "1/4 tsp:1 leaf",
+      "note": "Substitute 1/4 tsp dried oregano for 1 bay leaf."
+    }
+  ],
+  "Black Pepper": [
+    {
+      "name": "White Pepper",
+      "ratio": "1:1",
+      "note": "White pepper is milder and lacks the floral notes of black pepper."
+    },
+    {
+      "name": "Paprika",
+      "ratio": "1:1",
+      "note": "For color and a bit of flavor, less heat."
+    }
+  ],
+  "Cajun Seasoning": [
+    {
+      "name": "Creole Seasoning",
+      "ratio": "1:1",
+      "note": "Very similar flavor profile."
+    },
+    {
+      "name": "DIY Cajun",
+      "ratio": "1:1",
+      "note": "Mix paprika, garlic powder, onion powder, thyme, black pepper, cayenne."
+    }
+  ],
+  "Caraway Seed": [
+    {
+      "name": "Fennel Seed",
+      "ratio": "1:1",
+      "note": "Similar licorice-like flavor."
+    },
+    {
+      "name": "Dill Seed",
+      "ratio": "1:1",
+      "note": "Good for savory dishes like rye bread or sauerkraut."
+    }
+  ],
+  "Cardamom": [
+    {
+      "name": "Cinnamon + Nutmeg",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts cinnamon and nutmeg."
+    },
+    {
+      "name": "Ginger + Cinnamon",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts ground ginger and cinnamon."
+    }
+  ],
+  "Cayenne Pepper": [
+    {
+      "name": "Red Pepper Flakes",
+      "ratio": "1:1",
+      "note": "Similar heat level, but flakes add texture."
+    },
+    {
+      "name": "Hot Sauce",
+      "ratio": "4 drops:1/8 tsp",
+      "note": "Adjust based on the heat of the hot sauce."
+    }
+  ],
+  "Celery Seed": [
+    {
+      "name": "Celery Salt",
+      "ratio": "1:1",
+      "note": "Reduce other salt in the recipe."
+    },
+    {
+      "name": "Dill Seed",
+      "ratio": "1:1",
+      "note": "Similar earthy, slightly bitter flavor."
+    }
+  ],
+  "Chervil": [
+    {
+      "name": "Tarragon + Parsley",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts tarragon and parsley."
+    },
+    {
+      "name": "Parsley",
+      "ratio": "1:1",
+      "note": "Lacks the anise flavor of chervil, but looks similar."
+    }
+  ],
+  "Chili Powder": [
+    {
+      "name": "Paprika + Cumin + Oregano",
+      "ratio": "Equal parts",
+      "note": "Mix 1 tsp paprika, 1/2 tsp cumin, 1/4 tsp oregano, pinch of cayenne."
+    },
+    {
+      "name": "Taco Seasoning",
+      "ratio": "1:1",
+      "note": "Contains similar spices, but may have added salt/thickeners."
+    }
+  ],
+  "Chives": [
+    {
+      "name": "Green Onion (Scallion)",
+      "ratio": "1:1",
+      "note": "Use only the green parts for a similar flavor and look."
+    },
+    {
+      "name": "Onion Powder",
+      "ratio": "1/4 tsp:1 tbsp",
+      "note": "Use 1/4 tsp onion powder for every 1 tbsp fresh chives."
+    }
+  ],
+  "Cilantro (Fresh)": [
+    {
+      "name": "Parsley (Fresh)",
+      "ratio": "1:1",
+      "note": "Looks similar, but lacks the distinct cilantro flavor. Add a splash of lime juice."
+    },
+    {
+      "name": "Coriander (Ground)",
+      "ratio": "1/2 tsp:1 tbsp",
+      "note": "Coriander is the seed of the cilantro plant, but has a different flavor."
+    }
+  ],
+  "Cinnamon": [
+    {
+      "name": "Nutmeg",
+      "ratio": "1/4:1",
+      "note": "Nutmeg is stronger, use less."
+    },
+    {
+      "name": "Allspice",
+      "ratio": "1/4:1",
+      "note": "Use less, as allspice is more pungent."
+    },
+    {
+      "name": "Cardamom",
+      "ratio": "1/2:1",
+      "note": "Has a different, more floral flavor but works well in sweet dishes."
+    }
+  ],
+  "Cloves": [
+    {
+      "name": "Allspice",
+      "ratio": "1:1",
+      "note": "Allspice tastes like a mix of cloves, cinnamon, and nutmeg."
+    },
+    {
+      "name": "Nutmeg",
+      "ratio": "1:1",
+      "note": "Similar warm, sweet flavor."
+    }
+  ],
+  "Coriander (Ground)": [
+    {
+      "name": "Cumin",
+      "ratio": "1:1",
+      "note": "Cumin is earthier and stronger, so start with less."
+    },
+    {
+      "name": "Caraway Seed",
+      "ratio": "1:1",
+      "note": "Similar citrusy/earthy flavor."
+    }
+  ],
+  "Cumin": [
+    {
+      "name": "Chili Powder",
+      "ratio": "1:1",
+      "note": "Contains cumin, but will add heat and color."
+    },
+    {
+      "name": "Coriander",
+      "ratio": "1:1",
+      "note": "Coriander is milder and more citrusy."
+    }
+  ],
+  "Curry Powder": [
+    {
+      "name": "Garam Masala",
+      "ratio": "1:1",
+      "note": "Garam masala is sweeter and warmer; add some turmeric for color/earthiness."
+    },
+    {
+      "name": "Turmeric + Coriander + Cumin",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts for a basic curry flavor."
+    }
+  ],
+  "Dill (Fresh)": [
+    {
+      "name": "Tarragon (Fresh)",
+      "ratio": "1:1",
+      "note": "Tarragon has a similar anise-like flavor."
+    },
+    {
+      "name": "Dill (Dried)",
+      "ratio": "1/3:1",
+      "note": "Use 1 tsp dried dill for every 1 tbsp fresh."
+    }
+  ],
+  "Dill Seed": [
+    {
+      "name": "Caraway Seed",
+      "ratio": "1:1",
+      "note": "Similar earthy, slightly bitter flavor."
+    },
+    {
+      "name": "Celery Seed",
+      "ratio": "1:1",
+      "note": "Good for pickling and savory dishes."
+    }
+  ],
+  "Fennel Seed": [
+    {
+      "name": "Anise Seed",
+      "ratio": "1:1",
+      "note": "Very similar licorice flavor."
+    },
+    {
+      "name": "Caraway Seed",
+      "ratio": "1:1",
+      "note": "Similar earthy flavor, less sweet."
+    }
+  ],
+  "Fenugreek": [
+    {
+      "name": "Mustard Seed + Maple Syrup",
+      "ratio": "1:1",
+      "note": "Mix 1 tsp mustard seed with a drop of maple syrup for the bitter/sweet flavor."
+    },
+    {
+      "name": "Curry Powder",
+      "ratio": "1:1",
+      "note": "Most curry powders contain fenugreek."
+    }
+  ],
+  "Five Spice Powder": [
+    {
+      "name": "DIY Five Spice",
+      "ratio": "1:1",
+      "note": "Mix equal parts cinnamon, star anise, cloves, fennel seed, and Sichuan peppercorns."
+    },
+    {
+      "name": "Garam Masala",
+      "ratio": "1:1",
+      "note": "Different flavor profile, but adds similar warmth and complexity."
+    }
+  ],
+  "Garam Masala": [
+    {
+      "name": "Curry Powder",
+      "ratio": "1:1",
+      "note": "Curry powder is more turmeric-heavy and less sweet."
+    },
+    {
+      "name": "Allspice + Cumin",
+      "ratio": "4:1",
+      "note": "Mix 4 parts cumin with 1 part allspice."
+    }
+  ],
+  "Garlic Powder": [
+    {
+      "name": "Garlic (Fresh)",
+      "ratio": "1 clove:1/4 tsp",
+      "note": "Use 1 fresh clove for every 1/4 tsp powder."
+    },
+    {
+      "name": "Onion Powder",
+      "ratio": "1:1",
+      "note": "Different flavor, but adds similar savory notes."
+    }
+  ],
+  "Garlic (Fresh)": [
+    {
+      "name": "Garlic Powder",
+      "ratio": "1/4 tsp:1 clove",
+      "note": "Use 1/4 tsp powder for every fresh clove."
+    },
+    {
+      "name": "Shallot",
+      "ratio": "1/2:1 clove",
+      "note": "Use 1/2 small shallot for every fresh clove."
+    }
+  ],
+  "Ginger (Ground)": [
+    {
+      "name": "Ginger (Fresh)",
+      "ratio": "1 tbsp:1/4 tsp",
+      "note": "Use 1 tbsp fresh grated ginger for every 1/4 tsp ground."
+    },
+    {
+      "name": "Allspice",
+      "ratio": "1/4:1",
+      "note": "Allspice has similar warmth, but lacks the bite."
+    }
+  ],
+  "Ginger (Fresh)": [
+    {
+      "name": "Ginger (Ground)",
+      "ratio": "1/4 tsp:1 tbsp",
+      "note": "Use 1/4 tsp ground ginger for every 1 tbsp fresh."
+    },
+    {
+      "name": "Galangal",
+      "ratio": "1:1",
+      "note": "Galangal is more piney/citrusy but works in Asian dishes."
+    }
+  ],
+  "Italian Seasoning": [
+    {
+      "name": "Oregano + Basil",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts dried oregano and basil."
+    },
+    {
+      "name": "Herbes de Provence",
+      "ratio": "1:1",
+      "note": "Contains lavender, so it has a different floral note."
+    }
+  ],
+  "Mace": [
+    {
+      "name": "Nutmeg",
+      "ratio": "1:1",
+      "note": "Nutmeg is the seed of the same plant; mace is the outer covering."
+    },
+    {
+      "name": "Allspice",
+      "ratio": "1:1",
+      "note": "Similar warm, sweet flavor."
+    }
+  ],
+  "Marjoram": [
+    {
+      "name": "Oregano",
+      "ratio": "2/3:1",
+      "note": "Oregano is stronger, so use a little less."
+    },
+    {
+      "name": "Thyme",
+      "ratio": "1:1",
+      "note": "Similar earthy flavor."
+    }
+  ],
+  "Mint": [
+    {
+      "name": "Basil",
+      "ratio": "1:1",
+      "note": "Basil is related to mint and works in some savory dishes."
+    },
+    {
+      "name": "Parsley",
+      "ratio": "1:1",
+      "note": "For color and freshness, though lacks the minty flavor."
+    }
+  ],
+  "Mustard (Dry)": [
+    {
+      "name": "Mustard (Prepared)",
+      "ratio": "1 tbsp:1 tsp",
+      "note": "Reduce liquid in recipe slightly."
+    },
+    {
+      "name": "Wasabi Powder",
+      "ratio": "1/2:1",
+      "note": "Wasabi is much hotter, use less."
+    }
+  ],
+  "Mustard (Prepared)": [
+    {
+      "name": "Mustard (Dry)",
+      "ratio": "1 tsp:1 tbsp",
+      "note": "Mix 1 tsp dry mustard with 2 tsp water to make 1 tbsp prepared."
+    }
+  ],
+  "Nutmeg": [
+    {
+      "name": "Mace",
+      "ratio": "1:1",
+      "note": "Mace is slightly more pungent."
+    },
+    {
+      "name": "Cinnamon",
+      "ratio": "1:1",
+      "note": "Different flavor, but works in sweet recipes."
+    }
+  ],
+  "Old Bay Seasoning": [
+    {
+      "name": "Celery Salt + Paprika",
+      "ratio": "1:1",
+      "note": "Mix equal parts celery salt and paprika, plus a pinch of black pepper and cayenne."
+    },
+    {
+      "name": "Cajun Seasoning",
+      "ratio": "1:1",
+      "note": "Cajun is spicier."
+    }
+  ],
+  "Onion Powder": [
+    {
+      "name": "Onion (Fresh)",
+      "ratio": "1 tbsp:1 tsp",
+      "note": "Use 1 tbsp chopped fresh onion for every 1 tsp powder."
+    },
+    {
+      "name": "Garlic Powder",
+      "ratio": "1/2:1",
+      "note": "Garlic is stronger, use less."
+    }
+  ],
+  "Onion (Fresh)": [
+    {
+      "name": "Onion Powder",
+      "ratio": "1 tsp:1/2 cup",
+      "note": "Use 1 tsp powder for every 1/2 cup chopped fresh onion."
+    },
+    {
+      "name": "Shallots",
+      "ratio": "1:1",
+      "note": "Shallots are milder and sweeter."
+    }
+  ],
+  "Oregano": [
+    {
+      "name": "Marjoram",
+      "ratio": "1.5:1",
+      "note": "Marjoram is milder, so use more."
+    },
+    {
+      "name": "Basil",
+      "ratio": "1:1",
+      "note": "Different flavor, but works in Italian dishes."
+    }
+  ],
+  "Paprika": [
+    {
+      "name": "Chili Powder",
+      "ratio": "1:1",
+      "note": "Chili powder has added cumin/oregano, so it changes the flavor."
+    },
+    {
+      "name": "Cayenne Pepper",
+      "ratio": "1/4:1",
+      "note": "Cayenne is much hotter, use sparingly."
+    }
+  ],
+  "Paprika (Smoked)": [
+    {
+      "name": "Paprika + Liquid Smoke",
+      "ratio": "1:1",
+      "note": "Add a drop of liquid smoke to regular paprika."
+    },
+    {
+      "name": "Chipotle Powder",
+      "ratio": "1:1",
+      "note": "Chipotle is hotter."
+    }
+  ],
+  "Parsley (Dried)": [
+    {
+      "name": "Parsley (Fresh)",
+      "ratio": "1 tbsp:1 tsp",
+      "note": "Use 1 tbsp fresh for every 1 tsp dried."
+    },
+    {
+      "name": "Chervil (Dried)",
+      "ratio": "1:1",
+      "note": "Similar mild flavor with a hint of anise."
+    }
+  ],
+  "Parsley (Fresh)": [
+    {
+      "name": "Parsley (Dried)",
+      "ratio": "1 tsp:1 tbsp",
+      "note": "Use 1 tsp dried for every 1 tbsp fresh."
+    },
+    {
+      "name": "Cilantro",
+      "ratio": "1:1",
+      "note": "Cilantro is much stronger and has a different flavor."
+    }
+  ],
+  "Poultry Seasoning": [
+    {
+      "name": "Sage + Thyme",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts sage and thyme, plus a pinch of marjoram and black pepper."
+    }
+  ],
+  "Pumpkin Pie Spice": [
+    {
+      "name": "Cinnamon + Nutmeg + Ginger + Cloves",
+      "ratio": "Equal parts",
+      "note": "Mix 1 tsp cinnamon, 1/4 tsp nutmeg, 1/4 tsp ginger, 1/8 tsp cloves."
+    }
+  ],
+  "Red Pepper Flakes": [
+    {
+      "name": "Cayenne Pepper",
+      "ratio": "1/2:1",
+      "note": "Cayenne is hotter and more concentrated."
+    },
+    {
+      "name": "Hot Sauce",
+      "ratio": "1/2 tsp:1/4 tsp",
+      "note": "Adjust based on heat of hot sauce."
+    }
+  ],
+  "Rosemary": [
+    {
+      "name": "Thyme",
+      "ratio": "1:1",
+      "note": "Thyme is milder but has a similar earthy flavor."
+    },
+    {
+      "name": "Savory",
+      "ratio": "1:1",
+      "note": "Savory has a peppery, piney flavor."
+    }
+  ],
+  "Saffron": [
+    {
+      "name": "Turmeric",
+      "ratio": "1/4:1",
+      "note": "Provides the yellow color, but completely different flavor."
+    },
+    {
+      "name": "Annatto",
+      "ratio": "1:1",
+      "note": "Provides color, mild flavor."
+    }
+  ],
+  "Sage": [
+    {
+      "name": "Poultry Seasoning",
+      "ratio": "1:1",
+      "note": "Contains sage along with other herbs."
+    },
+    {
+      "name": "Marjoram",
+      "ratio": "1:1",
+      "note": "Similar savory flavor."
+    }
+  ],
+  "Savory": [
+    {
+      "name": "Thyme",
+      "ratio": "1:1",
+      "note": "Similar minty, earthy flavor."
+    },
+    {
+      "name": "Sage",
+      "ratio": "1:1",
+      "note": "Stronger, so start with less."
+    }
+  ],
+  "Sesame Seed": [
+    {
+      "name": "Poppy Seed",
+      "ratio": "1:1",
+      "note": "Similar texture and appearance (if using black sesame)."
+    },
+    {
+      "name": "Chopped Nuts",
+      "ratio": "1:1",
+      "note": "Finely chopped almonds or walnuts for crunch."
+    }
+  ],
+  "Star Anise": [
+    {
+      "name": "Anise Seed",
+      "ratio": "1:1",
+      "note": "Very similar flavor."
+    },
+    {
+      "name": "Fennel Seed",
+      "ratio": "1:1",
+      "note": "Milder licorice flavor."
+    }
+  ],
+  "Tarragon": [
+    {
+      "name": "Chervil",
+      "ratio": "1:1",
+      "note": "Milder anise flavor."
+    },
+    {
+      "name": "Fennel Fronds",
+      "ratio": "1:1",
+      "note": "Similar licorice flavor."
+    }
+  ],
+  "Thyme": [
+    {
+      "name": "Oregano",
+      "ratio": "1:1",
+      "note": "Oregano is stronger, so use slightly less."
+    },
+    {
+      "name": "Marjoram",
+      "ratio": "1:1",
+      "note": "Milder and sweeter."
+    }
+  ],
+  "Turmeric": [
+    {
+      "name": "Curry Powder",
+      "ratio": "1:1",
+      "note": "Contains turmeric, but adds other flavors."
+    },
+    {
+      "name": "Saffron",
+      "ratio": "Pinch:1 tsp",
+      "note": "Provides yellow color, very different flavor."
+    }
+  ],
+  "Vanilla Extract": [
+    {
+      "name": "Maple Syrup",
+      "ratio": "1:1",
+      "note": "Adds sweetness and depth."
+    },
+    {
+      "name": "Almond Extract",
+      "ratio": "1/2:1",
+      "note": "Much stronger, use half as much."
+    }
+  ],
+  "Vanilla Bean": [
+    {
+      "name": "Vanilla Extract",
+      "ratio": "1 tsp:1 inch bean",
+      "note": "Use 1 tsp extract for every inch of bean."
+    },
+    {
+      "name": "Vanilla Paste",
+      "ratio": "1:1",
+      "note": "Equal substitution."
+    }
+  ],
+  "White Pepper": [
+    {
+      "name": "Black Pepper",
+      "ratio": "1:1",
+      "note": "Black pepper is stronger and more complex; will add black specks."
+    }
+  ],
+  "Za'atar": [
+    {
+      "name": "Thyme + Sesame Seeds + Sumac",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts for a basic substitute."
+    }
+  ],
+  "Adobo Seasoning": [
+    {
+      "name": "DIY Adobo",
+      "ratio": "1:1",
+      "note": "Mix garlic powder, onion powder, oregano, black pepper, and salt."
+    },
+    {
+      "name": "Sazon",
+      "ratio": "1:1",
+      "note": "Adds achiote (annatto) flavor and color."
+    }
+  ],
+  "Amchoor (Mango Powder)": [
+    {
+      "name": "Lemon Juice",
+      "ratio": "1 tbsp:1 tsp",
+      "note": "Adds acidity, but adds liquid. Adjust recipe accordingly."
+    },
+    {
+      "name": "Sumac",
+      "ratio": "1:1",
+      "note": "Provides similar fruity tartness."
+    }
+  ],
+  "Annatto": [
+    {
+      "name": "Paprika + Turmeric",
+      "ratio": "1:1",
+      "note": "Mix equal parts for color, though flavor differs slightly."
+    },
+    {
+      "name": "Saffron",
+      "ratio": "Pinch:1 tsp",
+      "note": "Adds yellow color."
+    }
+  ],
+  "Berbere": [
+    {
+      "name": "Cayenne + Paprika + Warm Spices",
+      "ratio": "1:1",
+      "note": "Mix paprika, cayenne, ginger, coriander, cardamom, and fenugreek."
+    }
+  ],
+  "Bouquet Garni": [
+    {
+      "name": "Dried Mixed Herbs",
+      "ratio": "1 tsp:1 bouquet",
+      "note": "Mix parsley, thyme, and bay leaf."
+    }
+  ],
+  "Caper": [
+    {
+      "name": "Green Olives (Chopped)",
+      "ratio": "1:1",
+      "note": "Provides similar briny, salty flavor."
+    },
+    {
+      "name": "Lemon Juice",
+      "ratio": "Splash:1 tbsp",
+      "note": "Adds acidity if olives are unavailable."
+    }
+  ],
+  "Celery Salt": [
+    {
+      "name": "Celery Seed + Salt",
+      "ratio": "Equal parts",
+      "note": "Mix 1/2 tsp celery seed and 1/2 tsp salt."
+    },
+    {
+      "name": "Dill Salt",
+      "ratio": "1:1",
+      "note": "Different flavor but works in a pinch."
+    }
+  ],
+  "Chipotle Powder": [
+    {
+      "name": "Smoked Paprika + Cayenne",
+      "ratio": "1:1",
+      "note": "Mix equal parts smoked paprika and cayenne pepper."
+    },
+    {
+      "name": "Chipotle in Adobo",
+      "ratio": "1 tsp:1/2 tsp",
+      "note": "Use the sauce or puree the pepper."
+    }
+  ],
+  "Coriander (Fresh/Cilantro)": [
+    {
+      "name": "Parsley (Fresh)",
+      "ratio": "1:1",
+      "note": "Looks similar, add lime juice for zest."
+    },
+    {
+      "name": "Mint + Parsley",
+      "ratio": "Equal parts",
+      "note": "Mix fresh mint and parsley for an herbaceous flavor."
+    }
+  ],
+  "Cream of Tartar": [
+    {
+      "name": "Lemon Juice",
+      "ratio": "2:1",
+      "note": "Use 1 tsp lemon juice for every 1/2 tsp cream of tartar."
+    },
+    {
+      "name": "White Vinegar",
+      "ratio": "2:1",
+      "note": "Use 1 tsp vinegar for every 1/2 tsp cream of tartar."
+    }
+  ],
+  "Cumin Seed": [
+    {
+      "name": "Ground Cumin",
+      "ratio": "3/4:1",
+      "note": "Use 3/4 tsp ground cumin for 1 tsp whole seeds."
+    },
+    {
+      "name": "Caraway Seed",
+      "ratio": "1:1",
+      "note": "Similar earthy flavor."
+    }
+  ],
+  "Epazote": [
+    {
+      "name": "Cilantro",
+      "ratio": "1:1",
+      "note": "Best fresh alternative in Mexican dishes."
+    },
+    {
+      "name": "Oregano",
+      "ratio": "1:1",
+      "note": "Stronger flavor, use slightly less."
+    }
+  ],
+  "Galangal": [
+    {
+      "name": "Ginger (Fresh)",
+      "ratio": "1:1",
+      "note": "Similar appearance, but galangal is more piney/citrusy."
+    },
+    {
+      "name": "Ginger + Lemon Zest",
+      "ratio": "1:1",
+      "note": "Mix fresh ginger with a pinch of lemon zest."
+    }
+  ],
+  "Garlic Salt": [
+    {
+      "name": "Garlic Powder + Salt",
+      "ratio": "1:3",
+      "note": "Mix 1 part garlic powder with 3 parts salt."
+    }
+  ],
+  "Harissa": [
+    {
+      "name": "Chili Paste + Cumin + Coriander",
+      "ratio": "1:1",
+      "note": "Mix sriracha or chili paste with a pinch of cumin and coriander."
+    },
+    {
+      "name": "Sriracha",
+      "ratio": "1:1",
+      "note": "Similar heat, less earthy."
+    }
+  ],
+  "Herbes de Provence": [
+    {
+      "name": "Italian Seasoning",
+      "ratio": "1:1",
+      "note": "Lacks lavender but provides a similar herbaceous blend."
+    },
+    {
+      "name": "Thyme + Rosemary + Savory",
+      "ratio": "Equal parts",
+      "note": "Mix equal parts for a basic substitute."
+    }
+  ],
+  "Horseradish": [
+    {
+      "name": "Wasabi",
+      "ratio": "1:1",
+      "note": "Very similar flavor and heat profile."
+    },
+    {
+      "name": "Mustard (Spicy)",
+      "ratio": "1:1",
+      "note": "Provides a similar sharp bite."
+    }
+  ],
+  "Kaffir Lime Leaves": [
+    {
+      "name": "Lime Zest",
+      "ratio": "1/2 tsp:1 leaf",
+      "note": "Use 1/2 tsp lime zest for every leaf."
+    },
+    {
+      "name": "Lemon Zest",
+      "ratio": "1/2 tsp:1 leaf",
+      "note": "Works in a pinch if lime is unavailable."
+    }
+  ],
+  "Lemon Peel": [
+    {
+      "name": "Lemon Extract",
+      "ratio": "1/2 tsp:1 tsp",
+      "note": "Use half as much extract."
+    },
+    {
+      "name": "Lemon Juice",
+      "ratio": "2 tbsp:1 tsp",
+      "note": "Adds acidity and liquid."
+    }
+  ],
+  "Lemon Pepper": [
+    {
+      "name": "Black Pepper + Lemon Zest",
+      "ratio": "1:1",
+      "note": "Mix 1 tsp black pepper with 1 tsp lemon zest (add a pinch of salt)."
+    }
+  ],
+  "Miso": [
+    {
+      "name": "Soy Sauce",
+      "ratio": "1/2:1",
+      "note": "Provides saltiness and umami, but lacks thickness."
+    },
+    {
+      "name": "Tahini + Soy Sauce",
+      "ratio": "1:1",
+      "note": "Mix equal parts for umami and texture."
+    }
+  ],
+  "Nigella Sativa": [
+    {
+      "name": "Black Sesame Seeds",
+      "ratio": "1:1",
+      "note": "Similar look and slight nuttiness."
+    },
+    {
+      "name": "Cumin Seed",
+      "ratio": "1:1",
+      "note": "Different flavor but works in savory breads/curries."
+    }
+  ],
+  "Onion Salt": [
+    {
+      "name": "Onion Powder + Salt",
+      "ratio": "1:3",
+      "note": "Mix 1 part onion powder with 3 parts salt."
+    }
+  ],
+  "Orange Peel": [
+    {
+      "name": "Orange Extract",
+      "ratio": "1/2 tsp:1 tsp",
+      "note": "Use half as much extract."
+    },
+    {
+      "name": "Orange Juice",
+      "ratio": "2 tbsp:1 tsp",
+      "note": "Adds sweetness and liquid."
+    }
+  ],
+  "Panch Phoron": [
+    {
+      "name": "DIY Panch Phoron",
+      "ratio": "1:1",
+      "note": "Mix equal parts cumin, fennel, nigella, mustard, and fenugreek seeds."
+    }
+  ],
+  "Poppy Seed": [
+    {
+      "name": "Sesame Seed",
+      "ratio": "1:1",
+      "note": "Similar crunch, different flavor."
+    },
+    {
+      "name": "Chia Seed",
+      "ratio": "1:1",
+      "note": "Similar appearance and crunch."
+    }
+  ],
+  "Ras el Hanout": [
+    {
+      "name": "Garam Masala",
+      "ratio": "1:1",
+      "note": "Similar warm spice profile, less floral."
+    },
+    {
+      "name": "Curry Powder",
+      "ratio": "1:1",
+      "note": "Works in savory Moroccan dishes."
+    }
+  ],
+  "Sichuan Peppercorns": [
+    {
+      "name": "Black Pepper + Coriander",
+      "ratio": "1:1",
+      "note": "Mix equal parts. Lacks the tingly sensation but adds flavor."
+    },
+    {
+      "name": "White Pepper",
+      "ratio": "1:1",
+      "note": "Provides similar heat profile."
+    }
+  ],
+  "Sumac": [
+    {
+      "name": "Lemon Zest + Salt",
+      "ratio": "1:1",
+      "note": "Mix lemon zest with a pinch of salt."
+    },
+    {
+      "name": "Lemon Juice",
+      "ratio": "Splash:1 tsp",
+      "note": "Adds tartness but introduces liquid."
+    }
+  ],
+  "Tamarind": [
+    {
+      "name": "Lime Juice + Brown Sugar",
+      "ratio": "1:1",
+      "note": "Mix equal parts for a sweet/sour flavor."
+    },
+    {
+      "name": "Pomegranate Molasses",
+      "ratio": "1:1",
+      "note": "Similar tartness and sweetness."
+    }
+  ],
+  "Tandoori Masala": [
+    {
+      "name": "Garam Masala + Paprika",
+      "ratio": "1:1",
+      "note": "Mix equal parts garam masala and paprika (for color)."
+    }
+  ],
+  "Togarashi": [
+    {
+      "name": "Cayenne + Sesame Seeds",
+      "ratio": "1:1",
+      "note": "Mix equal parts cayenne pepper and sesame seeds."
+    },
+    {
+      "name": "Red Pepper Flakes",
+      "ratio": "1:1",
+      "note": "Provides heat, lacks complexity."
+    }
+  ],
+  "Wasabi": [
+    {
+      "name": "Horseradish + Mustard",
+      "ratio": "1:1",
+      "note": "Mix equal parts prepared horseradish and hot mustard."
+    },
+    {
+      "name": "Hot Mustard",
+      "ratio": "1:1",
+      "note": "Similar sinus-clearing heat."
+    }
+  ],
+  "Ajwain": [
+    {
+      "name": "Thyme",
+      "ratio": "1:1",
+      "note": "Thyme has a similar earthy flavor profile."
+    },
+    {
+      "name": "Caraway Seed",
+      "ratio": "1:1",
+      "note": "Good substitute for breads."
+    }
+  ],
+  "Baking Powder": [
+    {
+      "name": "Baking Soda + Cream of Tartar",
+      "ratio": "1:3",
+      "note": "Mix 1/4 tsp baking soda with 1/2 tsp cream of tartar for 1 tsp baking powder."
+    }
+  ],
+  "Baking Soda": [
+    {
+      "name": "Baking Powder",
+      "ratio": "3:1",
+      "note": "Use 3 tsp baking powder for every 1 tsp baking soda (may affect taste slightly)."
+    }
+  ],
+  "Cacao Nibs": [
+    {
+      "name": "Dark Chocolate Chips",
+      "ratio": "1:1",
+      "note": "Sweeter and melts differently."
+    },
+    {
+      "name": "Chopped Nuts",
+      "ratio": "1:1",
+      "note": "Provides crunch but lacks chocolate flavor."
+    }
+  ],
+  "Cajun Spice Blend": [
+    {
+      "name": "Creole Seasoning",
+      "ratio": "1:1",
+      "note": "Very similar, usually less spicy."
+    }
+  ],
+  "Cocoa Powder (Unsweetened)": [
+    {
+      "name": "Carob Powder",
+      "ratio": "1:1",
+      "note": "Naturally sweeter, less bitter."
+    },
+    {
+      "name": "Unsweetened Baking Chocolate",
+      "ratio": "1 oz:3 tbsp",
+      "note": "Melt 1 oz baking chocolate for every 3 tbsp cocoa powder."
+    }
+  ],
+  "File Powder": [
+    {
+      "name": "Okra",
+      "ratio": "As needed",
+      "note": "Provides similar thickening for gumbo, but changes texture."
+    },
+    {
+      "name": "Roux",
+      "ratio": "As needed",
+      "note": "Thickens soups and stews."
+    }
+  ],
+  "Gochugaru": [
+    {
+      "name": "Aleppo Pepper",
+      "ratio": "1:1",
+      "note": "Similar heat and fruitiness."
+    },
+    {
+      "name": "Cayenne + Sweet Paprika",
+      "ratio": "1:1",
+      "note": "Mix 1/4 tsp cayenne with 3/4 tsp sweet paprika."
+    }
+  ],
+  "Arrowroot Powder": [
+    {
+      "name": "Cornstarch",
+      "ratio": "1:1",
+      "note": "Similar thickening agent, but cornstarch breaks down faster in acidic liquids."
+    },
+    {
+      "name": "Tapioca Flour",
+      "ratio": "1:1",
+      "note": "Good for thickening pies and fruit sauces."
+    }
+  ],
+  "Maldon Salt (Flaky)": [
+    {
+      "name": "Fleur de Sel",
+      "ratio": "1:1",
+      "note": "Another delicate finishing salt."
+    },
+    {
+      "name": "Kosher Salt",
+      "ratio": "1:1",
+      "note": "Good alternative, though lacks the large flaky crunch."
+    }
+  ]
+};
+
+const spiceNames = Object.keys(spiceData).sort();
+
+const searchInput = document.getElementById('searchInput');
+const spiceList = document.getElementById('spiceList');
+const resultsCard = document.getElementById('resultsCard');
+const resultsBody = document.getElementById('resultsBody');
+const selectedSpiceName = document.getElementById('selectedSpiceName');
+const emptyState = document.getElementById('emptyState');
+
+let activeSpice = null;
+
+// Initialize the list
+function renderList(filterText = "") {
+  spiceList.innerHTML = "";
+  const lowerFilter = filterText.toLowerCase();
+
+  spiceNames.forEach(spice => {
+    if (spice.toLowerCase().includes(lowerFilter)) {
+      const btn = document.createElement('button');
+      btn.className = 'spice-btn';
+      if (spice === activeSpice) {
+        btn.classList.add('active');
+      }
+      btn.textContent = spice;
+      btn.onclick = () => selectSpice(spice);
+      spiceList.appendChild(btn);
+    }
+  });
+
+  if (spiceList.children.length === 0) {
+    spiceList.innerHTML = '<div style="color: #888; font-size: 0.9rem; padding: 8px;">No spices found.</div>';
+  }
+}
+
+function selectSpice(spice) {
+  activeSpice = spice;
+  renderList(searchInput.value); // Re-render to update active state
+
+  const substitutes = spiceData[spice];
+  selectedSpiceName.textContent = spice;
+
+  resultsBody.innerHTML = "";
+  substitutes.forEach((sub, index) => {
+    const div = document.createElement('div');
+    div.className = 'substitute-item';
+
+    // Create copy text
+    const copyText = `Substitute for ${spice}: ${sub.name} (Ratio: ${sub.ratio}). ${sub.note}`;
+
+    div.innerHTML = `
+      <div class="substitute-header">
+        <div>
+          <div class="substitute-name">${sub.name}</div>
+          <div class="substitute-ratio">Ratio: ${sub.ratio}</div>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, \`${copyText.replace(/`/g, '\\`')}\`)">Copy</button>
+      </div>
+      <div class="substitute-note">${sub.note}</div>
+    `;
+    resultsBody.appendChild(div);
+  });
+
+  emptyState.style.display = 'none';
+  resultsCard.style.display = 'block';
+}
+
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+searchInput.addEventListener('input', (e) => {
+  renderList(e.target.value);
+});
+
+// Initial render
+renderList();
+
+</script>
+</body>
+</html>
