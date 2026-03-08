@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FDA Nutrition Label Creator | Free Interactive Tool</title>
+<meta name="description" content="Create printable FDA-style nutrition labels online. Enter your food's nutrients, serving size, and calories to automatically calculate Daily Value (DV) percentages.">
+<meta property="og:title" content="FDA Nutrition Label Creator">
+<meta property="og:description" content="Create printable FDA-style nutrition labels online. Automatically calculates Daily Value (DV) percentages. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "FDA Nutrition Label Creator",
+  "url": "https://28grams.vip/nutrition-label",
+  "description": "Create printable FDA-style nutrition labels online. Enter your food's nutrients, serving size, and calories to automatically calculate Daily Value (DV) percentages.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 1000px; margin: 0 auto; padding: 20px 14px 40px; display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+
+/* Input cards */
+.card { background: #120c10; border: 2px solid #2a1820; border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: #150d12; border-bottom: 1px solid #2a1820; }
+.card-header h2 { font-size: 1rem; font-weight: 700; color: #ccc; }
+.card-body { padding: 20px; }
+
+.input-group { margin-bottom: 16px; }
+.input-group:last-child { margin-bottom: 0; }
+.input-group label { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 6px; font-weight: 600; }
+.input-group label small { color: #666; font-weight: 400; font-size: 0.75rem; margin-left: 4px; }
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.input-row .input-group { margin-bottom: 0; }
+
+.input-wrap { position: relative; display: flex; align-items: center; }
+.input-wrap input { width: 100%; background: #1a1015; border: 2px solid #2a1820; border-radius: 8px; padding: 10px 14px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.95rem; outline: none; }
+.input-wrap input:focus { border-color: #C2185B; }
+.input-wrap input.num { font-family: 'JetBrains Mono', monospace; padding-right: 36px; }
+.input-wrap.grams::after { content: 'g'; position: absolute; right: 14px; color: #666; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; pointer-events: none; }
+.input-wrap.mg::after { content: 'mg'; position: absolute; right: 14px; color: #666; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; pointer-events: none; }
+.input-wrap.mcg::after { content: 'mcg'; position: absolute; right: 14px; color: #666; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; pointer-events: none; }
+.input-wrap.cal::after { content: 'kcal'; position: absolute; right: 14px; color: #666; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; pointer-events: none; }
+.input-wrap.pct::after { content: '%'; position: absolute; right: 14px; color: #666; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; pointer-events: none; }
+
+.section-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #888; font-weight: 700; margin: 24px 0 12px; border-bottom: 1px solid #2a1820; padding-bottom: 6px; }
+.section-title:first-child { margin-top: 0; }
+
+.indent { padding-left: 20px; position: relative; }
+.indent::before { content: '└'; position: absolute; left: 6px; top: 32px; color: #333; }
+
+/* Nutrition Label Style */
+.label-container { background: #fff; padding: 12px; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.5); font-family: 'Inter', Helvetica, Arial, sans-serif; color: #000; box-sizing: border-box; width: 100%; max-width: 100%; margin: 0 auto; }
+.nutrition-label { border: 1px solid #000; padding: 8px; width: 100%; box-sizing: border-box; }
+.label-title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin: 0 0 4px; line-height: 1; border-bottom: 1px solid #000; padding-bottom: 4px; }
+.label-line { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #000; font-size: 0.95rem; }
+.label-line.thick { border-bottom-width: 6px; }
+.label-line.medium { border-bottom-width: 4px; }
+.label-line.indent { padding-left: 16px; }
+.label-line.indent::before { display: none; }
+.label-line.indent-double { padding-left: 32px; }
+
+.label-bold { font-weight: 800; }
+.label-right { text-align: right; }
+.label-dv-title { font-size: 0.8rem; font-weight: 800; text-align: right; border-bottom: 1px solid #000; padding-bottom: 2px; }
+
+.label-calories-row { display: flex; justify-content: space-between; align-items: flex-end; padding: 4px 0; border-bottom: 4px solid #000; }
+.label-calories-title { font-weight: 800; font-size: 1.2rem; line-height: 1; }
+.label-calories-val { font-weight: 900; font-size: 2.4rem; line-height: 1; }
+
+.label-footer { font-size: 0.75rem; line-height: 1.2; padding-top: 6px; }
+
+.btn { display: inline-block; background: #C2185B; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; font-family: 'Inter', sans-serif; width: 100%; text-align: center; }
+.btn:hover { background: #d81b60; }
+.btn-outline { background: transparent; border: 2px solid #2a1820; color: #ccc; }
+.btn-outline:hover { border-color: #C2185B; color: #fff; background: transparent; }
+
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (min-width: 800px) {
+  .hero h1 { font-size: 2.4rem; }
+  .main { grid-template-columns: 1fr 400px; padding: 32px 20px 40px; }
+  .label-container { max-width: 360px; }
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  .hero, .card:not(#previewCard), .actions, .content, .footer { display: none !important; }
+  .main { display: block; padding: 0; max-width: none; }
+  #previewCard { background: #fff; border: none; }
+  .card-header { display: none; }
+  .label-container { box-shadow: none; margin: 0; padding: 0; max-width: 400px; }
+  .label-footer { font-size: 0.6rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Nutrition <span>Label</span> 🏷️</h1>
+  <p>Create FDA-style nutrition labels instantly. Automatically calculates Daily Values (DV%) based on a 2,000 calorie diet.</p>
+</div>
+
+<div class="main">
+  <div class="editor-col">
+    <form id="labelForm">
+
+      <div class="card">
+        <div class="card-header"><h2>1. General Info</h2></div>
+        <div class="card-body">
+          <div class="input-row">
+            <div class="input-group">
+              <label>Servings Per Container</label>
+              <div class="input-wrap"><input type="text" id="inp-servings" value="8"></div>
+            </div>
+            <div class="input-group">
+              <label>Serving Size</label>
+              <div class="input-wrap"><input type="text" id="inp-servingSize" value="2/3 cup (55g)"></div>
+            </div>
+          </div>
+          <div class="input-group" style="margin-top: 16px;">
+            <label>Calories</label>
+            <div class="input-wrap cal"><input type="number" id="inp-calories" class="num" value="230" min="0"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2>2. Macros & Nutrients</h2></div>
+        <div class="card-body">
+
+          <div class="section-title">Fats & Cholesterol</div>
+          <div class="input-group">
+            <label>Total Fat</label>
+            <div class="input-wrap grams"><input type="number" id="inp-totalFat" class="num" value="8" min="0" step="0.1"></div>
+          </div>
+          <div class="input-group indent">
+            <label>Saturated Fat</label>
+            <div class="input-wrap grams"><input type="number" id="inp-satFat" class="num" value="1" min="0" step="0.1"></div>
+          </div>
+          <div class="input-group indent">
+            <label>Trans Fat</label>
+            <div class="input-wrap grams"><input type="number" id="inp-transFat" class="num" value="0" min="0" step="0.1"></div>
+          </div>
+          <div class="input-group" style="margin-top: 16px;">
+            <label>Cholesterol</label>
+            <div class="input-wrap mg"><input type="number" id="inp-cholesterol" class="num" value="0" min="0"></div>
+          </div>
+
+          <div class="section-title">Sodium</div>
+          <div class="input-group">
+            <label>Sodium</label>
+            <div class="input-wrap mg"><input type="number" id="inp-sodium" class="num" value="160" min="0"></div>
+          </div>
+
+          <div class="section-title">Carbohydrates</div>
+          <div class="input-group">
+            <label>Total Carbohydrate</label>
+            <div class="input-wrap grams"><input type="number" id="inp-totalCarb" class="num" value="37" min="0" step="0.1"></div>
+          </div>
+          <div class="input-group indent">
+            <label>Dietary Fiber</label>
+            <div class="input-wrap grams"><input type="number" id="inp-fiber" class="num" value="4" min="0" step="0.1"></div>
+          </div>
+          <div class="input-group indent">
+            <label>Total Sugars</label>
+            <div class="input-wrap grams"><input type="number" id="inp-totalSugars" class="num" value="12" min="0" step="0.1"></div>
+          </div>
+          <div class="input-group indent" style="padding-left: 40px;">
+            <label>Includes Added Sugars</label>
+            <div class="input-wrap grams"><input type="number" id="inp-addedSugars" class="num" value="10" min="0" step="0.1"></div>
+          </div>
+
+          <div class="section-title">Protein</div>
+          <div class="input-group">
+            <label>Protein</label>
+            <div class="input-wrap grams"><input type="number" id="inp-protein" class="num" value="3" min="0" step="0.1"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2>3. Vitamins & Minerals</h2></div>
+        <div class="card-body">
+          <div class="input-row">
+            <div class="input-group">
+              <label>Vitamin D <small>(mcg)</small></label>
+              <div class="input-wrap mcg"><input type="number" id="inp-vitD" class="num" value="2" min="0" step="0.1"></div>
+            </div>
+            <div class="input-group">
+              <label>Calcium <small>(mg)</small></label>
+              <div class="input-wrap mg"><input type="number" id="inp-calcium" class="num" value="260" min="0"></div>
+            </div>
+          </div>
+          <div class="input-row" style="margin-top: 16px;">
+            <div class="input-group">
+              <label>Iron <small>(mg)</small></label>
+              <div class="input-wrap mg"><input type="number" id="inp-iron" class="num" value="8" min="0" step="0.1"></div>
+            </div>
+            <div class="input-group">
+              <label>Potassium <small>(mg)</small></label>
+              <div class="input-wrap mg"><input type="number" id="inp-potassium" class="num" value="235" min="0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="preview-col">
+    <div class="card" id="previewCard" style="position: sticky; top: 32px;">
+      <div class="card-header">
+        <h2>👁️ Live Preview</h2>
+      </div>
+      <div class="card-body" style="background: #e0e0e0; border-radius: 0 0 16px 16px;">
+
+        <div class="label-container">
+          <div class="nutrition-label">
+            <h1 class="label-title">Nutrition Facts</h1>
+            <div class="label-line">
+              <span id="out-servings">8 servings per container</span>
+            </div>
+            <div class="label-line thick" style="align-items: flex-end; padding-bottom: 8px;">
+              <span class="label-bold" style="font-size: 1.1rem;">Serving size</span>
+              <span class="label-bold" style="font-size: 1.1rem;" id="out-servingSize">2/3 cup (55g)</span>
+            </div>
+
+            <div style="font-size: 0.8rem; font-weight: 800; padding-top: 4px;">Amount per serving</div>
+            <div class="label-calories-row">
+              <span class="label-calories-title">Calories</span>
+              <span class="label-calories-val" id="out-calories">230</span>
+            </div>
+
+            <div class="label-dv-title">% Daily Value*</div>
+
+            <div class="label-line">
+              <span><span class="label-bold">Total Fat</span> <span id="out-totalFat">8g</span></span>
+              <span class="label-bold" id="out-totalFat-dv">10%</span>
+            </div>
+            <div class="label-line indent">
+              <span>Saturated Fat <span id="out-satFat">1g</span></span>
+              <span class="label-bold" id="out-satFat-dv">5%</span>
+            </div>
+            <div class="label-line indent">
+              <span>Trans Fat <span id="out-transFat">0g</span></span>
+              <span></span>
+            </div>
+
+            <div class="label-line">
+              <span><span class="label-bold">Cholesterol</span> <span id="out-cholesterol">0mg</span></span>
+              <span class="label-bold" id="out-cholesterol-dv">0%</span>
+            </div>
+            <div class="label-line">
+              <span><span class="label-bold">Sodium</span> <span id="out-sodium">160mg</span></span>
+              <span class="label-bold" id="out-sodium-dv">7%</span>
+            </div>
+            <div class="label-line">
+              <span><span class="label-bold">Total Carbohydrate</span> <span id="out-totalCarb">37g</span></span>
+              <span class="label-bold" id="out-totalCarb-dv">13%</span>
+            </div>
+            <div class="label-line indent">
+              <span>Dietary Fiber <span id="out-fiber">4g</span></span>
+              <span class="label-bold" id="out-fiber-dv">14%</span>
+            </div>
+            <div class="label-line indent">
+              <span>Total Sugars <span id="out-totalSugars">12g</span></span>
+              <span></span>
+            </div>
+            <div class="label-line indent-double">
+              <span>Includes <span id="out-addedSugars">10g</span> Added Sugars</span>
+              <span class="label-bold" id="out-addedSugars-dv">20%</span>
+            </div>
+
+            <div class="label-line thick" style="border-bottom-width: 8px;">
+              <span><span class="label-bold">Protein</span> <span id="out-protein">3g</span></span>
+              <span></span>
+            </div>
+
+            <div class="label-line">
+              <span>Vitamin D <span id="out-vitD">2mcg</span></span>
+              <span id="out-vitD-dv">10%</span>
+            </div>
+            <div class="label-line">
+              <span>Calcium <span id="out-calcium">260mg</span></span>
+              <span id="out-calcium-dv">20%</span>
+            </div>
+            <div class="label-line">
+              <span>Iron <span id="out-iron">8mg</span></span>
+              <span id="out-iron-dv">45%</span>
+            </div>
+            <div class="label-line medium">
+              <span>Potassium <span id="out-potassium">235mg</span></span>
+              <span id="out-potassium-dv">6%</span>
+            </div>
+
+            <div class="label-footer">
+              * The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-outline" id="btn-copy" onclick="copyCode()">Copy HTML</button>
+          <button class="btn" onclick="window.print()">Print Label</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>What is a Nutrition Label?</h2>
+  <p>The Nutrition Facts label is required by the FDA (Food and Drug Administration) on most packaged foods and beverages in the United States. It provides detailed information about a food's nutrient content, such as the amount of fat, sugar, sodium and fiber it has.</p>
+
+  <h2>How Daily Values (DV%) are Calculated</h2>
+  <p>The Daily Values are reference amounts of nutrients to consume or not to exceed each day. The %DV shows how much a nutrient in a single serving of a food or dietary supplement contributes to your daily diet.</p>
+  <ul>
+    <li><strong>Total Fat:</strong> 78g (100% DV)</li>
+    <li><strong>Saturated Fat:</strong> 20g (100% DV)</li>
+    <li><strong>Cholesterol:</strong> 300mg (100% DV)</li>
+    <li><strong>Sodium:</strong> 2,300mg (100% DV)</li>
+    <li><strong>Total Carbohydrate:</strong> 275g (100% DV)</li>
+    <li><strong>Dietary Fiber:</strong> 28g (100% DV)</li>
+    <li><strong>Added Sugars:</strong> 50g (100% DV)</li>
+    <li><strong>Vitamin D:</strong> 20mcg (100% DV)</li>
+    <li><strong>Calcium:</strong> 1,300mg (100% DV)</li>
+    <li><strong>Iron:</strong> 18mg (100% DV)</li>
+    <li><strong>Potassium:</strong> 4,700mg (100% DV)</li>
+  </ul>
+  <p>Our tool automatically calculates the exact percentages based on these FDA standards.</p>
+
+  <h2>How to use this tool</h2>
+  <p>Simply enter your recipe or product's nutritional information into the input fields on the left. The live preview on the right will instantly update to reflect your changes, including mathematically correct Daily Value percentages.</p>
+  <p>Once you are finished, you can click "Print Label" to print a clean, high-contrast version of the label (without the dark theme or input fields), or "Copy HTML" to embed the label code onto your own website.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// FDA Daily Values for a 2,000 calorie diet
+const DV = {
+  totalFat: 78,
+  satFat: 20,
+  cholesterol: 300,
+  sodium: 2300,
+  totalCarb: 275,
+  fiber: 28,
+  addedSugars: 50,
+  protein: 50, // Usually %DV is omitted for protein unless making a claim or for infants
+  vitD: 20,
+  calcium: 1300,
+  iron: 18,
+  potassium: 4700
+};
+
+function formatNum(val) {
+  let num = parseFloat(val);
+  return isNaN(num) ? 0 : num;
+}
+
+function calcDV(val, dvTotal) {
+  if(dvTotal === 0) return 0;
+  return Math.round((val / dvTotal) * 100);
+}
+
+function updateLabel() {
+  // Get inputs
+  let servings = document.getElementById('inp-servings').value || '1';
+  let servingSize = document.getElementById('inp-servingSize').value || '1 serving';
+  let calories = formatNum(document.getElementById('inp-calories').value);
+
+  let totalFat = formatNum(document.getElementById('inp-totalFat').value);
+  let satFat = formatNum(document.getElementById('inp-satFat').value);
+  let transFat = formatNum(document.getElementById('inp-transFat').value);
+  let cholesterol = formatNum(document.getElementById('inp-cholesterol').value);
+  let sodium = formatNum(document.getElementById('inp-sodium').value);
+
+  let totalCarb = formatNum(document.getElementById('inp-totalCarb').value);
+  let fiber = formatNum(document.getElementById('inp-fiber').value);
+  let totalSugars = formatNum(document.getElementById('inp-totalSugars').value);
+  let addedSugars = formatNum(document.getElementById('inp-addedSugars').value);
+  let protein = formatNum(document.getElementById('inp-protein').value);
+
+  let vitD = formatNum(document.getElementById('inp-vitD').value);
+  let calcium = formatNum(document.getElementById('inp-calcium').value);
+  let iron = formatNum(document.getElementById('inp-iron').value);
+  let potassium = formatNum(document.getElementById('inp-potassium').value);
+
+  // Update plain text outs
+  document.getElementById('out-servings').textContent = servings + ' servings per container';
+  document.getElementById('out-servingSize').textContent = servingSize;
+  document.getElementById('out-calories').textContent = calories;
+
+  document.getElementById('out-totalFat').textContent = totalFat + 'g';
+  document.getElementById('out-satFat').textContent = satFat + 'g';
+  document.getElementById('out-transFat').textContent = transFat + 'g';
+  document.getElementById('out-cholesterol').textContent = cholesterol + 'mg';
+  document.getElementById('out-sodium').textContent = sodium + 'mg';
+
+  document.getElementById('out-totalCarb').textContent = totalCarb + 'g';
+  document.getElementById('out-fiber').textContent = fiber + 'g';
+  document.getElementById('out-totalSugars').textContent = totalSugars + 'g';
+  document.getElementById('out-addedSugars').textContent = addedSugars + 'g';
+  document.getElementById('out-protein').textContent = protein + 'g';
+
+  document.getElementById('out-vitD').textContent = vitD + 'mcg';
+  document.getElementById('out-calcium').textContent = calcium + 'mg';
+  document.getElementById('out-iron').textContent = iron + 'mg';
+  document.getElementById('out-potassium').textContent = potassium + 'mg';
+
+  // Update DV %
+  document.getElementById('out-totalFat-dv').textContent = calcDV(totalFat, DV.totalFat) + '%';
+  document.getElementById('out-satFat-dv').textContent = calcDV(satFat, DV.satFat) + '%';
+  document.getElementById('out-cholesterol-dv').textContent = calcDV(cholesterol, DV.cholesterol) + '%';
+  document.getElementById('out-sodium-dv').textContent = calcDV(sodium, DV.sodium) + '%';
+  document.getElementById('out-totalCarb-dv').textContent = calcDV(totalCarb, DV.totalCarb) + '%';
+  document.getElementById('out-fiber-dv').textContent = calcDV(fiber, DV.fiber) + '%';
+  document.getElementById('out-addedSugars-dv').textContent = calcDV(addedSugars, DV.addedSugars) + '%';
+
+  document.getElementById('out-vitD-dv').textContent = calcDV(vitD, DV.vitD) + '%';
+  document.getElementById('out-calcium-dv').textContent = calcDV(calcium, DV.calcium) + '%';
+  document.getElementById('out-iron-dv').textContent = calcDV(iron, DV.iron) + '%';
+  document.getElementById('out-potassium-dv').textContent = calcDV(potassium, DV.potassium) + '%';
+}
+
+// Attach listeners
+document.querySelectorAll('#labelForm input').forEach(input => {
+  input.addEventListener('input', updateLabel);
+});
+
+function copyCode() {
+  const container = document.querySelector('.label-container').outerHTML;
+  // Basic inline CSS wrapper to make it standalone
+  const fullHtml = `<style>
+.label-container { font-family: 'Inter', Helvetica, Arial, sans-serif; background: #fff; color: #000; padding: 12px; width: 100%; max-width: 360px; box-sizing: border-box; }
+.nutrition-label { border: 1px solid #000; padding: 8px; width: 100%; box-sizing: border-box; }
+.label-title { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin: 0 0 4px; line-height: 1; border-bottom: 1px solid #000; padding-bottom: 4px; }
+.label-line { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #000; font-size: 0.95rem; }
+.label-line.thick { border-bottom-width: 6px; }
+.label-line.medium { border-bottom-width: 4px; }
+.label-line.indent { padding-left: 16px; }
+.label-line.indent-double { padding-left: 32px; }
+.label-bold { font-weight: 800; }
+.label-dv-title { font-size: 0.8rem; font-weight: 800; text-align: right; border-bottom: 1px solid #000; padding-bottom: 2px; }
+.label-calories-row { display: flex; justify-content: space-between; align-items: flex-end; padding: 4px 0; border-bottom: 4px solid #000; }
+.label-calories-title { font-weight: 800; font-size: 1.2rem; line-height: 1; }
+.label-calories-val { font-weight: 900; font-size: 2.4rem; line-height: 1; }
+.label-footer { font-size: 0.75rem; line-height: 1.2; padding-top: 6px; }
+</style>
+` + container;
+
+  navigator.clipboard.writeText(fullHtml).then(() => {
+    let btn = document.getElementById('btn-copy');
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = 'Copy HTML'; }, 1500);
+  });
+}
+
+// Init
+updateLabel();
+</script>
+</body>
+</html>
