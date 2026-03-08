@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourdough Starter: Complete Guide & Cheat Sheet | 28grams</title>
+<meta name="description" content="A comprehensive, developer-style reference guide for creating, maintaining, and troubleshooting a sourdough starter. Day-by-day timeline and feeding schedules.">
+<meta property="og:title" content="Sourdough Starter: Complete Guide & Cheat Sheet">
+<meta property="og:description" content="Create and maintain a sourdough starter with this zero-fluff, easy-to-read reference guide. Includes a day-by-day timeline, exact ratios, and troubleshooting.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Sourdough Starter: Complete Guide",
+  "description": "How to create and maintain a sourdough starter. Day-by-day timeline, feeding schedule, troubleshooting.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" },
+  "publisher": { "@type": "Organization", "name": "28grams.vip", "url": "https://28grams.vip" },
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://28grams.vip/guide-sourdough" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; line-height: 1.5; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 540px; margin: 0 auto; }
+
+.main { max-width: 800px; margin: 0 auto; padding: 16px 20px 40px; }
+
+/* Search Bar */
+.search-container { margin-bottom: 32px; position: relative; }
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 14px 20px 14px 44px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Section Titles */
+.section-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin: 32px 0 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #2a1820; padding-bottom: 8px; }
+
+/* Cards shared */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  transition: opacity 0.2s, display 0.2s;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h3 { font-size: 1rem; font-weight: 700; color: #e0d0d8; display: flex; align-items: center; gap: 8px; }
+.card-header .badge {
+  background: #2a1820;
+  color: #C2185B;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-body { padding: 20px; }
+.card-body p { color: #888; font-size: 0.9rem; margin-bottom: 12px; }
+.card-body p:last-child { margin-bottom: 0; }
+.card-body strong { color: #ccc; }
+
+/* Data Grid / Tables */
+.data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.data-box { background: #1a1015; border: 1px solid #2a1820; border-radius: 8px; padding: 12px; text-align: center; }
+.data-label { font-size: 0.7rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; display: block; }
+.data-val { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+/* Code / Copy Blocks */
+.code-block-wrapper { position: relative; background: #0a060a; border: 1px solid #2a1820; border-radius: 8px; margin-bottom: 16px; overflow: hidden; }
+.code-block { padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #e0d0d8; overflow-x: auto; white-space: pre; }
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* Accordion (Troubleshooting) */
+.accordion-btn {
+  width: 100%;
+  text-align: left;
+  background: #150d12;
+  border: none;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e0d0d8;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+}
+.accordion-btn:hover { background: #1a1015; }
+.accordion-icon { color: #C2185B; font-weight: 900; transition: transform 0.2s; }
+.accordion-btn[aria-expanded="true"] .accordion-icon { transform: rotate(45deg); }
+.accordion-content {
+  display: none;
+  padding: 20px;
+  border-top: 1px solid #2a1820;
+}
+.accordion-content p { color: #888; font-size: 0.9rem; line-height: 1.6; }
+.accordion-content strong { color: #ccc; }
+
+/* Tags for filtering */
+.tags { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.tag { font-size: 0.7rem; color: #666; background: #1a1015; padding: 2px 8px; border-radius: 4px; border: 1px solid #2a1820; font-family: 'JetBrains Mono', monospace; }
+
+/* SEO content */
+.seo-content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.seo-content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.seo-content h2:first-child { margin-top: 0; }
+.seo-content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.seo-content ul { padding-left: 20px; margin-bottom: 14px; }
+.seo-content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.seo-content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+/* Hidden state for search filtering */
+.hidden { display: none !important; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 16px 14px 40px; }
+  .data-grid { grid-template-columns: 1fr; gap: 8px; }
+  .card-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+}
+
+#clipboardData { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Sourdough Starter <span>Guide</span> 🦠</h1>
+  <p>Your complete reference for creating, feeding, and troubleshooting a sourdough starter. Zero fluff, just the math and the methods.</p>
+</div>
+
+<div class="main">
+
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search guide (e.g., 'feeding', 'hooch', 'day 3')...">
+  </div>
+
+  <h2 class="section-title">📅 Creation Timeline (Days 1-7)</h2>
+
+  <div class="card searchable" data-search="day 1 start whole wheat rye mix water rest">
+    <div class="card-header">
+      <h3>Day 1: The Mix</h3>
+      <span class="badge">Start</span>
+    </div>
+    <div class="card-body">
+      <div class="tags"><span class="tag">initial</span><span class="tag">mix</span></div>
+      <p>Combine flour and water in a clean jar. Whole grain flours (like whole wheat or dark rye) are recommended because they contain more wild yeast and nutrients.</p>
+      <div class="data-grid">
+        <div class="data-box"><span class="data-label">Flour</span><span class="data-val">50g</span></div>
+        <div class="data-box"><span class="data-label">Water</span><span class="data-val">50g</span></div>
+        <div class="data-box"><span class="data-label">Action</span><span class="data-val">Rest 24h</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card searchable" data-search="day 2 3 false rise burst activity bacteria discard feed">
+    <div class="card-header">
+      <h3>Day 2-3: The False Rise</h3>
+      <span class="badge">Activity</span>
+    </div>
+    <div class="card-body">
+      <div class="tags"><span class="tag">discard</span><span class="tag">feed</span><span class="tag">1:1:1</span></div>
+      <p>You may see a massive burst of activity and a bad smell. This is a bacterial bloom (leuconostoc bacteria), not yeast. <strong>Do not bake with this.</strong> Keep feeding it to lower the pH.</p>
+      <div class="code-block-wrapper">
+        <button class="copy-btn" onclick="copyText(this, 'Daily Feed: 50g starter + 50g water + 50g flour (1:1:1 ratio)')">Copy</button>
+        <div class="code-block">Daily Feed (1:1:1 Ratio)
+------------------------
+1. Discard down to 50g starter
+2. Add 50g Water (room temp)
+3. Add 50g Flour (50/50 AP/Whole Wheat)
+4. Mix well, cover loosely. Rest 24h.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card searchable" data-search="day 4 5 quiet phase dead bubbles patience feed">
+    <div class="card-header">
+      <h3>Day 4-5: The Quiet Phase</h3>
+      <span class="badge">Patience</span>
+    </div>
+    <div class="card-body">
+      <div class="tags"><span class="tag">waiting</span><span class="tag">acidic</span></div>
+      <p>Activity will likely stop completely. It is not dead. The environment is becoming acidic enough to kill off unwanted bacteria, making room for wild yeast to wake up.</p>
+      <p><strong>Action:</strong> Continue discarding and feeding at a 1:1:1 ratio once a day. Keep it warm (70-75°F / 21-24°C).</p>
+    </div>
+  </div>
+
+  <div class="card searchable" data-search="day 6 7 active double float test ready yeast regular feeding">
+    <div class="card-header">
+      <h3>Day 6-7+: Predictable Rise</h3>
+      <span class="badge">Ready</span>
+    </div>
+    <div class="card-body">
+      <div class="tags"><span class="tag">ready</span><span class="tag">doubling</span></div>
+      <p>The starter should now predictably double in size within 4-8 hours after feeding and smell pleasantly sour/yeasty. Once it doubles consistently for 3 days in a row, it's ready to bake.</p>
+      <p><strong>Action:</strong> You can now switch to a maintenance schedule.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">⚖️ Maintenance & Feeding</h2>
+
+  <div class="card searchable" data-search="daily counter feeding schedule 1:1:1 1:2:2 1:5:5 ratios">
+    <div class="card-header">
+      <h3>Counter Maintenance (Baking Daily)</h3>
+    </div>
+    <div class="card-body">
+      <p>If you bake often, keep it on the counter. The feeding ratio determines how long it takes to peak.</p>
+      <div class="code-block-wrapper">
+        <button class="copy-btn" onclick="copyText(this, '1:1:1 = 1 part starter, 1 part water, 1 part flour (Peaks in 3-5h)\n1:2:2 = Peaks in 6-8h\n1:5:5 = Peaks in 10-12h (Overnight feed)')">Copy</button>
+        <div class="code-block">Ratios & Timing (approximate at 72°F)
+--------------------------------------
+1:1:1 (e.g. 20g S / 20g W / 20g F) -> Peaks in 3-5 hrs
+1:2:2 (e.g. 10g S / 20g W / 20g F) -> Peaks in 6-8 hrs
+1:5:5 (e.g.  5g S / 25g W / 25g F) -> Peaks in 10-12 hrs (Overnight)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card searchable" data-search="fridge maintenance weekly schedule cold storage hibernation">
+    <div class="card-header">
+      <h3>Fridge Maintenance (Baking Weekly)</h3>
+    </div>
+    <div class="card-body">
+      <p>If you bake once a week or less, store it in the fridge to slow fermentation and save flour.</p>
+      <ol style="padding-left: 20px; color: #888; font-size: 0.9rem; margin-top: 10px;">
+        <li style="margin-bottom: 6px;">Feed starter at a 1:2:2 ratio.</li>
+        <li style="margin-bottom: 6px;">Leave on counter for 1-2 hours until you see 20% growth.</li>
+        <li style="margin-bottom: 6px;">Put a tight lid on and place in the fridge.</li>
+        <li>To bake: Take it out, feed it once or twice on the counter until it doubles, then use.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 class="section-title">🚑 Troubleshooting</h2>
+
+  <div class="card searchable" data-search="hooch dark liquid water top hungry acetone smell">
+    <button class="accordion-btn" aria-expanded="false" onclick="toggleAccordion(this)">
+      <span>Dark liquid on top (Hooch) / Smells like acetone</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-content">
+      <p><strong>Diagnosis:</strong> Your starter is very hungry.</p>
+      <p style="margin-top: 8px;"><strong>Fix:</strong> The liquid is harmless alcohol produced by yeast. You can pour it off or stir it in. Discard most of the starter and feed it a larger ratio (like 1:3:3 or 1:5:5) to give the yeast more food.</p>
+    </div>
+  </div>
+
+  <div class="card searchable" data-search="not rising bubbly flat slow cold environment">
+    <button class="accordion-btn" aria-expanded="false" onclick="toggleAccordion(this)">
+      <span>Starter is flat / Not rising</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-content">
+      <p><strong>Diagnosis:</strong> It's too cold, or the yeast population is weak.</p>
+      <p style="margin-top: 8px;"><strong>Fix:</strong> Move it to a warmer spot (e.g., inside the oven with just the light on, or on top of the fridge). Switch to using 50% Whole Wheat or Rye flour in your feedings to boost nutrients.</p>
+    </div>
+  </div>
+
+  <div class="card searchable" data-search="mold pink orange fuzzy throw away trash dangerous">
+    <button class="accordion-btn" aria-expanded="false" onclick="toggleAccordion(this)">
+      <span>Pink/Orange streaks or fuzzy mold</span>
+      <span class="accordion-icon">+</span>
+    </button>
+    <div class="accordion-content">
+      <p><strong>Diagnosis:</strong> Contamination.</p>
+      <p style="margin-top: 8px;"><strong>Fix:</strong> <strong>THROW IT AWAY.</strong> Do not try to save it. Wash your jar thoroughly with hot soapy water, sanitize it, and start over.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="seo-content">
+  <h2>The Science of a Sourdough Starter</h2>
+  <p>A sourdough starter is a symbiotic culture of bacteria and yeast (SCOBY). The wild yeast (primarily <i>Saccharomyces cerevisiae</i> and <i>Candida milleri</i>) is responsible for producing carbon dioxide, which makes your bread rise. The lactic acid bacteria (LAB) produce lactic and acetic acids, which give the bread its signature sour flavor, lower the pH to prevent mold, and break down gluten to make the bread more digestible.</p>
+
+  <h2>Why Discard?</h2>
+  <p>Many beginners hate throwing away flour. However, discarding before feeding is mathematically necessary. If you don't discard, you must feed an exponentially growing amount of flour to maintain the proper food-to-microbe ratio. If you keep 100g of starter, you must feed it 100g of flour. The next day, you have 300g of starter, which requires 300g of flour, and so on. Discarding keeps the culture at a manageable size and prevents the acidity levels from becoming too toxic for the yeast to survive.</p>
+
+  <h2>Understanding Hydration in Starters</h2>
+  <p>This guide assumes a <strong>100% hydration starter</strong>, which is the standard for most modern recipes. This simply means you feed it equal parts <em>by weight</em> of water and flour. Because water is denser than flour, a 100% hydration starter will look like thick pancake batter. If you use volume measurements (like cups), equal parts water and flour will result in a hydration closer to 200%, which is too watery and will struggle to trap gas bubbles.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<textarea id="clipboardData" aria-hidden="true"></textarea>
+
+<script>
+// Search/Filter functionality
+const searchInput = document.getElementById('searchInput');
+const searchableCards = document.querySelectorAll('.searchable');
+
+searchInput.addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase().trim();
+
+  searchableCards.forEach(card => {
+    // Search the hidden data attribute, plus text content of headers/accordions
+    const searchData = card.getAttribute('data-search') || '';
+    const textData = card.textContent.toLowerCase();
+
+    if (searchData.includes(term) || textData.includes(term)) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+});
+
+// Accordion toggle
+function toggleAccordion(btn) {
+  const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+  const content = btn.nextElementSibling;
+
+  if (isExpanded) {
+    btn.setAttribute('aria-expanded', 'false');
+    content.style.display = 'none';
+  } else {
+    btn.setAttribute('aria-expanded', 'true');
+    content.style.display = 'block';
+  }
+}
+
+// Copy to clipboard
+function copyText(btn, text) {
+  const clipboardData = document.getElementById('clipboardData');
+  clipboardData.value = text;
+  clipboardData.select();
+  document.execCommand('copy');
+
+  const originalText = btn.textContent;
+  btn.textContent = 'Copied!';
+  btn.classList.add('copied');
+
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.classList.remove('copied');
+  }, 1500);
+}
+</script>
+
+</body>
+</html>
