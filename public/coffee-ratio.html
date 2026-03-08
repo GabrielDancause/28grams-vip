@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Brew Ratio Calculator — Dial in Your Perfect Cup | Free Tool</title>
+<meta name="description" content="Calculate the exact coffee-to-water ratio for pour-over, French press, espresso, and cold brew. Simple, accurate, and completely free.">
+<meta property="og:title" content="Coffee Brew Ratio Calculator — Dial in Your Perfect Cup">
+<meta property="og:description" content="Calculate the exact coffee-to-water ratio for pour-over, French press, espresso, and cold brew.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Coffee Brew Ratio Calculator",
+  "url": "https://28grams.vip/coffee-ratio",
+  "description": "Calculate the exact coffee-to-water ratio for pour-over, French press, espresso, and cold brew. Enter your coffee weight to find out how much water to use.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Methods control */
+.methods-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.method-btn {
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  color: #888;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease;
+}
+.method-btn:hover {
+  background: #2a1820;
+  color: #ccc;
+}
+.method-btn.active {
+  background: #2a1020;
+  border-color: #C2185B;
+  color: #fff;
+}
+
+/* Calculator Grid */
+.calc-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.calc-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+
+.calc-body {
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.calc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.calc-label {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.calc-input {
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 14px 40px 14px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.calc-input:focus { border-color: #C2185B; }
+.unit {
+  position: absolute;
+  right: 14px;
+  font-size: 1rem;
+  color: #888;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.ratio-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ratio-label {
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.ratio-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #C2185B;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ratio-input {
+  background: transparent;
+  border: none;
+  color: #C2185B;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 48px;
+  text-align: left;
+  outline: none;
+  border-bottom: 2px dashed #C2185B;
+  padding-bottom: 2px;
+}
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .calc-body {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .ratio-display {
+    flex-direction: row;
+    gap: 16px;
+  }
+  .ratio-label { margin-bottom: 0; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Coffee Brew <span>Ratio</span> ☕</h1>
+  <p>Dial in your perfect cup. Enter your coffee weight to instantly calculate exactly how much water you need.</p>
+</div>
+
+<div class="main">
+
+  <div class="methods-bar" id="methodsBar">
+    <button class="method-btn active" data-ratio="16" data-name="Pour-Over">Pour-Over (1:16)</button>
+    <button class="method-btn" data-ratio="12" data-name="French Press">French Press (1:12)</button>
+    <button class="method-btn" data-ratio="2" data-name="Espresso">Espresso (1:2)</button>
+    <button class="method-btn" data-ratio="8" data-name="Cold Brew">Cold Brew (1:8)</button>
+    <button class="method-btn" data-ratio="15" data-name="AeroPress">AeroPress (1:15)</button>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-header">
+      <h2 id="methodTitle">Pour-Over</h2>
+    </div>
+
+    <div class="calc-body">
+      <div class="calc-group">
+        <span class="calc-label">Coffee (Dose)</span>
+        <div class="input-with-unit">
+          <input type="number" class="calc-input" id="coffeeInput" value="15" min="0" step="any">
+          <span class="unit">g</span>
+        </div>
+      </div>
+
+      <div class="ratio-display">
+        <span class="ratio-label">Ratio</span>
+        <div class="ratio-value">
+          <span>1:</span>
+          <input type="number" class="ratio-input" id="ratioInput" value="16" min="0.1" step="any">
+        </div>
+      </div>
+
+      <div class="calc-group">
+        <span class="calc-label">Water (Yield)</span>
+        <div class="input-with-unit">
+          <input type="number" class="calc-input" id="waterInput" value="240" min="0" step="any">
+          <span class="unit">g</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card">
+    <div class="result-header">
+      <h2>📋 Brew Recipe</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+      <pre id="resultText"></pre>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <h2>Understanding Coffee Brew Ratios</h2>
+  <p>A coffee brew ratio is the relationship between the amount of ground coffee (the dose) and the amount of water (the yield). It is universally expressed as <strong>1:X</strong>, where 1 is the part of coffee, and X is the parts of water.</p>
+  <p>For example, a 1:16 ratio means that for every 1 gram of coffee, you will use 16 grams of water. By weighing both your coffee and water, you achieve consistency that is impossible to get with scoops or measuring cups.</p>
+
+  <h2>Popular Brew Methods</h2>
+  <ul>
+    <li><strong>Pour-Over (1:15 to 1:17):</strong> Provides a clean, bright, and nuanced cup. Start at 1:16 and adjust. If it tastes too weak, try 1:15. If it's too bitter or heavy, try 1:17.</li>
+    <li><strong>French Press (1:12 to 1:15):</strong> Uses immersion brewing which requires a coarser grind. A tighter ratio like 1:12 yields a heavy, full-bodied cup.</li>
+    <li><strong>Espresso (1:1.5 to 1:2.5):</strong> Highly concentrated. Traditional espresso pulls at 1:2 (e.g., 18g of coffee yields 36g of liquid espresso). Ristrettos pull tighter (1:1.5), and lungos pull longer (1:3).</li>
+    <li><strong>Cold Brew (1:5 to 1:8):</strong> Makes a concentrate. Typically brewed at 1:8, then diluted with ice or water when serving.</li>
+  </ul>
+
+  <h2>How to Adjust Your Brew</h2>
+  <p>The brew ratio is your foundation. Once you have a set ratio, you can adjust the flavor of your coffee by changing the grind size or water temperature.</p>
+  <ul>
+    <li><strong>Coffee tastes sour or salty?</strong> It's under-extracted. Grind finer, increase water temperature, or use slightly more water (a higher ratio, like moving from 1:15 to 1:16).</li>
+    <li><strong>Coffee tastes bitter or dry?</strong> It's over-extracted. Grind coarser, decrease water temperature, or use slightly less water (a lower ratio).</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Elements
+var coffeeInput = document.getElementById('coffeeInput');
+var waterInput = document.getElementById('waterInput');
+var ratioInput = document.getElementById('ratioInput');
+var methodTitle = document.getElementById('methodTitle');
+var resultText = document.getElementById('resultText');
+var methodsBar = document.getElementById('methodsBar');
+var methodBtns = document.querySelectorAll('.method-btn');
+
+var currentMethodName = "Pour-Over";
+
+function round(val) {
+  return Math.round(val * 10) / 10;
+}
+
+function updateFromCoffee() {
+  var c = parseFloat(coffeeInput.value) || 0;
+  var r = parseFloat(ratioInput.value) || 1;
+  waterInput.value = round(c * r);
+  updateSummary();
+}
+
+function updateFromWater() {
+  var w = parseFloat(waterInput.value) || 0;
+  var r = parseFloat(ratioInput.value) || 1;
+  if (r > 0) {
+    coffeeInput.value = round(w / r);
+  }
+  updateSummary();
+}
+
+function updateFromRatio() {
+  // When ratio changes manually, anchor to coffee weight
+  updateFromCoffee();
+  // Clear active button if custom ratio is typed
+  methodBtns.forEach(function(b) { b.classList.remove('active'); });
+  methodTitle.textContent = "Custom Ratio";
+  currentMethodName = "Custom Ratio";
+}
+
+// Event Listeners
+coffeeInput.addEventListener('input', updateFromCoffee);
+waterInput.addEventListener('input', updateFromWater);
+ratioInput.addEventListener('input', updateFromRatio);
+
+methodBtns.forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    methodBtns.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+
+    var r = parseFloat(btn.getAttribute('data-ratio'));
+    currentMethodName = btn.getAttribute('data-name');
+
+    ratioInput.value = r;
+    methodTitle.textContent = currentMethodName;
+
+    // Anchor to coffee weight when changing method
+    updateFromCoffee();
+  });
+});
+
+function updateSummary() {
+  var c = round(parseFloat(coffeeInput.value) || 0);
+  var w = round(parseFloat(waterInput.value) || 0);
+  var r = round(parseFloat(ratioInput.value) || 1);
+
+  var lines = [];
+  lines.push("Method: " + currentMethodName);
+  lines.push("Ratio:  1:" + r);
+  lines.push("------------------------");
+  lines.push("Coffee: " + c + "g");
+  lines.push("Water:  " + w + "g");
+
+  resultText.textContent = lines.join('\n');
+}
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(resultText.textContent).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// Init
+updateSummary();
+</script>
+</body>
+</html>
