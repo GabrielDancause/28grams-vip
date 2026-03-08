@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bread Hydration Calculator — Find Your Perfect Crumb | Free Tool</title>
+<meta name="description" content="Calculate your bread dough hydration instantly. Enter your flour and water weights to find the hydration percentage and understand its effect on your loaf.">
+<meta property="og:title" content="Bread Hydration Calculator — Find Your Perfect Crumb">
+<meta property="og:description" content="Calculate your bread dough hydration instantly. Enter your flour and water weights to find the hydration percentage and understand its effect on your loaf.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Bread Hydration Calculator",
+  "url": "https://28grams.vip/bread-hydration",
+  "description": "Calculate your bread dough hydration instantly. Find the perfect balance for your desired crumb.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Totals control */
+.totals-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.total-group { display: flex; align-items: center; gap: 10px; }
+.total-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.total-input {
+  width: 90px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.total-input:focus { border-color: #C2185B; }
+.total-unit { font-size: 1.2rem; color: #888; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.arrow { font-size: 1.5rem; color: #C2185B; }
+
+/* Cards shared */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; }
+
+/* Formula Inputs */
+.formula-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 24px 20px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input {
+  width: 100%;
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e0d0d8;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  outline: none;
+  text-align: right;
+  padding-right: 24px;
+}
+.input-wrap input:focus { border-color: #C2185B; }
+.input-wrap.grams::after {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  content: 'g';
+}
+.input-wrap.percent::after {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  content: '%';
+}
+.info-text {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Results Section */
+.effect-guide {
+  padding: 24px 20px;
+}
+.hydration-result {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.hydration-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.hydration-value span {
+  color: #C2185B;
+}
+.hydration-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e0d0d8;
+  margin-bottom: 4px;
+}
+.hydration-desc {
+  font-size: 0.9rem;
+  color: #888;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .totals-bar { flex-direction: column; gap: 14px; }
+  .formula-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* Hidden copy text area */
+#clipboardData { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Bread <span>Hydration</span> 💧</h1>
+  <p>Calculate your dough's hydration percentage instantly to understand its texture, workability, and crumb structure.</p>
+</div>
+
+<div class="main">
+
+  <div class="totals-bar">
+    <div class="total-group">
+      <span class="total-label">Target Hydration</span>
+      <input type="number" class="total-input" id="targetHydration" value="70" min="0" step="any">
+      <span class="total-unit">%</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>⚖️ Weights</h2>
+    </div>
+    <div class="formula-grid">
+      <div class="input-group">
+        <label>Total Flour Weight</label>
+        <div class="input-wrap grams">
+          <input type="number" id="inFlour" value="500" min="0" step="any">
+        </div>
+        <div class="info-text">Combined weight of all flours in your recipe.</div>
+      </div>
+      <div class="input-group">
+        <label>Total Water Weight</label>
+        <div class="input-wrap grams">
+          <input type="number" id="inWater" value="350" min="0" step="any">
+        </div>
+        <div class="info-text">Amount of water or liquid. Adjust this to change hydration.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>🍞 Dough Characteristics</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Info</button>
+    </div>
+    <div class="effect-guide">
+      <div class="hydration-result">
+        <div class="hydration-value" id="resHydration">70.0<span>%</span></div>
+        <div class="hydration-label" id="resLabel">Standard Dough</div>
+        <div class="hydration-desc" id="resDesc">A great starting point for beginners. It's relatively easy to handle and shape, offering a balance between a slightly open crumb and a sturdy structure. Ideal for everyday artisan loaves.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>What is Bread Hydration?</h2>
+  <p>Hydration is one of the most important concepts in bread baking. It refers to the ratio of water (or total liquid) to total flour in your recipe, expressed as a percentage using Baker's Math. In this system, the total flour weight is always exactly 100%.</p>
+  <p>For example, if a recipe calls for 1000g of flour and 700g of water, the hydration is 70% (700 ÷ 1000 = 0.70).</p>
+
+  <h2>How Hydration Affects Your Bread</h2>
+  <ul>
+    <li><strong>Crumb Structure:</strong> Higher hydration generally leads to a more "open" crumb (larger, irregular holes), while lower hydration yields a tighter, more uniform crumb (great for sandwiches).</li>
+    <li><strong>Handling & Shaping:</strong> Lower hydration doughs are stiff, less sticky, and easier to knead and shape. High hydration doughs are very wet, sticky, and often require techniques like "stretch and fold" or coil folds instead of traditional kneading.</li>
+    <li><strong>Crust & Volume:</strong> Wetter doughs create more steam inside the loaf as they bake, which can contribute to greater "oven spring" (rise) and a thinner, crispier crust.</li>
+  </ul>
+
+  <h2>A Guide to Hydration Levels</h2>
+  <ul>
+    <li><strong>Low Hydration (&lt; 60%):</strong> Very stiff dough. Examples include bagels, pretzels, and some stiff sourdough starters. Easy to handle.</li>
+    <li><strong>Standard Hydration (60% - 70%):</strong> The sweet spot for many traditional breads, including sandwich loaves and beginner sourdough. A good balance of flavor, manageable texture, and a soft, even crumb.</li>
+    <li><strong>High Hydration (70% - 85%):</strong> Typical for ciabatta and advanced sourdough boules. Wet, sticky, and challenging to handle, but yields a dramatic, open crumb with big holes and a light, airy texture.</li>
+    <li><strong>Extreme Hydration (85%+):</strong> Very challenging, almost batter-like consistency. Used for specialty breads like pan de cristal. Requires significant experience and specialized flours with high protein content to build enough strength.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<textarea id="clipboardData" aria-hidden="true"></textarea>
+
+<script>
+// Elements
+var inFlour = document.getElementById('inFlour');
+var inWater = document.getElementById('inWater');
+var targetHydration = document.getElementById('targetHydration');
+
+var resHydration = document.getElementById('resHydration');
+var resLabel = document.getElementById('resLabel');
+var resDesc = document.getElementById('resDesc');
+
+var clipboardData = document.getElementById('clipboardData');
+
+// Hydration Data
+var hydrationTiers = [
+  { max: 50, label: "Very Stiff Dough", desc: "Extremely dry and stiff. Typically used for specialty items like certain pasta doughs or very stiff starters, rather than standard bread." },
+  { max: 60, label: "Stiff Dough", desc: "Firm and very easy to handle. Perfect for bagels, pretzels, and tight-crumb sandwich breads. Requires significant kneading to develop gluten." },
+  { max: 65, label: "Medium-Stiff Dough", desc: "A smooth, manageable dough that's great for everyday sandwich loaves, dinner rolls, and simple yeast breads. Easy to knead and shape." },
+  { max: 70, label: "Standard Dough", desc: "The sweet spot for beginners. It offers a balance between an open, airy crumb and a dough that is still reasonably easy to shape and handle without too much stickiness." },
+  { max: 75, label: "Medium-High Hydration", desc: "A bit sticky and requires some skill to handle. Great for rustic artisan loaves and sourdough, yielding a pleasantly open crumb and good oven spring." },
+  { max: 85, label: "High Hydration", desc: "Wet, slack, and challenging to work with. Often requires stretch-and-fold techniques rather than kneading. Produces ciabatta or advanced sourdough with large, irregular holes." },
+  { max: Infinity, label: "Extreme Hydration", desc: "Almost batter-like. Extremely difficult to build tension. Used for specialty breads like Pan de Cristal. Requires high-protein flour and advanced handling techniques." }
+];
+
+function round(val) { return Math.round(val * 10) / 10; }
+
+function updateFromWeights() {
+  var fw = parseFloat(inFlour.value) || 0;
+  var ww = parseFloat(inWater.value) || 0;
+
+  if (fw === 0) {
+    targetHydration.value = 0;
+    updateDisplay(0);
+    return;
+  }
+
+  var hyd = (ww / fw) * 100;
+  targetHydration.value = round(hyd);
+  updateDisplay(hyd);
+}
+
+function updateFromTarget() {
+  var fw = parseFloat(inFlour.value) || 0;
+  var target = parseFloat(targetHydration.value) || 0;
+
+  var ww = fw * (target / 100);
+  inWater.value = round(ww);
+  updateDisplay(target);
+}
+
+function updateDisplay(hydration) {
+  resHydration.innerHTML = round(hydration).toFixed(1) + '<span>%</span>';
+
+  var tier = hydrationTiers.find(function(t) { return hydration <= t.max; }) || hydrationTiers[hydrationTiers.length - 1];
+
+  resLabel.textContent = tier.label;
+  resDesc.textContent = tier.desc;
+}
+
+function copyResult() {
+  var fw = parseFloat(inFlour.value) || 0;
+  var ww = parseFloat(inWater.value) || 0;
+  var hyd = targetHydration.value;
+  var label = resLabel.textContent;
+
+  var txt = "Bread Hydration Info:\n" +
+            "---------------------\n" +
+            "Flour:     " + fw + "g\n" +
+            "Water:     " + ww + "g\n" +
+            "Hydration: " + hyd + "%\n" +
+            "Type:      " + label;
+
+  clipboardData.value = txt;
+  clipboardData.select();
+  document.execCommand('copy');
+
+  var btn = document.getElementById('copyBtn');
+  btn.textContent = '✓ Copied';
+  btn.classList.add('copied');
+  setTimeout(function() { btn.textContent = 'Copy Info'; btn.classList.remove('copied'); }, 1500);
+}
+
+// Listeners
+inFlour.addEventListener('input', updateFromWeights);
+inWater.addEventListener('input', updateFromWeights);
+targetHydration.addEventListener('input', updateFromTarget);
+
+// Init
+updateFromWeights();
+</script>
+</body>
+</html>
