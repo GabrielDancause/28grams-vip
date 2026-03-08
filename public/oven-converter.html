@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oven Temperature Converter — Fahrenheit, Celsius & Gas Marks | Free Tool</title>
+<meta name="description" content="Convert oven temperatures between Fahrenheit, Celsius, and Gas Marks. Includes fan and convection oven adjustments. Free, easy-to-use baking tool.">
+<meta property="og:title" content="Oven Temperature Converter — Fahrenheit, Celsius & Gas Marks">
+<meta property="og:description" content="Quickly convert oven temperatures for baking. Fahrenheit, Celsius, Gas Marks, and Fan/Convection adjustments.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Oven Temperature Converter",
+  "url": "https://28grams.vip/oven-converter",
+  "description": "Convert oven temperatures between Fahrenheit, Celsius, and Gas Marks. Includes fan and convection oven adjustments.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards */
+.calc-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.calc-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+.calc-body {
+  padding: 30px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.calc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.calc-label {
+  font-size: 0.82rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.input-with-unit {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.calc-input {
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 14px 40px 14px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.calc-input:focus { border-color: #C2185B; }
+.unit {
+  position: absolute;
+  right: 14px;
+  font-size: 1rem;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+select.calc-input {
+  padding-right: 36px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  cursor: pointer;
+}
+select.calc-input option {
+  font-family: 'Inter', sans-serif;
+}
+
+.fan-section {
+  padding: 24px 20px;
+  background: #1a1015;
+  border-top: 1px solid #2a1820;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.fan-info h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #C2185B;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.fan-info p {
+  font-size: 0.8rem;
+  color: #888;
+  line-height: 1.4;
+}
+.fan-values {
+  display: flex;
+  gap: 16px;
+}
+.fan-val-box {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 100px;
+}
+.fan-val-box .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+.fan-val-box .lbl {
+  font-size: 0.7rem;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* Quick Reference Table */
+.ref-table-wrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #2a1820;
+  background: #150d12;
+  margin: 20px;
+}
+.ref-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+.ref-table th, .ref-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #2a1820;
+}
+.ref-table th {
+  background: #1a1015;
+  color: #ccc;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+.ref-table tr:last-child td { border-bottom: none; }
+.ref-table td { color: #e0d0d8; font-family: 'JetBrains Mono', monospace; }
+.ref-table td:first-child { font-family: 'Inter', sans-serif; font-weight: 500; color: #fff; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 768px) {
+  .calc-body { grid-template-columns: 1fr; gap: 20px; }
+  .fan-section { flex-direction: column; align-items: flex-start; }
+  .fan-values { width: 100%; justify-content: space-between; }
+  .fan-val-box { flex: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Oven Temp <span>Converter</span> 🔥</h1>
+  <p>Seamlessly convert between Fahrenheit, Celsius, and Gas Marks. Includes fan and convection oven adjustments.</p>
+</div>
+
+<div class="main">
+
+  <div class="calc-card">
+    <div class="calc-header">
+      <h2>🌡️ Temperature Converter</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy Results</button>
+    </div>
+
+    <div class="calc-body">
+      <div class="calc-group">
+        <span class="calc-label">Fahrenheit</span>
+        <div class="input-with-unit">
+          <input type="number" class="calc-input" id="inputF" value="350">
+          <span class="unit">°F</span>
+        </div>
+      </div>
+      <div class="calc-group">
+        <span class="calc-label">Celsius</span>
+        <div class="input-with-unit">
+          <input type="number" class="calc-input" id="inputC" value="180">
+          <span class="unit">°C</span>
+        </div>
+      </div>
+      <div class="calc-group">
+        <span class="calc-label">Gas Mark</span>
+        <select id="inputGas" class="calc-input">
+          <option value="">Custom / Varies</option>
+          <option value="0.25">Gas Mark 1/4</option>
+          <option value="0.5">Gas Mark 1/2</option>
+          <option value="1">Gas Mark 1</option>
+          <option value="2">Gas Mark 2</option>
+          <option value="3">Gas Mark 3</option>
+          <option value="4" selected>Gas Mark 4</option>
+          <option value="5">Gas Mark 5</option>
+          <option value="6">Gas Mark 6</option>
+          <option value="7">Gas Mark 7</option>
+          <option value="8">Gas Mark 8</option>
+          <option value="9">Gas Mark 9</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="fan-section">
+      <div class="fan-info">
+        <h3>🌀 Fan / Convection Equivalent</h3>
+        <p>If your recipe is for a conventional oven, set your fan oven to this temperature.</p>
+      </div>
+      <div class="fan-values">
+        <div class="fan-val-box">
+          <div class="val" id="fanF">325</div>
+          <div class="lbl">°F (Fan)</div>
+        </div>
+        <div class="fan-val-box">
+          <div class="val" id="fanC">160</div>
+          <div class="lbl">°C (Fan)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-header">
+      <h2>📋 Quick Reference Chart</h2>
+    </div>
+    <div class="ref-table-wrap">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Fahrenheit</th>
+            <th>Celsius</th>
+            <th>Fan / Conv.</th>
+            <th>Gas Mark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Very Slow</td><td>225°F</td><td>110°C</td><td>90°C</td><td>1/4</td></tr>
+          <tr><td>Very Slow</td><td>250°F</td><td>130°C</td><td>110°C</td><td>1/2</td></tr>
+          <tr><td>Slow</td><td>275°F</td><td>140°C</td><td>120°C</td><td>1</td></tr>
+          <tr><td>Slow</td><td>300°F</td><td>150°C</td><td>130°C</td><td>2</td></tr>
+          <tr><td>Moderately Slow</td><td>325°F</td><td>160°C</td><td>140°C</td><td>3</td></tr>
+          <tr><td>Moderate</td><td>350°F</td><td>180°C</td><td>160°C</td><td>4</td></tr>
+          <tr><td>Moderately Hot</td><td>375°F</td><td>190°C</td><td>170°C</td><td>5</td></tr>
+          <tr><td>Hot</td><td>400°F</td><td>200°C</td><td>180°C</td><td>6</td></tr>
+          <tr><td>Hot</td><td>425°F</td><td>220°C</td><td>200°C</td><td>7</td></tr>
+          <tr><td>Very Hot</td><td>450°F</td><td>230°C</td><td>210°C</td><td>8</td></tr>
+          <tr><td>Very Hot</td><td>475°F</td><td>240°C</td><td>220°C</td><td>9</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>Understanding Oven Temperatures</h2>
+  <p>Baking is a science, and temperature accuracy is crucial for success. In the United States, recipes are typically written in <strong>Fahrenheit (°F)</strong>, while most of the rest of the world uses <strong>Celsius (°C)</strong>. In the UK and some commonwealth countries, older recipes or specific ovens use <strong>Gas Marks</strong>.</p>
+  <p>A standard "moderate" oven temperature for baking cakes, cookies, and breads is 350°F, which equates to roughly 175°C to 180°C, or Gas Mark 4.</p>
+
+  <h2>Fan vs. Conventional Ovens</h2>
+  <p>Fan ovens (also called convection ovens in the US) use a fan to circulate hot air continuously. This eliminates cold spots and cooks food faster and more evenly than a conventional static oven.</p>
+  <p>Because of this efficiency, you must adjust conventional recipe temperatures down when using a fan oven. The general rule is to <strong>reduce the temperature by 20°C or 25°F</strong>. Our calculator does this automatically for you in the "Fan / Convection Equivalent" section.</p>
+
+  <h2>What is a Gas Mark?</h2>
+  <p>The Gas Mark system was introduced in the UK to standardize the temperature of gas ovens. It scales from Gas Mark 1/4 (Very Slow, 225°F) up to Gas Mark 9 (Very Hot, 475°F). Each increase of 1 Gas Mark corresponds to an increase of 25°F or approximately 14°C.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+const inputF = document.getElementById('inputF');
+const inputC = document.getElementById('inputC');
+const inputGas = document.getElementById('inputGas');
+const fanF = document.getElementById('fanF');
+const fanC = document.getElementById('fanC');
+
+const tableMapping = {
+  "0.25": { f: 225, c: 110 },
+  "0.5": { f: 250, c: 130 },
+  "1": { f: 275, c: 140 },
+  "2": { f: 300, c: 150 },
+  "3": { f: 325, c: 160 },
+  "4": { f: 350, c: 180 },
+  "5": { f: 375, c: 190 },
+  "6": { f: 400, c: 200 },
+  "7": { f: 425, c: 220 },
+  "8": { f: 450, c: 230 },
+  "9": { f: 475, c: 240 }
+};
+
+function updateFan(f, c) {
+  if (isNaN(f)) {
+    fanF.textContent = '-';
+  } else {
+    fanF.textContent = Math.round(f - 25);
+  }
+
+  if (isNaN(c)) {
+    fanC.textContent = '-';
+  } else {
+    fanC.textContent = Math.round(c - 20);
+  }
+}
+
+function updateFromF() {
+  const f = parseFloat(inputF.value);
+  if (isNaN(f)) {
+    inputC.value = '';
+    inputGas.value = '';
+    updateFan(NaN, NaN);
+    return;
+  }
+
+  // Calculate C
+  const c = Math.round((f - 32) * 5 / 9);
+  inputC.value = c;
+
+  // Check if matches Gas Mark strictly by F
+  let foundGas = "";
+  for (const [mark, data] of Object.entries(tableMapping)) {
+    if (data.f === f) {
+      foundGas = mark;
+      break;
+    }
+  }
+  inputGas.value = foundGas;
+
+  updateFan(f, c);
+}
+
+function updateFromC() {
+  const c = parseFloat(inputC.value);
+  if (isNaN(c)) {
+    inputF.value = '';
+    inputGas.value = '';
+    updateFan(NaN, NaN);
+    return;
+  }
+
+  // Calculate F
+  const f = Math.round((c * 9 / 5) + 32);
+  inputF.value = f;
+
+  // Check if matches Gas Mark strictly by C or close F
+  let foundGas = "";
+  for (const [mark, data] of Object.entries(tableMapping)) {
+    if (data.c === c) {
+      foundGas = mark;
+      break;
+    }
+  }
+  inputGas.value = foundGas;
+
+  updateFan(f, c);
+}
+
+function updateFromGas() {
+  const gm = inputGas.value;
+  if (!gm) return; // if 'Custom' selected, do nothing.
+
+  const data = tableMapping[gm];
+  inputF.value = data.f;
+  inputC.value = data.c;
+
+  updateFan(data.f, data.c);
+}
+
+function copyResult() {
+  const f = inputF.value;
+  const c = inputC.value;
+  const gm = inputGas.options[inputGas.selectedIndex].text;
+  const ff = fanF.textContent;
+  const fc = fanC.textContent;
+
+  if (!f || !c) return;
+
+  let gmText = inputGas.value ? ` / ${gm}` : "";
+
+  const text = `Oven Temperature: ${f}°F / ${c}°C${gmText}\nFan Equivalent: ${ff}°F / ${fc}°C`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy Results';
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+// Event Listeners
+inputF.addEventListener('input', updateFromF);
+inputC.addEventListener('input', updateFromC);
+inputGas.addEventListener('change', updateFromGas);
+
+// Init based on default value
+updateFromGas();
+</script>
+</body>
+</html>
