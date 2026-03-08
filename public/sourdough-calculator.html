@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sourdough Calculator — Master Your Dough Ratios & Timing | Free Tool</title>
+<meta name="description" content="Calculate perfect sourdough bread ratios instantly. Enter total dough or flour weight, set hydration and starter percentages, and get an exact baking schedule. Free, no signup.">
+<meta property="og:title" content="Sourdough Calculator — Master Your Dough Ratios & Timing">
+<meta property="og:description" content="Calculate exact gram amounts for flour, water, starter, and salt. Get a customized baking timeline based on your start time. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Sourdough Calculator",
+  "url": "https://28grams.vip/sourdough-calculator",
+  "description": "Calculate sourdough ratios, hydration, starter percentages, and generate a baking schedule.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards shared */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; }
+
+/* Target weight control */
+.totals-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.total-group { display: flex; align-items: center; gap: 10px; }
+.total-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.total-input {
+  width: 90px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.total-input:focus { border-color: #C2185B; }
+.total-unit { font-size: 1.2rem; color: #888; font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.arrow { font-size: 1.5rem; color: #C2185B; }
+
+/* Formula Inputs */
+.formula-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 24px 20px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input {
+  width: 100%;
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e0d0d8;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  outline: none;
+  text-align: right;
+  padding-right: 24px;
+}
+.input-wrap input:focus { border-color: #C2185B; }
+.input-wrap::after {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  pointer-events: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  content: '%';
+}
+.info-text {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* Results Grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 24px 20px;
+}
+.res-box {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+.res-label {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: block;
+}
+.res-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+}
+.res-val span {
+  font-size: 0.9rem;
+  color: #888;
+  font-weight: 500;
+}
+
+/* Schedule */
+.schedule-controls {
+  padding: 16px 20px;
+  border-bottom: 1px solid #2a1820;
+  background: #181015;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.schedule-controls label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+}
+.schedule-controls input[type="time"] {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #e0d0d8;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  outline: none;
+}
+.schedule-controls input[type="time"]:focus { border-color: #C2185B; }
+
+.timeline { padding: 20px; }
+.time-row {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #1a1015;
+  align-items: center;
+}
+.time-row:last-child { border-bottom: none; }
+.t-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  color: #C2185B;
+  font-weight: 600;
+}
+.t-step {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e0d0d8;
+}
+.t-desc {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 2px;
+}
+.t-dur {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: #666;
+  background: #1a1015;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .totals-bar { flex-direction: column; gap: 14px; }
+  .formula-grid { grid-template-columns: 1fr; gap: 16px; }
+  .results-grid { grid-template-columns: repeat(2, 1fr); }
+  .time-row { grid-template-columns: 70px 1fr; }
+  .t-dur { display: none; }
+}
+
+/* Hidden copy text area */
+#clipboardData { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Sourdough <span>Calculator</span> 🌾</h1>
+  <p>Calculate perfect sourdough ratios and generate an exact baking timeline. Enter your total dough weight and hydration to get started.</p>
+</div>
+
+<div class="main">
+
+  <div class="totals-bar">
+    <div class="total-group">
+      <span class="total-label">Total Flour</span>
+      <input type="number" class="total-input" id="totalFlour" value="500" min="0" step="any">
+      <span class="total-unit">g</span>
+    </div>
+    <span class="arrow">↔</span>
+    <div class="total-group">
+      <span class="total-label">Total Dough</span>
+      <input type="number" class="total-input" id="totalDough" value="860" min="0" step="any">
+      <span class="total-unit">g</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>🧮 Baker's Percentages</h2>
+    </div>
+    <div class="formula-grid">
+      <div class="input-group">
+        <label>Hydration</label>
+        <div class="input-wrap">
+          <input type="number" id="hydP" value="70" min="0" max="150" step="1">
+        </div>
+        <div class="info-text">Ratio of water to flour. Higher = more open crumb, harder to handle.</div>
+      </div>
+      <div class="input-group">
+        <label>Inoculation (Starter)</label>
+        <div class="input-wrap">
+          <input type="number" id="staP" value="20" min="0" max="100" step="1">
+        </div>
+        <div class="info-text">Amount of starter. Higher = faster bulk fermentation.</div>
+      </div>
+      <div class="input-group">
+        <label>Salt</label>
+        <div class="input-wrap">
+          <input type="number" id="salP" value="2" min="0" max="5" step="0.1">
+        </div>
+        <div class="info-text">Standard is 2%. Controls fermentation rate and flavor.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>⚖️ Ingredients List</h2>
+      <button class="copy-btn" id="copyIngBtn" onclick="copyIngredients()">Copy Recipe</button>
+    </div>
+    <div class="results-grid">
+      <div class="res-box">
+        <span class="res-label">Flour</span>
+        <div class="res-val" id="resFlour">500<span>g</span></div>
+      </div>
+      <div class="res-box">
+        <span class="res-label">Water</span>
+        <div class="res-val" id="resWater">350<span>g</span></div>
+      </div>
+      <div class="res-box">
+        <span class="res-label">Starter (100%)</span>
+        <div class="res-val" id="resStarter">100<span>g</span></div>
+      </div>
+      <div class="res-box">
+        <span class="res-label">Salt</span>
+        <div class="res-val" id="resSalt">10<span>g</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>⏱️ Baking Schedule</h2>
+      <button class="copy-btn" id="copySchedBtn" onclick="copySchedule()">Copy Timeline</button>
+    </div>
+    <div class="schedule-controls">
+      <label>Start Time:</label>
+      <input type="time" id="startTime" value="09:00">
+    </div>
+    <div class="timeline" id="timelineList">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+
+</div>
+
+<div class="content">
+  <h2>Understanding Sourdough Percentages</h2>
+  <p>Sourdough recipes almost always use <strong>Baker's Percentages</strong>. This means every ingredient is expressed as a percentage of the total flour weight. Total flour is always exactly 100%.</p>
+  <ul>
+    <li><strong>Hydration (Water):</strong> 70% hydration means for every 1000g of flour, you use 700g of water. Lower hydration (65-70%) is easier to shape and perfect for beginners. Higher hydration (75-85%) yields a more open, airy crumb but results in sticky dough that requires experience to handle.</li>
+    <li><strong>Inoculation (Starter):</strong> The standard is 20%. This dictates how fast your dough will ferment. If your kitchen is very hot in summer, drop this to 10-15% to prevent over-proofing. In winter, you might increase it to 25%. (Note: This calculator assumes a 100% hydration starter, meaning half flour, half water).</li>
+    <li><strong>Salt:</strong> Almost universally set at 2% for bread. It tightens the gluten structure and slows down yeast activity slightly, preventing runaway fermentation.</li>
+  </ul>
+
+  <h2>How to Use This Tool</h2>
+  <p>You can approach your bake in two ways:</p>
+  <p><strong>1. Target Dough Weight:</strong> If you know you want two loaves weighing 850g each (total 1700g), type 1700 into the Total Dough box. The calculator will work backward to tell you exactly how much flour, water, and starter you need.</p>
+  <p><strong>2. Flour-First:</strong> If you have exactly 500g of bread flour left in your bag, type 500 into the Total Flour box. The calculator will scale everything else to match.</p>
+
+  <h2>The Baking Schedule</h2>
+  <p>The timeline provided is a standard guideline for a 20% starter recipe at a comfortable room temperature (~72°F/22°C). Sourdough is a living thing — watch the dough, not the clock.</p>
+  <ul>
+    <li>If your kitchen is <strong>warmer</strong>, bulk fermentation will happen much faster.</li>
+    <li>If your kitchen is <strong>colder</strong>, it may take hours longer than the timeline suggests.</li>
+    <li>A dough is fully proofed when it has increased in volume by 30-50%, is jiggly, domed at the edges, and holds an indentation slightly when poked.</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<textarea id="clipboardData" aria-hidden="true"></textarea>
+
+<script>
+// Elements
+var inFlour = document.getElementById('totalFlour');
+var inDough = document.getElementById('totalDough');
+var inHyd = document.getElementById('hydP');
+var inSta = document.getElementById('staP');
+var inSal = document.getElementById('salP');
+
+var resFlour = document.getElementById('resFlour');
+var resWater = document.getElementById('resWater');
+var resStarter = document.getElementById('resStarter');
+var resSalt = document.getElementById('resSalt');
+
+var inStartTime = document.getElementById('startTime');
+var timelineList = document.getElementById('timelineList');
+var clipboardData = document.getElementById('clipboardData');
+
+// State
+var weights = { flour: 0, water: 0, starter: 0, salt: 0 };
+var scheduleData = [];
+
+function round(val) { return Math.round(val * 10) / 10; }
+
+function calcFromFlour() {
+  var tf = parseFloat(inFlour.value) || 0;
+  var hp = (parseFloat(inHyd.value) || 0) / 100;
+  var sp = (parseFloat(inSta.value) || 0) / 100;
+  var sap = (parseFloat(inSal.value) || 0) / 100;
+
+  weights.flour = tf;
+  weights.water = tf * hp;
+  weights.starter = tf * sp;
+  weights.salt = tf * sap;
+
+  var td = weights.flour + weights.water + weights.starter + weights.salt;
+  inDough.value = round(td);
+
+  updateDisplay();
+}
+
+function calcFromDough() {
+  var td = parseFloat(inDough.value) || 0;
+  var hp = (parseFloat(inHyd.value) || 0) / 100;
+  var sp = (parseFloat(inSta.value) || 0) / 100;
+  var sap = (parseFloat(inSal.value) || 0) / 100;
+
+  var totalPercent = 1 + hp + sp + sap;
+  var tf = td / totalPercent;
+
+  weights.flour = tf;
+  weights.water = tf * hp;
+  weights.starter = tf * sp;
+  weights.salt = tf * sap;
+
+  inFlour.value = round(tf);
+
+  updateDisplay();
+}
+
+function updateDisplay() {
+  resFlour.innerHTML = round(weights.flour) + '<span>g</span>';
+  resWater.innerHTML = round(weights.water) + '<span>g</span>';
+  resStarter.innerHTML = round(weights.starter) + '<span>g</span>';
+  resSalt.innerHTML = round(weights.salt) + '<span>g</span>';
+}
+
+// Schedule Logic
+function generateSchedule() {
+  var timeStr = inStartTime.value;
+  if (!timeStr) return;
+
+  var parts = timeStr.split(':');
+  var startDate = new Date();
+  startDate.setHours(parseInt(parts[0]), parseInt(parts[1]), 0, 0);
+
+  var steps = [
+    { title: "Mix Autolyse", desc: "Mix flour and water. Let rest to hydrate.", durMins: 0 },
+    { title: "Add Starter & Salt", desc: "Dimple in starter and salt. Mix thoroughly.", durMins: 60 },
+    { title: "Stretch & Fold 1", desc: "First set of gentle stretch and folds.", durMins: 30 },
+    { title: "Stretch & Fold 2", desc: "Second set. Dough should feel stronger.", durMins: 30 },
+    { title: "Stretch & Fold 3", desc: "Final set. Leave to rest untouched.", durMins: 30 },
+    { title: "End Bulk Fermentation", desc: "Dough should be jiggly, airy, and increased by 30-50%.", durMins: 180 }, // 3 hrs rest
+    { title: "Pre-shape", desc: "Shape gently into a loose round. Rest on counter.", durMins: 0 },
+    { title: "Final Shape", desc: "Shape tightly. Place upside down in banneton.", durMins: 30 },
+    { title: "Cold Retard", desc: "Place in fridge for overnight proofing (12-18 hours).", durMins: 0 },
+    { title: "Bake", desc: "Next day: Score and bake in pre-heated dutch oven.", durMins: 12 * 60 }
+  ];
+
+  scheduleData = [];
+  var currentTime = startDate.getTime();
+
+  steps.forEach(function(step) {
+    currentTime += step.durMins * 60000;
+    var d = new Date(currentTime);
+
+    // Format AM/PM time
+    var h = d.getHours();
+    var m = d.getMinutes();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12;
+    h = h ? h : 12;
+    var mm = m < 10 ? '0' + m : m;
+    var fTime = h + ':' + mm + ' ' + ampm;
+
+    // Day marker if crossed midnight (simple approximation for overnight bake)
+    var dayLabel = "";
+    if (step.durMins > 600) dayLabel = " (Next Day)";
+
+    var durStr = "";
+    if (step.durMins > 0 && step.durMins < 60) durStr = "+ " + step.durMins + "m";
+    if (step.durMins >= 60) durStr = "+ " + Math.round(step.durMins / 60 * 10)/10 + "h";
+
+    scheduleData.push({
+      time: fTime + dayLabel,
+      title: step.title,
+      desc: step.desc,
+      dur: durStr
+    });
+  });
+
+  renderSchedule();
+}
+
+function renderSchedule() {
+  timelineList.innerHTML = '';
+  scheduleData.forEach(function(s) {
+    var row = document.createElement('div');
+    row.className = 'time-row';
+    row.innerHTML =
+      '<div class="t-time">' + s.time + '</div>' +
+      '<div>' +
+        '<div class="t-step">' + s.title + '</div>' +
+        '<div class="t-desc">' + s.desc + '</div>' +
+      '</div>' +
+      (s.dur ? '<div class="t-dur">' + s.dur + '</div>' : '<div></div>');
+    timelineList.appendChild(row);
+  });
+}
+
+// Copy Handlers
+function copyIngredients() {
+  var txt = "Sourdough Recipe:\n" +
+            "-----------------\n" +
+            "Flour:   " + round(weights.flour) + "g\n" +
+            "Water:   " + round(weights.water) + "g (" + inHyd.value + "%)\n" +
+            "Starter: " + round(weights.starter) + "g (" + inSta.value + "%)\n" +
+            "Salt:    " + round(weights.salt) + "g (" + inSal.value + "%)\n" +
+            "-----------------\n" +
+            "Total Dough: " + round(parseFloat(inDough.value)) + "g";
+
+  clipboardData.value = txt;
+  clipboardData.select();
+  document.execCommand('copy');
+
+  var btn = document.getElementById('copyIngBtn');
+  btn.textContent = '✓ Copied';
+  btn.classList.add('copied');
+  setTimeout(function() { btn.textContent = 'Copy Recipe'; btn.classList.remove('copied'); }, 1500);
+}
+
+function copySchedule() {
+  var txt = "Baking Schedule:\n-----------------\n";
+  scheduleData.forEach(function(s) {
+    txt += s.time.padEnd(14, ' ') + " | " + s.title + "\n";
+  });
+
+  clipboardData.value = txt;
+  clipboardData.select();
+  document.execCommand('copy');
+
+  var btn = document.getElementById('copySchedBtn');
+  btn.textContent = '✓ Copied';
+  btn.classList.add('copied');
+  setTimeout(function() { btn.textContent = 'Copy Timeline'; btn.classList.remove('copied'); }, 1500);
+}
+
+// Listeners
+inFlour.addEventListener('input', calcFromFlour);
+inDough.addEventListener('input', calcFromDough);
+inHyd.addEventListener('input', calcFromFlour);
+inSta.addEventListener('input', calcFromFlour);
+inSal.addEventListener('input', calcFromFlour);
+inStartTime.addEventListener('input', generateSchedule);
+
+// Init
+calcFromFlour();
+generateSchedule();
+</script>
+</body>
+</html>
