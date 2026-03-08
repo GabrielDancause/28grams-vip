@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Brewing Methods Compared — Reference Guide</title>
+<meta name="description" content="A comprehensive reference guide and cheat sheet for coffee brewing methods: Pour-over, French press, AeroPress, and espresso. Compare grind size, ratio, technique, and flavor profiles.">
+<meta property="og:title" content="Coffee Brewing Methods Compared — Reference Guide">
+<meta property="og:description" content="A comprehensive reference guide for coffee brewing methods: Pour-over, French press, AeroPress, and espresso. Compare grind size, ratio, technique, and flavor profiles.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Coffee Brewing Methods Compared — Reference Guide",
+  "description": "A comprehensive reference guide and cheat sheet for coffee brewing methods: Pour-over, French press, AeroPress, and espresso. Compare grind size, ratio, technique, and flavor profiles.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" },
+  "publisher": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Search Bar */
+.search-container {
+  margin-bottom: 24px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px 20px 16px 48px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Reference Cards */
+.calc-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.calc-card:hover { border-color: #3a2830; }
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.calc-header h2 { font-size: 1.1rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+.calc-body {
+  padding: 24px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.detail-group {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 12px;
+  padding: 16px;
+}
+.detail-label {
+  font-size: 0.75rem;
+  color: #888;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: block;
+}
+.detail-value {
+  font-size: 0.95rem;
+  color: #e0d0d8;
+  line-height: 1.5;
+}
+.detail-value.highlight {
+  color: #C2185B;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Expandable Technique Section */
+.technique-section {
+  grid-column: 1 / -1;
+  border-top: 1px solid #2a1820;
+  margin-top: 4px;
+  padding-top: 20px;
+}
+.technique-toggle {
+  background: none;
+  border: none;
+  color: #C2185B;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+.technique-toggle svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+.technique-toggle.expanded svg {
+  transform: rotate(180deg);
+}
+.technique-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+}
+.technique-content.expanded {
+  max-height: 500px; /* arbitrary large max-height for animation */
+  margin-top: 16px;
+}
+.technique-list {
+  list-style: none;
+  counter-reset: tech-counter;
+}
+.technique-list li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: #c8b8c0;
+  line-height: 1.6;
+}
+.technique-list li:last-child { margin-bottom: 0; }
+.technique-list li::before {
+  counter-increment: tech-counter;
+  content: counter(tech-counter);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background: #2a1820;
+  color: #888;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; transition: color 0.2s; }
+.footer a:hover { color: #ff6b9d; }
+
+/* No Results State */
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+  font-size: 0.95rem;
+  background: #120c10;
+  border: 2px dashed #2a1820;
+  border-radius: 16px;
+}
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .calc-body { grid-template-columns: 1fr; gap: 16px; padding: 20px 16px; }
+  .calc-header { padding: 14px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Coffee Brewing <span>Guide</span> ☕</h1>
+  <p>The developer's cheat sheet for coffee brewing methods. Compare grind sizes, ratios, techniques, and flavor profiles instantly.</p>
+</div>
+
+<div class="main">
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search methods, tools, or flavor profiles...">
+  </div>
+
+  <div id="noResults" class="no-results">
+    No brewing methods match your search. Try "espresso", "bold", or "french press".
+  </div>
+
+  <div class="methods-container" id="methodsContainer">
+
+    <!-- Pour-Over Card -->
+    <div class="calc-card" data-search="pour-over pour over v60 chemex filter clean bright nuanced">
+      <div class="calc-header">
+        <h2>Pour-Over (V60 / Chemex)</h2>
+        <button class="copy-btn" onclick="copyRecipe(this, 'Pour-Over', 'Medium-Fine', '1:15 to 1:17', 'Clean, bright, and nuanced')">Copy Recipe</button>
+      </div>
+      <div class="calc-body">
+        <div class="detail-group">
+          <span class="detail-label">Grind Size</span>
+          <div class="detail-value highlight">Medium-Fine</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">Like table salt</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Standard Ratio</span>
+          <div class="detail-value highlight">1:15 to 1:17</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">1g coffee : 16g water</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Water Temp</span>
+          <div class="detail-value">90°C - 96°C <span class="mono">(195°F - 205°F)</span></div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Flavor Profile</span>
+          <div class="detail-value">Clean, bright, and nuanced. Highlights acidity and complex floral/fruity notes.</div>
+        </div>
+
+        <div class="technique-section">
+          <button class="technique-toggle" onclick="toggleTechnique(this)">
+            View Technique
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="technique-content">
+            <ul class="technique-list">
+              <li>Place filter in dripper and rinse with hot water. Discard rinse water.</li>
+              <li>Add ground coffee and level the bed.</li>
+              <li><strong>The Bloom:</strong> Pour water equal to 2-3x the coffee weight. Wait 30-45 seconds.</li>
+              <li><strong>The Pour:</strong> Slowly pour remaining water in slow, concentric circles.</li>
+              <li>Allow the water to drain completely. Target brew time: 2:30 - 3:30.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- French Press Card -->
+    <div class="calc-card" data-search="french press immersion cafetiere heavy full-bodied bold">
+      <div class="calc-header">
+        <h2>French Press</h2>
+        <button class="copy-btn" onclick="copyRecipe(this, 'French Press', 'Coarse', '1:12 to 1:15', 'Heavy, full-bodied, and bold')">Copy Recipe</button>
+      </div>
+      <div class="calc-body">
+        <div class="detail-group">
+          <span class="detail-label">Grind Size</span>
+          <div class="detail-value highlight">Coarse</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">Like sea salt</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Standard Ratio</span>
+          <div class="detail-value highlight">1:12 to 1:15</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">1g coffee : 15g water</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Water Temp</span>
+          <div class="detail-value">93°C <span class="mono">(200°F)</span></div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Flavor Profile</span>
+          <div class="detail-value">Heavy, full-bodied, and bold. Retains natural oils for a rich mouthfeel.</div>
+        </div>
+
+        <div class="technique-section">
+          <button class="technique-toggle" onclick="toggleTechnique(this)">
+            View Technique
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="technique-content">
+            <ul class="technique-list">
+              <li>Preheat the press with hot water, then discard.</li>
+              <li>Add coarse coffee grounds to the carafe.</li>
+              <li>Pour water vigorously to saturate all grounds.</li>
+              <li>Wait 4 minutes to steep.</li>
+              <li>Optional: Gently break the crust and skim off foam/floating bits.</li>
+              <li>Press the plunger down slowly and pour immediately to stop extraction.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AeroPress Card -->
+    <div class="calc-card" data-search="aeropress versatile smooth concentrated pressure filter">
+      <div class="calc-header">
+        <h2>AeroPress</h2>
+        <button class="copy-btn" onclick="copyRecipe(this, 'AeroPress', 'Medium-Fine', '1:15 (Standard)', 'Smooth, versatile, and concentrated')">Copy Recipe</button>
+      </div>
+      <div class="calc-body">
+        <div class="detail-group">
+          <span class="detail-label">Grind Size</span>
+          <div class="detail-value highlight">Medium-Fine</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">Slightly finer than pour-over</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Standard Ratio</span>
+          <div class="detail-value highlight">1:15</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">Highly adaptable</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Water Temp</span>
+          <div class="detail-value">80°C - 85°C <span class="mono">(175°F - 185°F)</span></div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Flavor Profile</span>
+          <div class="detail-value">Smooth, versatile, and low acidity. Can mimic both espresso and pour-over styles.</div>
+        </div>
+
+        <div class="technique-section">
+          <button class="technique-toggle" onclick="toggleTechnique(this)">
+            View Technique (Inverted)
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="technique-content">
+            <ul class="technique-list">
+              <li>Assemble AeroPress upside-down (plunger on bottom) and pre-heat.</li>
+              <li>Place filter in cap and rinse.</li>
+              <li>Add coffee and start timer. Pour water to saturate grounds.</li>
+              <li>Stir gently for 10 seconds. Wait until 1:30.</li>
+              <li>Attach filter cap tightly.</li>
+              <li>Carefully flip the entire assembly onto a sturdy mug.</li>
+              <li>Press plunger steadily for 30 seconds until you hear a hiss.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Espresso Card -->
+    <div class="calc-card" data-search="espresso machine intense concentrated crema tight">
+      <div class="calc-header">
+        <h2>Espresso</h2>
+        <button class="copy-btn" onclick="copyRecipe(this, 'Espresso', 'Fine', '1:2', 'Intense, syrupy, concentrated')">Copy Recipe</button>
+      </div>
+      <div class="calc-body">
+        <div class="detail-group">
+          <span class="detail-label">Grind Size</span>
+          <div class="detail-value highlight">Very Fine</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">Like powdered sugar</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Standard Ratio</span>
+          <div class="detail-value highlight">1:2</div>
+          <div style="font-size:0.8rem; color:#888; margin-top:4px;">18g in, 36g out</div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Water Temp</span>
+          <div class="detail-value">93°C <span class="mono">(200°F)</span></div>
+        </div>
+        <div class="detail-group">
+          <span class="detail-label">Flavor Profile</span>
+          <div class="detail-value">Intense, syrupy, highly concentrated with a rich crema.</div>
+        </div>
+
+        <div class="technique-section">
+          <button class="technique-toggle" onclick="toggleTechnique(this)">
+            View Technique
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="technique-content">
+            <ul class="technique-list">
+              <li>Grind coffee directly into portafilter.</li>
+              <li>Use WDT (Weiss Distribution Technique) to break up clumps and distribute grounds evenly.</li>
+              <li>Tamp grounds firmly and perfectly level.</li>
+              <li>Lock portafilter into group head and start extraction immediately.</li>
+              <li>Aim for 25-30 seconds of extraction time to reach your target yield (e.g., 36g).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="content">
+  <h2>The Golden Rules of Coffee Brewing</h2>
+  <p>Regardless of the brewing method you choose, a few fundamental principles dictate the quality of your cup:</p>
+  <ul>
+    <li><strong>Freshness matters:</strong> Buy whole beans roasted within the last 2-4 weeks. Grind them immediately before brewing. Pre-ground coffee loses its aromatic compounds incredibly fast.</li>
+    <li><strong>Use a scale:</strong> Volumetric measurements (like scoops) are wildly inaccurate due to bean density variations. Weighing your coffee and water in grams ensures repeatability.</li>
+    <li><strong>Water quality:</strong> Coffee is 98% water. If your tap water tastes bad or is too hard/soft, your coffee will suffer. Use filtered water.</li>
+  </ul>
+
+  <h2>Understanding Extraction</h2>
+  <p>Extraction is the process of dissolving coffee flavors into water. The goal is a balanced extraction. If you under-extract, the coffee tastes sour, salty, and thin. If you over-extract, it tastes bitter, dry, and astringent.</p>
+  <p>You can control extraction by manipulating three main variables:</p>
+  <ul>
+    <li><strong>Grind Size:</strong> Finer grinds extract faster (more surface area). Coarser grinds extract slower.</li>
+    <li><strong>Time:</strong> The longer the water is in contact with the coffee, the more it extracts.</li>
+    <li><strong>Temperature:</strong> Hotter water extracts faster and more efficiently than cooler water.</li>
+  </ul>
+
+  <h2>Dialing In Your Brew</h2>
+  <p>If your coffee doesn't taste right, only change <strong>one variable at a time</strong>. The easiest variable to change is grind size. If your coffee is sour (under-extracted), grind finer. If your coffee is bitter (over-extracted), grind coarser. Leave your ratio and temperature identical until you have found the optimal grind size.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Search Functionality
+const searchInput = document.getElementById('searchInput');
+const methodCards = document.querySelectorAll('.calc-card');
+const noResults = document.getElementById('noResults');
+
+searchInput.addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase().trim();
+  let hasVisibleCards = false;
+
+  methodCards.forEach(card => {
+    const searchTerms = card.getAttribute('data-search').toLowerCase();
+
+    // Check if the card's search terms include the input term
+    if (searchTerms.includes(term)) {
+      card.style.display = 'block';
+      hasVisibleCards = true;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  // Show/Hide no results state
+  if (hasVisibleCards) {
+    noResults.style.display = 'none';
+  } else {
+    noResults.style.display = 'block';
+  }
+});
+
+// Expand/Collapse Technique
+function toggleTechnique(btn) {
+  const content = btn.nextElementSibling;
+
+  // Toggle classes
+  btn.classList.toggle('expanded');
+  content.classList.toggle('expanded');
+}
+
+// Copy Recipe Functionality
+function copyRecipe(btn, method, grind, ratio, notes) {
+  const summary = [
+    `☕ ${method} Brew Recipe`,
+    `--------------------------`,
+    `Grind Size : ${grind}`,
+    `Ratio      : ${ratio}`,
+    `Profile    : ${notes}`,
+    `--------------------------`,
+    `Generated via 28grams.vip`
+  ].join('\n');
+
+  navigator.clipboard.writeText(summary).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+</script>
+
+</body>
+</html>
