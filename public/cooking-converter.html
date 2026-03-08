@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking Unit Converter — Volume, Weight & Temp | Free Tool</title>
+<meta name="description" content="Convert between cups, grams, ounces, milliliters, and more. Includes ingredient density conversions for accurate volume-to-weight baking. Free, no signup.">
+<meta property="og:title" content="Cooking Unit Converter — Volume, Weight & Temp">
+<meta property="og:description" content="Convert cups to grams, Fahrenheit to Celsius. Free, accurate cooking conversions with built-in ingredient densities.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cooking Unit Converter",
+  "url": "https://28grams.vip/cooking-converter",
+  "description": "Convert between cups, grams, ounces, milliliters, and more. Includes ingredient density conversions for accurate volume-to-weight baking.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards */
+.converter-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+.card-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+.conv-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.conv-row input.amount {
+  flex: 1;
+  width: 100%;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  outline: none;
+}
+.conv-row input.amount.result {
+  color: #C2185B;
+  background: #150d12;
+  border-color: #2a1820;
+}
+.conv-row input.amount:focus { border-color: #C2185B; }
+.conv-row input.amount.result:focus { border-color: #2a1820; }
+
+.conv-row select.unit-select {
+  width: 150px;
+  flex-shrink: 0;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #e0d0d8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.conv-row select.unit-select:focus { border-color: #C2185B; }
+.conv-row select.unit-select optgroup { color: #888; font-weight: 600; }
+.conv-row select.unit-select option { color: #e0d0d8; }
+
+.mid-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.swap-btn {
+  background: #2a1020;
+  border: 1px solid #3a2030;
+  color: #C2185B;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.swap-btn:hover { background: #3a1530; }
+
+.ing-select-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.ing-select-wrap select {
+  width: 100%;
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="10" height="6" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+  transition: all 0.2s;
+}
+.ing-select-wrap select:disabled { opacity: 0.5; cursor: not-allowed; }
+.ing-select-wrap select.active { color: #e0d0d8; border-color: #3a2030; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .conv-row { flex-wrap: wrap; }
+  .conv-row select.unit-select { width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Cooking Unit <span>Converter</span> 🔄</h1>
+  <p>Convert volume, weight, and temperature. Includes density conversions for common ingredients.</p>
+</div>
+
+<div class="main">
+
+  <div class="converter-card" id="vwCard">
+    <div class="card-header">
+      <h2>⚖️ Volume & Weight</h2>
+      <button class="copy-btn" id="vwCopyBtn" onclick="copyResult('vwResult', 'vwCopyBtn')">Copy</button>
+    </div>
+    <div class="card-body">
+      <div class="conv-row">
+        <input type="number" id="vwAmount" class="amount" value="1" min="0" step="any">
+        <select id="vwFromUnit" class="unit-select">
+          <optgroup label="Volume">
+            <option value="cup">Cups</option>
+            <option value="tbsp">Tablespoons</option>
+            <option value="tsp">Teaspoons</option>
+            <option value="ml">Milliliters</option>
+            <option value="l">Liters</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option value="g">Grams</option>
+            <option value="kg">Kilograms</option>
+            <option value="oz">Ounces</option>
+            <option value="lb">Pounds</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="mid-row">
+        <button class="swap-btn" onclick="swapVw()">⇅ Swap</button>
+        <div class="ing-select-wrap">
+          <select id="vwIngredient" disabled>
+            <option value="water">Water / Liquid (1g/ml)</option>
+            <option value="flour">All-Purpose Flour (125g/cup)</option>
+            <option value="sugar">Granulated Sugar (200g/cup)</option>
+            <option value="brown_sugar">Brown Sugar, packed (213g/cup)</option>
+            <option value="powdered_sugar">Powdered Sugar (120g/cup)</option>
+            <option value="butter">Butter (227g/cup)</option>
+            <option value="cocoa">Cocoa Powder (80g/cup)</option>
+            <option value="milk">Milk (240g/cup)</option>
+            <option value="honey">Honey (340g/cup)</option>
+            <option value="oil">Vegetable Oil (218g/cup)</option>
+            <option value="salt">Table Salt (292g/cup)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="conv-row">
+        <input type="text" id="vwResult" class="amount result" readonly>
+        <select id="vwToUnit" class="unit-select">
+          <optgroup label="Volume">
+            <option value="cup">Cups</option>
+            <option value="tbsp">Tablespoons</option>
+            <option value="tsp">Teaspoons</option>
+            <option value="ml" selected>Milliliters</option>
+            <option value="l">Liters</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option value="g">Grams</option>
+            <option value="kg">Kilograms</option>
+            <option value="oz">Ounces</option>
+            <option value="lb">Pounds</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="converter-card" id="tempCard">
+    <div class="card-header">
+      <h2>🌡️ Temperature</h2>
+      <button class="copy-btn" id="tempCopyBtn" onclick="copyResult('tempResult', 'tempCopyBtn')">Copy</button>
+    </div>
+    <div class="card-body">
+      <div class="conv-row">
+        <input type="number" id="tempAmount" class="amount" value="350" step="any">
+        <select id="tempFromUnit" class="unit-select">
+          <option value="f">°F</option>
+          <option value="c">°C</option>
+        </select>
+      </div>
+      <div class="mid-row" style="justify-content: center;">
+        <button class="swap-btn" onclick="swapTemp()">⇅ Swap</button>
+      </div>
+      <div class="conv-row">
+        <input type="text" id="tempResult" class="amount result" readonly>
+        <select id="tempToUnit" class="unit-select">
+          <option value="c" selected>°C</option>
+          <option value="f">°F</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>Why Convert Volume to Weight?</h2>
+  <p>In professional kitchens and bakeries, measuring by weight (grams or ounces) is the standard. Measuring cups are inherently inaccurate for dry ingredients like flour because how you scoop can drastically change the amount packed into the cup. By converting your volume recipes to weight, you ensure <strong>perfect consistency every time you bake</strong>.</p>
+
+  <h2>How Does Ingredient Density Work?</h2>
+  <p>Different ingredients have different densities. One cup of water weighs approximately 236 grams, but one cup of all-purpose flour only weighs about 125 grams because it contains air. One cup of honey is extremely dense and weighs about 340 grams.</p>
+  <p>When you convert between a volume unit (like cups or tablespoons) and a weight unit (like grams or ounces), our calculator asks you to specify the ingredient so it can apply the correct density multiplier.</p>
+
+  <h2>Common Culinary Conversions</h2>
+  <ul>
+    <li><strong>1 cup</strong> = 16 tablespoons = 48 teaspoons ≈ 237 ml</li>
+    <li><strong>1 tablespoon</strong> = 3 teaspoons ≈ 15 ml</li>
+    <li><strong>1 ounce (weight)</strong> ≈ 28.35 grams</li>
+    <li><strong>1 pound</strong> = 16 ounces ≈ 454 grams</li>
+    <li><strong>1 stick of butter</strong> = ½ cup = 4 ounces = 113 grams</li>
+  </ul>
+
+  <h2>Temperature: Fahrenheit to Celsius</h2>
+  <p>Most American recipes use Fahrenheit, while the rest of the world uses Celsius. Common oven temperatures:</p>
+  <ul>
+    <li><strong>Warm:</strong> 200°F = 95°C</li>
+    <li><strong>Low:</strong> 300°F = 150°C</li>
+    <li><strong>Moderate:</strong> 350°F = 175°C (Standard baking temp)</li>
+    <li><strong>Moderately High:</strong> 375°F = 190°C</li>
+    <li><strong>High:</strong> 400°F = 205°C</li>
+    <li><strong>Very High:</strong> 450°F = 230°C</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Conversion Maps
+const volUnits = { cup: 236.588, tbsp: 14.7868, tsp: 4.92892, ml: 1, l: 1000 };
+const weightUnits = { g: 1, kg: 1000, oz: 28.3495, lb: 453.592 };
+
+const densities = {
+  water: 236.588,
+  flour: 125,
+  sugar: 200,
+  brown_sugar: 213,
+  powdered_sugar: 120,
+  butter: 227,
+  cocoa: 80,
+  milk: 240,
+  honey: 340,
+  oil: 218,
+  salt: 292
+};
+
+// DOM Elements
+const vwAmount = document.getElementById('vwAmount');
+const vwFromUnit = document.getElementById('vwFromUnit');
+const vwToUnit = document.getElementById('vwToUnit');
+const vwIngredient = document.getElementById('vwIngredient');
+const vwResult = document.getElementById('vwResult');
+
+const tempAmount = document.getElementById('tempAmount');
+const tempFromUnit = document.getElementById('tempFromUnit');
+const tempToUnit = document.getElementById('tempToUnit');
+const tempResult = document.getElementById('tempResult');
+
+function formatNumber(num) {
+  if (isNaN(num)) return '';
+  // Round to max 2 decimal places
+  let rounded = Math.round(num * 100) / 100;
+  return rounded.toString();
+}
+
+function updateVw() {
+  const amt = parseFloat(vwAmount.value);
+  if (isNaN(amt)) {
+    vwResult.value = '';
+    return;
+  }
+
+  const from = vwFromUnit.value;
+  const to = vwToUnit.value;
+
+  const fromIsVol = from in volUnits;
+  const toIsVol = to in volUnits;
+
+  // Enable/disable ingredient selector based on cross-conversion
+  if (fromIsVol !== toIsVol) {
+    vwIngredient.disabled = false;
+    vwIngredient.classList.add('active');
+  } else {
+    vwIngredient.disabled = true;
+    vwIngredient.classList.remove('active');
+  }
+
+  let result = 0;
+
+  if (fromIsVol && toIsVol) {
+    result = amt * volUnits[from] / volUnits[to];
+  } else if (!fromIsVol && !toIsVol) {
+    result = amt * weightUnits[from] / weightUnits[to];
+  } else if (fromIsVol && !toIsVol) {
+    // Volume to Weight
+    const gPerCup = densities[vwIngredient.value];
+    const cups = (amt * volUnits[from]) / volUnits.cup;
+    const grams = cups * gPerCup;
+    result = grams / weightUnits[to];
+  } else if (!fromIsVol && toIsVol) {
+    // Weight to Volume
+    const gPerCup = densities[vwIngredient.value];
+    const grams = amt * weightUnits[from];
+    const cups = grams / gPerCup;
+    const ml = cups * volUnits.cup;
+    result = ml / volUnits[to];
+  }
+
+  vwResult.value = formatNumber(result);
+}
+
+function updateTemp() {
+  const amt = parseFloat(tempAmount.value);
+  if (isNaN(amt)) {
+    tempResult.value = '';
+    return;
+  }
+
+  const from = tempFromUnit.value;
+  const to = tempToUnit.value;
+
+  let result = amt;
+
+  if (from === 'f' && to === 'c') {
+    result = (amt - 32) * 5 / 9;
+  } else if (from === 'c' && to === 'f') {
+    result = (amt * 9 / 5) + 32;
+  }
+
+  tempResult.value = formatNumber(result);
+}
+
+function swapVw() {
+  const temp = vwFromUnit.value;
+  vwFromUnit.value = vwToUnit.value;
+  vwToUnit.value = temp;
+  updateVw();
+}
+
+function swapTemp() {
+  const temp = tempFromUnit.value;
+  tempFromUnit.value = tempToUnit.value;
+  tempToUnit.value = temp;
+  updateTemp();
+}
+
+function copyResult(inputId, btnId) {
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(btnId);
+  if (!input.value) return;
+
+  navigator.clipboard.writeText(input.value).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+// Event Listeners
+[vwAmount, vwFromUnit, vwToUnit, vwIngredient].forEach(el => el.addEventListener('input', updateVw));
+[tempAmount, tempFromUnit, tempToUnit].forEach(el => el.addEventListener('input', updateTemp));
+
+// Init
+updateVw();
+updateTemp();
+</script>
+</body>
+</html>
