@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Cookbooks for Home Cooks — Curated List & Comparison | 28grams.vip</title>
+<meta name="description" content="Top cookbooks for home cooks by cuisine: Italian, Asian, French, baking, and BBQ. Filter, compare, and find the perfect cookbook from beginner to advanced.">
+<meta property="og:title" content="Best Cookbooks for Home Cooks — Curated List & Comparison">
+<meta property="og:description" content="Top cookbooks for home cooks by cuisine: Italian, Asian, French, baking, and BBQ. Filter, compare, and find the perfect cookbook from beginner to advanced.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Best Cookbooks for Home Cooks",
+  "name": "Best Cookbooks for Home Cooks — Curated List & Comparison",
+  "url": "https://28grams.vip/list-cookbooks",
+  "description": "Top cookbooks for home cooks by cuisine: Italian, Asian, French, baking, and BBQ. Filter, compare, and find the perfect cookbook from beginner to advanced.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #888; font-size: 0.95rem; max-width: 520px; margin: 0 auto; line-height: 1.5; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Filter & Sort Bar */
+.controls-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.search-container {
+  position: relative;
+  width: 100%;
+}
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 14px 20px 14px 44px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: #150d12;
+  border: 1px solid #2a1820;
+  color: #888;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.filter-btn:hover { background: #1a1015; color: #ccc; }
+.filter-btn.active { background: #C2185B; color: #fff; border-color: #C2185B; }
+
+.sort-select {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  color: #e0d0d8;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Cards */
+.card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.card.hidden { display: none; }
+.card-top {
+  padding: 20px;
+  border-bottom: 1px solid #2a1820;
+  background: #150d12;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.card-title-group { flex: 1; }
+.card-title { font-size: 1.2rem; font-weight: 800; color: #fff; margin-bottom: 4px; line-height: 1.3; }
+.card-author { font-size: 0.9rem; color: #888; font-style: italic; margin-bottom: 8px; }
+.badge { display: inline-block; background: #2a1820; color: #c8b8c0; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.card-score {
+  text-align: right;
+  background: #1a0a14;
+  border: 1px solid #C2185B;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 60px;
+}
+.score-num { font-size: 1.2rem; font-weight: 900; color: #C2185B; display: block; font-family: 'JetBrains Mono', monospace; }
+.score-label { font-size: 0.65rem; color: #888; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+
+.card-body { padding: 20px; }
+.card-desc { font-size: 0.9rem; color: #c8b8c0; line-height: 1.6; margin-bottom: 16px; }
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.metric { background: #1a1015; border: 1px solid #2a1820; border-radius: 8px; padding: 10px; text-align: center; }
+.metric-label { font-size: 0.7rem; color: #888; text-transform: uppercase; font-weight: 600; margin-bottom: 4px; }
+.metric-value { font-size: 0.85rem; color: #fff; font-weight: 600; }
+
+.pros-cons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: #150d12;
+  border-radius: 8px;
+  padding: 16px;
+}
+.pc-col h4 { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; color: #888; letter-spacing: 0.5px; }
+.pc-col ul { list-style: none; }
+.pc-col li { font-size: 0.85rem; color: #e0d0d8; line-height: 1.5; margin-bottom: 6px; position: relative; padding-left: 18px; }
+.pc-col li::before { position: absolute; left: 0; font-weight: 900; }
+.pros li::before { content: '+'; color: #4ade80; }
+.cons li::before { content: '-'; color: #f87171; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #888; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #888; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #888; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .card-top { flex-direction: column; }
+  .card-score { align-self: flex-start; margin-top: 8px; }
+  .metrics-grid { grid-template-columns: 1fr; }
+  .pros-cons { grid-template-columns: 1fr; gap: 12px; }
+  .filter-row { flex-direction: column; align-items: stretch; }
+  .sort-select { align-self: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Best Cookbooks <span>Ranked</span> 📚</h1>
+  <p>The definitive guide to essential cookbooks for home cooks. Compare top picks across cuisines and skill levels.</p>
+</div>
+
+<div class="main">
+  <div class="controls-container">
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search by title, author, or keyword...">
+    </div>
+    <div class="filter-row">
+      <div class="filters" id="categoryFilters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="general">General</button>
+        <button class="filter-btn" data-filter="italian">Italian</button>
+        <button class="filter-btn" data-filter="asian">Asian</button>
+        <button class="filter-btn" data-filter="french">French</button>
+        <button class="filter-btn" data-filter="baking">Baking</button>
+        <button class="filter-btn" data-filter="bbq">BBQ</button>
+      </div>
+      <select class="sort-select" id="sortSelect">
+        <option value="rating-desc">Sort: Highest Rating</option>
+        <option value="title-asc">Sort: Title (A-Z)</option>
+        <option value="level-asc">Sort: Beginner First</option>
+      </select>
+    </div>
+  </div>
+
+  <div id="cookbookList">
+
+    <!-- Card 1 -->
+    <div class="card" data-category="general" data-rating="9.8" data-level="1" data-title="Salt, Fat, Acid, Heat">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">Salt, Fat, Acid, Heat</h2>
+          <div class="card-author">by Samin Nosrat</div>
+          <span class="badge">General</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.8</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Master the fundamental elements of good cooking. Instead of rigid recipes, this book teaches you the intuition behind balancing flavors and textures, making you a confident improviser in the kitchen.</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Beginner</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Technique</div></div>
+          <div class="metric"><div class="metric-label">Format</div><div class="metric-value">Illustrated</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Teaches intuitive cooking over strict recipes</li>
+              <li>Beautiful, informative illustrations</li>
+              <li>Highly accessible writing style</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Fewer traditional recipes than standard books</li>
+              <li>Lacks step-by-step photos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card" data-category="general" data-rating="9.6" data-level="3" data-title="The Food Lab">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">The Food Lab</h2>
+          <div class="card-author">by J. Kenji López-Alt</div>
+          <span class="badge">General</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.6</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">A deep dive into the science of everyday cooking. Kenji meticulously tests classic American dishes to find the best, most reliable methods. Perfect for cooks who want to know the "why" behind the "how".</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Advanced</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Science</div></div>
+          <div class="metric"><div class="metric-label">Pages</div><div class="metric-value">958</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Incredibly thorough scientific explanations</li>
+              <li>Bulletproof, exhaustively tested recipes</li>
+              <li>Excellent step-by-step photography</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Massive and heavy book</li>
+              <li>Some recipes are very time-consuming</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-category="italian" data-rating="9.5" data-level="2" data-title="Essentials of Classic Italian Cooking">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">Essentials of Classic Italian Cooking</h2>
+          <div class="card-author">by Marcella Hazan</div>
+          <span class="badge">Italian</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.5</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">The ultimate bible for traditional Italian home cooking. Hazan's approach is uncompromising yet simple, proving that the best Italian food relies on high-quality ingredients rather than complex techniques.</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Intermediate</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Tradition</div></div>
+          <div class="metric"><div class="metric-label">Recipes</div><div class="metric-value">500+</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Authentic, foundational Italian recipes</li>
+              <li>Simple ingredients, massive flavor (e.g., famous 3-ingredient tomato sauce)</li>
+              <li>Comprehensive coverage of regions</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>No photographs</li>
+              <li>Some instructions feel dated</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-category="asian" data-rating="9.7" data-level="2" data-title="The Wok: Recipes and Techniques">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">The Wok: Recipes and Techniques</h2>
+          <div class="card-author">by J. Kenji López-Alt</div>
+          <span class="badge">Asian</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.7</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">A masterclass in cooking with the most versatile pan in the kitchen. Kenji breaks down the science of stir-frying, deep-frying, and steaming, focusing on pan-Asian techniques adapted for western home kitchens.</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Intermediate</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Technique</div></div>
+          <div class="metric"><div class="metric-label">Images</div><div class="metric-value">1000+</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Demystifies high-heat wok cooking</li>
+              <li>Incredible photo sequences for techniques</li>
+              <li>Adaptable to standard home stoves</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Requires specific pantry ingredients</li>
+              <li>Prep work can be intense</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card" data-category="french" data-rating="9.3" data-level="3" data-title="Mastering the Art of French Cooking">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">Mastering the Art of French Cooking</h2>
+          <div class="card-author">by Julia Child, Simone Beck, Louisette Bertholle</div>
+          <span class="badge">French</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.3</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">The legendary book that brought French cuisine to the American public. While demanding, it teaches classical techniques that form the foundation of western culinary arts.</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Advanced</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Classical</div></div>
+          <div class="metric"><div class="metric-label">Recipes</div><div class="metric-value">524</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>The absolute authority on classic French</li>
+              <li>Teaches foundational western techniques</li>
+              <li>Incredibly precise instructions</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Very complex, multi-page recipes</li>
+              <li>Heavy use of butter and rich ingredients</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="card" data-category="baking" data-rating="9.4" data-level="2" data-title="Flour Water Salt Yeast">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">Flour Water Salt Yeast</h2>
+          <div class="card-author">by Ken Forkish</div>
+          <span class="badge">Baking</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.4</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">The essential guide to artisan bread baking at home. Forkish strips bread down to its core four ingredients, teaching time and temperature management to achieve bakery-quality crust and crumb.</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Intermediate</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Bread</div></div>
+          <div class="metric"><div class="metric-label">Method</div><div class="metric-value">Dutch Oven</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Revolutionized home bread baking</li>
+              <li>Clear schedules for every recipe</li>
+              <li>Excellent primer on baker's math</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Calls for discarding a lot of starter</li>
+              <li>Requires specific equipment (Dutch oven, baskets)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="card" data-category="bbq" data-rating="9.2" data-level="1" data-title="Meathead: The Science of Great Barbecue">
+      <div class="card-top">
+        <div class="card-title-group">
+          <h2 class="card-title">Meathead: The Science of Great Barbecue</h2>
+          <div class="card-author">by Meathead Goldwyn</div>
+          <span class="badge">BBQ</span>
+        </div>
+        <div class="card-score">
+          <span class="score-num">9.2</span>
+          <span class="score-label">Score</span>
+        </div>
+      </div>
+      <div class="card-body">
+        <p class="card-desc">Busts common BBQ myths with hard science. Meathead explains exactly how smoke, heat, and meat interact, ensuring you understand the mechanics of grilling and smoking rather than just following dogma.</p>
+        <div class="metrics-grid">
+          <div class="metric"><div class="metric-label">Skill Level</div><div class="metric-value">Beginner</div></div>
+          <div class="metric"><div class="metric-label">Focus</div><div class="metric-value">Science</div></div>
+          <div class="metric"><div class="metric-label">Topic</div><div class="metric-value">Smoking/Grilling</div></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-col pros">
+            <h4>Pros</h4>
+            <ul>
+              <li>Debunks persistent BBQ myths</li>
+              <li>Explains thermodynamics of grills/smokers</li>
+              <li>Great dry rub and sauce formulas</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <h4>Cons</h4>
+            <ul>
+              <li>Formatting can be visually cluttered</li>
+              <li>Very science-heavy intro chapters</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End list -->
+</div>
+
+<div class="content">
+  <h2>How to Choose the Right Cookbook</h2>
+  <p>The best cookbook for you depends entirely on your current skill level and what kind of cook you want to become. If you are a beginner looking to build intuition, start with books that focus on technique over rigid formulas, like <strong>Salt, Fat, Acid, Heat</strong>. If you are analytical and want to understand the underlying chemistry of cooking, <strong>The Food Lab</strong> is unparalleled.</p>
+
+  <h2>Why Cooking Science Matters</h2>
+  <p>Many traditional recipes rely on myths or outdated practices. Modern cookbooks increasingly rely on the scientific method—testing variables side-by-side to find the absolute best way to roast a chicken or bake a loaf of bread. Understanding concepts like the Maillard reaction, carryover cooking, and gluten development allows you to step away from recipes and cook with confidence.</p>
+
+  <h2>Building a Kitchen Library</h2>
+  <p>A well-rounded culinary library doesn't need to be massive. We recommend starting with one foundational technique book, one baking reference, and a definitive guide for the cuisine you cook most often. As you master these, you can expand into more specialized niches like fermentation, advanced pastry, or regional specialties.</p>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const searchInput = document.getElementById('searchInput');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const sortSelect = document.getElementById('sortSelect');
+  const cookbookList = document.getElementById('cookbookList');
+  let cards = Array.from(cookbookList.querySelectorAll('.card'));
+
+  let currentFilter = 'all';
+  let searchQuery = '';
+
+  function renderCards() {
+    // 1. Filter
+    cards.forEach(card => {
+      const category = card.getAttribute('data-category');
+      const text = card.innerText.toLowerCase();
+
+      const matchesFilter = currentFilter === 'all' || category === currentFilter;
+      const matchesSearch = text.includes(searchQuery);
+
+      if (matchesFilter && matchesSearch) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    // 2. Sort
+    const visibleCards = cards.filter(card => !card.classList.contains('hidden'));
+    const sortVal = sortSelect.value;
+
+    visibleCards.sort((a, b) => {
+      if (sortVal === 'rating-desc') {
+        return parseFloat(b.getAttribute('data-rating')) - parseFloat(a.getAttribute('data-rating'));
+      } else if (sortVal === 'title-asc') {
+        return a.getAttribute('data-title').localeCompare(b.getAttribute('data-title'));
+      } else if (sortVal === 'level-asc') {
+        return parseInt(a.getAttribute('data-level')) - parseInt(b.getAttribute('data-level'));
+      }
+      return 0;
+    });
+
+    // Re-append in sorted order
+    visibleCards.forEach(card => cookbookList.appendChild(card));
+  }
+
+  // Event Listeners
+  searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value.toLowerCase().trim();
+    renderCards();
+  });
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      e.target.classList.add('active');
+      currentFilter = e.target.getAttribute('data-filter');
+      renderCards();
+    });
+  });
+
+  sortSelect.addEventListener('change', () => {
+    renderCards();
+  });
+
+  // Initial Sort
+  renderCards();
+});
+</script>
+</body>
+</html>
