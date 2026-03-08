@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal Prep Calculator — Plan Portions & Shopping List | Free Tool</title>
+<meta name="description" content="Calculate weekly meal prep portions, generate a grocery shopping list, and estimate macros per meal. Free, interactive, no signup.">
+<meta property="og:title" content="Meal Prep Calculator — Plan Portions & Shopping List">
+<meta property="og:description" content="Enter your per-meal portions, set days and meals per day, and instantly generate your weekly grocery shopping list.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Meal Prep Calculator",
+  "url": "https://28grams.vip/meal-prep",
+  "description": "Calculate weekly meal prep portions, generate a grocery shopping list, and estimate macros per meal.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Servings control */
+.servings-bar {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.serving-group { display: flex; align-items: center; gap: 10px; }
+.serving-label { font-size: 0.82rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.serving-input {
+  width: 70px;
+  background: #1a1015;
+  border: 2px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+}
+.serving-input:focus { border-color: #C2185B; }
+.arrow { font-size: 1.5rem; color: #C2185B; }
+.multiplier {
+  background: #2a1020;
+  color: #C2185B;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+.multiplier span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+}
+
+/* Macros bar */
+.macros-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.macro-item {
+  background: #120c10;
+  border: 1px solid #2a1820;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  min-width: 120px;
+}
+.macro-label {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+.macro-val {
+  font-size: 1.1rem;
+  color: #e0d0d8;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+/* Ingredients */
+.ingredients-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.ing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.ing-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.add-btn {
+  background: #2a1020;
+  border: 1px solid #3a2030;
+  color: #C2185B;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.add-btn:hover { background: #3a1530; }
+.ing-list { padding: 8px 0; }
+.ing-row {
+  display: grid;
+  grid-template-columns: 80px 70px 1fr 65px 65px 36px;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 20px;
+  border-bottom: 1px solid #1a1015;
+}
+.ing-row:last-child { border-bottom: none; }
+.ing-row input {
+  background: #1a1015;
+  border: 1px solid #2a1820;
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: #e0d0d8;
+  font-size: 0.85rem;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+}
+.ing-row input:focus { border-color: #C2185B; }
+.ing-row input.amount, .ing-row input.macros {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  text-align: right;
+}
+.del-btn {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.del-btn:hover { color: #f87171; background: #1a0a0a; }
+
+/* Result card */
+.result-card {
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  display: none;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #150d12;
+  border-bottom: 1px solid #2a1820;
+}
+.result-header h2 { font-size: 0.9rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #2a1820;
+  border: 1px solid #3a2830;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+.copy-btn:hover { background: #3a2030; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+.result-body { padding: 20px; }
+.result-body pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+  color: #c8b8c0;
+  white-space: pre-wrap;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #777; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #777; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #150d12; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .servings-bar { flex-direction: column; gap: 14px; }
+
+  .ing-row {
+    grid-template-columns: 70px 60px 1fr 30px;
+    grid-template-rows: auto auto;
+    padding: 12px 14px;
+    gap: 8px;
+  }
+  .ing-row input.amount { grid-column: 1 / 2; grid-row: 1 / 2; }
+  .ing-row input.unit { grid-column: 2 / 3; grid-row: 1 / 2; }
+  .ing-row input.name { grid-column: 3 / 4; grid-row: 1 / 2; }
+  .ing-row input.cals { grid-column: 1 / 3; grid-row: 2 / 3; }
+  .ing-row input.protein { grid-column: 3 / 4; grid-row: 2 / 3; }
+  .ing-row .del-btn { grid-column: 4 / 5; grid-row: 1 / 3; height: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Meal Prep <span>Calculator</span> 🍱</h1>
+  <p>Plan your portions, calculate macros, and generate your weekly grocery list instantly.</p>
+</div>
+
+<div class="main">
+
+  <div class="servings-bar">
+    <div class="serving-group">
+      <span class="serving-label">Days</span>
+      <input type="number" class="serving-input" id="daysInp" value="5" min="1" max="30">
+    </div>
+    <span class="arrow">×</span>
+    <div class="serving-group">
+      <span class="serving-label">Meals/Day</span>
+      <input type="number" class="serving-input" id="mealsInp" value="2" min="1" max="10">
+    </div>
+    <span class="arrow">=</span>
+    <div class="multiplier">
+      Total: <span id="totalMealsText">10</span> meals
+    </div>
+  </div>
+
+  <div class="macros-bar" id="macrosBar">
+    <div class="macro-item">
+      <div class="macro-label">Calories / Meal</div>
+      <div class="macro-val" id="calsVal">0</div>
+    </div>
+    <div class="macro-item">
+      <div class="macro-label">Protein / Meal</div>
+      <div class="macro-val" id="proteinVal">0g</div>
+    </div>
+  </div>
+
+  <div class="ingredients-card" id="ingredientsCard">
+    <div class="ing-header">
+      <h2>⚖️ Per-Meal Ingredients</h2>
+      <button class="add-btn" onclick="addRow()">+ Add</button>
+    </div>
+    <div class="ing-list" id="ingList">
+    </div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="result-header">
+      <h2>🛒 Total Shopping List</h2>
+      <button class="copy-btn" id="copyBtn" onclick="copyResult()">Copy</button>
+    </div>
+    <div class="result-body">
+      <pre id="resultText"></pre>
+    </div>
+  </div>
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>How to Calculate Meal Prep Portions</h2>
+  <p>Meal prepping is the easiest way to hit your nutrition goals, but figuring out exactly how many groceries to buy can be frustrating. To get your total grocery list, <strong>multiply your per-meal portion by the total number of meals</strong> you plan to eat.</p>
+  <p>Our meal prep calculator does the math for you. Simply enter what goes into one of your prep containers, set how many days and meals per day you're prepping for, and we'll instantly generate a total grocery shopping list. We'll also estimate the macros per meal based on your inputs.</p>
+
+  <h2>Raw vs. Cooked Weights</h2>
+  <p>One of the most common meal prep mistakes is confusing raw and cooked weights. Always calculate your grocery list based on <strong>raw weights</strong>, as that is how you buy the food.</p>
+  <ul>
+    <li><strong>Meat and Poultry:</strong> Shrinks by about 25% when cooked. If you want 150g of cooked chicken breast per meal, you need to buy about 200g of raw chicken breast per meal.</li>
+    <li><strong>Rice and Grains:</strong> Expands to 2-3 times its weight/volume when cooked. 1 cup of dry rice yields about 3 cups of cooked rice.</li>
+    <li><strong>Vegetables:</strong> Depending on the cooking method (roasting vs steaming), veggies will shrink by roughly 10-25% as they lose water.</li>
+  </ul>
+
+  <h2>Standard Meal Prep Portions</h2>
+  <ul>
+    <li><strong>Protein:</strong> 4-6 oz (115-170g) raw weight per meal</li>
+    <li><strong>Carbohydrates:</strong> ½ to 1 cup of cooked grains, or 150-200g of potatoes per meal</li>
+    <li><strong>Vegetables:</strong> 1-2 cups or 100-150g per meal</li>
+    <li><strong>Fats:</strong> 1 tbsp of oil, nuts, or seeds, or ¼ of an avocado per meal</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2025 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+var ingredients = [];
+var daysEl = document.getElementById('daysInp');
+var mealsEl = document.getElementById('mealsInp');
+var totalMealsText = document.getElementById('totalMealsText');
+var calsVal = document.getElementById('calsVal');
+var proteinVal = document.getElementById('proteinVal');
+var ingList = document.getElementById('ingList');
+var resultCard = document.getElementById('resultCard');
+var resultText = document.getElementById('resultText');
+
+// Default starter ingredients
+var starters = [
+  { amount: 150, unit: 'g', name: 'chicken breast', cals: 165, protein: 31 },
+  { amount: 1, unit: 'cup', name: 'white rice', cals: 205, protein: 4 },
+  { amount: 100, unit: 'g', name: 'broccoli', cals: 34, protein: 2.8 },
+  { amount: 1, unit: 'tbsp', name: 'olive oil', cals: 119, protein: 0 }
+];
+
+starters.forEach(function(s) { ingredients.push(s); });
+renderIngredients();
+update();
+
+daysEl.addEventListener('input', update);
+mealsEl.addEventListener('input', update);
+
+function getTotalMeals() {
+  var d = parseInt(daysEl.value) || 0;
+  var m = parseInt(mealsEl.value) || 0;
+  return d * m;
+}
+
+function update() {
+  var total = getTotalMeals();
+  totalMealsText.textContent = total;
+
+  var totalCals = 0;
+  var totalProtein = 0;
+
+  ingredients.forEach(function(ing) {
+    totalCals += (parseFloat(ing.cals) || 0);
+    totalProtein += (parseFloat(ing.protein) || 0);
+  });
+
+  calsVal.textContent = Math.round(totalCals);
+  proteinVal.textContent = (Math.round(totalProtein * 10) / 10) + 'g';
+
+  if (ingredients.length === 0 || total === 0) {
+    resultCard.style.display = 'none';
+    return;
+  }
+
+  resultCard.style.display = 'block';
+  var lines = [];
+  ingredients.forEach(function(ing) {
+    if (!ing.name && !ing.amount) return;
+    var scaled = (parseFloat(ing.amount) || 0) * total;
+    var formatted = formatAmount(scaled);
+    var line = formatted + (ing.unit ? ' ' + ing.unit : '') + (ing.name ? ' ' + ing.name : '');
+    lines.push(line.trim());
+  });
+  resultText.textContent = lines.join('\n');
+}
+
+function formatAmount(n) {
+  if (n === 0) return '0';
+  if (n >= 10) return Math.round(n * 10) / 10 + '';
+  var fracs = [
+    [0.125, '⅛'], [0.25, '¼'], [0.333, '⅓'], [0.375, '⅜'],
+    [0.5, '½'], [0.625, '⅝'], [0.667, '⅔'], [0.75, '¾'], [0.875, '⅞']
+  ];
+  var whole = Math.floor(n);
+  var frac = n - whole;
+  if (frac < 0.05) return whole + '';
+  for (var i = 0; i < fracs.length; i++) {
+    if (Math.abs(frac - fracs[i][0]) < 0.05) {
+      return (whole > 0 ? whole + ' ' : '') + fracs[i][1];
+    }
+  }
+  return (Math.round(n * 100) / 100) + '';
+}
+
+function addRow() {
+  ingredients.push({ amount: 0, unit: '', name: '', cals: 0, protein: 0 });
+  renderIngredients();
+  update();
+  var inputs = ingList.querySelectorAll('input.amount');
+  if (inputs.length > 0) inputs[inputs.length - 1].focus();
+}
+
+function removeRow(idx) {
+  ingredients.splice(idx, 1);
+  renderIngredients();
+  update();
+}
+
+function renderIngredients() {
+  ingList.innerHTML = '';
+  ingredients.forEach(function(ing, i) {
+    var row = document.createElement('div');
+    row.className = 'ing-row';
+    row.innerHTML =
+      '<input class="amount" type="text" value="' + formatEditAmount(ing.amount) + '" placeholder="Qty" data-idx="' + i + '" data-field="amount">' +
+      '<input class="unit" type="text" value="' + esc(ing.unit) + '" placeholder="unit" data-idx="' + i + '" data-field="unit">' +
+      '<input class="name" type="text" value="' + esc(ing.name) + '" placeholder="ingredient name" data-idx="' + i + '" data-field="name">' +
+      '<input class="cals macros" type="number" value="' + (ing.cals || '') + '" placeholder="kcal" data-idx="' + i + '" data-field="cals" min="0">' +
+      '<input class="protein macros" type="number" value="' + (ing.protein || '') + '" placeholder="pro (g)" data-idx="' + i + '" data-field="protein" min="0" step="any">' +
+      '<button class="del-btn" onclick="removeRow(' + i + ')">✕</button>';
+    ingList.appendChild(row);
+  });
+
+  ingList.querySelectorAll('input').forEach(function(inp) {
+    inp.addEventListener('input', function() {
+      var idx = parseInt(this.getAttribute('data-idx'));
+      var field = this.getAttribute('data-field');
+      if (field === 'amount') {
+        ingredients[idx].amount = parseFraction(this.value);
+      } else if (field === 'cals' || field === 'protein') {
+        ingredients[idx][field] = this.value === '' ? 0 : parseFloat(this.value);
+      } else {
+        ingredients[idx][field] = this.value;
+      }
+      update();
+    });
+  });
+}
+
+function formatEditAmount(n) {
+  if (n === 0) return '';
+  if (n === Math.floor(n)) return n + '';
+  var fracs = [[0.125,'1/8'],[0.25,'1/4'],[0.333,'1/3'],[0.375,'3/8'],[0.5,'1/2'],[0.625,'5/8'],[0.667,'2/3'],[0.75,'3/4'],[0.875,'7/8']];
+  var whole = Math.floor(n);
+  var frac = n - whole;
+  for (var i = 0; i < fracs.length; i++) {
+    if (Math.abs(frac - fracs[i][0]) < 0.02) {
+      return (whole > 0 ? whole + ' ' : '') + fracs[i][1];
+    }
+  }
+  return (Math.round(n * 100) / 100) + '';
+}
+
+function parseFraction(str) {
+  str = str.trim();
+  if (!str) return 0;
+  var uniMap = {'½':0.5,'⅓':0.333,'⅔':0.667,'¼':0.25,'¾':0.75,'⅛':0.125,'⅜':0.375,'⅝':0.625,'⅞':0.875};
+  for (var u in uniMap) {
+    if (str.indexOf(u) !== -1) {
+      var before = str.replace(u, '').trim();
+      return (before ? parseFloat(before) : 0) + uniMap[u];
+    }
+  }
+  var parts = str.split(/\s+/);
+  var total = 0;
+  parts.forEach(function(p) {
+    if (p.indexOf('/') !== -1) {
+      var fParts = p.split('/');
+      total += parseFloat(fParts[0]) / parseFloat(fParts[1]);
+    } else {
+      total += parseFloat(p) || 0;
+    }
+  });
+  return total;
+}
+
+function copyResult() {
+  var btn = document.getElementById('copyBtn');
+  var totalMeals = getTotalMeals();
+  var text = "Meal Prep Grocery List (" + totalMeals + " meals):\n\n" + resultText.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>
