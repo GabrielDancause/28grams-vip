@@ -1,0 +1,852 @@
+[
+  {
+    "food": "Soy Protein Isolate",
+    "category": "Supplements",
+    "proteinG": 88,
+    "caloriesKcal": 338,
+    "proteinPerCalorie": 0.2604,
+    "fatG": 1.5,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Collagen Peptides",
+    "category": "Supplements",
+    "proteinG": 90,
+    "caloriesKcal": 360,
+    "proteinPerCalorie": 0.25,
+    "fatG": 0,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Shrimp",
+    "category": "Seafood",
+    "proteinG": 24,
+    "caloriesKcal": 99,
+    "proteinPerCalorie": 0.2424,
+    "fatG": 0.3,
+    "carbsG": 0.2,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Crab Meat",
+    "category": "Seafood",
+    "proteinG": 19,
+    "caloriesKcal": 84,
+    "proteinPerCalorie": 0.2262,
+    "fatG": 0.9,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Turkey Breast, Skinless",
+    "category": "Poultry",
+    "proteinG": 30,
+    "caloriesKcal": 135,
+    "proteinPerCalorie": 0.2222,
+    "fatG": 1.5,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Cod",
+    "category": "Seafood",
+    "proteinG": 18,
+    "caloriesKcal": 82,
+    "proteinPerCalorie": 0.2195,
+    "fatG": 0.7,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Tuna (Canned in Water)",
+    "category": "Seafood",
+    "proteinG": 25,
+    "caloriesKcal": 116,
+    "proteinPerCalorie": 0.2155,
+    "fatG": 1,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Lobster",
+    "category": "Seafood",
+    "proteinG": 19,
+    "caloriesKcal": 89,
+    "proteinPerCalorie": 0.2135,
+    "fatG": 0.9,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Whey Protein Isolate",
+    "category": "Supplements",
+    "proteinG": 80,
+    "caloriesKcal": 376,
+    "proteinPerCalorie": 0.2128,
+    "fatG": 1.5,
+    "carbsG": 5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Casein Protein Powder",
+    "category": "Supplements",
+    "proteinG": 76,
+    "caloriesKcal": 358,
+    "proteinPerCalorie": 0.2123,
+    "fatG": 1.5,
+    "carbsG": 5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Egg Whites",
+    "category": "Dairy & Eggs",
+    "proteinG": 11,
+    "caloriesKcal": 52,
+    "proteinPerCalorie": 0.2115,
+    "fatG": 0.2,
+    "carbsG": 0.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Pea Protein Powder",
+    "category": "Supplements",
+    "proteinG": 80,
+    "caloriesKcal": 380,
+    "proteinPerCalorie": 0.2105,
+    "fatG": 8,
+    "carbsG": 3,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Veal Cutlet",
+    "category": "Meat",
+    "proteinG": 32,
+    "caloriesKcal": 153,
+    "proteinPerCalorie": 0.2092,
+    "fatG": 2,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Halibut",
+    "category": "Seafood",
+    "proteinG": 23,
+    "caloriesKcal": 111,
+    "proteinPerCalorie": 0.2072,
+    "fatG": 1.6,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Quark",
+    "category": "Dairy & Eggs",
+    "proteinG": 14,
+    "caloriesKcal": 68,
+    "proteinPerCalorie": 0.2059,
+    "fatG": 0.2,
+    "carbsG": 3.5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Vital Wheat Gluten",
+    "category": "Pantry",
+    "proteinG": 75.2,
+    "caloriesKcal": 370,
+    "proteinPerCalorie": 0.2032,
+    "fatG": 1.9,
+    "carbsG": 13.8,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Tilapia",
+    "category": "Seafood",
+    "proteinG": 26,
+    "caloriesKcal": 128,
+    "proteinPerCalorie": 0.2031,
+    "fatG": 2.7,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Seitan",
+    "category": "Plant-Based",
+    "proteinG": 75,
+    "caloriesKcal": 370,
+    "proteinPerCalorie": 0.2027,
+    "fatG": 1.9,
+    "carbsG": 14,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Spirulina",
+    "category": "Pantry",
+    "proteinG": 57.5,
+    "caloriesKcal": 290,
+    "proteinPerCalorie": 0.1983,
+    "fatG": 7.7,
+    "carbsG": 23.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Bison",
+    "category": "Meat",
+    "proteinG": 28,
+    "caloriesKcal": 143,
+    "proteinPerCalorie": 0.1958,
+    "fatG": 2.4,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Venison",
+    "category": "Meat",
+    "proteinG": 30,
+    "caloriesKcal": 158,
+    "proteinPerCalorie": 0.1899,
+    "fatG": 3.2,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Scallops",
+    "category": "Seafood",
+    "proteinG": 21,
+    "caloriesKcal": 111,
+    "proteinPerCalorie": 0.1892,
+    "fatG": 0.8,
+    "carbsG": 5.4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Chicken Breast, Skinless",
+    "category": "Poultry",
+    "proteinG": 31,
+    "caloriesKcal": 165,
+    "proteinPerCalorie": 0.1879,
+    "fatG": 3.6,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Pork Tenderloin",
+    "category": "Meat",
+    "proteinG": 26,
+    "caloriesKcal": 143,
+    "proteinPerCalorie": 0.1818,
+    "fatG": 3.5,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Greek Yogurt, Non-fat",
+    "category": "Dairy & Eggs",
+    "proteinG": 10,
+    "caloriesKcal": 59,
+    "proteinPerCalorie": 0.1695,
+    "fatG": 0.4,
+    "carbsG": 3.6,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Skyr",
+    "category": "Dairy & Eggs",
+    "proteinG": 11,
+    "caloriesKcal": 65,
+    "proteinPerCalorie": 0.1692,
+    "fatG": 0.2,
+    "carbsG": 4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Textured Vegetable Protein (TVP)",
+    "category": "Pantry",
+    "proteinG": 51.5,
+    "caloriesKcal": 327,
+    "proteinPerCalorie": 0.1575,
+    "fatG": 1.2,
+    "carbsG": 33.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Lean Ground Beef (95%)",
+    "category": "Meat",
+    "proteinG": 26,
+    "caloriesKcal": 171,
+    "proteinPerCalorie": 0.152,
+    "fatG": 6,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Nutritional Yeast",
+    "category": "Pantry",
+    "proteinG": 50,
+    "caloriesKcal": 333,
+    "proteinPerCalorie": 0.1502,
+    "fatG": 5,
+    "carbsG": 33.3,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Trout",
+    "category": "Seafood",
+    "proteinG": 21,
+    "caloriesKcal": 148,
+    "proteinPerCalorie": 0.1419,
+    "fatG": 6.6,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Mushrooms",
+    "category": "Vegetables",
+    "proteinG": 3.1,
+    "caloriesKcal": 22,
+    "proteinPerCalorie": 0.1409,
+    "fatG": 0.3,
+    "carbsG": 3.3,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Salmon, Wild",
+    "category": "Seafood",
+    "proteinG": 20,
+    "caloriesKcal": 142,
+    "proteinPerCalorie": 0.1408,
+    "fatG": 6,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Duck Breast, Skinless",
+    "category": "Poultry",
+    "proteinG": 19,
+    "caloriesKcal": 135,
+    "proteinPerCalorie": 0.1407,
+    "fatG": 5.9,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Mussels",
+    "category": "Seafood",
+    "proteinG": 24,
+    "caloriesKcal": 172,
+    "proteinPerCalorie": 0.1395,
+    "fatG": 4.5,
+    "carbsG": 7.4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Cottage Cheese, Non-fat",
+    "category": "Dairy & Eggs",
+    "proteinG": 10,
+    "caloriesKcal": 72,
+    "proteinPerCalorie": 0.1389,
+    "fatG": 0.3,
+    "carbsG": 6.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Lamb Chops, Lean",
+    "category": "Meat",
+    "proteinG": 28,
+    "caloriesKcal": 206,
+    "proteinPerCalorie": 0.1359,
+    "fatG": 9,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Spinach",
+    "category": "Vegetables",
+    "proteinG": 2.9,
+    "caloriesKcal": 23,
+    "proteinPerCalorie": 0.1261,
+    "fatG": 0.4,
+    "carbsG": 3.6,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Sardines (Canned in Water)",
+    "category": "Seafood",
+    "proteinG": 25,
+    "caloriesKcal": 208,
+    "proteinPerCalorie": 0.1202,
+    "fatG": 11,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Bok Choy",
+    "category": "Vegetables",
+    "proteinG": 1.5,
+    "caloriesKcal": 13,
+    "proteinPerCalorie": 0.1154,
+    "fatG": 0.2,
+    "carbsG": 2.2,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Oysters",
+    "category": "Seafood",
+    "proteinG": 9,
+    "caloriesKcal": 81,
+    "proteinPerCalorie": 0.1111,
+    "fatG": 2.3,
+    "carbsG": 4.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Tofu, Extra Firm",
+    "category": "Plant-Based",
+    "proteinG": 16,
+    "caloriesKcal": 144,
+    "proteinPerCalorie": 0.1111,
+    "fatG": 8.7,
+    "carbsG": 2.8,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Beef Sirloin Steak",
+    "category": "Meat",
+    "proteinG": 27,
+    "caloriesKcal": 244,
+    "proteinPerCalorie": 0.1107,
+    "fatG": 14,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Asparagus",
+    "category": "Vegetables",
+    "proteinG": 2.2,
+    "caloriesKcal": 20,
+    "proteinPerCalorie": 0.11,
+    "fatG": 0.1,
+    "carbsG": 3.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Soy Milk",
+    "category": "Dairy & Eggs",
+    "proteinG": 3.3,
+    "caloriesKcal": 33,
+    "proteinPerCalorie": 0.1,
+    "fatG": 1.5,
+    "carbsG": 1.8,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Tempeh",
+    "category": "Plant-Based",
+    "proteinG": 19,
+    "caloriesKcal": 192,
+    "proteinPerCalorie": 0.099,
+    "fatG": 10.8,
+    "carbsG": 7.6,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Skim Milk",
+    "category": "Dairy & Eggs",
+    "proteinG": 3.4,
+    "caloriesKcal": 35,
+    "proteinPerCalorie": 0.0971,
+    "fatG": 0.1,
+    "carbsG": 5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Mozzarella, Part-skim",
+    "category": "Dairy & Eggs",
+    "proteinG": 24,
+    "caloriesKcal": 254,
+    "proteinPerCalorie": 0.0945,
+    "fatG": 16,
+    "carbsG": 2.8,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Kale",
+    "category": "Vegetables",
+    "proteinG": 3.3,
+    "caloriesKcal": 35,
+    "proteinPerCalorie": 0.0943,
+    "fatG": 0.5,
+    "carbsG": 4.4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Mackerel",
+    "category": "Seafood",
+    "proteinG": 19,
+    "caloriesKcal": 205,
+    "proteinPerCalorie": 0.0927,
+    "fatG": 14,
+    "carbsG": 0,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Edamame",
+    "category": "Plant-Based",
+    "proteinG": 11,
+    "caloriesKcal": 121,
+    "proteinPerCalorie": 0.0909,
+    "fatG": 5.2,
+    "carbsG": 8.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Parmesan Cheese",
+    "category": "Dairy & Eggs",
+    "proteinG": 38,
+    "caloriesKcal": 431,
+    "proteinPerCalorie": 0.0882,
+    "fatG": 29,
+    "carbsG": 4.1,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Whole Eggs",
+    "category": "Dairy & Eggs",
+    "proteinG": 13,
+    "caloriesKcal": 155,
+    "proteinPerCalorie": 0.0839,
+    "fatG": 11,
+    "carbsG": 1.1,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Broccoli",
+    "category": "Vegetables",
+    "proteinG": 2.8,
+    "caloriesKcal": 34,
+    "proteinPerCalorie": 0.0824,
+    "fatG": 0.4,
+    "carbsG": 6.6,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Brussels Sprouts",
+    "category": "Vegetables",
+    "proteinG": 3.4,
+    "caloriesKcal": 43,
+    "proteinPerCalorie": 0.0791,
+    "fatG": 0.3,
+    "carbsG": 9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Lentils",
+    "category": "Plant-Based",
+    "proteinG": 9,
+    "caloriesKcal": 116,
+    "proteinPerCalorie": 0.0776,
+    "fatG": 0.4,
+    "carbsG": 20,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Cauliflower",
+    "category": "Vegetables",
+    "proteinG": 1.9,
+    "caloriesKcal": 25,
+    "proteinPerCalorie": 0.076,
+    "fatG": 0.3,
+    "carbsG": 5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Swiss Cheese",
+    "category": "Dairy & Eggs",
+    "proteinG": 27,
+    "caloriesKcal": 380,
+    "proteinPerCalorie": 0.0711,
+    "fatG": 28,
+    "carbsG": 5.4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Artichokes",
+    "category": "Vegetables",
+    "proteinG": 3.3,
+    "caloriesKcal": 47,
+    "proteinPerCalorie": 0.0702,
+    "fatG": 0.2,
+    "carbsG": 10.5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Kidney Beans",
+    "category": "Plant-Based",
+    "proteinG": 8.7,
+    "caloriesKcal": 127,
+    "proteinPerCalorie": 0.0685,
+    "fatG": 0.5,
+    "carbsG": 22.8,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Black Beans",
+    "category": "Plant-Based",
+    "proteinG": 8.9,
+    "caloriesKcal": 132,
+    "proteinPerCalorie": 0.0674,
+    "fatG": 0.5,
+    "carbsG": 23.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Green Peas",
+    "category": "Plant-Based",
+    "proteinG": 5.4,
+    "caloriesKcal": 81,
+    "proteinPerCalorie": 0.0667,
+    "fatG": 0.4,
+    "carbsG": 14.5,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Pinto Beans",
+    "category": "Plant-Based",
+    "proteinG": 9,
+    "caloriesKcal": 143,
+    "proteinPerCalorie": 0.0629,
+    "fatG": 0.6,
+    "carbsG": 26.2,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Navy Beans",
+    "category": "Plant-Based",
+    "proteinG": 8.2,
+    "caloriesKcal": 140,
+    "proteinPerCalorie": 0.0586,
+    "fatG": 0.6,
+    "carbsG": 26.1,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Hemp Seeds",
+    "category": "Nuts & Seeds",
+    "proteinG": 31.6,
+    "caloriesKcal": 553,
+    "proteinPerCalorie": 0.0571,
+    "fatG": 48.8,
+    "carbsG": 8.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Chickpeas",
+    "category": "Plant-Based",
+    "proteinG": 8.9,
+    "caloriesKcal": 164,
+    "proteinPerCalorie": 0.0543,
+    "fatG": 2.6,
+    "carbsG": 27.4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Pumpkin Seeds",
+    "category": "Nuts & Seeds",
+    "proteinG": 30.2,
+    "caloriesKcal": 559,
+    "proteinPerCalorie": 0.054,
+    "fatG": 49.1,
+    "carbsG": 10.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Peanuts",
+    "category": "Nuts & Seeds",
+    "proteinG": 25.8,
+    "caloriesKcal": 567,
+    "proteinPerCalorie": 0.0455,
+    "fatG": 49.2,
+    "carbsG": 16.1,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Oats",
+    "category": "Plant-Based",
+    "proteinG": 16.9,
+    "caloriesKcal": 389,
+    "proteinPerCalorie": 0.0434,
+    "fatG": 6.9,
+    "carbsG": 66.3,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Spelt",
+    "category": "Plant-Based",
+    "proteinG": 5.5,
+    "caloriesKcal": 127,
+    "proteinPerCalorie": 0.0433,
+    "fatG": 0.9,
+    "carbsG": 26.4,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Peanut Butter",
+    "category": "Nuts & Seeds",
+    "proteinG": 25.1,
+    "caloriesKcal": 588,
+    "proteinPerCalorie": 0.0427,
+    "fatG": 50.4,
+    "carbsG": 20,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Wild Rice",
+    "category": "Plant-Based",
+    "proteinG": 4,
+    "caloriesKcal": 101,
+    "proteinPerCalorie": 0.0396,
+    "fatG": 0.3,
+    "carbsG": 21.3,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Teff",
+    "category": "Plant-Based",
+    "proteinG": 3.9,
+    "caloriesKcal": 101,
+    "proteinPerCalorie": 0.0386,
+    "fatG": 0.6,
+    "carbsG": 19.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Sweet Corn",
+    "category": "Vegetables",
+    "proteinG": 3.3,
+    "caloriesKcal": 86,
+    "proteinPerCalorie": 0.0384,
+    "fatG": 1.4,
+    "carbsG": 18.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Amaranth",
+    "category": "Plant-Based",
+    "proteinG": 3.8,
+    "caloriesKcal": 102,
+    "proteinPerCalorie": 0.0373,
+    "fatG": 1.6,
+    "carbsG": 18.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Buckwheat",
+    "category": "Plant-Based",
+    "proteinG": 3.4,
+    "caloriesKcal": 92,
+    "proteinPerCalorie": 0.037,
+    "fatG": 0.6,
+    "carbsG": 20,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Quinoa",
+    "category": "Plant-Based",
+    "proteinG": 4.4,
+    "caloriesKcal": 120,
+    "proteinPerCalorie": 0.0367,
+    "fatG": 1.9,
+    "carbsG": 21.3,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Almonds",
+    "category": "Nuts & Seeds",
+    "proteinG": 21.2,
+    "caloriesKcal": 579,
+    "proteinPerCalorie": 0.0366,
+    "fatG": 49.9,
+    "carbsG": 21.6,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Pistachios",
+    "category": "Nuts & Seeds",
+    "proteinG": 20.2,
+    "caloriesKcal": 562,
+    "proteinPerCalorie": 0.0359,
+    "fatG": 45.3,
+    "carbsG": 27.2,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Sunflower Seeds",
+    "category": "Nuts & Seeds",
+    "proteinG": 20.8,
+    "caloriesKcal": 584,
+    "proteinPerCalorie": 0.0356,
+    "fatG": 51.5,
+    "carbsG": 20,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Flaxseeds",
+    "category": "Nuts & Seeds",
+    "proteinG": 18.3,
+    "caloriesKcal": 534,
+    "proteinPerCalorie": 0.0343,
+    "fatG": 42.2,
+    "carbsG": 28.9,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Almond Butter",
+    "category": "Nuts & Seeds",
+    "proteinG": 21,
+    "caloriesKcal": 614,
+    "proteinPerCalorie": 0.0342,
+    "fatG": 55.5,
+    "carbsG": 18.8,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Chia Seeds",
+    "category": "Nuts & Seeds",
+    "proteinG": 16.5,
+    "caloriesKcal": 486,
+    "proteinPerCalorie": 0.034,
+    "fatG": 30.7,
+    "carbsG": 42.1,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Cashews",
+    "category": "Nuts & Seeds",
+    "proteinG": 18.2,
+    "caloriesKcal": 553,
+    "proteinPerCalorie": 0.0329,
+    "fatG": 43.8,
+    "carbsG": 30.2,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Walnuts",
+    "category": "Nuts & Seeds",
+    "proteinG": 15.2,
+    "caloriesKcal": 654,
+    "proteinPerCalorie": 0.0232,
+    "fatG": 65.2,
+    "carbsG": 13.7,
+    "servingSize": "100g"
+  },
+  {
+    "food": "Brazil Nuts",
+    "category": "Nuts & Seeds",
+    "proteinG": 14.3,
+    "caloriesKcal": 659,
+    "proteinPerCalorie": 0.0217,
+    "fatG": 67.1,
+    "carbsG": 11.7,
+    "servingSize": "100g"
+  }
+]
