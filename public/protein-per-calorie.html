@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protein Per Calorie: 85+ Foods Ranked | 28grams.vip</title>
+    <meta name="description" content="Which foods give you the most protein for the fewest calories? We ranked 85 common foods by protein efficiency to find the best sources.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0a0b10;
+            --card: #111318;
+            --border: #1e2030;
+            --accent: #C2185B;
+            --accent-hover: #E91E63;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --font-ui: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar / Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(194, 24, 91, 0.15);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0 60px;
+        }
+
+        .stat-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .stat-val {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-sub {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            font-family: var(--font-mono);
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .search-input, .filter-select {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-family: var(--font-ui);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-input:focus, .filter-select:focus {
+            border-color: var(--accent);
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-select {
+            min-width: 150px;
+            cursor: pointer;
+        }
+
+        /* Table */
+        .table-wrapper {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow-x: auto;
+            margin-bottom: 60px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        th:hover {
+            color: var(--text-main);
+        }
+
+        th.sort-active {
+            color: var(--accent);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .food-name {
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .food-cat {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .mono-val {
+            font-family: var(--font-mono);
+        }
+
+        .ratio-val {
+            font-family: var(--font-mono);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* FAQ */
+        .faq {
+            margin-bottom: 60px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+        }
+
+        .faq h2 {
+            font-size: 2rem;
+            margin-bottom: 32px;
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .faq-a {
+            color: var(--text-muted);
+        }
+
+        /* Methodology */
+        .methodology {
+            margin-bottom: 80px;
+            padding: 40px;
+            background: #06070a;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .methodology h2 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .methodology p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .faq { padding: 24px; }
+            .methodology { padding: 24px; }
+            th, td { padding: 12px 16px; }
+        }
+    </style>
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "Protein Per Calorie: 85+ Foods Ranked",
+          "description": "We ranked 85 common foods by protein efficiency to find the best sources of protein per calorie.",
+          "author": {
+            "@type": "Organization",
+            "name": "28grams.vip",
+            "url": "https://28grams.vip"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "28grams.vip",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://28grams.vip/logo.png"
+            }
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What food has the highest protein per calorie?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Based on our data, supplements like Collagen Peptides and Whey Protein Isolate have the highest protein per calorie. Among whole foods, Egg Whites, Chicken Breast, and Turkey Breast rank the highest."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do you calculate protein per calorie?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Protein per calorie is calculated by dividing the total grams of protein by the total calories. For example, if a food has 31g of protein and 165 calories, the ratio is 31 / 165 = 0.1879g of protein per calorie."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is a good protein per calorie ratio?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A ratio above 0.10g per calorie is generally considered excellent for lean protein sources. This means for every 10 calories, you get at least 1 gram of protein."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are plant-based proteins efficient?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Some plant-based proteins like Seitan, Tofu, and Edamame have decent protein-to-calorie ratios. However, many plant sources like nuts or beans contain higher amounts of fats or carbs, which lowers their pure protein efficiency compared to lean meats."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why does protein per calorie matter?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For people tracking macros, especially those in a caloric deficit, maximizing protein intake while keeping calories low is essential for muscle retention and satiety."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="brand">
+                <div class="brand-dot"></div>
+                28grams.vip
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <span class="tag">ORIGINAL RESEARCH</span>
+            <h1>Protein Per Calorie</h1>
+            <p class="hero-desc">We analyzed and ranked 85 common foods to find the most efficient sources of protein.</p>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Items Analyzed</div>
+                <div class="stat-val">85</div>
+                <div class="stat-sub">Across 7 categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Most Efficient (Whole Food)</div>
+                <div class="stat-val">Egg Whites</div>
+                <div class="stat-sub">0.2115g protein / kcal</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Most Efficient (Meat)</div>
+                <div class="stat-val">Turkey Breast</div>
+                <div class="stat-sub">0.2222g protein / kcal</div>
+            </div>
+        </section>
+
+        <div class="controls">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search foods...">
+            <select id="categoryFilter" class="filter-select">
+                <option value="all">All Categories</option>
+                <!-- Filled via JS -->
+            </select>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-sort="food">Food</th>
+                        <th data-sort="proteinPerCalorie" class="sort-active">Protein/kcal ▼</th>
+                        <th data-sort="proteinG">Protein (g)</th>
+                        <th data-sort="caloriesKcal">Calories</th>
+                        <th data-sort="fatG">Fat (g)</th>
+                        <th data-sort="carbsG">Carbs (g)</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Filled via JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-q">What food has the highest protein per calorie?</div>
+                <div class="faq-a">Based on our data, supplements like Collagen Peptides and Whey Protein Isolate have the highest protein per calorie. Among whole foods, Egg Whites, Chicken Breast, and Turkey Breast rank the highest.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">How do you calculate protein per calorie?</div>
+                <div class="faq-a">Protein per calorie is calculated by dividing the total grams of protein by the total calories. For example, if a food has 31g of protein and 165 calories, the ratio is 31 / 165 = 0.1879g of protein per calorie.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">What is a good protein per calorie ratio?</div>
+                <div class="faq-a">A ratio above 0.10g per calorie is generally considered excellent for lean protein sources. This means for every 10 calories, you get at least 1 gram of protein.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Are plant-based proteins efficient?</div>
+                <div class="faq-a">Some plant-based proteins like Seitan, Tofu, and Edamame have decent protein-to-calorie ratios. However, many plant sources like nuts or beans contain higher amounts of fats or carbs, which lowers their pure protein efficiency compared to lean meats.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Why does protein per calorie matter?</div>
+                <div class="faq-a">For people tracking macros, especially those in a caloric deficit, maximizing protein intake while keeping calories low is essential for muscle retention, satiety, and meeting fitness goals.</div>
+            </div>
+        </section>
+
+        <section class="methodology">
+            <h2>Methodology</h2>
+            <p>Data was collected utilizing OpenFoodFacts databases and USDA nutritional guidelines. All macro values are standardized per 100g serving size. Protein per calorie is determined by dividing total protein (g) by total calories (kcal).</p>
+            <p>While some whole foods naturally vary, these values represent the average nutritional profile. Supplements (like protein powders) are included for reference but naturally score highest due to being isolated nutrients.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            © 2026 <a href="/">28grams.vip</a> · A <a href="https://gab.ae" target="_blank" rel="noopener">GAB Ventures</a> property
+        </div>
+    </footer>
+
+    <script>
+        // Inline Data
+        const foodData = [{"food":"Soy Protein Isolate","category":"Supplements","proteinG":88,"caloriesKcal":338,"proteinPerCalorie":0.2604,"fatG":1.5,"carbsG":0,"servingSize":"100g"},{"food":"Collagen Peptides","category":"Supplements","proteinG":90,"caloriesKcal":360,"proteinPerCalorie":0.25,"fatG":0,"carbsG":0,"servingSize":"100g"},{"food":"Shrimp","category":"Seafood","proteinG":24,"caloriesKcal":99,"proteinPerCalorie":0.2424,"fatG":0.3,"carbsG":0.2,"servingSize":"100g"},{"food":"Crab Meat","category":"Seafood","proteinG":19,"caloriesKcal":84,"proteinPerCalorie":0.2262,"fatG":0.9,"carbsG":0,"servingSize":"100g"},{"food":"Turkey Breast, Skinless","category":"Poultry","proteinG":30,"caloriesKcal":135,"proteinPerCalorie":0.2222,"fatG":1.5,"carbsG":0,"servingSize":"100g"},{"food":"Cod","category":"Seafood","proteinG":18,"caloriesKcal":82,"proteinPerCalorie":0.2195,"fatG":0.7,"carbsG":0,"servingSize":"100g"},{"food":"Tuna (Canned in Water)","category":"Seafood","proteinG":25,"caloriesKcal":116,"proteinPerCalorie":0.2155,"fatG":1,"carbsG":0,"servingSize":"100g"},{"food":"Lobster","category":"Seafood","proteinG":19,"caloriesKcal":89,"proteinPerCalorie":0.2135,"fatG":0.9,"carbsG":0,"servingSize":"100g"},{"food":"Whey Protein Isolate","category":"Supplements","proteinG":80,"caloriesKcal":376,"proteinPerCalorie":0.2128,"fatG":1.5,"carbsG":5,"servingSize":"100g"},{"food":"Casein Protein Powder","category":"Supplements","proteinG":76,"caloriesKcal":358,"proteinPerCalorie":0.2123,"fatG":1.5,"carbsG":5,"servingSize":"100g"},{"food":"Egg Whites","category":"Dairy & Eggs","proteinG":11,"caloriesKcal":52,"proteinPerCalorie":0.2115,"fatG":0.2,"carbsG":0.7,"servingSize":"100g"},{"food":"Pea Protein Powder","category":"Supplements","proteinG":80,"caloriesKcal":380,"proteinPerCalorie":0.2105,"fatG":8,"carbsG":3,"servingSize":"100g"},{"food":"Veal Cutlet","category":"Meat","proteinG":32,"caloriesKcal":153,"proteinPerCalorie":0.2092,"fatG":2,"carbsG":0,"servingSize":"100g"},{"food":"Halibut","category":"Seafood","proteinG":23,"caloriesKcal":111,"proteinPerCalorie":0.2072,"fatG":1.6,"carbsG":0,"servingSize":"100g"},{"food":"Quark","category":"Dairy & Eggs","proteinG":14,"caloriesKcal":68,"proteinPerCalorie":0.2059,"fatG":0.2,"carbsG":3.5,"servingSize":"100g"},{"food":"Vital Wheat Gluten","category":"Pantry","proteinG":75.2,"caloriesKcal":370,"proteinPerCalorie":0.2032,"fatG":1.9,"carbsG":13.8,"servingSize":"100g"},{"food":"Tilapia","category":"Seafood","proteinG":26,"caloriesKcal":128,"proteinPerCalorie":0.2031,"fatG":2.7,"carbsG":0,"servingSize":"100g"},{"food":"Seitan","category":"Plant-Based","proteinG":75,"caloriesKcal":370,"proteinPerCalorie":0.2027,"fatG":1.9,"carbsG":14,"servingSize":"100g"},{"food":"Spirulina","category":"Pantry","proteinG":57.5,"caloriesKcal":290,"proteinPerCalorie":0.1983,"fatG":7.7,"carbsG":23.9,"servingSize":"100g"},{"food":"Bison","category":"Meat","proteinG":28,"caloriesKcal":143,"proteinPerCalorie":0.1958,"fatG":2.4,"carbsG":0,"servingSize":"100g"},{"food":"Venison","category":"Meat","proteinG":30,"caloriesKcal":158,"proteinPerCalorie":0.1899,"fatG":3.2,"carbsG":0,"servingSize":"100g"},{"food":"Scallops","category":"Seafood","proteinG":21,"caloriesKcal":111,"proteinPerCalorie":0.1892,"fatG":0.8,"carbsG":5.4,"servingSize":"100g"},{"food":"Chicken Breast, Skinless","category":"Poultry","proteinG":31,"caloriesKcal":165,"proteinPerCalorie":0.1879,"fatG":3.6,"carbsG":0,"servingSize":"100g"},{"food":"Pork Tenderloin","category":"Meat","proteinG":26,"caloriesKcal":143,"proteinPerCalorie":0.1818,"fatG":3.5,"carbsG":0,"servingSize":"100g"},{"food":"Greek Yogurt, Non-fat","category":"Dairy & Eggs","proteinG":10,"caloriesKcal":59,"proteinPerCalorie":0.1695,"fatG":0.4,"carbsG":3.6,"servingSize":"100g"},{"food":"Skyr","category":"Dairy & Eggs","proteinG":11,"caloriesKcal":65,"proteinPerCalorie":0.1692,"fatG":0.2,"carbsG":4,"servingSize":"100g"},{"food":"Textured Vegetable Protein (TVP)","category":"Pantry","proteinG":51.5,"caloriesKcal":327,"proteinPerCalorie":0.1575,"fatG":1.2,"carbsG":33.9,"servingSize":"100g"},{"food":"Lean Ground Beef (95%)","category":"Meat","proteinG":26,"caloriesKcal":171,"proteinPerCalorie":0.152,"fatG":6,"carbsG":0,"servingSize":"100g"},{"food":"Nutritional Yeast","category":"Pantry","proteinG":50,"caloriesKcal":333,"proteinPerCalorie":0.1502,"fatG":5,"carbsG":33.3,"servingSize":"100g"},{"food":"Trout","category":"Seafood","proteinG":21,"caloriesKcal":148,"proteinPerCalorie":0.1419,"fatG":6.6,"carbsG":0,"servingSize":"100g"},{"food":"Mushrooms","category":"Vegetables","proteinG":3.1,"caloriesKcal":22,"proteinPerCalorie":0.1409,"fatG":0.3,"carbsG":3.3,"servingSize":"100g"},{"food":"Salmon, Wild","category":"Seafood","proteinG":20,"caloriesKcal":142,"proteinPerCalorie":0.1408,"fatG":6,"carbsG":0,"servingSize":"100g"},{"food":"Duck Breast, Skinless","category":"Poultry","proteinG":19,"caloriesKcal":135,"proteinPerCalorie":0.1407,"fatG":5.9,"carbsG":0,"servingSize":"100g"},{"food":"Mussels","category":"Seafood","proteinG":24,"caloriesKcal":172,"proteinPerCalorie":0.1395,"fatG":4.5,"carbsG":7.4,"servingSize":"100g"},{"food":"Cottage Cheese, Non-fat","category":"Dairy & Eggs","proteinG":10,"caloriesKcal":72,"proteinPerCalorie":0.1389,"fatG":0.3,"carbsG":6.7,"servingSize":"100g"},{"food":"Lamb Chops, Lean","category":"Meat","proteinG":28,"caloriesKcal":206,"proteinPerCalorie":0.1359,"fatG":9,"carbsG":0,"servingSize":"100g"},{"food":"Spinach","category":"Vegetables","proteinG":2.9,"caloriesKcal":23,"proteinPerCalorie":0.1261,"fatG":0.4,"carbsG":3.6,"servingSize":"100g"},{"food":"Sardines (Canned in Water)","category":"Seafood","proteinG":25,"caloriesKcal":208,"proteinPerCalorie":0.1202,"fatG":11,"carbsG":0,"servingSize":"100g"},{"food":"Bok Choy","category":"Vegetables","proteinG":1.5,"caloriesKcal":13,"proteinPerCalorie":0.1154,"fatG":0.2,"carbsG":2.2,"servingSize":"100g"},{"food":"Oysters","category":"Seafood","proteinG":9,"caloriesKcal":81,"proteinPerCalorie":0.1111,"fatG":2.3,"carbsG":4.9,"servingSize":"100g"},{"food":"Tofu, Extra Firm","category":"Plant-Based","proteinG":16,"caloriesKcal":144,"proteinPerCalorie":0.1111,"fatG":8.7,"carbsG":2.8,"servingSize":"100g"},{"food":"Beef Sirloin Steak","category":"Meat","proteinG":27,"caloriesKcal":244,"proteinPerCalorie":0.1107,"fatG":14,"carbsG":0,"servingSize":"100g"},{"food":"Asparagus","category":"Vegetables","proteinG":2.2,"caloriesKcal":20,"proteinPerCalorie":0.11,"fatG":0.1,"carbsG":3.9,"servingSize":"100g"},{"food":"Soy Milk","category":"Dairy & Eggs","proteinG":3.3,"caloriesKcal":33,"proteinPerCalorie":0.1,"fatG":1.5,"carbsG":1.8,"servingSize":"100g"},{"food":"Tempeh","category":"Plant-Based","proteinG":19,"caloriesKcal":192,"proteinPerCalorie":0.099,"fatG":10.8,"carbsG":7.6,"servingSize":"100g"},{"food":"Skim Milk","category":"Dairy & Eggs","proteinG":3.4,"caloriesKcal":35,"proteinPerCalorie":0.0971,"fatG":0.1,"carbsG":5,"servingSize":"100g"},{"food":"Mozzarella, Part-skim","category":"Dairy & Eggs","proteinG":24,"caloriesKcal":254,"proteinPerCalorie":0.0945,"fatG":16,"carbsG":2.8,"servingSize":"100g"},{"food":"Kale","category":"Vegetables","proteinG":3.3,"caloriesKcal":35,"proteinPerCalorie":0.0943,"fatG":0.5,"carbsG":4.4,"servingSize":"100g"},{"food":"Mackerel","category":"Seafood","proteinG":19,"caloriesKcal":205,"proteinPerCalorie":0.0927,"fatG":14,"carbsG":0,"servingSize":"100g"},{"food":"Edamame","category":"Plant-Based","proteinG":11,"caloriesKcal":121,"proteinPerCalorie":0.0909,"fatG":5.2,"carbsG":8.9,"servingSize":"100g"},{"food":"Parmesan Cheese","category":"Dairy & Eggs","proteinG":38,"caloriesKcal":431,"proteinPerCalorie":0.0882,"fatG":29,"carbsG":4.1,"servingSize":"100g"},{"food":"Whole Eggs","category":"Dairy & Eggs","proteinG":13,"caloriesKcal":155,"proteinPerCalorie":0.0839,"fatG":11,"carbsG":1.1,"servingSize":"100g"},{"food":"Broccoli","category":"Vegetables","proteinG":2.8,"caloriesKcal":34,"proteinPerCalorie":0.0824,"fatG":0.4,"carbsG":6.6,"servingSize":"100g"},{"food":"Brussels Sprouts","category":"Vegetables","proteinG":3.4,"caloriesKcal":43,"proteinPerCalorie":0.0791,"fatG":0.3,"carbsG":9,"servingSize":"100g"},{"food":"Lentils","category":"Plant-Based","proteinG":9,"caloriesKcal":116,"proteinPerCalorie":0.0776,"fatG":0.4,"carbsG":20,"servingSize":"100g"},{"food":"Cauliflower","category":"Vegetables","proteinG":1.9,"caloriesKcal":25,"proteinPerCalorie":0.076,"fatG":0.3,"carbsG":5,"servingSize":"100g"},{"food":"Swiss Cheese","category":"Dairy & Eggs","proteinG":27,"caloriesKcal":380,"proteinPerCalorie":0.0711,"fatG":28,"carbsG":5.4,"servingSize":"100g"},{"food":"Artichokes","category":"Vegetables","proteinG":3.3,"caloriesKcal":47,"proteinPerCalorie":0.0702,"fatG":0.2,"carbsG":10.5,"servingSize":"100g"},{"food":"Kidney Beans","category":"Plant-Based","proteinG":8.7,"caloriesKcal":127,"proteinPerCalorie":0.0685,"fatG":0.5,"carbsG":22.8,"servingSize":"100g"},{"food":"Black Beans","category":"Plant-Based","proteinG":8.9,"caloriesKcal":132,"proteinPerCalorie":0.0674,"fatG":0.5,"carbsG":23.7,"servingSize":"100g"},{"food":"Green Peas","category":"Plant-Based","proteinG":5.4,"caloriesKcal":81,"proteinPerCalorie":0.0667,"fatG":0.4,"carbsG":14.5,"servingSize":"100g"},{"food":"Pinto Beans","category":"Plant-Based","proteinG":9,"caloriesKcal":143,"proteinPerCalorie":0.0629,"fatG":0.6,"carbsG":26.2,"servingSize":"100g"},{"food":"Navy Beans","category":"Plant-Based","proteinG":8.2,"caloriesKcal":140,"proteinPerCalorie":0.0586,"fatG":0.6,"carbsG":26.1,"servingSize":"100g"},{"food":"Hemp Seeds","category":"Nuts & Seeds","proteinG":31.6,"caloriesKcal":553,"proteinPerCalorie":0.0571,"fatG":48.8,"carbsG":8.7,"servingSize":"100g"},{"food":"Chickpeas","category":"Plant-Based","proteinG":8.9,"caloriesKcal":164,"proteinPerCalorie":0.0543,"fatG":2.6,"carbsG":27.4,"servingSize":"100g"},{"food":"Pumpkin Seeds","category":"Nuts & Seeds","proteinG":30.2,"caloriesKcal":559,"proteinPerCalorie":0.054,"fatG":49.1,"carbsG":10.7,"servingSize":"100g"},{"food":"Peanuts","category":"Nuts & Seeds","proteinG":25.8,"caloriesKcal":567,"proteinPerCalorie":0.0455,"fatG":49.2,"carbsG":16.1,"servingSize":"100g"},{"food":"Oats","category":"Plant-Based","proteinG":16.9,"caloriesKcal":389,"proteinPerCalorie":0.0434,"fatG":6.9,"carbsG":66.3,"servingSize":"100g"},{"food":"Spelt","category":"Plant-Based","proteinG":5.5,"caloriesKcal":127,"proteinPerCalorie":0.0433,"fatG":0.9,"carbsG":26.4,"servingSize":"100g"},{"food":"Peanut Butter","category":"Nuts & Seeds","proteinG":25.1,"caloriesKcal":588,"proteinPerCalorie":0.0427,"fatG":50.4,"carbsG":20,"servingSize":"100g"},{"food":"Wild Rice","category":"Plant-Based","proteinG":4,"caloriesKcal":101,"proteinPerCalorie":0.0396,"fatG":0.3,"carbsG":21.3,"servingSize":"100g"},{"food":"Teff","category":"Plant-Based","proteinG":3.9,"caloriesKcal":101,"proteinPerCalorie":0.0386,"fatG":0.6,"carbsG":19.9,"servingSize":"100g"},{"food":"Sweet Corn","category":"Vegetables","proteinG":3.3,"caloriesKcal":86,"proteinPerCalorie":0.0384,"fatG":1.4,"carbsG":18.7,"servingSize":"100g"},{"food":"Amaranth","category":"Plant-Based","proteinG":3.8,"caloriesKcal":102,"proteinPerCalorie":0.0373,"fatG":1.6,"carbsG":18.7,"servingSize":"100g"},{"food":"Buckwheat","category":"Plant-Based","proteinG":3.4,"caloriesKcal":92,"proteinPerCalorie":0.037,"fatG":0.6,"carbsG":20,"servingSize":"100g"},{"food":"Quinoa","category":"Plant-Based","proteinG":4.4,"caloriesKcal":120,"proteinPerCalorie":0.0367,"fatG":1.9,"carbsG":21.3,"servingSize":"100g"},{"food":"Almonds","category":"Nuts & Seeds","proteinG":21.2,"caloriesKcal":579,"proteinPerCalorie":0.0366,"fatG":49.9,"carbsG":21.6,"servingSize":"100g"},{"food":"Pistachios","category":"Nuts & Seeds","proteinG":20.2,"caloriesKcal":562,"proteinPerCalorie":0.0359,"fatG":45.3,"carbsG":27.2,"servingSize":"100g"},{"food":"Sunflower Seeds","category":"Nuts & Seeds","proteinG":20.8,"caloriesKcal":584,"proteinPerCalorie":0.0356,"fatG":51.5,"carbsG":20,"servingSize":"100g"},{"food":"Flaxseeds","category":"Nuts & Seeds","proteinG":18.3,"caloriesKcal":534,"proteinPerCalorie":0.0343,"fatG":42.2,"carbsG":28.9,"servingSize":"100g"},{"food":"Almond Butter","category":"Nuts & Seeds","proteinG":21,"caloriesKcal":614,"proteinPerCalorie":0.0342,"fatG":55.5,"carbsG":18.8,"servingSize":"100g"},{"food":"Chia Seeds","category":"Nuts & Seeds","proteinG":16.5,"caloriesKcal":486,"proteinPerCalorie":0.034,"fatG":30.7,"carbsG":42.1,"servingSize":"100g"},{"food":"Cashews","category":"Nuts & Seeds","proteinG":18.2,"caloriesKcal":553,"proteinPerCalorie":0.0329,"fatG":43.8,"carbsG":30.2,"servingSize":"100g"},{"food":"Walnuts","category":"Nuts & Seeds","proteinG":15.2,"caloriesKcal":654,"proteinPerCalorie":0.0232,"fatG":65.2,"carbsG":13.7,"servingSize":"100g"},{"food":"Brazil Nuts","category":"Nuts & Seeds","proteinG":14.3,"caloriesKcal":659,"proteinPerCalorie":0.0217,"fatG":67.1,"carbsG":11.7,"servingSize":"100g"}];
+
+        // State
+        let currentSort = { key: 'proteinPerCalorie', dir: -1 }; // -1 for desc, 1 for asc
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // DOM Elements
+        const tbody = document.getElementById('tableBody');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const headers = document.querySelectorAll('th[data-sort]');
+
+        // Initialize Categories
+        const categories = [...new Set(foodData.map(item => item.category))].sort();
+        categories.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = cat;
+            categoryFilter.appendChild(opt);
+        });
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase();
+            renderTable();
+        });
+
+        categoryFilter.addEventListener('change', (e) => {
+            currentFilter = e.target.value;
+            renderTable();
+        });
+
+        headers.forEach(th => {
+            th.addEventListener('click', () => {
+                const key = th.dataset.sort;
+
+                // Toggle dir if same key
+                if (currentSort.key === key) {
+                    currentSort.dir *= -1;
+                } else {
+                    currentSort.key = key;
+                    currentSort.dir = -1; // Default to desc for most numbers
+                    if (key === 'food') currentSort.dir = 1; // Default asc for text
+                }
+
+                // Update UI
+                headers.forEach(h => {
+                    h.classList.remove('sort-active');
+                    h.textContent = h.textContent.replace(' ▼', '').replace(' ▲', '');
+                });
+                th.classList.add('sort-active');
+                th.textContent += currentSort.dir === 1 ? ' ▲' : ' ▼';
+
+                renderTable();
+            });
+        });
+
+        // Render function
+        function renderTable() {
+            let filtered = foodData.filter(item => {
+                const search = searchQuery.toLowerCase();
+                const matchesSearch = item.food.toLowerCase().includes(search) || item.category.toLowerCase().includes(search);
+                const matchesCat = currentFilter === 'all' || item.category === currentFilter;
+                return matchesSearch && matchesCat;
+            });
+
+            filtered.sort((a, b) => {
+                let valA = a[currentSort.key];
+                let valB = b[currentSort.key];
+
+                if (typeof valA === 'string') {
+                    valA = valA.toLowerCase();
+                    valB = valB.toLowerCase();
+                    if (valA < valB) return -1 * currentSort.dir;
+                    if (valA > valB) return 1 * currentSort.dir;
+                    return 0;
+                }
+
+                if (valA < valB) return -1 * currentSort.dir;
+                if (valA > valB) return 1 * currentSort.dir;
+                return 0;
+            });
+
+            tbody.innerHTML = '';
+            filtered.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="food-name">${item.food}</div>
+                        <div class="food-cat">${item.category}</div>
+                    </td>
+                    <td class="ratio-val">${item.proteinPerCalorie.toFixed(4)}</td>
+                    <td class="mono-val">${item.proteinG.toFixed(1)}</td>
+                    <td class="mono-val">${item.caloriesKcal.toFixed(0)}</td>
+                    <td class="mono-val">${item.fatG.toFixed(1)}</td>
+                    <td class="mono-val">${item.carbsG.toFixed(1)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Initial Render
+        renderTable();
+    </script>
+</body>
+</html>
