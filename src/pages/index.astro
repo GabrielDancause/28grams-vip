@@ -1,163 +1,407 @@
 ---
 import BaseHead from '../layouts/BaseHead.astro';
 
-const studies = [
-  {
-    title: "Sourdough Recipe Analysis 2026",
-    subtitle: "85 Recipes from 4 Sources",
-    slug: "/sourdough-study",
-    stat: "77.8%",
-    statLabel: "average hydration",
-    desc: "We analyzed 85 sourdough recipes from King Arthur, The Perfect Loaf, Breadtopia & Food52. Average oven temp is 431°F. White flour dominates at 72%.",
-    tag: "ORIGINAL RESEARCH",
-  },
-  {
-    title: "Cooking Oil Smoke Points & Nutrition",
-    subtitle: "28 Oils Compared",
-    slug: "/cooking-oil-comparison",
-    stat: "28",
-    statLabel: "oils compared",
-    desc: "The definitive guide to every cooking oil — smoke point, fat composition, best uses. From extra virgin olive oil (350°F) to avocado oil (520°F).",
-    tag: "ORIGINAL RESEARCH",
-  },
+// Tools (all the cooking calculators and converters)
+const tools = [
+  { emoji: "⚖️", name: "Recipe Yield Scaler", slug: "/recipe-scaler", desc: "Scale any recipe up or down with all ingredients recalculated" },
+  { emoji: "🍞", name: "Baker's Percentage Calculator", slug: "/bakers-percentage", desc: "Convert bread recipes to baker's percentages or vice versa" },
+  { emoji: "🌡️", name: "Metric ↔ Imperial Converter", slug: "/cooking-converter", desc: "Cups to grams, Fahrenheit to Celsius, ounces to milliliters" },
+  { emoji: "🍞", name: "Sourdough Calculator", slug: "/sourdough-calculator", desc: "Calculate flour weight, hydration, starter percentage, and timing" },
+  { emoji: "🌡️", name: "Sous Vide Calculator", slug: "/sous-vide", desc: "Time and temperature for beef, pork, chicken, fish, eggs" },
+  { emoji: "☕", name: "Coffee Brew Ratio Calculator", slug: "/coffee-ratio", desc: "Pour-over, French press, espresso, cold brew ratios" },
+  { emoji: "🍕", name: "Pizza Dough Calculator", slug: "/pizza-dough", desc: "Exact flour, water, yeast, salt for any number of dough balls" },
+  { emoji: "🥩", name: "Smoking Calculator", slug: "/smoking-calculator", desc: "Time and temperature for brisket, ribs, pork shoulder, chicken" },
+  { emoji: "🍺", name: "ABV Calculator", slug: "/abv-calculator", desc: "Calculate alcohol by volume from gravity readings" },
+  { emoji: "🍞", name: "Bread Hydration Calculator", slug: "/bread-hydration", desc: "True hydration percentage accounting for preferments" },
+  { emoji: "🫙", name: "Fermentation Timer", slug: "/fermentation-timer", desc: "Schedules for bread, yogurt, kombucha, kimchi fermentation" },
+  { emoji: "📋", name: "Nutrition Label Creator", slug: "/nutrition-label", desc: "FDA-style nutrition labels with serving size and nutrients" },
+  { emoji: "🌶️", name: "Spice Substitution Guide", slug: "/spice-substitution", desc: "Substitutes for 100+ spices with ratio adjustments" },
+  { emoji: "🥡", name: "Meal Prep Calculator", slug: "/meal-prep", desc: "Weekly meal prep portions with shopping list and macros" },
+  { emoji: "🥚", name: "Egg Substitute Calculator", slug: "/egg-substitute", desc: "Baking egg substitutes: flax, chia, applesauce, banana" },
+  { emoji: "🌡️", name: "Oven Temperature Converter", slug: "/oven-converter", desc: "Fahrenheit, Celsius, and gas mark conversions" },
+  { emoji: "🍞", name: "Yeast Converter", slug: "/yeast-converter", desc: "Convert between fresh, active dry, and instant yeast" }
 ];
 
-const tools = [
-  { emoji: "⚖️", name: "Recipe Yield Scaler", desc: "Scale any recipe up or down. Enter the original yield, your target, and get every ingredient recalculated.", soon: false, slug: "/recipe-scaler" },
-  { emoji: "🍞", name: "Baker's Percentage Calculator", desc: "Convert any bread recipe to baker's percentages — or go the other way. The pro baker's best friend.", soon: false, slug: "/bakers-percentage" },
-  { emoji: "🌡️", name: "Metric ↔ Imperial Converter", desc: "Cups to grams, Fahrenheit to Celsius, ounces to milliliters. Every kitchen conversion in one place.", soon: false, slug: "/cooking-converter" },
-  { emoji: "🍞", name: "Sourdough Calculator", desc: "Sourdough ratios. Flour weight, hydration, starter %. Water, starter, salt. Timing schedule.", soon: false, slug: "/sourdough-calculator" },
-  { emoji: "🌡️", name: "Sous Vide Calculator", desc: "Sous vide time/temp for any protein. Beef, pork, chicken, fish, eggs.", soon: false, slug: "/sous-vide" },
-  { emoji: "☕", name: "Coffee Brew Ratio Calculator", desc: "Coffee-to-water ratios. Pour-over, French press, espresso, cold brew.", soon: false, slug: "/coffee-ratio" },
-  { emoji: "🍕", name: "Pizza Dough Calculator", desc: "Calculate exact flour, water, yeast, salt, and oil for any number of pizza dough balls. Neapolitan, New York, and more.", soon: false, slug: "/pizza-dough" },
-  { emoji: "🥩", name: "Smoking Calculator", desc: "Time and temperature for smoking any meat. Brisket, ribs, pork shoulder, chicken — with rest time and stall estimates.", soon: false, slug: "/smoking-calculator" },
-  { emoji: "🍺", name: "ABV Calculator", desc: "Calculate alcohol by volume from original and final gravity readings. Supports Brix and SG.", soon: false, slug: "/abv-calculator" },
-  { emoji: "🍞", name: "Bread Hydration Calculator", desc: "Calculate true hydration percentage for any bread recipe. Accounts for preferments, enriched doughs, and whole grains.", soon: false, slug: "/bread-hydration" },
-  { emoji: "🫙", name: "Fermentation Timer", desc: "Fermentation schedules. Bread, yogurt, kombucha, kimchi. Temp-adjusted.", soon: false, slug: "/fermentation-timer" },
-  { emoji: "📋", name: "Nutrition Label Creator", desc: "FDA-style nutrition labels. Serving size, nutrients. Printable. DV %.", soon: false, slug: "/nutrition-label" },
-  { emoji: "🌶️", name: "Spice Substitution Guide", desc: "Substitutes for 100+ spices. Ratio adjustments. Best alternatives.", soon: false, slug: "/spice-substitution" },
-  { emoji: "🥡", name: "Meal Prep Calculator", desc: "Weekly meal prep portions. Shopping list. Macros per meal.", soon: false, slug: "/meal-prep" },
-  { emoji: "🥚", name: "Egg Substitute Calculator", desc: "Baking egg substitutes. Flax, chia, applesauce, banana, aquafaba.", soon: false, slug: "/egg-substitute" },
-  { emoji: "📚", name: "Sourdough Starter: Complete Guide", desc: "How to create and maintain a sourdough starter. Day-by-day timeline, feeding schedule, troubleshooting.", soon: false, slug: "/guide-sourdough" },
-  { emoji: "📚", name: "Bread Baking for Beginners", desc: "Start baking bread at home. Equipment, flour types, kneading, proofing, baking. First recipe.", soon: false, slug: "/guide-bread-baking" },
-  { emoji: "📚", name: "Home Fermentation Guide", desc: "Start fermenting at home. Sauerkraut, kimchi, kombucha, yogurt. Equipment, safety, troubleshooting.", soon: false, slug: "/guide-fermentation" },
-  { emoji: "🌡️", name: "Oven Temperature Converter", desc: "Fahrenheit, Celsius, and gas marks. Quick oven temp conversions for any recipe.", soon: false, slug: "/oven-converter" },
-  { emoji: "🔪", name: "Knife Skills 101", desc: "Essential kitchen cuts and knife types. Julienne, brunoise, chiffonade — the complete reference.", soon: false, slug: "/guide-knife-skills" },
-  { emoji: "☕", name: "Coffee Brewing Methods Guide", desc: "Pour-over, French press, AeroPress, espresso, cold brew — methods compared side by side.", soon: false, slug: "/guide-coffee-brewing" },
-  { emoji: "🥩", name: "Smoking Meat Guide", desc: "Beginner's guide to smoking meat. Wood types, temperatures, timing, and troubleshooting.", soon: false, slug: "/guide-smoking-meat" },
-  { emoji: "⚖️", name: "Best Kitchen Scales", desc: "Kitchen scales compared for baking, cooking, and coffee. Capacity, precision, and value.", soon: false, slug: "/list-kitchen-scales" },
-  { emoji: "🍳", name: "Essential Kitchen Tools", desc: "Curated list of must-have kitchen tools. Comparisons and recommendations for every budget.", soon: false, slug: "/list-kitchen-tools" },
-  { emoji: "🍞", name: "Yeast Converter", desc: "Convert between fresh, active dry, and instant yeast. Never get the ratio wrong again.", soon: false, slug: "/yeast-converter" },
-  { emoji: "📚", name: "Best Cookbooks", desc: "Curated list of the best cookbooks for every skill level. Baking, pastry, bread, and general cooking.", soon: false, slug: "/list-cookbooks" },
-  { emoji: "🍳", name: "Best Cast Iron Skillets", desc: "Cast iron skillets compared by weight, heat retention, handle comfort, and value.", soon: false, slug: "/list-cast-iron" },
-  { emoji: "☕", name: "Best Coffee Grinders", desc: "Coffee grinders compared by grind consistency, burr type, capacity, and price.", soon: false, slug: "/list-coffee-grinders" },
-  { emoji: "🧈", name: "Butter & Sugar Substitution", desc: "Out of butter? Need less sugar? Find the right substitute and the exact amount to use.", soon: true },
-  { emoji: "⏱️", name: "Cooking Time Adjuster", desc: "Changing pan size or altitude? Recalculate baking time and temperature automatically.", soon: true },
-  { emoji: "🥘", name: "Serving Cost Calculator", desc: "How much does each plate really cost? Add ingredients, quantities, and prices — get cost per serving.", soon: true },
+// Studies 
+const studies = [
+  { emoji: "🍞", name: "Sourdough Recipe Analysis 2026", slug: "/sourdough-study", desc: "85 recipes analyzed from 4 sources — hydration, temperature, flour types", stat: "77.8%", statLabel: "average hydration" },
+  { emoji: "🫒", name: "Cooking Oil Smoke Points & Nutrition", slug: "/cooking-oil-comparison", desc: "28 oils compared — smoke points, fat composition, best uses", stat: "28", statLabel: "oils compared" }
+];
+
+// Guides
+const guides = [
+  { emoji: "📚", name: "Sourdough Starter Complete Guide", slug: "/guide-sourdough", desc: "Create and maintain starter with day-by-day timeline" },
+  { emoji: "📚", name: "Bread Baking for Beginners", slug: "/guide-bread-baking", desc: "Equipment, flour types, kneading, proofing, baking basics" },
+  { emoji: "📚", name: "Home Fermentation Guide", slug: "/guide-fermentation", desc: "Sauerkraut, kimchi, kombucha, yogurt safety and techniques" },
+  { emoji: "🔪", name: "Knife Skills 101", slug: "/guide-knife-skills", desc: "Essential cuts and knife types — julienne, brunoise, chiffonade" },
+  { emoji: "☕", name: "Coffee Brewing Methods Guide", slug: "/guide-coffee-brewing", desc: "Pour-over, French press, AeroPress, espresso methods compared" },
+  { emoji: "🥩", name: "Smoking Meat Guide", slug: "/guide-smoking-meat", desc: "Beginner's guide with wood types, temperatures, timing" }
+];
+
+// Lists
+const lists = [
+  { emoji: "⚖️", name: "Best Kitchen Scales", slug: "/list-kitchen-scales", desc: "Kitchen scales compared for capacity, precision, and value" },
+  { emoji: "🍳", name: "Essential Kitchen Tools", slug: "/list-kitchen-tools", desc: "Must-have kitchen tools for every budget and skill level" },
+  { emoji: "📚", name: "Best Cookbooks", slug: "/list-cookbooks", desc: "Curated cookbooks for baking, pastry, bread, and cooking" },
+  { emoji: "🍳", name: "Best Cast Iron Skillets", slug: "/list-cast-iron", desc: "Cast iron skillets by weight, heat retention, value" },
+  { emoji: "☕", name: "Best Coffee Grinders", slug: "/list-coffee-grinders", desc: "Coffee grinders by grind consistency, burr type, price" }
 ];
 ---
 <html lang="en">
 <head>
-  <BaseHead
-    title="28 Grams — Recipe Scaling, Baker's Percentages & Culinary Conversion Tools"
-    description="Free culinary calculators: recipe yield scaler, baker's percentage calculator, metric to imperial converter, substitution guides, and serving cost calculator. No signup."
-    ogTitle="28 Grams — Precision Cooking Starts Here"
-    ogDescription="Recipe scaling, baker's percentages, unit conversions, and culinary calculators. Free, fast, no signup."
-  />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <BaseHead />
+  <title>28grams.vip — Cooking & Food Science</title>
+  <meta name="description" content="Free culinary calculators: recipe scaling, baker's percentages, metric conversions, substitution guides, and cooking research." />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: #0a060a; color: #e0d0d8; }
-    .hero { text-align: center; padding: 100px 24px 80px; background: linear-gradient(180deg, #1a0a14 0%, #0a060a 100%); position: relative; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, rgba(122,27,61,0.1) 0%, transparent 60%); }
+    body { 
+      font-family: 'Inter', -apple-system, sans-serif; 
+      background: #060a12; 
+      color: #c8d0de; 
+      line-height: 1.6;
+    }
+
+    /* Hero */
+    .hero { 
+      text-align: center; 
+      padding: 100px 24px 70px; 
+      background: linear-gradient(180deg, #1a0a14 0%, #060a12 100%); 
+      position: relative; 
+    }
+    .hero::before { 
+      content: ''; 
+      position: absolute; 
+      inset: 0; 
+      background: radial-gradient(circle at 50% 40%, rgba(194,24,91,0.08) 0%, transparent 60%); 
+    }
     .hero-content { position: relative; z-index: 1; }
-    .hero h1 { font-size: 3rem; font-weight: 900; letter-spacing: -1.5px; margin-bottom: 12px; background: linear-gradient(135deg, #fff 0%, #C2185B 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero p { color: #666; font-size: 1.05rem; max-width: 480px; margin: 0 auto; }
-    .grid { max-width: 900px; margin: 0 auto; padding: 0 24px 100px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-    .card { background: #120c10; border: 2px solid #2a1820; border-radius: 16px; padding: 28px 24px; position: relative; text-decoration: none; color: inherit; display: block; transition: border-color 0.2s, transform 0.2s; }
-    .card:hover { border-color: #C2185B; transform: translateY(-2px); }
-    .card .emoji { font-size: 2rem; margin-bottom: 12px; display: block; }
-    .card h2 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
-    .card p { font-size: 0.85rem; color: #888; line-height: 1.6; }
-    .badge { position: absolute; top: 14px; right: 14px; background: #2a1820; color: #C2185B; font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
-    .footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #333; border-top: 1px solid #1a0e15; }
-    .footer a { color: #C2185B; text-decoration: none; }
+    .hero .tagline { 
+      color: #C2185B; 
+      font-size: 0.85rem; 
+      font-weight: 700; 
+      letter-spacing: 3px; 
+      text-transform: uppercase; 
+      margin-bottom: 16px; 
+    }
+    .hero h1 { 
+      font-size: 3rem; 
+      font-weight: 900; 
+      letter-spacing: -1.5px; 
+      margin-bottom: 20px; 
+      background: linear-gradient(135deg, #fff 0%, #C2185B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p { 
+      color: #5a6a80; 
+      font-size: 1.05rem; 
+      max-width: 520px; 
+      margin: 0 auto; 
+    }
+
     /* Sections */
-    .section-container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-    .section-header { text-align: center; margin-bottom: 28px; padding-top: 10px; }
-    .section-tag { display: inline-block; background: #2a1820; color: #C2185B; font-size: 0.7rem; font-weight: 800; padding: 4px 14px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 10px; }
-    .section-title { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
-    .section-sub { color: #555; font-size: 0.9rem; }
+    .section-container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 60px 24px; 
+    }
+    .section-header { 
+      text-align: center; 
+      margin-bottom: 40px; 
+    }
+    .section-tag { 
+      display: inline-block; 
+      background: rgba(194,24,91,0.1); 
+      color: #C2185B; 
+      font-size: 0.7rem; 
+      font-weight: 800; 
+      padding: 6px 16px; 
+      border-radius: 20px; 
+      letter-spacing: 1px; 
+      margin-bottom: 12px; 
+    }
+    .section-title { 
+      font-size: 2.2rem; 
+      font-weight: 900; 
+      color: #fff; 
+      margin-bottom: 8px; 
+      letter-spacing: -0.8px; 
+    }
+    .section-sub { 
+      color: #5a6a80; 
+      font-size: 1rem; 
+    }
 
-    /* Studies */
-    .studies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; margin-bottom: 50px; }
-    .study-card { background: linear-gradient(135deg, #120c10 0%, #1a0e16 100%); border: 2px solid #2a1820; border-radius: 20px; padding: 32px 28px; text-decoration: none; color: inherit; display: block; transition: border-color 0.3s, transform 0.2s; position: relative; overflow: hidden; }
-    .study-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #C2185B, #E91E63); opacity: 0; transition: opacity 0.3s; }
-    .study-card:hover { border-color: #C2185B; transform: translateY(-3px); }
+    /* Tools Grid */
+    .tools-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+      gap: 16px; 
+    }
+    .tool-card { 
+      background: #120c10; 
+      border: 1px solid #2a1820; 
+      border-radius: 12px; 
+      padding: 20px; 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      transition: all 0.2s ease; 
+    }
+    .tool-card:hover { 
+      border-color: #C2185B; 
+      transform: translateY(-2px); 
+    }
+    .tool-emoji { 
+      font-size: 1.4rem; 
+      margin-bottom: 8px; 
+      display: block; 
+    }
+    .tool-name { 
+      font-size: 0.95rem; 
+      font-weight: 700; 
+      color: #e0e8f0; 
+      margin-bottom: 6px; 
+    }
+    .tool-desc { 
+      font-size: 0.8rem; 
+      color: #6a7a90; 
+      line-height: 1.4; 
+    }
+
+    /* Studies Grid */
+    .studies-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+      gap: 24px; 
+    }
+    .study-card { 
+      background: linear-gradient(135deg, #120c10 0%, #1a0e16 100%); 
+      border: 1px solid #2a1820; 
+      border-radius: 16px; 
+      padding: 28px 24px; 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      transition: all 0.3s ease; 
+      position: relative; 
+      overflow: hidden; 
+    }
+    .study-card::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      height: 2px; 
+      background: linear-gradient(90deg, #C2185B, #E91E63); 
+      opacity: 0; 
+      transition: opacity 0.3s; 
+    }
+    .study-card:hover { 
+      border-color: #C2185B; 
+      transform: translateY(-3px); 
+      box-shadow: 0 12px 40px rgba(194,24,91,0.15); 
+    }
     .study-card:hover::before { opacity: 1; }
-    .study-tag { display: inline-block; background: rgba(194,24,91,0.12); color: #C2185B; font-size: 0.6rem; font-weight: 800; padding: 3px 10px; border-radius: 12px; letter-spacing: 0.8px; margin-bottom: 14px; }
-    .study-stat { margin-bottom: 14px; }
-    .stat-number { display: block; font-size: 2.4rem; font-weight: 900; color: #C2185B; line-height: 1; letter-spacing: -1px; }
-    .stat-label { display: block; font-size: 0.82rem; color: #666; margin-top: 4px; }
-    .study-title { font-size: 1.12rem; font-weight: 800; color: #fff; margin-bottom: 4px; }
-    .study-subtitle { font-size: 0.8rem; color: #C2185B; margin-bottom: 10px; font-weight: 600; }
-    .study-desc { font-size: 0.85rem; color: #777; line-height: 1.6; margin-bottom: 14px; }
-    .study-cta { color: #C2185B; font-size: 0.85rem; font-weight: 700; }
+    
+    .study-emoji { 
+      font-size: 1.6rem; 
+      margin-bottom: 12px; 
+      display: block; 
+    }
+    .study-stat { 
+      margin-bottom: 16px; 
+    }
+    .stat-number { 
+      display: block; 
+      font-size: 2rem; 
+      font-weight: 900; 
+      color: #C2185B; 
+      line-height: 1; 
+      letter-spacing: -1px; 
+    }
+    .stat-label { 
+      display: block; 
+      font-size: 0.75rem; 
+      color: #5a6a80; 
+      margin-top: 4px; 
+    }
+    .study-name { 
+      font-size: 1rem; 
+      font-weight: 800; 
+      color: #e0e8f0; 
+      margin-bottom: 8px; 
+      line-height: 1.3; 
+    }
+    .study-desc { 
+      font-size: 0.85rem; 
+      color: #6a7a90; 
+      line-height: 1.4; 
+    }
 
-    .grid { margin-bottom: 50px; }
+    /* Guides & Lists Grid */
+    .guides-grid, .lists-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+      gap: 20px; 
+    }
+    .guide-card, .list-card { 
+      background: #120c10; 
+      border: 1px solid #2a1820; 
+      border-radius: 14px; 
+      padding: 24px 20px; 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      transition: all 0.2s ease; 
+    }
+    .guide-card:hover, .list-card:hover { 
+      border-color: #C2185B; 
+      transform: translateY(-2px); 
+    }
+    .guide-emoji, .list-emoji { 
+      font-size: 1.5rem; 
+      margin-bottom: 10px; 
+      display: block; 
+    }
+    .guide-name, .list-name { 
+      font-size: 1rem; 
+      font-weight: 700; 
+      color: #e0e8f0; 
+      margin-bottom: 6px; 
+    }
+    .guide-desc, .list-desc { 
+      font-size: 0.85rem; 
+      color: #6a7a90; 
+      line-height: 1.4; 
+    }
 
-    @media (max-width: 600px) { .hero h1 { font-size: 2.2rem; } .hero { padding: 70px 20px 50px; } .grid { grid-template-columns: 1fr; } .studies-grid { grid-template-columns: 1fr; } .stat-number { font-size: 2rem; } }
+    /* Footer */
+    .footer { 
+      text-align: center; 
+      padding: 50px 24px; 
+      font-size: 0.85rem; 
+      color: #3a4a5a; 
+      border-top: 1px solid #151f2e; 
+      background: #040810; 
+    }
+    .footer a { 
+      color: #C2185B; 
+      text-decoration: none; 
+    }
+    .footer a:hover { 
+      text-decoration: underline; 
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .hero { padding: 70px 20px 50px; }
+      .section-container { padding: 40px 20px; }
+      .tools-grid, .studies-grid, .guides-grid, .lists-grid { 
+        grid-template-columns: 1fr; 
+      }
+    }
   </style>
 </head>
 <body>
-<div class="hero">
-  <div class="hero-content">
-    <h1>28 Grams 🍳</h1>
-    <p>Precision cooking tools & food research. Scale recipes, nail baker's percentages, convert anything.</p>
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-content">
+      <div class="tagline">Cooking & Food Science</div>
+      <h1>28grams.vip</h1>
+      <p>Precision cooking tools & food research. Scale recipes, nail baker's percentages, convert anything.</p>
+    </div>
   </div>
-</div>
 
-<div class="section-container">
-  <div class="section-header">
-    <span class="section-tag">🔬 ORIGINAL RESEARCH</span>
-    <h2 class="section-title">Featured Studies</h2>
-    <p class="section-sub">Real data from real recipes. Crawled, measured, analyzed.</p>
-  </div>
-  <div class="studies-grid">
-    {studies.map(s => (
-      <a class="study-card" href={s.slug}>
-        <span class="study-tag">{s.tag}</span>
-        <div class="study-stat">
-          <span class="stat-number">{s.stat}</span>
-          <span class="stat-label">{s.statLabel}</span>
-        </div>
-        <h3 class="study-title">{s.title}</h3>
-        <p class="study-subtitle">{s.subtitle}</p>
-        <p class="study-desc">{s.desc}</p>
-        <span class="study-cta">Read the study →</span>
-      </a>
-    ))}
-  </div>
-</div>
+  <!-- Tools Section -->
+  {tools.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🛠️ TOOLS</span>
+        <h2 class="section-title">Cooking Tools</h2>
+        <p class="section-sub">Free, runs in your browser, no signup.</p>
+      </div>
+      <div class="tools-grid">
+        {tools.map(tool => (
+          <a class="tool-card" href={tool.slug}>
+            <span class="tool-emoji">{tool.emoji}</span>
+            <h3 class="tool-name">{tool.name}</h3>
+            <p class="tool-desc">{tool.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 
-<div class="section-container">
-  <div class="section-header">
-    <span class="section-tag">🛠️ TOOLS</span>
-    <h2 class="section-title">Cooking Tools</h2>
-    <p class="section-sub">Free, runs in your browser, no signup.</p>
-  </div>
-  <div class="grid">
-    {tools.map(t => (
-      <a class="card" href={t.slug || '#'} style={t.soon ? 'pointer-events:none' : ''}>
-        {t.soon ? <span class="badge">COMING SOON</span> : <span class="badge" style="background:#1a2a1a;color:#4ade80;">LIVE</span>}
-        <span class="emoji">{t.emoji}</span>
-        <h2>{t.name}</h2>
-        <p>{t.desc}</p>
-      </a>
-    ))}
-  </div>
-</div>
+  <!-- Studies Section -->
+  {studies.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">🔬 RESEARCH</span>
+        <h2 class="section-title">Featured Studies</h2>
+        <p class="section-sub">Real data from real recipes. Crawled, measured, analyzed.</p>
+      </div>
+      <div class="studies-grid">
+        {studies.map(study => (
+          <a class="study-card" href={study.slug}>
+            <span class="study-emoji">{study.emoji}</span>
+            <div class="study-stat">
+              <span class="stat-number">{study.stat}</span>
+              <span class="stat-label">{study.statLabel}</span>
+            </div>
+            <h3 class="study-name">{study.name}</h3>
+            <p class="study-desc">{study.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
 
-<div class="footer">© 2026 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property</div>
+  <!-- Guides Section -->
+  {guides.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">📚 GUIDES</span>
+        <h2 class="section-title">Cooking Guides</h2>
+        <p class="section-sub">Step-by-step guides for mastering cooking techniques.</p>
+      </div>
+      <div class="guides-grid">
+        {guides.map(guide => (
+          <a class="guide-card" href={guide.slug}>
+            <span class="guide-emoji">{guide.emoji}</span>
+            <h3 class="guide-name">{guide.name}</h3>
+            <p class="guide-desc">{guide.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Lists Section -->
+  {lists.length > 0 && (
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">📋 LISTS</span>
+        <h2 class="section-title">Curated Lists</h2>
+        <p class="section-sub">Best kitchen tools, equipment, and cookbooks compared.</p>
+      </div>
+      <div class="lists-grid">
+        {lists.map(list => (
+          <a class="list-card" href={list.slug}>
+            <span class="list-emoji">{list.emoji}</span>
+            <h3 class="list-name">{list.name}</h3>
+            <p class="list-desc">{list.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Footer -->
+  <div class="footer">
+    © 2026 <a href="/">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+  </div>
 </body>
 </html>
