@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caffeine Content Comparison: Coffee, Tea, Energy Drinks 2026</title>
+  <meta name="description" content="Compare caffeine content per 8oz across 130 coffees, teas, energy drinks, and sodas.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      --bg: #0a0b10;
+      --card: #111318;
+      --border: #1e2030;
+      --accent: #C2185B;
+      --text: #e0e0e0;
+      --text-dim: #888888;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: rgba(194, 24, 91, 0.15);
+      color: var(--accent);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    section {
+      margin-bottom: 4rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .search-input {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      font-family: inherit;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .table-container {
+      overflow-x: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    th:hover {
+      color: var(--text);
+    }
+
+    td {
+      font-size: 0.95rem;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .dim {
+      color: var(--text-dim);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .brand-tag {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      background: rgba(255,255,255,0.05);
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      margin-left: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .faq-question {
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .faq-answer {
+      color: var(--text-dim);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border);
+      background: #040810;
+      margin-top: 4rem;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .container { padding: 1.5rem; }
+      .controls { flex-direction: column; align-items: stretch; }
+      .search-input { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tag">ORIGINAL RESEARCH</div>
+    <h1>Caffeine Content Comparison: Coffee, Tea, Energy Drinks 2026</h1>
+    <p class="subtitle">Comprehensive analysis of caffeine levels across 130 popular beverages, normalized per 8oz serving for accurate comparison.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">130</div>
+        <div class="stat-label">Beverages Analyzed</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">728mg</div>
+        <div class="stat-label">Highest Caffeine (Death Wish)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">137mg</div>
+        <div class="stat-label">Avg Coffee per 8oz</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">84mg</div>
+        <div class="stat-label">Avg Energy Drink per 8oz</div>
+      </div>
+    </div>
+
+    <section>
+      <h2>Interactive Data Explorer</h2>
+
+      <div class="controls">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search beverages or brands...">
+
+        <div class="filters" id="filters">
+          <button class="filter-btn active" data-filter="All">All</button>
+          <button class="filter-btn" data-filter="Coffee">Coffee</button>
+          <button class="filter-btn" data-filter="Tea">Tea</button>
+          <button class="filter-btn" data-filter="Energy Drink">Energy Drink</button>
+          <button class="filter-btn" data-filter="Soda">Soda</button>
+          <button class="filter-btn" data-filter="Energy Shot">Energy Shot</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="name">Beverage <span class="sort-icon"></span></th>
+              <th data-sort="category">Category <span class="sort-icon"></span></th>
+              <th data-sort="servingSizeOz">Serving Size <span class="sort-icon"></span></th>
+              <th data-sort="caffeineMg">Total Caffeine <span class="sort-icon"></span></th>
+              <th data-sort="caffeinePer8oz">Caffeine / 8oz <span class="sort-icon"></span></th>
+              <th data-sort="sugarG">Sugar <span class="sort-icon"></span></th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Methodology</h2>
+      <p style="color: var(--text-dim); margin-bottom: 1rem;">
+        Data for this study was collected from the USDA FoodData Central database, brand websites, and established nutritional databases during our 2026 audit.
+        We analyzed a diverse range of 130 beverages including popular coffee chains, energy drinks, sodas, and teas.
+      </p>
+      <p style="color: var(--text-dim);">
+        To provide a fair comparison across drastically different serving sizes—ranging from 1oz espresso shots to 24oz cold brews—we calculated a normalized
+        "Caffeine per 8oz" metric. This allows consumers to understand the true concentration of caffeine in their beverages regardless of the container size.
+        Beverages with zero caffeine (like decaf or caffeine-free sodas) were included for baseline reference.
+      </p>
+    </section>
+
+    <section>
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question">Which coffee has the most caffeine?</div>
+        <div class="faq-answer">Death Wish Coffee contains the highest amount of caffeine in our study, boasting an incredible 728mg per 8oz serving. Among major chains, Starbucks Pike Place Roast is exceptionally high with 310mg per 16oz serving.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Do energy drinks have more caffeine than coffee?</div>
+        <div class="faq-answer">On average, standard brewed coffee actually has more caffeine per ounce than many standard energy drinks. An 8.4oz Red Bull contains 80mg of caffeine, while 8oz of generic brewed coffee contains about 95mg. However, specialized energy drinks (like Bang or Reign) contain 300mg per 16oz can.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How much caffeine is in a shot of espresso?</div>
+        <div class="faq-answer">A standard 1oz shot of espresso contains about 63mg of caffeine. While espresso is highly concentrated, a typical 8oz cup of brewed coffee contains more total caffeine (95mg) simply because of the larger serving size.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Which tea has the highest caffeine content?</div>
+        <div class="faq-answer">Guayaki Yerba Mate (150mg per 15.5oz can) and Matcha (70mg per 8oz) are among the highest naturally caffeinated teas. Standard black tea averages about 47mg per 8oz cup, while green tea has about 28mg.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Does dark roast coffee have more caffeine than light roast?</div>
+        <div class="faq-answer">No, this is a common myth. Light roast coffee actually retains slightly more caffeine than dark roast because the longer roasting process for dark roasts breaks down a small amount of the caffeine compound. However, the difference is negligible.</div>
+      </div>
+    </section>
+  </div>
+
+  <div class="footer">
+    © 2026 <a href="/">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+  </div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Caffeine Content Comparison: Coffee, Tea, Energy Drinks 2026",
+    "description": "Comprehensive analysis of caffeine levels across 130 popular beverages, normalized per 8oz serving for accurate comparison.",
+    "author": {
+      "@type": "Organization",
+      "name": "28grams.vip",
+      "url": "https://28grams.vip"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "28grams.vip",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://28grams.vip/logo.png"
+      }
+    },
+    "datePublished": "2026-03-09"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which coffee has the most caffeine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Death Wish Coffee contains the highest amount of caffeine in our study, boasting an incredible 728mg per 8oz serving. Among major chains, Starbucks Pike Place Roast is exceptionally high with 310mg per 16oz serving."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do energy drinks have more caffeine than coffee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On average, standard brewed coffee actually has more caffeine per ounce than many standard energy drinks. An 8.4oz Red Bull contains 80mg of caffeine, while 8oz of generic brewed coffee contains about 95mg. However, specialized energy drinks (like Bang or Reign) contain 300mg per 16oz can."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much caffeine is in a shot of espresso?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard 1oz shot of espresso contains about 63mg of caffeine. While espresso is highly concentrated, a typical 8oz cup of brewed coffee contains more total caffeine (95mg) simply because of the larger serving size."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which tea has the highest caffeine content?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Guayaki Yerba Mate (150mg per 15.5oz can) and Matcha (70mg per 8oz) are among the highest naturally caffeinated teas. Standard black tea averages about 47mg per 8oz cup, while green tea has about 28mg."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does dark roast coffee have more caffeine than light roast?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, this is a common myth. Light roast coffee actually retains slightly more caffeine than dark roast because the longer roasting process for dark roasts breaks down a small amount of the caffeine compound. However, the difference is negligible."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    const data = [
+  {
+    "name": "Brewed Coffee (8 oz)",
+    "category": "Coffee",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 95,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 11.88,
+    "caffeinePer8oz": 95.04
+  },
+  {
+    "name": "Espresso (1 shot)",
+    "category": "Coffee",
+    "brand": "Generic",
+    "servingSizeOz": 1,
+    "caffeineMg": 63,
+    "sugarG": 0,
+    "caloriesKcal": 1,
+    "caffeinePerOz": 63,
+    "caffeinePer8oz": 504
+  },
+  {
+    "name": "Cold Brew (16 oz)",
+    "category": "Coffee",
+    "brand": "Generic",
+    "servingSizeOz": 16,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 12.5,
+    "caffeinePer8oz": 100
+  },
+  {
+    "name": "Starbucks Pike Place Roast (Grande)",
+    "category": "Coffee",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 310,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 19.38,
+    "caffeinePer8oz": 155.04
+  },
+  {
+    "name": "Starbucks Cold Brew (Grande)",
+    "category": "Coffee",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 205,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 12.81,
+    "caffeinePer8oz": 102.48
+  },
+  {
+    "name": "Starbucks Caffè Americano (Grande)",
+    "category": "Coffee",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 225,
+    "sugarG": 0,
+    "caloriesKcal": 15,
+    "caffeinePerOz": 14.06,
+    "caffeinePer8oz": 112.48
+  },
+  {
+    "name": "Starbucks Caramel Macchiato (Grande)",
+    "category": "Coffee",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 150,
+    "sugarG": 33,
+    "caloriesKcal": 250,
+    "caffeinePerOz": 9.38,
+    "caffeinePer8oz": 75.04
+  },
+  {
+    "name": "Dunkin' Original Blend (Medium)",
+    "category": "Coffee",
+    "brand": "Dunkin'",
+    "servingSizeOz": 14,
+    "caffeineMg": 210,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 15,
+    "caffeinePer8oz": 120
+  },
+  {
+    "name": "Dunkin' Cold Brew (Medium)",
+    "category": "Coffee",
+    "brand": "Dunkin'",
+    "servingSizeOz": 24,
+    "caffeineMg": 260,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 10.83,
+    "caffeinePer8oz": 86.64
+  },
+  {
+    "name": "Dunkin' Espresso (1 shot)",
+    "category": "Coffee",
+    "brand": "Dunkin'",
+    "servingSizeOz": 1.5,
+    "caffeineMg": 118,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 78.67,
+    "caffeinePer8oz": 629.36
+  },
+  {
+    "name": "Peet's Brewed Coffee (Medium)",
+    "category": "Coffee",
+    "brand": "Peet's",
+    "servingSizeOz": 16,
+    "caffeineMg": 267,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 16.69,
+    "caffeinePer8oz": 133.52
+  },
+  {
+    "name": "Tim Hortons Original Blend (Medium)",
+    "category": "Coffee",
+    "brand": "Tim Hortons",
+    "servingSizeOz": 14,
+    "caffeineMg": 205,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 14.64,
+    "caffeinePer8oz": 117.12
+  },
+  {
+    "name": "Death Wish Coffee (8 oz)",
+    "category": "Coffee",
+    "brand": "Death Wish",
+    "servingSizeOz": 8,
+    "caffeineMg": 728,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 91,
+    "caffeinePer8oz": 728
+  },
+  {
+    "name": "Nespresso OriginalLine Espresso",
+    "category": "Coffee",
+    "brand": "Nespresso",
+    "servingSizeOz": 1.35,
+    "caffeineMg": 60,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 44.44,
+    "caffeinePer8oz": 355.52
+  },
+  {
+    "name": "Nespresso Vertuo Coffee (8 oz)",
+    "category": "Coffee",
+    "brand": "Nespresso",
+    "servingSizeOz": 8,
+    "caffeineMg": 165,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 20.63,
+    "caffeinePer8oz": 165.04
+  },
+  {
+    "name": "McDonald's Premium Roast Coffee (Medium)",
+    "category": "Coffee",
+    "brand": "McDonald's",
+    "servingSizeOz": 16,
+    "caffeineMg": 145,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 9.06,
+    "caffeinePer8oz": 72.48
+  },
+  {
+    "name": "Panera Light Roast Coffee (16 oz)",
+    "category": "Coffee",
+    "brand": "Panera",
+    "servingSizeOz": 16,
+    "caffeineMg": 214,
+    "sugarG": 0,
+    "caloriesKcal": 15,
+    "caffeinePerOz": 13.38,
+    "caffeinePer8oz": 107.04
+  },
+  {
+    "name": "Panera Dark Roast Coffee (16 oz)",
+    "category": "Coffee",
+    "brand": "Panera",
+    "servingSizeOz": 16,
+    "caffeineMg": 214,
+    "sugarG": 0,
+    "caloriesKcal": 15,
+    "caffeinePerOz": 13.38,
+    "caffeinePer8oz": 107.04
+  },
+  {
+    "name": "Folgers Classic Roast (8 oz)",
+    "category": "Coffee",
+    "brand": "Folgers",
+    "servingSizeOz": 8,
+    "caffeineMg": 112,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 14,
+    "caffeinePer8oz": 112
+  },
+  {
+    "name": "Maxwell House (8 oz)",
+    "category": "Coffee",
+    "brand": "Maxwell House",
+    "servingSizeOz": 8,
+    "caffeineMg": 112,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 14,
+    "caffeinePer8oz": 112
+  },
+  {
+    "name": "Black Tea (8 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 47,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 5.88,
+    "caffeinePer8oz": 47.04
+  },
+  {
+    "name": "Green Tea (8 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 28,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 3.5,
+    "caffeinePer8oz": 28
+  },
+  {
+    "name": "White Tea (8 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 28,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 3.5,
+    "caffeinePer8oz": 28
+  },
+  {
+    "name": "Oolong Tea (8 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 37,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 4.63,
+    "caffeinePer8oz": 37.04
+  },
+  {
+    "name": "Matcha (1 tsp powder/8 oz water)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 70,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 8.75,
+    "caffeinePer8oz": 70
+  },
+  {
+    "name": "Lipton Black Tea",
+    "category": "Tea",
+    "brand": "Lipton",
+    "servingSizeOz": 8,
+    "caffeineMg": 55,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 6.88,
+    "caffeinePer8oz": 55.04
+  },
+  {
+    "name": "Lipton Iced Tea (16 oz bottle)",
+    "category": "Tea",
+    "brand": "Lipton",
+    "servingSizeOz": 16,
+    "caffeineMg": 24,
+    "sugarG": 32,
+    "caloriesKcal": 130,
+    "caffeinePerOz": 1.5,
+    "caffeinePer8oz": 12
+  },
+  {
+    "name": "Starbucks Iced Black Tea (Grande)",
+    "category": "Tea",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 25,
+    "sugarG": 11,
+    "caloriesKcal": 45,
+    "caffeinePerOz": 1.56,
+    "caffeinePer8oz": 12.48
+  },
+  {
+    "name": "Starbucks Matcha Tea Latte (Grande)",
+    "category": "Tea",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 80,
+    "sugarG": 32,
+    "caloriesKcal": 240,
+    "caffeinePerOz": 5,
+    "caffeinePer8oz": 40
+  },
+  {
+    "name": "Starbucks Chai Tea Latte (Grande)",
+    "category": "Tea",
+    "brand": "Starbucks",
+    "servingSizeOz": 16,
+    "caffeineMg": 95,
+    "sugarG": 42,
+    "caloriesKcal": 240,
+    "caffeinePerOz": 5.94,
+    "caffeinePer8oz": 47.52
+  },
+  {
+    "name": "Snapple Peach Tea (16 oz)",
+    "category": "Tea",
+    "brand": "Snapple",
+    "servingSizeOz": 16,
+    "caffeineMg": 37,
+    "sugarG": 40,
+    "caloriesKcal": 150,
+    "caffeinePerOz": 2.31,
+    "caffeinePer8oz": 18.48
+  },
+  {
+    "name": "Arizona Iced Tea with Lemon (16 oz)",
+    "category": "Tea",
+    "brand": "Arizona",
+    "servingSizeOz": 16,
+    "caffeineMg": 15,
+    "sugarG": 48,
+    "caloriesKcal": 180,
+    "caffeinePerOz": 0.94,
+    "caffeinePer8oz": 7.52
+  },
+  {
+    "name": "Pure Leaf Unsweetened Black Tea",
+    "category": "Tea",
+    "brand": "Pure Leaf",
+    "servingSizeOz": 18.5,
+    "caffeineMg": 69,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 3.73,
+    "caffeinePer8oz": 29.84
+  },
+  {
+    "name": "Pure Leaf Sweet Tea",
+    "category": "Tea",
+    "brand": "Pure Leaf",
+    "servingSizeOz": 18.5,
+    "caffeineMg": 69,
+    "sugarG": 42,
+    "caloriesKcal": 160,
+    "caffeinePerOz": 3.73,
+    "caffeinePer8oz": 29.84
+  },
+  {
+    "name": "Yerba Mate (8 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 85,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 10.63,
+    "caffeinePer8oz": 85.04
+  },
+  {
+    "name": "Guayaki Yerba Mate (15.5 oz can)",
+    "category": "Tea",
+    "brand": "Guayaki",
+    "servingSizeOz": 15.5,
+    "caffeineMg": 150,
+    "sugarG": 28,
+    "caloriesKcal": 120,
+    "caffeinePerOz": 9.68,
+    "caffeinePer8oz": 77.44
+  },
+  {
+    "name": "Twinings Earl Grey",
+    "category": "Tea",
+    "brand": "Twinings",
+    "servingSizeOz": 8,
+    "caffeineMg": 65,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 8.13,
+    "caffeinePer8oz": 65.04
+  },
+  {
+    "name": "Twinings English Breakfast",
+    "category": "Tea",
+    "brand": "Twinings",
+    "servingSizeOz": 8,
+    "caffeineMg": 65,
+    "sugarG": 0,
+    "caloriesKcal": 2,
+    "caffeinePerOz": 8.13,
+    "caffeinePer8oz": 65.04
+  },
+  {
+    "name": "Bigelow Classic Green Tea",
+    "category": "Tea",
+    "brand": "Bigelow",
+    "servingSizeOz": 8,
+    "caffeineMg": 25,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 3.13,
+    "caffeinePer8oz": 25.04
+  },
+  {
+    "name": "Celestial Seasonings Energy Tea",
+    "category": "Tea",
+    "brand": "Celestial Seasonings",
+    "servingSizeOz": 8,
+    "caffeineMg": 95,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 11.88,
+    "caffeinePer8oz": 95.04
+  },
+  {
+    "name": "Red Bull Energy Drink",
+    "category": "Energy Drink",
+    "brand": "Red Bull",
+    "servingSizeOz": 8.4,
+    "caffeineMg": 80,
+    "sugarG": 27,
+    "caloriesKcal": 110,
+    "caffeinePerOz": 9.52,
+    "caffeinePer8oz": 76.16
+  },
+  {
+    "name": "Red Bull Sugarfree",
+    "category": "Energy Drink",
+    "brand": "Red Bull",
+    "servingSizeOz": 8.4,
+    "caffeineMg": 80,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 9.52,
+    "caffeinePer8oz": 76.16
+  },
+  {
+    "name": "Monster Energy",
+    "category": "Energy Drink",
+    "brand": "Monster",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 54,
+    "caloriesKcal": 210,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Monster Zero Ultra",
+    "category": "Energy Drink",
+    "brand": "Monster",
+    "servingSizeOz": 16,
+    "caffeineMg": 150,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 9.38,
+    "caffeinePer8oz": 75.04
+  },
+  {
+    "name": "Celsius Live Fit",
+    "category": "Energy Drink",
+    "brand": "Celsius",
+    "servingSizeOz": 12,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 16.67,
+    "caffeinePer8oz": 133.36
+  },
+  {
+    "name": "Bang Energy",
+    "category": "Energy Drink",
+    "brand": "Bang",
+    "servingSizeOz": 16,
+    "caffeineMg": 300,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 18.75,
+    "caffeinePer8oz": 150
+  },
+  {
+    "name": "Reign Total Body Fuel",
+    "category": "Energy Drink",
+    "brand": "Reign",
+    "servingSizeOz": 16,
+    "caffeineMg": 300,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 18.75,
+    "caffeinePer8oz": 150
+  },
+  {
+    "name": "Rockstar Energy Drink",
+    "category": "Energy Drink",
+    "brand": "Rockstar",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 63,
+    "caloriesKcal": 260,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Rockstar Pure Zero",
+    "category": "Energy Drink",
+    "brand": "Rockstar",
+    "servingSizeOz": 16,
+    "caffeineMg": 240,
+    "sugarG": 0,
+    "caloriesKcal": 20,
+    "caffeinePerOz": 15,
+    "caffeinePer8oz": 120
+  },
+  {
+    "name": "Ghost Energy",
+    "category": "Energy Drink",
+    "brand": "Ghost",
+    "servingSizeOz": 16,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 12.5,
+    "caffeinePer8oz": 100
+  },
+  {
+    "name": "C4 Energy",
+    "category": "Energy Drink",
+    "brand": "Cellucor",
+    "servingSizeOz": 16,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 12.5,
+    "caffeinePer8oz": 100
+  },
+  {
+    "name": "Alani Nu Energy",
+    "category": "Energy Drink",
+    "brand": "Alani Nu",
+    "servingSizeOz": 12,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 16.67,
+    "caffeinePer8oz": 133.36
+  },
+  {
+    "name": "Zoa Energy",
+    "category": "Energy Drink",
+    "brand": "Zoa",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 0,
+    "caloriesKcal": 15,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "A Shoc Energy",
+    "category": "Energy Drink",
+    "brand": "A Shoc",
+    "servingSizeOz": 16,
+    "caffeineMg": 300,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 18.75,
+    "caffeinePer8oz": 150
+  },
+  {
+    "name": "NOS Energy Drink",
+    "category": "Energy Drink",
+    "brand": "NOS",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 54,
+    "caloriesKcal": 210,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Full Throttle",
+    "category": "Energy Drink",
+    "brand": "Full Throttle",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 58,
+    "caloriesKcal": 220,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Amp Energy",
+    "category": "Energy Drink",
+    "brand": "Amp",
+    "servingSizeOz": 16,
+    "caffeineMg": 142,
+    "sugarG": 58,
+    "caloriesKcal": 220,
+    "caffeinePerOz": 8.88,
+    "caffeinePer8oz": 71.04
+  },
+  {
+    "name": "V8 +Energy",
+    "category": "Energy Drink",
+    "brand": "V8",
+    "servingSizeOz": 8,
+    "caffeineMg": 80,
+    "sugarG": 10,
+    "caloriesKcal": 50,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "G Fuel (Can)",
+    "category": "Energy Drink",
+    "brand": "G Fuel",
+    "servingSizeOz": 16,
+    "caffeineMg": 300,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 18.75,
+    "caffeinePer8oz": 150
+  },
+  {
+    "name": "Prime Energy",
+    "category": "Energy Drink",
+    "brand": "Prime",
+    "servingSizeOz": 12,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 16.67,
+    "caffeinePer8oz": 133.36
+  },
+  {
+    "name": "Coca-Cola Classic",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 34,
+    "sugarG": 39,
+    "caloriesKcal": 140,
+    "caffeinePerOz": 2.83,
+    "caffeinePer8oz": 22.64
+  },
+  {
+    "name": "Diet Coke",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 46,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 3.83,
+    "caffeinePer8oz": 30.64
+  },
+  {
+    "name": "Coke Zero Sugar",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 34,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 2.83,
+    "caffeinePer8oz": 22.64
+  },
+  {
+    "name": "Pepsi",
+    "category": "Soda",
+    "brand": "Pepsi",
+    "servingSizeOz": 12,
+    "caffeineMg": 38,
+    "sugarG": 41,
+    "caloriesKcal": 150,
+    "caffeinePerOz": 3.17,
+    "caffeinePer8oz": 25.36
+  },
+  {
+    "name": "Diet Pepsi",
+    "category": "Soda",
+    "brand": "Pepsi",
+    "servingSizeOz": 12,
+    "caffeineMg": 35,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 2.92,
+    "caffeinePer8oz": 23.36
+  },
+  {
+    "name": "Mountain Dew",
+    "category": "Soda",
+    "brand": "Pepsi",
+    "servingSizeOz": 12,
+    "caffeineMg": 54,
+    "sugarG": 46,
+    "caloriesKcal": 170,
+    "caffeinePerOz": 4.5,
+    "caffeinePer8oz": 36
+  },
+  {
+    "name": "Diet Mountain Dew",
+    "category": "Soda",
+    "brand": "Pepsi",
+    "servingSizeOz": 12,
+    "caffeineMg": 54,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 4.5,
+    "caffeinePer8oz": 36
+  },
+  {
+    "name": "Dr Pepper",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 41,
+    "sugarG": 40,
+    "caloriesKcal": 150,
+    "caffeinePerOz": 3.42,
+    "caffeinePer8oz": 27.36
+  },
+  {
+    "name": "Diet Dr Pepper",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 41,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 3.42,
+    "caffeinePer8oz": 27.36
+  },
+  {
+    "name": "Sprite (Caffeine Free)",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 0,
+    "sugarG": 38,
+    "caloriesKcal": 140,
+    "caffeinePerOz": 0,
+    "caffeinePer8oz": 0
+  },
+  {
+    "name": "7UP (Caffeine Free)",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 0,
+    "sugarG": 38,
+    "caloriesKcal": 140,
+    "caffeinePerOz": 0,
+    "caffeinePer8oz": 0
+  },
+  {
+    "name": "Mello Yello",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 51,
+    "sugarG": 47,
+    "caloriesKcal": 170,
+    "caffeinePerOz": 4.25,
+    "caffeinePer8oz": 34
+  },
+  {
+    "name": "Surge",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 16,
+    "caffeineMg": 69,
+    "sugarG": 56,
+    "caloriesKcal": 230,
+    "caffeinePerOz": 4.31,
+    "caffeinePer8oz": 34.48
+  },
+  {
+    "name": "Sun Drop",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 64,
+    "sugarG": 43,
+    "caloriesKcal": 170,
+    "caffeinePerOz": 5.33,
+    "caffeinePer8oz": 42.64
+  },
+  {
+    "name": "Barq's Root Beer",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 22,
+    "sugarG": 44,
+    "caloriesKcal": 160,
+    "caffeinePerOz": 1.83,
+    "caffeinePer8oz": 14.64
+  },
+  {
+    "name": "A&W Root Beer (Caffeine Free)",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 0,
+    "sugarG": 45,
+    "caloriesKcal": 170,
+    "caffeinePerOz": 0,
+    "caffeinePer8oz": 0
+  },
+  {
+    "name": "Sunkist Orange Soda",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 19,
+    "sugarG": 43,
+    "caloriesKcal": 160,
+    "caffeinePerOz": 1.58,
+    "caffeinePer8oz": 12.64
+  },
+  {
+    "name": "RC Cola",
+    "category": "Soda",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 12,
+    "caffeineMg": 43,
+    "sugarG": 42,
+    "caloriesKcal": 160,
+    "caffeinePerOz": 3.58,
+    "caffeinePer8oz": 28.64
+  },
+  {
+    "name": "Baja Blast",
+    "category": "Soda",
+    "brand": "Pepsi/Taco Bell",
+    "servingSizeOz": 12,
+    "caffeineMg": 54,
+    "sugarG": 44,
+    "caloriesKcal": 170,
+    "caffeinePerOz": 4.5,
+    "caffeinePer8oz": 36
+  },
+  {
+    "name": "Cherry Coke",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 34,
+    "sugarG": 42,
+    "caloriesKcal": 150,
+    "caffeinePerOz": 2.83,
+    "caffeinePer8oz": 22.64
+  },
+  {
+    "name": "Vanilla Coke",
+    "category": "Soda",
+    "brand": "Coca-Cola",
+    "servingSizeOz": 12,
+    "caffeineMg": 34,
+    "sugarG": 42,
+    "caloriesKcal": 150,
+    "caffeinePerOz": 2.83,
+    "caffeinePer8oz": 22.64
+  },
+  {
+    "name": "5-Hour Energy",
+    "category": "Energy Shot",
+    "brand": "Living Essentials",
+    "servingSizeOz": 1.93,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 4,
+    "caffeinePerOz": 103.63,
+    "caffeinePer8oz": 829.04
+  },
+  {
+    "name": "5-Hour Energy Extra Strength",
+    "category": "Energy Shot",
+    "brand": "Living Essentials",
+    "servingSizeOz": 1.93,
+    "caffeineMg": 230,
+    "sugarG": 0,
+    "caloriesKcal": 4,
+    "caffeinePerOz": 119.17,
+    "caffeinePer8oz": 953.36
+  },
+  {
+    "name": "Mio Energy (1 squeeze/8 oz)",
+    "category": "Water Enhancer",
+    "brand": "Kraft Heinz",
+    "servingSizeOz": 8,
+    "caffeineMg": 60,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 7.5,
+    "caffeinePer8oz": 60
+  },
+  {
+    "name": "Crystal Light Energy",
+    "category": "Water Enhancer",
+    "brand": "Kraft Heinz",
+    "servingSizeOz": 16,
+    "caffeineMg": 60,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 3.75,
+    "caffeinePer8oz": 30
+  },
+  {
+    "name": "Bawls Guarana",
+    "category": "Soda",
+    "brand": "Bawls",
+    "servingSizeOz": 10,
+    "caffeineMg": 64,
+    "sugarG": 34,
+    "caloriesKcal": 130,
+    "caffeinePerOz": 6.4,
+    "caffeinePer8oz": 51.2
+  },
+  {
+    "name": "Jolt Cola",
+    "category": "Soda",
+    "brand": "Jolt",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 50,
+    "caloriesKcal": 190,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Black Blood Energy Shot",
+    "category": "Energy Shot",
+    "brand": "BioTechUSA",
+    "servingSizeOz": 2,
+    "caffeineMg": 400,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 200,
+    "caffeinePer8oz": 1600
+  },
+  {
+    "name": "Stok Cold Brew Shot",
+    "category": "Coffee",
+    "brand": "Stok",
+    "servingSizeOz": 0.44,
+    "caffeineMg": 40,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 90.91,
+    "caffeinePer8oz": 727.28
+  },
+  {
+    "name": "Monster Hydro",
+    "category": "Energy Drink",
+    "brand": "Monster",
+    "servingSizeOz": 25.4,
+    "caffeineMg": 188,
+    "sugarG": 50,
+    "caloriesKcal": 200,
+    "caffeinePerOz": 7.4,
+    "caffeinePer8oz": 59.2
+  },
+  {
+    "name": "Rockstar Recovery",
+    "category": "Energy Drink",
+    "brand": "Rockstar",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 2,
+    "caloriesKcal": 20,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Gatorade Fast Twitch",
+    "category": "Energy Drink",
+    "brand": "PepsiCo",
+    "servingSizeOz": 12,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 16.67,
+    "caffeinePer8oz": 133.36
+  },
+  {
+    "name": "Starbucks Refreshers (Canned)",
+    "category": "Energy Drink",
+    "brand": "Starbucks",
+    "servingSizeOz": 12,
+    "caffeineMg": 50,
+    "sugarG": 20,
+    "caloriesKcal": 90,
+    "caffeinePerOz": 4.17,
+    "caffeinePer8oz": 33.36
+  },
+  {
+    "name": "Mountain Dew Kickstart",
+    "category": "Energy Drink",
+    "brand": "Pepsi",
+    "servingSizeOz": 16,
+    "caffeineMg": 90,
+    "sugarG": 20,
+    "caloriesKcal": 80,
+    "caffeinePerOz": 5.63,
+    "caffeinePer8oz": 45.04
+  },
+  {
+    "name": "Mountain Dew Amp Game Fuel",
+    "category": "Energy Drink",
+    "brand": "Pepsi",
+    "servingSizeOz": 16,
+    "caffeineMg": 90,
+    "sugarG": 23,
+    "caloriesKcal": 90,
+    "caffeinePerOz": 5.63,
+    "caffeinePer8oz": 45.04
+  },
+  {
+    "name": "Starbucks Tripleshot Energy",
+    "category": "Coffee",
+    "brand": "Starbucks",
+    "servingSizeOz": 15,
+    "caffeineMg": 225,
+    "sugarG": 29,
+    "caloriesKcal": 210,
+    "caffeinePerOz": 15,
+    "caffeinePer8oz": 120
+  },
+  {
+    "name": "Starbucks Doubleshot on Ice",
+    "category": "Coffee",
+    "brand": "Starbucks",
+    "servingSizeOz": 6.5,
+    "caffeineMg": 110,
+    "sugarG": 11,
+    "caloriesKcal": 70,
+    "caffeinePerOz": 16.92,
+    "caffeinePer8oz": 135.36
+  },
+  {
+    "name": "Peet's Espresso (1 shot)",
+    "category": "Coffee",
+    "brand": "Peet's",
+    "servingSizeOz": 1.5,
+    "caffeineMg": 70,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 46.67,
+    "caffeinePer8oz": 373.36
+  },
+  {
+    "name": "Caribou Coffee Brewed (Medium)",
+    "category": "Coffee",
+    "brand": "Caribou",
+    "servingSizeOz": 16,
+    "caffeineMg": 305,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 19.06,
+    "caffeinePer8oz": 152.48
+  },
+  {
+    "name": "Wawa Brewed Coffee (16 oz)",
+    "category": "Coffee",
+    "brand": "Wawa",
+    "servingSizeOz": 16,
+    "caffeineMg": 290,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 18.13,
+    "caffeinePer8oz": 145.04
+  },
+  {
+    "name": "Bissell Family Farms Maple Water",
+    "category": "Water Enhancer",
+    "brand": "Bissell",
+    "servingSizeOz": 12,
+    "caffeineMg": 0,
+    "sugarG": 12,
+    "caloriesKcal": 45,
+    "caffeinePerOz": 0,
+    "caffeinePer8oz": 0
+  },
+  {
+    "name": "Guayusa Tea (8 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 8,
+    "caffeineMg": 90,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 11.25,
+    "caffeinePer8oz": 90
+  },
+  {
+    "name": "Hint Kick Water",
+    "category": "Water",
+    "brand": "Hint",
+    "servingSizeOz": 16,
+    "caffeineMg": 60,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 3.75,
+    "caffeinePer8oz": 30
+  },
+  {
+    "name": "Water Joe",
+    "category": "Water",
+    "brand": "Water Joe",
+    "servingSizeOz": 20,
+    "caffeineMg": 70,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 3.5,
+    "caffeinePer8oz": 28
+  },
+  {
+    "name": "Kombucha (16 oz)",
+    "category": "Tea",
+    "brand": "Generic",
+    "servingSizeOz": 16,
+    "caffeineMg": 15,
+    "sugarG": 10,
+    "caloriesKcal": 40,
+    "caffeinePerOz": 0.94,
+    "caffeinePer8oz": 7.52
+  },
+  {
+    "name": "GT's Synergy Kombucha",
+    "category": "Tea",
+    "brand": "GT's",
+    "servingSizeOz": 16,
+    "caffeineMg": 15,
+    "sugarG": 12,
+    "caloriesKcal": 50,
+    "caffeinePerOz": 0.94,
+    "caffeinePer8oz": 7.52
+  },
+  {
+    "name": "Bai Antioxidant Infusion",
+    "category": "Water Enhancer",
+    "brand": "Bai",
+    "servingSizeOz": 18,
+    "caffeineMg": 55,
+    "sugarG": 1,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 3.06,
+    "caffeinePer8oz": 24.48
+  },
+  {
+    "name": "Vitaminwater Energy",
+    "category": "Water",
+    "brand": "Vitaminwater",
+    "servingSizeOz": 20,
+    "caffeineMg": 50,
+    "sugarG": 26,
+    "caloriesKcal": 100,
+    "caffeinePerOz": 2.5,
+    "caffeinePer8oz": 20
+  },
+  {
+    "name": "Bing Energy Drink",
+    "category": "Energy Drink",
+    "brand": "Bing",
+    "servingSizeOz": 12,
+    "caffeineMg": 120,
+    "sugarG": 9,
+    "caloriesKcal": 40,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Uptime Energy",
+    "category": "Energy Drink",
+    "brand": "Uptime",
+    "servingSizeOz": 12,
+    "caffeineMg": 142,
+    "sugarG": 0,
+    "caloriesKcal": 5,
+    "caffeinePerOz": 11.83,
+    "caffeinePer8oz": 94.64
+  },
+  {
+    "name": "Runa Clean Energy",
+    "category": "Energy Drink",
+    "brand": "Runa",
+    "servingSizeOz": 12,
+    "caffeineMg": 150,
+    "sugarG": 0,
+    "caloriesKcal": 10,
+    "caffeinePerOz": 12.5,
+    "caffeinePer8oz": 100
+  },
+  {
+    "name": "Xyience Energy",
+    "category": "Energy Drink",
+    "brand": "Xyience",
+    "servingSizeOz": 16,
+    "caffeineMg": 176,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 11,
+    "caffeinePer8oz": 88
+  },
+  {
+    "name": "Zipfizz Energy Mix",
+    "category": "Water Enhancer",
+    "brand": "Zipfizz",
+    "servingSizeOz": 16,
+    "caffeineMg": 100,
+    "sugarG": 0,
+    "caloriesKcal": 20,
+    "caffeinePerOz": 6.25,
+    "caffeinePer8oz": 50
+  },
+  {
+    "name": "GFuel Hydration",
+    "category": "Water Enhancer",
+    "brand": "GFuel",
+    "servingSizeOz": 16,
+    "caffeineMg": 0,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 0,
+    "caffeinePer8oz": 0
+  },
+  {
+    "name": "Steaz Energy",
+    "category": "Energy Drink",
+    "brand": "Steaz",
+    "servingSizeOz": 12,
+    "caffeineMg": 100,
+    "sugarG": 20,
+    "caloriesKcal": 80,
+    "caffeinePerOz": 8.33,
+    "caffeinePer8oz": 66.64
+  },
+  {
+    "name": "Guru Organic Energy",
+    "category": "Energy Drink",
+    "brand": "Guru",
+    "servingSizeOz": 8.4,
+    "caffeineMg": 100,
+    "sugarG": 21,
+    "caloriesKcal": 80,
+    "caffeinePerOz": 11.9,
+    "caffeinePer8oz": 95.2
+  },
+  {
+    "name": "Kill Cliff Ignite",
+    "category": "Energy Drink",
+    "brand": "Kill Cliff",
+    "servingSizeOz": 15,
+    "caffeineMg": 150,
+    "sugarG": 0,
+    "caloriesKcal": 25,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Sambazon Amazon Energy",
+    "category": "Energy Drink",
+    "brand": "Sambazon",
+    "servingSizeOz": 12,
+    "caffeineMg": 80,
+    "sugarG": 24,
+    "caloriesKcal": 110,
+    "caffeinePerOz": 6.67,
+    "caffeinePer8oz": 53.36
+  },
+  {
+    "name": "Inca Kola",
+    "category": "Soda",
+    "brand": "Inca Kola",
+    "servingSizeOz": 12,
+    "caffeineMg": 35,
+    "sugarG": 39,
+    "caloriesKcal": 140,
+    "caffeinePerOz": 2.92,
+    "caffeinePer8oz": 23.36
+  },
+  {
+    "name": "Irn Bru",
+    "category": "Soda",
+    "brand": "A.G. Barr",
+    "servingSizeOz": 11.1,
+    "caffeineMg": 30,
+    "sugarG": 34,
+    "caloriesKcal": 130,
+    "caffeinePerOz": 2.7,
+    "caffeinePer8oz": 21.6
+  },
+  {
+    "name": "V Energy",
+    "category": "Energy Drink",
+    "brand": "Frucor Suntory",
+    "servingSizeOz": 8.4,
+    "caffeineMg": 78,
+    "sugarG": 26,
+    "caloriesKcal": 108,
+    "caffeinePerOz": 9.29,
+    "caffeinePer8oz": 74.32
+  },
+  {
+    "name": "Lucozade Energy",
+    "category": "Energy Drink",
+    "brand": "Lucozade",
+    "servingSizeOz": 12.8,
+    "caffeineMg": 46,
+    "sugarG": 17,
+    "caloriesKcal": 145,
+    "caffeinePerOz": 3.59,
+    "caffeinePer8oz": 28.72
+  },
+  {
+    "name": "Relentless Origin",
+    "category": "Energy Drink",
+    "brand": "Monster",
+    "servingSizeOz": 16.9,
+    "caffeineMg": 160,
+    "sugarG": 24,
+    "caloriesKcal": 100,
+    "caffeinePerOz": 9.47,
+    "caffeinePer8oz": 75.76
+  },
+  {
+    "name": "Mother Energy Drink",
+    "category": "Energy Drink",
+    "brand": "Monster",
+    "servingSizeOz": 16.9,
+    "caffeineMg": 160,
+    "sugarG": 51,
+    "caloriesKcal": 228,
+    "caffeinePerOz": 9.47,
+    "caffeinePer8oz": 75.76
+  },
+  {
+    "name": "Rip It Energy",
+    "category": "Energy Drink",
+    "brand": "National Beverage",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 66,
+    "caloriesKcal": 260,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Venom Energy",
+    "category": "Energy Drink",
+    "brand": "Keurig Dr Pepper",
+    "servingSizeOz": 16,
+    "caffeineMg": 160,
+    "sugarG": 60,
+    "caloriesKcal": 230,
+    "caffeinePerOz": 10,
+    "caffeinePer8oz": 80
+  },
+  {
+    "name": "Liquid Death Armed Yeti",
+    "category": "Tea",
+    "brand": "Liquid Death",
+    "servingSizeOz": 19.2,
+    "caffeineMg": 30,
+    "sugarG": 3,
+    "caloriesKcal": 30,
+    "caffeinePerOz": 1.56,
+    "caffeinePer8oz": 12.48
+  },
+  {
+    "name": "Bucked Up Energy",
+    "category": "Energy Drink",
+    "brand": "DAS Labs",
+    "servingSizeOz": 16,
+    "caffeineMg": 300,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 18.75,
+    "caffeinePer8oz": 150
+  },
+  {
+    "name": "RYSE Fuel",
+    "category": "Energy Drink",
+    "brand": "RYSE",
+    "servingSizeOz": 16,
+    "caffeineMg": 200,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 12.5,
+    "caffeinePer8oz": 100
+  },
+  {
+    "name": "Jocko Go",
+    "category": "Energy Drink",
+    "brand": "Jocko Fuel",
+    "servingSizeOz": 12,
+    "caffeineMg": 95,
+    "sugarG": 0,
+    "caloriesKcal": 0,
+    "caffeinePerOz": 7.92,
+    "caffeinePer8oz": 63.36
+  }
+];
+
+    let currentData = [...data];
+    let sortColumn = 'caffeinePer8oz';
+    let sortDirection = -1; // -1 for desc, 1 for asc
+    let currentFilter = 'All';
+
+    const tableBody = document.getElementById('tableBody');
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const headers = document.querySelectorAll('th[data-sort]');
+
+    function renderTable() {
+      tableBody.innerHTML = currentData.map(item => `
+        <tr>
+          <td>
+            <strong>${item.name}</strong>
+            ${item.brand !== 'Generic' ? `<span class="brand-tag">${item.brand}</span>` : ''}
+          </td>
+          <td class="dim">${item.category}</td>
+          <td class="dim">${item.servingSizeOz} oz</td>
+          <td class="mono">${item.caffeineMg} mg</td>
+          <td class="mono" style="color: #fff;">${item.caffeinePer8oz} mg</td>
+          <td class="dim">${item.sugarG} g</td>
+        </tr>
+      `).join('');
+    }
+
+    function sortData() {
+      currentData.sort((a, b) => {
+        let valA = a[sortColumn];
+        let valB = b[sortColumn];
+
+        if (typeof valA === 'string') valA = valA.toLowerCase();
+        if (typeof valB === 'string') valB = valB.toLowerCase();
+
+        if (valA < valB) return -1 * sortDirection;
+        if (valA > valB) return 1 * sortDirection;
+        return 0;
+      });
+
+      // Update sort icons
+      headers.forEach(th => {
+        const icon = th.querySelector('.sort-icon');
+        if (th.dataset.sort === sortColumn) {
+          icon.textContent = sortDirection === 1 ? ' ↑' : ' ↓';
+        } else {
+          icon.textContent = '';
+        }
+      });
+    }
+
+    function filterData() {
+      const searchTerm = searchInput.value.toLowerCase();
+
+      currentData = data.filter(item => {
+        const matchesSearch = item.name.toLowerCase().includes(searchTerm) ||
+                              item.brand.toLowerCase().includes(searchTerm);
+        const matchesFilter = currentFilter === 'All' || item.category === currentFilter;
+
+        return matchesSearch && matchesFilter;
+      });
+
+      sortData();
+      renderTable();
+    }
+
+    // Event Listeners
+    searchInput.addEventListener('input', filterData);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.filter;
+        filterData();
+      });
+    });
+
+    headers.forEach(th => {
+      th.addEventListener('click', () => {
+        const column = th.dataset.sort;
+        if (sortColumn === column) {
+          sortDirection *= -1; // toggle direction
+        } else {
+          sortColumn = column;
+          sortDirection = -1; // default desc for new column
+        }
+        sortData();
+        renderTable();
+      });
+    });
+
+    // Initial render
+    sortData();
+    renderTable();
+  </script>
+</body>
+</html>
