@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://28grams.vip/cooking-timer" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking Timer — Multi-Timer for the Kitchen | Free Tool</title>
+<meta name="description" content="A free, multi-timer cooking tool. Run multiple named timers simultaneously with audio alerts and common presets for eggs, pasta, and rice.">
+<meta property="og:title" content="Cooking Timer — Multi-Timer for the Kitchen">
+<meta property="og:description" content="Run multiple named timers simultaneously with audio alerts and common presets. Free, no signup.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cooking Timer",
+  "url": "https://28grams.vip/cooking-timer",
+  "description": "Multi-timer for the kitchen. Run multiple named timers simultaneously.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a0b10; color: #e0d0d8; min-height: 100vh; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #0a0b10 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #888; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards shared */
+.card {
+  background: #111318;
+  border: 2px solid #1e2030;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #151720;
+  border-bottom: 1px solid #1e2030;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; display: flex; align-items: center; gap: 8px; }
+
+/* Input area */
+.create-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 12px;
+  padding: 24px 20px;
+  align-items: end;
+}
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-group label { font-size: 0.75rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+.input-wrap input {
+  width: 100%;
+  background: #1a1c26;
+  border: 1px solid #2a2d3d;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #e0d0d8;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  outline: none;
+}
+.input-wrap input.time-input {
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+}
+.input-wrap input:focus { border-color: #C2185B; }
+.add-btn {
+  background: #C2185B;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  height: 41px;
+}
+.add-btn:hover { background: #d81b60; }
+
+/* Presets */
+.presets {
+  padding: 16px 20px;
+  border-top: 1px solid #1e2030;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background: #151720;
+}
+.preset-btn {
+  background: #1a1c26;
+  border: 1px solid #2a2d3d;
+  color: #aaa;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.preset-btn:hover { background: #2a2d3d; color: #fff; border-color: #3a3d52; }
+
+/* Active Timers */
+.timer-list { display: flex; flex-direction: column; gap: 16px; }
+.timer-item {
+  background: #111318;
+  border: 2px solid #1e2030;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.2s;
+}
+.timer-item.done {
+  border-color: #C2185B;
+  background: #1a0a14;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(194, 24, 91, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(194, 24, 91, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(194, 24, 91, 0); }
+}
+
+.t-info { display: flex; flex-direction: column; gap: 4px; }
+.t-name { font-size: 1.1rem; font-weight: 700; color: #fff; }
+.t-end { font-size: 0.75rem; color: #888; }
+.t-time-wrap { display: flex; align-items: center; gap: 20px; }
+.t-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  min-width: 140px;
+  text-align: right;
+}
+.timer-item.done .t-time { color: #C2185B; }
+.timer-item.paused .t-time { color: #888; }
+
+.t-controls { display: flex; gap: 8px; }
+.t-btn {
+  background: #1a1c26;
+  border: 1px solid #2a2d3d;
+  color: #ccc;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+.t-btn:hover { background: #2a2d3d; color: #fff; }
+.t-btn.btn-cancel:hover { background: #3a1a24; border-color: #C2185B; color: #ff6b9d; }
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #888; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #888; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #555; border-top: 1px solid #151720; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 650px) {
+  .create-grid { grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .input-group.full-width { grid-column: 1 / -1; }
+  .add-btn { grid-column: 1 / -1; }
+  .timer-item { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .t-time-wrap { width: 100%; justify-content: space-between; }
+  .t-time { font-size: 2rem; }
+}
+
+/* Modal for Audio Permission */
+#audioOverlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(10, 11, 16, 0.8);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.audio-modal {
+  background: #111318;
+  border: 1px solid #1e2030;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 320px;
+}
+.audio-modal h3 { color: #fff; margin-bottom: 12px; }
+.audio-modal p { color: #888; font-size: 0.9rem; margin-bottom: 20px; }
+.audio-btn {
+  background: #C2185B;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+<div class="hero">
+  <h1>Cooking <span>Timer</span> ⏱️</h1>
+  <p>Run multiple named timers simultaneously. Built for the busy kitchen.</p>
+</div>
+
+<div class="main">
+  <div class="card">
+    <div class="card-header">
+      <h2>⏱️ New Timer</h2>
+    </div>
+    <form id="timerForm" class="create-grid" onsubmit="addTimer(event)">
+      <div class="input-group full-width">
+        <label>Timer Name</label>
+        <div class="input-wrap">
+          <input type="text" id="tName" placeholder="e.g. Potatoes, Pasta..." required>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Hours</label>
+        <div class="input-wrap">
+          <input type="number" id="tHours" class="time-input" min="0" max="99" placeholder="00">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Mins</label>
+        <div class="input-wrap">
+          <input type="number" id="tMins" class="time-input" min="0" max="59" placeholder="00">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Secs</label>
+        <div class="input-wrap">
+          <input type="number" id="tSecs" class="time-input" min="0" max="59" placeholder="00">
+        </div>
+      </div>
+      <button type="submit" class="add-btn">+ Start</button>
+    </form>
+
+    <div class="presets">
+      <button class="preset-btn" onclick="applyPreset('Soft Boiled Eggs', 0, 6, 0)">🥚 Soft Eggs (6m)</button>
+      <button class="preset-btn" onclick="applyPreset('Hard Boiled Eggs', 0, 9, 0)">🥚 Hard Eggs (9m)</button>
+      <button class="preset-btn" onclick="applyPreset('Pasta (Al Dente)', 0, 10, 0)">🍝 Pasta (10m)</button>
+      <button class="preset-btn" onclick="applyPreset('White Rice', 0, 15, 0)">🍚 White Rice (15m)</button>
+      <button class="preset-btn" onclick="applyPreset('Steamed Veggies', 0, 5, 0)">🥦 Veggies (5m)</button>
+    </div>
+  </div>
+
+  <div id="timersContainer" class="timer-list">
+    <!-- Active timers will be appended here -->
+  </div>
+</div>
+
+<div class="content">
+  <h2>Why Use a Multi-Timer?</h2>
+  <p>Timing is everything in cooking. Whether you're preparing a holiday feast with multiple dishes finishing at different times or just trying to coordinate pasta and sauce, a single kitchen timer rarely cuts it. Our multi-timer allows you to track every component of your meal simultaneously.</p>
+
+  <h2>Features of this Cooking Timer</h2>
+  <ul>
+    <li><strong>Multiple Concurrent Timers:</strong> Run as many timers as you need at the same time.</li>
+    <li><strong>Named Timers:</strong> Never forget what a timer is for. Name them "Pasta", "Roast", or "Resting Steak".</li>
+    <li><strong>Common Presets:</strong> Quick buttons for perfectly timed eggs, pasta, and rice.</li>
+    <li><strong>Audio Alerts:</strong> A distinct chime lets you know exactly when time is up. Make sure your device volume is turned up!</li>
+    <li><strong>Mobile-Friendly:</strong> Designed to work seamlessly on your phone while you're moving around the kitchen.</li>
+  </ul>
+
+  <h2>Frequently Asked Questions</h2>
+  <p><strong>Will the timer ring if my phone screen turns off?</strong><br>
+  For the best experience, keep your browser open and the screen on. Most modern mobile browsers pause JavaScript execution when the screen is off or the app is in the background, which may delay the alarm until you wake the device.</p>
+  <p><strong>How do I stop the alarm?</strong><br>
+  When a timer reaches zero, the card will turn pink, pulse, and an alarm will sound. Click the "Stop" button on the timer card to silence it and clear the timer.</p>
+</div>
+
+<div class="footer">
+  © 2026 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<div id="audioOverlay">
+  <div class="audio-modal">
+    <h3>Enable Audio Alerts</h3>
+    <p>To hear the timer when it finishes, please enable audio playback.</p>
+    <button class="audio-btn" onclick="initAudio()">Enable Audio</button>
+  </div>
+</div>
+
+<script>
+// State
+var timers = [];
+var timerIdCounter = 0;
+var intervalId = null;
+
+// Audio Context for the alert sound
+var audioCtx = null;
+var audioEnabled = false;
+
+function initAudio() {
+  var AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) return;
+  audioCtx = new AudioContext();
+
+  // Play a silent sound to unlock audio context on mobile
+  var osc = audioCtx.createOscillator();
+  osc.connect(audioCtx.destination);
+  osc.start(0);
+  osc.stop(0.001);
+
+  audioEnabled = true;
+  document.getElementById('audioOverlay').style.display = 'none';
+}
+
+function playAlert() {
+  if (!audioEnabled || !audioCtx) return;
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  var osc = audioCtx.createOscillator();
+  var gainNode = audioCtx.createGain();
+
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+  osc.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+
+  gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+  gainNode.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.1);
+  gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+
+  osc.connect(gainNode);
+  gainNode.connect(audioCtx.destination);
+
+  osc.start(audioCtx.currentTime);
+  osc.stop(audioCtx.currentTime + 0.6);
+
+  // Play again slightly delayed for a "double beep"
+  setTimeout(function() {
+    var osc2 = audioCtx.createOscillator();
+    var gainNode2 = audioCtx.createGain();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(880, audioCtx.currentTime);
+    osc2.frequency.exponentialRampToValueAtTime(440, audioCtx.currentTime + 0.5);
+    gainNode2.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode2.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 0.1);
+    gainNode2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
+    osc2.connect(gainNode2);
+    gainNode2.connect(audioCtx.destination);
+    osc2.start(audioCtx.currentTime);
+    osc2.stop(audioCtx.currentTime + 0.6);
+  }, 200);
+}
+
+function applyPreset(name, h, m, s) {
+  document.getElementById('tName').value = name;
+  document.getElementById('tHours').value = h || '';
+  document.getElementById('tMins').value = m || '';
+  document.getElementById('tSecs').value = s || '';
+
+  // Create an event to submit the form programmatically while triggering the form's logic correctly
+  var evt = new Event('submit', { cancelable: true });
+  document.getElementById('timerForm').dispatchEvent(evt);
+}
+
+function addTimer(e) {
+  e.preventDefault();
+
+  // Check if audio needs unlocking
+  if (!audioEnabled) {
+    document.getElementById('audioOverlay').style.display = 'flex';
+  }
+
+  var name = document.getElementById('tName').value || 'Timer';
+  var h = parseInt(document.getElementById('tHours').value) || 0;
+  var m = parseInt(document.getElementById('tMins').value) || 0;
+  var s = parseInt(document.getElementById('tSecs').value) || 0;
+
+  var totalSeconds = (h * 3600) + (m * 60) + s;
+  if (totalSeconds <= 0) return;
+
+  var now = Date.now();
+  var endTime = now + (totalSeconds * 1000);
+
+  var timer = {
+    id: ++timerIdCounter,
+    name: name,
+    initialSeconds: totalSeconds,
+    remainingSeconds: totalSeconds,
+    endTime: endTime,
+    paused: false,
+    done: false,
+    lastTick: now
+  };
+
+  timers.push(timer);
+
+  // Reset form
+  document.getElementById('tName').value = '';
+  document.getElementById('tHours').value = '';
+  document.getElementById('tMins').value = '';
+  document.getElementById('tSecs').value = '';
+
+  renderTimers();
+  startInterval();
+}
+
+function togglePause(id) {
+  var timer = timers.find(function(t) { return t.id === id; });
+  if (!timer || timer.done) return;
+
+  var now = Date.now();
+  if (timer.paused) {
+    // Resume
+    timer.paused = false;
+    timer.endTime = now + (timer.remainingSeconds * 1000);
+    timer.lastTick = now;
+  } else {
+    // Pause
+    timer.paused = true;
+    // Calculate exact remaining
+    timer.remainingSeconds = Math.max(0, Math.ceil((timer.endTime - now) / 1000));
+  }
+  renderTimers();
+}
+
+function cancelTimer(id) {
+  timers = timers.filter(function(t) { return t.id !== id; });
+  renderTimers();
+  if (timers.length === 0 && intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+}
+
+function formatTime(totalSeconds) {
+  var h = Math.floor(totalSeconds / 3600);
+  var m = Math.floor((totalSeconds % 3600) / 60);
+  var s = totalSeconds % 60;
+
+  var result = [];
+  if (h > 0) result.push(h.toString().padStart(2, '0'));
+  result.push(m.toString().padStart(2, '0'));
+  result.push(s.toString().padStart(2, '0'));
+
+  return result.join(':');
+}
+
+function formatEndTime(timestamp) {
+  var d = new Date(timestamp);
+  var h = d.getHours();
+  var m = d.getMinutes();
+  var ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12;
+  h = h ? h : 12;
+  var mm = m < 10 ? '0' + m : m;
+  return h + ':' + mm + ' ' + ampm;
+}
+
+function tick() {
+  var now = Date.now();
+  var needsRender = false;
+  var beepNeeded = false;
+
+  timers.forEach(function(timer) {
+    if (timer.paused || timer.done) return;
+
+    var remaining = Math.max(0, Math.ceil((timer.endTime - now) / 1000));
+
+    if (remaining !== timer.remainingSeconds) {
+      timer.remainingSeconds = remaining;
+      needsRender = true;
+
+      var timeEl = document.getElementById('time-' + timer.id);
+      if (timeEl) {
+        timeEl.textContent = formatTime(remaining);
+      }
+    }
+
+    if (remaining === 0) {
+      timer.done = true;
+      needsRender = true;
+      beepNeeded = true;
+    }
+  });
+
+  if (beepNeeded) {
+    playAlert();
+    // Vibrate on mobile if supported
+    if ("vibrate" in navigator) {
+      navigator.vibrate([500, 200, 500]);
+    }
+  }
+
+  if (needsRender) {
+    renderTimers();
+  }
+}
+
+function startInterval() {
+  if (!intervalId) {
+    intervalId = setInterval(tick, 200); // 200ms resolution for snappy updates
+  }
+}
+
+function renderTimers() {
+  var container = document.getElementById('timersContainer');
+  container.innerHTML = '';
+
+  // Sort: active first, then paused, then done
+  var sortedTimers = [].concat(timers).sort(function(a, b) {
+    if (a.done && !b.done) return 1;
+    if (!a.done && b.done) return -1;
+    return a.endTime - b.endTime;
+  });
+
+  sortedTimers.forEach(function(timer) {
+    var item = document.createElement('div');
+    item.className = 'timer-item' + (timer.done ? ' done' : '') + (timer.paused ? ' paused' : '');
+    item.id = 'timer-' + timer.id;
+
+    var info = document.createElement('div');
+    info.className = 't-info';
+    info.innerHTML = '<div class="t-name">' + timer.name + '</div>' +
+                     '<div class="t-end">' + (timer.done ? 'Finished' : (timer.paused ? 'Paused' : 'Ends at ' + formatEndTime(timer.endTime))) + '</div>';
+
+    var wrap = document.createElement('div');
+    wrap.className = 't-time-wrap';
+
+    var timeDisplay = document.createElement('div');
+    timeDisplay.className = 't-time';
+    timeDisplay.id = 'time-' + timer.id;
+    timeDisplay.textContent = formatTime(timer.remainingSeconds);
+
+    var controls = document.createElement('div');
+    controls.className = 't-controls';
+
+    if (timer.done) {
+      var stopBtn = document.createElement('button');
+      stopBtn.className = 't-btn btn-cancel';
+      stopBtn.innerHTML = '⏹️';
+      stopBtn.title = "Stop";
+      stopBtn.onclick = function() { cancelTimer(timer.id); };
+      controls.appendChild(stopBtn);
+    } else {
+      var pauseBtn = document.createElement('button');
+      pauseBtn.className = 't-btn';
+      pauseBtn.innerHTML = timer.paused ? '▶️' : '⏸️';
+      pauseBtn.title = timer.paused ? "Resume" : "Pause";
+      pauseBtn.onclick = function() { togglePause(timer.id); };
+
+      var cancelBtn = document.createElement('button');
+      cancelBtn.className = 't-btn btn-cancel';
+      cancelBtn.innerHTML = '✖';
+      cancelBtn.title = "Cancel";
+      cancelBtn.onclick = function() { cancelTimer(timer.id); };
+
+      controls.appendChild(pauseBtn);
+      controls.appendChild(cancelBtn);
+    }
+
+    wrap.appendChild(timeDisplay);
+    wrap.appendChild(controls);
+
+    item.appendChild(info);
+    item.appendChild(wrap);
+
+    container.appendChild(item);
+  });
+}
+</script>
+</body>
+</html>
