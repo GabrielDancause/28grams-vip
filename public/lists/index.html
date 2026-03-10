@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://28grams.vip/lists" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curated Lists — Kitchen Tools & Equipment | 28grams.vip</title>
+<meta name="description" content="Curated lists of the best kitchen tools, equipment, cookbooks, and resources.">
+<meta property="og:title" content="Curated Lists — Kitchen Tools & Equipment">
+<meta property="og:description" content="Curated lists of the best kitchen tools, equipment, cookbooks, and resources.">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Curated Lists — Kitchen Tools & Equipment",
+  "url": "https://28grams.vip/lists",
+  "description": "Curated lists of the best kitchen tools, equipment, cookbooks, and resources.",
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: #060a12; color: #e0d0d8; min-height: 100vh; line-height: 1.6; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Hero */
+.hero { text-align: center; padding: 80px 24px 40px; background: linear-gradient(180deg, #1a0a14 0%, #060a12 100%); position: relative; }
+.hero h1 { font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 12px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #8892b0; font-size: 1.05rem; max-width: 540px; margin: 0 auto; }
+
+/* Search & Filter */
+.search-container { max-width: 600px; margin: 30px auto 40px; position: relative; padding: 0 20px; }
+.search-input {
+  width: 100%;
+  background: #111318;
+  border: 2px solid #1e2030;
+  border-radius: 12px;
+  padding: 16px 20px 16px 48px;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: all 0.2s ease;
+}
+.search-input:focus { border-color: #C2185B; box-shadow: 0 0 0 3px rgba(194,24,91,0.2); }
+.search-icon {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8892b0;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+.counter { text-align: center; color: #8892b0; font-size: 0.9rem; margin-bottom: 40px; font-weight: 500; }
+.counter span { color: #C2185B; font-weight: 700; }
+
+/* Main Content */
+.main { max-width: 1200px; margin: 0 auto; padding: 0 24px 80px; }
+
+/* Lists Grid */
+.lists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.list-card {
+  background: #111318;
+  border: 1px solid #1e2030;
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.list-card:hover {
+  border-color: #C2185B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.list-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #C2185B, #E91E63);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.list-card:hover::before { opacity: 1; }
+
+.list-emoji {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.list-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #e0e8f0;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.list-desc {
+  font-size: 0.95rem;
+  color: #8892b0;
+  line-height: 1.5;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: #8892b0;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+  display: none;
+}
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.85rem; color: #5a6a80; border-top: 1px solid #151f2e; margin-top: 40px; background: #040810; }
+.footer a { color: #C2185B; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .hero { padding: 60px 20px 30px; }
+  .lists-grid { grid-template-columns: 1fr; }
+  .main { padding: 0 16px 60px; }
+  .list-card { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+<div class="hero">
+  <h1>Curated <span>Lists</span></h1>
+  <p>The best kitchen tools, equipment, cookbooks, and resources compared.</p>
+</div>
+
+<div class="search-container">
+  <span class="search-icon">🔍</span>
+  <input type="text" id="searchInput" class="search-input" placeholder="Search lists by name or description...">
+</div>
+
+<div class="counter" id="counterDisplay">Showing <span id="listCount">0</span> lists</div>
+
+<div class="main">
+  <div class="lists-grid" id="listsGrid">
+    <!-- Cards will be populated here -->
+  </div>
+  <div class="no-results" id="noResults">
+    No lists found matching your search. Try different keywords.
+  </div>
+</div>
+
+<div class="footer">
+  © 2026 <a href="/">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+const lists = [
+  { emoji: "⚖️", name: "Best Kitchen Scales", slug: "/list-kitchen-scales", desc: "Kitchen scales compared for capacity, precision, and value" },
+  { emoji: "🍳", name: "Essential Kitchen Tools", slug: "/list-kitchen-tools", desc: "Must-have kitchen tools for every budget and skill level" },
+  { emoji: "📚", name: "Best Cookbooks", slug: "/list-cookbooks", desc: "Curated cookbooks for baking, pastry, bread, and cooking" },
+  { emoji: "🍳", name: "Best Cast Iron Skillets", slug: "/list-cast-iron", desc: "Cast iron skillets by weight, heat retention, value" },
+  { emoji: "☕", name: "Best Coffee Grinders", slug: "/list-coffee-grinders", desc: "Coffee grinders by grind consistency, burr type, price" }
+];
+
+const listsGrid = document.getElementById('listsGrid');
+const searchInput = document.getElementById('searchInput');
+const listCount = document.getElementById('listCount');
+const noResults = document.getElementById('noResults');
+
+function renderLists(filterText = '') {
+  listsGrid.innerHTML = '';
+  let count = 0;
+  const term = filterText.toLowerCase();
+
+  lists.forEach(list => {
+    if (list.name.toLowerCase().includes(term) || list.desc.toLowerCase().includes(term)) {
+      count++;
+
+      const a = document.createElement('a');
+      a.className = 'list-card';
+      a.href = list.slug;
+
+      a.innerHTML = `
+        <span class="list-emoji">${list.emoji}</span>
+        <h2 class="list-name">${list.name}</h2>
+        <p class="list-desc">${list.desc}</p>
+      `;
+
+      listsGrid.appendChild(a);
+    }
+  });
+
+  listCount.textContent = count;
+
+  if (count === 0) {
+    noResults.style.display = 'block';
+  } else {
+    noResults.style.display = 'none';
+  }
+}
+
+// Initial render
+renderLists();
+
+// Search listener
+searchInput.addEventListener('input', (e) => {
+  renderLists(e.target.value);
+});
+</script>
+</body>
+</html>
