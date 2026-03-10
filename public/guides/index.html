@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://28grams.vip/guides/" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cooking Guides & Cheat Sheets | 28grams</title>
+<meta name="description" content="A collection of comprehensive, developer-style reference guides for cooking, baking, fermentation, and more.">
+<meta property="og:title" content="Cooking Guides & Cheat Sheets">
+<meta property="og:description" content="A collection of comprehensive, developer-style reference guides for cooking, baking, fermentation, and more.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #060a12; color: #e0d0d8; min-height: 100vh; line-height: 1.5; }
+
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #1a0a14 0%, #060a12 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #666; font-size: 0.95rem; max-width: 540px; margin: 0 auto; }
+
+.main { max-width: 1000px; margin: 0 auto; padding: 16px 20px 40px; }
+
+/* Search Bar */
+.search-container { margin-bottom: 32px; position: relative; max-width: 600px; margin-left: auto; margin-right: auto; }
+.search-input {
+  width: 100%;
+  background: #120c10;
+  border: 2px solid #2a1820;
+  border-radius: 12px;
+  padding: 14px 20px 14px 44px;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-input:focus { border-color: #C2185B; }
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Counter */
+.counter { text-align: center; font-size: 0.9rem; color: #888; margin-bottom: 24px; font-weight: 600; }
+
+/* Guides Grid */
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.guide-card {
+  background: #111318;
+  border: 1px solid #1e2030;
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.2s ease;
+}
+.guide-card:hover {
+  border-color: #C2185B;
+  transform: translateY(-2px);
+}
+.guide-emoji {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.guide-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e0e8f0;
+  margin-bottom: 6px;
+}
+.guide-desc {
+  font-size: 0.85rem;
+  color: #6a7a90;
+  line-height: 1.4;
+}
+
+/* Footer */
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #3a4a5a; border-top: 1px solid #151f2e; margin-top: 40px; background: #040810; }
+.footer a { color: #C2185B; text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* Hidden state for search filtering */
+.hidden { display: none !important; }
+
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .guides-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+<div class="hero">
+  <h1>Cooking <span>Guides</span> 📚</h1>
+  <p>Step-by-step guides for mastering cooking techniques.</p>
+</div>
+
+<div class="main">
+  <div class="search-container">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search guides (e.g., 'sourdough', 'coffee')...">
+  </div>
+
+  <div class="counter" id="counter">6 guides</div>
+
+  <div class="guides-grid" id="guidesGrid">
+    <a class="guide-card searchable" href="/guide-sourdough" data-search="sourdough starter complete guide create and maintain starter with day-by-day timeline">
+      <span class="guide-emoji">📚</span>
+      <h3 class="guide-name">Sourdough Starter Complete Guide</h3>
+      <p class="guide-desc">Create and maintain starter with day-by-day timeline</p>
+    </a>
+
+    <a class="guide-card searchable" href="/guide-bread-baking" data-search="bread baking for beginners equipment flour types kneading proofing baking basics">
+      <span class="guide-emoji">📚</span>
+      <h3 class="guide-name">Bread Baking for Beginners</h3>
+      <p class="guide-desc">Equipment, flour types, kneading, proofing, baking basics</p>
+    </a>
+
+    <a class="guide-card searchable" href="/guide-fermentation" data-search="home fermentation guide sauerkraut kimchi kombucha yogurt safety and techniques">
+      <span class="guide-emoji">📚</span>
+      <h3 class="guide-name">Home Fermentation Guide</h3>
+      <p class="guide-desc">Sauerkraut, kimchi, kombucha, yogurt safety and techniques</p>
+    </a>
+
+    <a class="guide-card searchable" href="/guide-knife-skills" data-search="knife skills 101 essential cuts and knife types julienne brunoise chiffonade">
+      <span class="guide-emoji">🔪</span>
+      <h3 class="guide-name">Knife Skills 101</h3>
+      <p class="guide-desc">Essential cuts and knife types — julienne, brunoise, chiffonade</p>
+    </a>
+
+    <a class="guide-card searchable" href="/guide-coffee-brewing" data-search="coffee brewing methods guide pour over french press aeropress espresso methods compared">
+      <span class="guide-emoji">☕</span>
+      <h3 class="guide-name">Coffee Brewing Methods Guide</h3>
+      <p class="guide-desc">Pour-over, French press, AeroPress, espresso methods compared</p>
+    </a>
+
+    <a class="guide-card searchable" href="/guide-smoking-meat" data-search="smoking meat guide beginner's guide with wood types temperatures timing">
+      <span class="guide-emoji">🥩</span>
+      <h3 class="guide-name">Smoking Meat Guide</h3>
+      <p class="guide-desc">Beginner's guide with wood types, temperatures, timing</p>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  © 2026 <a href="/">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Search/Filter functionality
+const searchInput = document.getElementById('searchInput');
+const searchableCards = document.querySelectorAll('.searchable');
+const counter = document.getElementById('counter');
+
+searchInput.addEventListener('input', function(e) {
+  const term = e.target.value.toLowerCase().trim();
+  let visibleCount = 0;
+
+  searchableCards.forEach(card => {
+    // Search the hidden data attribute, plus text content
+    const searchData = card.getAttribute('data-search') || '';
+    const textData = card.textContent.toLowerCase();
+
+    if (searchData.includes(term) || textData.includes(term)) {
+      card.classList.remove('hidden');
+      visibleCount++;
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  counter.textContent = visibleCount + (visibleCount === 1 ? ' guide' : ' guides');
+});
+</script>
+</body>
+</html>
