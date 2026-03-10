@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-G86C7NJG3F');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools — 28grams.vip</title>
+<meta name="description" content="All cooking and culinary tools from 28grams.vip">
+<link rel="canonical" href="https://28grams.vip/tools/" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #060a12; color: #e0d0d8; min-height: 100vh; }
+
+.hero { text-align: center; padding: 48px 24px 24px; }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 12px; }
+.hero h1 span { color: #C2185B; }
+.search-container { max-width: 480px; margin: 0 auto 12px; }
+.search-box { width: 100%; padding: 12px 20px; font-size: 1rem; border-radius: 8px; border: 1px solid #1e2030; background: #111318; color: #fff; outline: none; transition: border-color 0.2s; font-family: 'Inter', sans-serif; }
+.search-box:focus { border-color: #C2185B; }
+.counter { font-size: 0.9rem; color: #888; margin-bottom: 32px; }
+
+.main { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px; }
+
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+@media (max-width: 600px) {
+  .tools-grid { grid-template-columns: 1fr; }
+}
+
+.tool-card {
+  background: #111318;
+  border: 1px solid #1e2030;
+  border-radius: 12px;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.2s ease;
+}
+.tool-card:hover {
+  border-color: #C2185B;
+  transform: translateY(-2px);
+}
+.tool-emoji { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+.tool-name { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+.tool-desc { font-size: 0.85rem; color: #888; line-height: 1.4; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #888; border-top: 1px solid #1e2030; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+<div class="hero">
+  <h1>Tools</h1>
+  <div class="search-container">
+    <input type="text" id="searchInput" class="search-box" placeholder="Search tools...">
+  </div>
+  <div class="counter" id="toolCounter">17 tools</div>
+</div>
+
+<div class="main">
+  <div class="tools-grid" id="toolsGrid">
+    <a class="tool-card" href="/recipe-scaler">
+      <span class="tool-emoji">⚖️</span>
+      <h3 class="tool-name">Recipe Yield Scaler</h3>
+      <p class="tool-desc">Scale any recipe up or down with all ingredients recalculated</p>
+    </a>
+    <a class="tool-card" href="/bakers-percentage">
+      <span class="tool-emoji">🍞</span>
+      <h3 class="tool-name">Baker's Percentage Calculator</h3>
+      <p class="tool-desc">Convert bread recipes to baker's percentages or vice versa</p>
+    </a>
+    <a class="tool-card" href="/cooking-converter">
+      <span class="tool-emoji">🌡️</span>
+      <h3 class="tool-name">Metric ↔ Imperial Converter</h3>
+      <p class="tool-desc">Cups to grams, Fahrenheit to Celsius, ounces to milliliters</p>
+    </a>
+    <a class="tool-card" href="/sourdough-calculator">
+      <span class="tool-emoji">🍞</span>
+      <h3 class="tool-name">Sourdough Calculator</h3>
+      <p class="tool-desc">Calculate flour weight, hydration, starter percentage, and timing</p>
+    </a>
+    <a class="tool-card" href="/sous-vide">
+      <span class="tool-emoji">🌡️</span>
+      <h3 class="tool-name">Sous Vide Calculator</h3>
+      <p class="tool-desc">Time and temperature for beef, pork, chicken, fish, eggs</p>
+    </a>
+    <a class="tool-card" href="/coffee-ratio">
+      <span class="tool-emoji">☕</span>
+      <h3 class="tool-name">Coffee Brew Ratio Calculator</h3>
+      <p class="tool-desc">Pour-over, French press, espresso, cold brew ratios</p>
+    </a>
+    <a class="tool-card" href="/pizza-dough">
+      <span class="tool-emoji">🍕</span>
+      <h3 class="tool-name">Pizza Dough Calculator</h3>
+      <p class="tool-desc">Exact flour, water, yeast, salt for any number of dough balls</p>
+    </a>
+    <a class="tool-card" href="/smoking-calculator">
+      <span class="tool-emoji">🥩</span>
+      <h3 class="tool-name">Smoking Calculator</h3>
+      <p class="tool-desc">Time and temperature for brisket, ribs, pork shoulder, chicken</p>
+    </a>
+    <a class="tool-card" href="/abv-calculator">
+      <span class="tool-emoji">🍺</span>
+      <h3 class="tool-name">ABV Calculator</h3>
+      <p class="tool-desc">Calculate alcohol by volume from gravity readings</p>
+    </a>
+    <a class="tool-card" href="/bread-hydration">
+      <span class="tool-emoji">🍞</span>
+      <h3 class="tool-name">Bread Hydration Calculator</h3>
+      <p class="tool-desc">True hydration percentage accounting for preferments</p>
+    </a>
+    <a class="tool-card" href="/fermentation-timer">
+      <span class="tool-emoji">🫙</span>
+      <h3 class="tool-name">Fermentation Timer</h3>
+      <p class="tool-desc">Schedules for bread, yogurt, kombucha, kimchi fermentation</p>
+    </a>
+    <a class="tool-card" href="/nutrition-label">
+      <span class="tool-emoji">📋</span>
+      <h3 class="tool-name">Nutrition Label Creator</h3>
+      <p class="tool-desc">FDA-style nutrition labels with serving size and nutrients</p>
+    </a>
+    <a class="tool-card" href="/spice-substitution">
+      <span class="tool-emoji">🌶️</span>
+      <h3 class="tool-name">Spice Substitution Guide</h3>
+      <p class="tool-desc">Substitutes for 100+ spices with ratio adjustments</p>
+    </a>
+    <a class="tool-card" href="/meal-prep">
+      <span class="tool-emoji">🥡</span>
+      <h3 class="tool-name">Meal Prep Calculator</h3>
+      <p class="tool-desc">Weekly meal prep portions with shopping list and macros</p>
+    </a>
+    <a class="tool-card" href="/egg-substitute">
+      <span class="tool-emoji">🥚</span>
+      <h3 class="tool-name">Egg Substitute Calculator</h3>
+      <p class="tool-desc">Baking egg substitutes: flax, chia, applesauce, banana</p>
+    </a>
+    <a class="tool-card" href="/oven-converter">
+      <span class="tool-emoji">🌡️</span>
+      <h3 class="tool-name">Oven Temperature Converter</h3>
+      <p class="tool-desc">Fahrenheit, Celsius, and gas mark conversions</p>
+    </a>
+    <a class="tool-card" href="/yeast-converter">
+      <span class="tool-emoji">🍞</span>
+      <h3 class="tool-name">Yeast Converter</h3>
+      <p class="tool-desc">Convert between fresh, active dry, and instant yeast</p>
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  © 2026 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+  const searchInput = document.getElementById('searchInput');
+  const toolsGrid = document.getElementById('toolsGrid');
+  const toolCards = toolsGrid.getElementsByClassName('tool-card');
+  const toolCounter = document.getElementById('toolCounter');
+
+  searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    let count = 0;
+
+    for (let i = 0; i < toolCards.length; i++) {
+      const card = toolCards[i];
+      const name = card.querySelector('.tool-name').textContent.toLowerCase();
+      const desc = card.querySelector('.tool-desc').textContent.toLowerCase();
+
+      if (name.includes(query) || desc.includes(query)) {
+        card.style.display = 'block';
+        count++;
+      } else {
+        card.style.display = 'none';
+      }
+    }
+
+    if (count === 1) {
+      toolCounter.textContent = count + ' tool';
+    } else {
+      toolCounter.textContent = count + ' tools';
+    }
+  });
+</script>
+</body>
+</html>
