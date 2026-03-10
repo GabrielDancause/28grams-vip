@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-G86C7NJG3F"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-G86C7NJG3F');</script>
+<meta charset="UTF-8">
+<link rel="canonical" href="https://28grams.vip/baking-converter" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baking Ingredient Converter — Cups, Grams, Ounces | Free Tool</title>
+<meta name="description" content="Convert baking ingredients between cups, grams, and ounces based on accurate density. Includes baker's percentage quick calculator. Free, no signup.">
+<meta property="og:title" content="Baking Ingredient Converter — Cups, Grams, Ounces">
+<meta property="og:description" content="Convert baking ingredients accurately. Cups to grams for flour, sugar, butter. Built-in baker's percentages.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Baking Ingredient Converter",
+  "url": "https://28grams.vip/baking-converter",
+  "description": "Convert baking ingredients between cups, grams, and ounces based on accurate density. Includes baker's percentage quick calculator.",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "author": { "@type": "Organization", "name": "GAB Ventures", "url": "https://gab.ae" }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0a0b10; color: #e0d0d8; min-height: 100vh; }
+code, .mono { font-family: 'JetBrains Mono', monospace; }
+.hero { text-align: center; padding: 48px 24px 24px; background: linear-gradient(180deg, #111318 0%, #0a0b10 100%); }
+.hero h1 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero h1 span { background: linear-gradient(135deg, #C2185B, #ff6b9d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: #8892b0; font-size: 0.95rem; max-width: 480px; margin: 0 auto; }
+.main { max-width: 800px; margin: 0 auto; padding: 32px 20px 40px; }
+
+/* Cards */
+.converter-card {
+  background: #111318;
+  border: 2px solid #1e2030;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #151820;
+  border-bottom: 1px solid #1e2030;
+}
+.card-header h2 { font-size: 0.95rem; font-weight: 700; color: #ccc; }
+.copy-btn {
+  background: #1e2030;
+  border: 1px solid #2a2e40;
+  color: #888;
+  padding: 5px 14px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: #2a2e40; color: #ccc; }
+.copy-btn.copied { background: #1a3a1a; color: #4ade80; border-color: #2d5a2d; }
+
+.card-body { padding: 24px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+.conv-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.conv-row input.amount {
+  flex: 1;
+  width: 100%;
+  background: #0a0b10;
+  border: 2px solid #1e2030;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  outline: none;
+}
+.conv-row input.amount.result {
+  color: #C2185B;
+  background: #151820;
+  border-color: #1e2030;
+}
+.conv-row input.amount:focus { border-color: #C2185B; }
+.conv-row input.amount.result:focus { border-color: #1e2030; }
+
+.conv-row select.unit-select {
+  width: 150px;
+  flex-shrink: 0;
+  background: #0a0b10;
+  border: 2px solid #1e2030;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #e0d0d8;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.conv-row select.unit-select:focus { border-color: #C2185B; }
+.conv-row select.unit-select optgroup { color: #888; font-weight: 600; }
+.conv-row select.unit-select option { color: #e0d0d8; }
+
+.mid-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.swap-btn {
+  background: rgba(194, 24, 91, 0.1);
+  border: 1px solid #C2185B;
+  color: #C2185B;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.swap-btn:hover { background: rgba(194, 24, 91, 0.2); }
+
+.ing-select-wrap {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.ing-select-wrap select {
+  width: 100%;
+  background: #0a0b10;
+  border: 1px solid #1e2030;
+  border-radius: 8px;
+  padding: 8px 14px;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg width="10" height="6" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M1 1.5L6 6.5L11 1.5" stroke="%23888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/%3E%3C/svg%3E');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 30px;
+  transition: all 0.2s;
+}
+.ing-select-wrap select:disabled { opacity: 0.5; cursor: not-allowed; }
+.ing-select-wrap select.active { color: #e0d0d8; border-color: #2a2e40; }
+
+/* Baker's Percentage Quick Calc */
+.bakers-calc {
+  background: #151820;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #1e2030;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+.bakers-calc > div {
+  flex: 1;
+  min-width: 150px;
+}
+.bakers-calc label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #8892b0;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.bakers-calc input {
+  width: 100%;
+  background: #0a0b10;
+  border: 1px solid #1e2030;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  outline: none;
+}
+.bakers-calc input:focus { border-color: #C2185B; }
+.bakers-calc .result-box {
+  background: #0a0b10;
+  border: 1px dashed #2a2e40;
+  border-radius: 8px;
+  padding: 10px 12px;
+  color: #C2185B;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* SEO content */
+.content { max-width: 720px; margin: 40px auto 0; padding: 0 20px; }
+.content h2 { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 40px 0 14px; }
+.content h2:first-child { margin-top: 0; }
+.content p { font-size: 0.9rem; color: #8892b0; line-height: 1.8; margin-bottom: 14px; }
+.content ul { padding-left: 20px; margin-bottom: 14px; }
+.content li { font-size: 0.88rem; color: #8892b0; line-height: 1.8; margin-bottom: 4px; }
+.content strong { color: #ccc; }
+
+.footer { text-align: center; padding: 40px 24px; font-size: 0.78rem; color: #444c5a; border-top: 1px solid #151820; margin-top: 40px; }
+.footer a { color: #C2185B; text-decoration: none; }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 1.8rem; }
+  .main { padding: 20px 14px 40px; }
+  .conv-row { flex-wrap: wrap; }
+  .conv-row select.unit-select { width: 100%; }
+}
+</style>
+</head>
+<body>
+<script src="/nav.js"></script>
+
+<div class="hero">
+  <h1>Baking Ingredient <span>Converter</span> ⚖️</h1>
+  <p>Accurate conversions between volume and weight for baking. Includes a quick Baker's Percentage calculator.</p>
+</div>
+
+<div class="main">
+
+  <div class="converter-card" id="vwCard">
+    <div class="card-header">
+      <h2>🔄 Ingredient Converter</h2>
+      <button class="copy-btn" id="vwCopyBtn" onclick="copyResult('vwResult', 'vwCopyBtn')">Copy</button>
+    </div>
+    <div class="card-body">
+      <div class="conv-row">
+        <input type="number" id="vwAmount" class="amount" value="1" min="0" step="any">
+        <select id="vwFromUnit" class="unit-select">
+          <optgroup label="Volume">
+            <option value="cup">Cups</option>
+            <option value="tbsp">Tablespoons</option>
+            <option value="tsp">Teaspoons</option>
+            <option value="ml">Milliliters</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option value="g">Grams</option>
+            <option value="oz">Ounces</option>
+            <option value="lb">Pounds</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="mid-row">
+        <button class="swap-btn" onclick="swapVw()">⇅ Swap</button>
+        <div class="ing-select-wrap">
+          <select id="vwIngredient">
+            <option value="flour">All-Purpose / Bread Flour (120g/cup)</option>
+            <option value="flour_ww">Whole Wheat Flour (113g/cup)</option>
+            <option value="sugar">Granulated Sugar (200g/cup)</option>
+            <option value="brown_sugar">Brown Sugar, packed (213g/cup)</option>
+            <option value="powdered_sugar">Powdered Sugar (113g/cup)</option>
+            <option value="butter">Butter (227g/cup)</option>
+            <option value="cocoa">Cocoa Powder (85g/cup)</option>
+            <option value="milk">Milk (240g/cup)</option>
+            <option value="water">Water (237g/cup)</option>
+            <option value="oil">Vegetable Oil (218g/cup)</option>
+            <option value="honey">Honey (340g/cup)</option>
+            <option value="salt">Table Salt (292g/cup)</option>
+            <option value="yeast_active">Active Dry Yeast (140g/cup)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="conv-row">
+        <input type="text" id="vwResult" class="amount result" readonly>
+        <select id="vwToUnit" class="unit-select">
+          <optgroup label="Volume">
+            <option value="cup">Cups</option>
+            <option value="tbsp">Tablespoons</option>
+            <option value="tsp">Teaspoons</option>
+            <option value="ml">Milliliters</option>
+          </optgroup>
+          <optgroup label="Weight">
+            <option value="g" selected>Grams</option>
+            <option value="oz">Ounces</option>
+            <option value="lb">Pounds</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="converter-card" id="bpCard">
+    <div class="card-header">
+      <h2>🍞 Baker's Percentage Quick Calc</h2>
+    </div>
+    <div class="card-body">
+      <div class="bakers-calc">
+        <div>
+          <label>Total Flour (g)</label>
+          <input type="number" id="bpFlour" value="1000" min="0" step="any">
+        </div>
+        <div>
+          <label>Ingredient %</label>
+          <input type="number" id="bpPercent" value="70" min="0" step="any">
+        </div>
+        <div>
+          <label>Result Weight</label>
+          <div class="result-box" id="bpResult">700 g</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SEO Content -->
+<div class="content">
+  <h2>Why Measure Baking Ingredients by Weight?</h2>
+  <p>In baking, precision is everything. A recipe measured in volume (like cups) can yield wildly different results depending on how the ingredients are packed. For instance, a scooped cup of flour can weigh anywhere from 100 grams to 150 grams depending on whether it was sifted or packed tightly. Weighing ingredients in grams guarantees <strong>consistency and accuracy</strong> every single time you bake.</p>
+
+  <h2>How Ingredient Density Affects Conversions</h2>
+  <p>Every ingredient has a unique density. While 1 cup of water weighs exactly 237 grams (and equals 237 ml), 1 cup of all-purpose flour weighs around 120 grams. Conversely, dense ingredients like honey weigh significantly more (around 340 grams per cup). Our calculator automatically applies these specific density multipliers when you convert between volume and weight.</p>
+
+  <h2>Understanding Baker's Percentages</h2>
+  <p>Baker's percentage is a standard notation used in bread baking where every ingredient is expressed as a percentage of the <strong>total flour weight</strong>. The total flour is always set to 100%.</p>
+  <ul>
+    <li>If a recipe calls for 1000g of flour and 700g of water, the hydration (water percentage) is 70%.</li>
+    <li>If it calls for 20g of salt, the salt percentage is 2%.</li>
+    <li>This system allows bakers to easily scale recipes up or down while maintaining the exact same dough characteristics.</li>
+  </ul>
+  <p>Use our Quick Calc above to easily find the gram weight for any percentage relative to your flour weight, or check out our full <a href="/bakers-percentage">Baker's Percentage Calculator</a> for complex recipes.</p>
+
+  <h2>Common Baking Densities (per US Cup)</h2>
+  <ul>
+    <li><strong>All-Purpose Flour:</strong> 120g</li>
+    <li><strong>Granulated Sugar:</strong> 200g</li>
+    <li><strong>Brown Sugar (packed):</strong> 213g</li>
+    <li><strong>Butter:</strong> 227g (2 sticks)</li>
+    <li><strong>Milk:</strong> 240g</li>
+  </ul>
+</div>
+
+<div class="footer">
+  © 2026 <a href="https://28grams.vip">28grams.vip</a> · A <a href="https://gab.ae">GAB Ventures</a> property
+</div>
+
+<script>
+// Conversion Maps
+const volUnits = { cup: 236.588, tbsp: 14.7868, tsp: 4.92892, ml: 1 };
+const weightUnits = { g: 1, oz: 28.3495, lb: 453.592 };
+
+// Densities in grams per US Cup
+const densities = {
+  flour: 120,
+  flour_ww: 113,
+  sugar: 200,
+  brown_sugar: 213,
+  powdered_sugar: 113,
+  butter: 227,
+  cocoa: 85,
+  milk: 240,
+  water: 236.588,
+  oil: 218,
+  honey: 340,
+  salt: 292,
+  yeast_active: 140
+};
+
+// DOM Elements - Converter
+const vwAmount = document.getElementById('vwAmount');
+const vwFromUnit = document.getElementById('vwFromUnit');
+const vwToUnit = document.getElementById('vwToUnit');
+const vwIngredient = document.getElementById('vwIngredient');
+const vwResult = document.getElementById('vwResult');
+
+// DOM Elements - Baker's Percentage
+const bpFlour = document.getElementById('bpFlour');
+const bpPercent = document.getElementById('bpPercent');
+const bpResult = document.getElementById('bpResult');
+
+function formatNumber(num) {
+  if (isNaN(num)) return '';
+  let rounded = Math.round(num * 10) / 10;
+  return rounded.toString();
+}
+
+function updateVw() {
+  const amt = parseFloat(vwAmount.value);
+  if (isNaN(amt)) {
+    vwResult.value = '';
+    return;
+  }
+
+  const from = vwFromUnit.value;
+  const to = vwToUnit.value;
+
+  const fromIsVol = from in volUnits;
+  const toIsVol = to in volUnits;
+
+  // Active state styling for ingredient select (always active for visual consistency, or just keep it matching)
+  if (fromIsVol !== toIsVol) {
+    vwIngredient.classList.add('active');
+  } else {
+    vwIngredient.classList.remove('active');
+  }
+
+  let result = 0;
+
+  if (fromIsVol && toIsVol) {
+    result = amt * volUnits[from] / volUnits[to];
+  } else if (!fromIsVol && !toIsVol) {
+    result = amt * weightUnits[from] / weightUnits[to];
+  } else if (fromIsVol && !toIsVol) {
+    // Volume to Weight
+    const gPerCup = densities[vwIngredient.value];
+    const cups = (amt * volUnits[from]) / volUnits.cup;
+    const grams = cups * gPerCup;
+    result = grams / weightUnits[to];
+  } else if (!fromIsVol && toIsVol) {
+    // Weight to Volume
+    const gPerCup = densities[vwIngredient.value];
+    const grams = amt * weightUnits[from];
+    const cups = grams / gPerCup;
+    const ml = cups * volUnits.cup;
+    result = ml / volUnits[to];
+  }
+
+  vwResult.value = formatNumber(result);
+}
+
+function swapVw() {
+  const temp = vwFromUnit.value;
+  vwFromUnit.value = vwToUnit.value;
+  vwToUnit.value = temp;
+  updateVw();
+}
+
+function copyResult(inputId, btnId) {
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(btnId);
+  if (!input.value) return;
+
+  navigator.clipboard.writeText(input.value).then(() => {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+function updateBp() {
+  const flour = parseFloat(bpFlour.value);
+  const percent = parseFloat(bpPercent.value);
+
+  if (isNaN(flour) || isNaN(percent)) {
+    bpResult.textContent = '- g';
+    return;
+  }
+
+  const result = (flour * percent) / 100;
+  bpResult.textContent = formatNumber(result) + ' g';
+}
+
+// Event Listeners
+[vwAmount, vwFromUnit, vwToUnit, vwIngredient].forEach(el => el.addEventListener('input', updateVw));
+[bpFlour, bpPercent].forEach(el => el.addEventListener('input', updateBp));
+
+// Init
+updateVw();
+updateBp();
+</script>
+</body>
+</html>
